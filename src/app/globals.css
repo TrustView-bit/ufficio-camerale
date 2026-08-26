@@ -1,26 +1,247 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
+
+/* -------------------------------------------------------------------------
+   Design token — Ufficio Camerale
+   Palette istituzionale ma calda: blu profondo (fiducia) + teal salvia
+   (conferma/verificato). Ambra e rosso SOLO per stati reali.
+   Ogni colore e' definito qui: mai hardcodare valori nei componenti.
+   ------------------------------------------------------------------------- */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Stati camerali — usati dai badge azienda */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-danger: var(--danger);
+  --color-danger-foreground: var(--danger-foreground);
+  --color-danger-subtle: var(--danger-subtle);
+  --color-neutral-subtle: var(--neutral-subtle);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.33);
+  --radius-2xl: calc(var(--radius) * 1.66);
+  --radius-3xl: calc(var(--radius) * 2);
+  --radius-4xl: calc(var(--radius) * 2.5);
+
+  /* Ombre appena percettibili */
+  --shadow-card:
+    0 1px 2px 0 oklch(0.24 0.03 258 / 0.04), 0 1px 3px 0 oklch(0.24 0.03 258 / 0.05);
+  --shadow-raised:
+    0 2px 4px -1px oklch(0.24 0.03 258 / 0.05),
+    0 6px 16px -4px oklch(0.24 0.03 258 / 0.08);
+
+  --ease-ui: cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Fondo bianco/grigio caldissimo, testo grigio-blu scuro */
+  --background: oklch(0.988 0.003 85);
+  --foreground: oklch(0.245 0.022 258);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+
+  /* Blu profondo istituzionale */
+  --primary: oklch(0.415 0.128 259);
+  --primary-foreground: oklch(0.99 0.003 85);
+
+  --secondary: oklch(0.962 0.006 258);
+  --secondary-foreground: oklch(0.32 0.03 259);
+
+  --muted: oklch(0.965 0.005 90);
+  --muted-foreground: oklch(0.518 0.019 258);
+
+  /* Teal / verde salvia — l'accento "verificato" */
+  --accent: oklch(0.478 0.084 187);
+  --accent-foreground: oklch(0.99 0.003 85);
+
+  --border: oklch(0.908 0.006 258);
+  --input: oklch(0.895 0.007 258);
+  --ring: oklch(0.415 0.128 259);
+
+  --success: oklch(0.492 0.1 166);
+  --success-foreground: oklch(0.99 0.003 85);
+  --success-subtle: oklch(0.955 0.028 168);
+
+  --warning: oklch(0.508 0.108 62);
+  --warning-foreground: oklch(0.99 0.003 85);
+  --warning-subtle: oklch(0.962 0.038 78);
+
+  --danger: oklch(0.522 0.183 27);
+  --danger-foreground: oklch(0.99 0.003 85);
+  --danger-subtle: oklch(0.958 0.021 25);
+
+  --neutral-subtle: oklch(0.945 0.005 258);
+
+  /* shadcn usa --destructive internamente: allineato a --danger */
+  --destructive: var(--danger);
+
+  --chart-1: oklch(0.415 0.128 259);
+  --chart-2: oklch(0.478 0.084 187);
+  --chart-3: oklch(0.508 0.108 62);
+  --chart-4: oklch(0.492 0.1 166);
+  --chart-5: oklch(0.518 0.019 258);
+
+  --radius: 0.75rem; /* 12px */
+
+  --sidebar: oklch(0.975 0.004 85);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+.dark {
+  --background: oklch(0.192 0.017 258);
+  --foreground: oklch(0.945 0.006 258);
+
+  --card: oklch(0.232 0.019 258);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.232 0.019 258);
+  --popover-foreground: var(--foreground);
+
+  /* In dark il blu si schiarisce per restare leggibile su fondo scuro */
+  --primary: oklch(0.735 0.108 259);
+  --primary-foreground: oklch(0.185 0.02 259);
+
+  --secondary: oklch(0.288 0.021 258);
+  --secondary-foreground: oklch(0.925 0.008 258);
+
+  --muted: oklch(0.272 0.018 258);
+  --muted-foreground: oklch(0.712 0.016 258);
+
+  --accent: oklch(0.732 0.077 178);
+  --accent-foreground: oklch(0.185 0.02 259);
+
+  --border: oklch(0.995 0.005 258 / 12%);
+  --input: oklch(0.995 0.005 258 / 18%);
+  --ring: oklch(0.735 0.108 259);
+
+  --success: oklch(0.722 0.107 168);
+  --success-foreground: oklch(0.175 0.02 168);
+  --success-subtle: oklch(0.318 0.045 168);
+
+  --warning: oklch(0.782 0.122 74);
+  --warning-foreground: oklch(0.195 0.03 68);
+  --warning-subtle: oklch(0.335 0.052 68);
+
+  --danger: oklch(0.688 0.168 25);
+  --danger-foreground: oklch(0.175 0.03 27);
+  --danger-subtle: oklch(0.318 0.062 25);
+
+  --neutral-subtle: oklch(0.292 0.014 258);
+
+  --destructive: var(--danger);
+
+  --chart-1: oklch(0.735 0.108 259);
+  --chart-2: oklch(0.732 0.077 178);
+  --chart-3: oklch(0.782 0.122 74);
+  --chart-4: oklch(0.722 0.107 168);
+  --chart-5: oklch(0.712 0.016 258);
+
+  --sidebar: oklch(0.212 0.018 258);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--secondary);
+  --sidebar-accent-foreground: var(--secondary-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Focus sempre visibile e coerente su tutto il portale (WCAG AA) */
+  :focus-visible {
+    @apply outline-ring;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Numeri tabulari: P.IVA, REA, capitale sociale devono incolonnarsi */
+  .num {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+}
+
+/* Rispetta la preferenza di sistema: nessuna animazione superflua */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
