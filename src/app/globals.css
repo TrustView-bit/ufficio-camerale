@@ -247,6 +247,88 @@
 }
 
 /* -------------------------------------------------------------------------
+   Testi lunghi: informativa, termini, cookie. Nessun plugin tipografico,
+   solo le poche regole che servono davvero.
+   ------------------------------------------------------------------------- */
+.prosa {
+  max-width: 42rem;
+}
+
+.prosa h2 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prosa h2:first-child {
+  margin-top: 0;
+}
+
+.prosa h3 {
+  font-size: 0.98rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.prosa p,
+.prosa li {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+}
+
+.prosa p + p {
+  margin-top: 0.9rem;
+}
+
+.prosa ul,
+.prosa ol {
+  margin-top: 0.9rem;
+  padding-left: 1.35rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.prosa ul {
+  list-style: disc;
+}
+
+.prosa ol {
+  list-style: decimal;
+}
+
+.prosa strong {
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.prosa a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prosa dl {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.prosa dt {
+  font-weight: 500;
+  color: var(--foreground);
+  font-size: 0.95rem;
+}
+
+.prosa dd {
+  color: var(--muted-foreground);
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* -------------------------------------------------------------------------
    Stampa: il pulsante "Stampa o PDF" della scheda azienda deve produrre un
    documento leggibile, non lo screenshot di un sito. Via la navigazione, via
    i fondi colorati, e le schede non si spezzano a metà fra due pagine.
