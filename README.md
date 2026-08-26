@@ -15,7 +15,7 @@ azienda chiara e veloce.
 | 2 | Validazione P.IVA / CF + UI ricerca | ✅ fatto |
 | 3 | Provider VIES + `/verifica-partita-iva` | ✅ fatto |
 | 4 | Schema DB, cache, provider camerale | ✅ dati mock; provider reale da collegare |
-| 5 | Scheda azienda + SEO | ⬜ |
+| 5 | Scheda azienda + SEO | ✅ fatto (manca la mappa statica) |
 | 6 | Descrizioni AI asincrone | ⬜ |
 | 7 | Rate limiting, pagine legali, test, deploy | ⬜ |
 
@@ -118,6 +118,32 @@ un'ora, per non gravare su un servizio già fragile.
 
 Nota: VIES riempie denominazione e indirizzo con `---` quando lo Stato membro
 non li divulga; il provider li normalizza a `null` e la UI lo spiega.
+
+## Schede azienda
+
+Ogni impresa ha un solo indirizzo canonico:
+`/azienda/<denominazione-slug>-<partita-iva>`. La Partita IVA in coda è
+l'identificatore stabile — la denominazione può cambiare, il numero no — e
+uno slug non canonico viene rediretto con un 308 sul canonico, così i motori
+di ricerca vedono un URL solo.
+
+Cercare una Partita IVA valida porta direttamente alla scheda: una P.IVA
+identifica una sola impresa, e mostrare una lista di un elemento sarebbe un
+passaggio inutile.
+
+Le schede si rigenerano al massimo una volta all'ora (ISR). Ciascuna espone
+dati strutturati `Organization` e un'immagine Open Graph generata al volo.
+Il pulsante «Stampa o PDF» usa `window.print()` con un foglio di stile
+dedicato in `globals.css`: niente dipendenze e niente generazione lato server.
+
+### Mappa statica: cosa manca
+
+Il piano prevedeva una mappa statica leggera della sede. Non è stata
+implementata perché ogni servizio di tile utilizzabile (Mapbox, Google Static
+Maps, Geoapify) richiede una chiave, e non ne è stata configurata nessuna. Al
+suo posto la barra dei link rapidi apre l'indirizzo su Google Maps. Per
+aggiungerla basta una chiave e un `<Image>` verso l'endpoint statico del
+fornitore scelto: nessuna modifica strutturale.
 
 ## Archivio, cache e costi
 
