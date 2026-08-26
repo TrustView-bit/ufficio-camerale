@@ -42,7 +42,7 @@ function FooterNav({
 
 export function SiteFooter() {
   return (
-    <footer className="border-border bg-muted/40 mt-16 border-t">
+    <footer data-site-chrome className="border-border bg-muted/40 mt-16 border-t">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:gap-16">
           <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">

@@ -245,3 +245,45 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* -------------------------------------------------------------------------
+   Stampa: il pulsante "Stampa o PDF" della scheda azienda deve produrre un
+   documento leggibile, non lo screenshot di un sito. Via la navigazione, via
+   i fondi colorati, e le schede non si spezzano a metà fra due pagine.
+   ------------------------------------------------------------------------- */
+@media print {
+  [data-site-chrome] {
+    display: none !important;
+  }
+
+  :root {
+    --background: white;
+    --foreground: black;
+    --card: white;
+    --card-foreground: black;
+    --muted-foreground: oklch(0.38 0 0);
+    --border: oklch(0.78 0 0);
+  }
+
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+
+  [data-slot="card"] {
+    break-inside: avoid;
+    box-shadow: none;
+    border-color: oklch(0.78 0 0);
+  }
+
+  h1 {
+    font-size: 20pt;
+  }
+
+  /* l'indirizzo di un link è inutile su carta se il testo lo contiene già */
+  a {
+    color: black;
+    text-decoration: none;
+  }
+}
