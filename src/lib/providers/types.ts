@@ -1,0 +1,90 @@
+import type { Ateco, Bilancio, Indirizzo, UnitaLocale } from "@/lib/db/schema";
+
+export type { Ateco, Bilancio, Indirizzo, UnitaLocale };
+
+/** Stato attività di un'impresa nel Registro Imprese. */
+export const STATI_ATTIVITA = [
+  "attiva",
+  "cessata",
+  "in-liquidazione",
+  "sconosciuto",
+] as const;
+
+export type StatoAttivita = (typeof STATI_ATTIVITA)[number];
+
+/** Dati camerali di un'impresa, normalizzati e indipendenti dal fornitore. */
+export type CompanyData = {
+  partitaIva: string;
+  codiceFiscale: string | null;
+  denominazione: string;
+  formaGiuridica: string | null;
+  statoAttivita: StatoAttivita;
+  /** ISO YYYY-MM-DD */
+  dataCostituzione: string | null;
+  reaNumero: string | null;
+  reaCciaa: string | null;
+  capitaleSociale: number | null;
+  atecoPrimario: string | null;
+  atecoPrimarioDescrizione: string | null;
+  atecoSecondari: Ateco[];
+  sede: Indirizzo | null;
+  unitaLocali: UnitaLocale[];
+  bilanci: Bilancio[];
+  pec: string | null;
+  sitoWeb: string | null;
+  telefono: string | null;
+  dipendenti: number | null;
+  classeDipendenti: string | null;
+};
+
+export type ProviderUnavailableReason =
+  | "TIMEOUT"
+  | "NETWORK"
+  | "UNAUTHORIZED"
+  | "QUOTA_EXCEEDED"
+  | "RATE_LIMITED"
+  | "SERVICE_UNAVAILABLE"
+  | "UNEXPECTED";
+
+/**
+ * Esito di un'interrogazione. Come per VIES, un provider non deve lanciare:
+ * l'indisponibilità è uno stato previsto, e va tenuta distinta da "l'impresa
+ * non esiste", perché porta a comportamenti diversi (ripiego sull'archivio
+ * contro risposta negativa all'utente).
+ */
+export type ProviderResult =
+  | { status: "found"; company: CompanyData; raw: unknown; httpStatus?: number }
+  | { status: "not-found"; httpStatus?: number }
+  | {
+      status: "unavailable";
+      reason: ProviderUnavailableReason;
+      httpStatus?: number;
+    };
+
+/**
+ * Contratto comune a tutti i fornitori di dati camerali.
+ *
+ * La UI dipende solo da questa interfaccia: cambiare fornitore non deve
+ * comportare modifiche alle pagine.
+ */
+export interface CompanyProvider {
+  /** Identificativo usato nei log e nella colonna provider_name. */
+  readonly name: string;
+  /** Costo stimato di una singola interrogazione, in euro. */
+  readonly costPerLookupEur: number;
+  getByPartitaIva(partitaIva: string): Promise<ProviderResult>;
+}
+
+export const PROVIDER_UNAVAILABLE_MESSAGE: Record<
+  ProviderUnavailableReason,
+  string
+> = {
+  TIMEOUT: "Il fornitore dei dati camerali non ha risposto in tempo.",
+  NETWORK: "Non è stato possibile raggiungere il fornitore dei dati camerali.",
+  UNAUTHORIZED: "Le credenziali del fornitore dei dati camerali non sono valide.",
+  QUOTA_EXCEEDED: "Il credito disponibile presso il fornitore è esaurito.",
+  RATE_LIMITED: "Troppe richieste al fornitore: riprova fra poco.",
+  SERVICE_UNAVAILABLE:
+    "Il fornitore dei dati camerali è temporaneamente fuori servizio.",
+  UNEXPECTED: "Il fornitore ha risposto in un modo che non sappiamo interpretare.",
+};
