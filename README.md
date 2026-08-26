@@ -81,6 +81,53 @@ Convenzioni:
   liquidazione, cessata, errori). Mai decorativi.
 - `.num` — attiva i numeri tabulari per P.IVA, REA, capitale sociale
 
+## Dataset Istat
+
+`data/` contiene tre file JSON **committati nel repository**, generati a mano
+dagli script in `scripts/`. Il build su Vercel non deve mai dipendere dalla
+raggiungibilità di istat.it o di GitHub.
+
+```bash
+npm run build:ateco    # struttura ATECO 2025 + raccordo bidirezionale con la 2022
+npm run build:comuni   # comuni, province, regioni e CAP
+```
+
+Istat rinomina i file a ogni aggiornamento: se un URL non risponde più, lo
+script si ferma dicendo quale indirizzo cercare e dove aggiornarlo.
+
+### Perché serve il raccordo ATECO
+
+I fornitori di dati camerali restituiscono ancora in larga parte codici ATECO
+**2022**, mentre la classificazione in vigore è la **2025**. Cercare un codice
+2022 nella tabella 2025 non dà nulla: `62.01.00` non esiste in ATECO 2025,
+dove la programmazione informatica è `62.10.00`.
+
+La conversione **non è uno a uno**: 1.048 codici 2022 su 3.157 corrispondono a
+più codici 2025. Quando la corrispondenza è ambigua, `descriviAteco()` risale
+al livello gerarchico condiviso invece di scegliere arbitrariamente il primo
+risultato, e segnala l'approssimazione con `esatta: false`.
+
+La cascata completa: struttura 2025 → conversione dal raccordo → troncamento a
+un livello superiore → `null`. **Mai una descrizione inventata.**
+
+Nel database restano tre campi distinti — codice grezzo, versione della
+classificazione, descrizione risolta — e il codice del fornitore non viene mai
+sovrascritto con quello convertito: quando Istat pubblicherà il raccordo
+successivo, tutto si ricalcola da capo.
+
+### Comuni
+
+`normalizzaComune()` in `src/lib/geo.ts` riconosce un comune scritto in
+qualunque modo: maiuscolo, senza accenti, con o senza apostrofi, o nella forma
+bilingue con la barra (`Bolzano/Bozen`). Serve soprattutto agli indirizzi VIES,
+che arrivano tutti in maiuscolo: `"LARGO FRANCESCO RICHINI 6 \n20122 MILANO MI"`
+diventa via, CAP, comune e provincia riconosciuti.
+
+Due limiti dichiarati: il dataset contiene i soli nomi **italiani** dei comuni,
+quindi `Bozen` da solo non risolve (`Bolzano/Bozen` sì); e sei nomi sono usati
+da più comuni (Samone, Calliano, Livo, Peglio, Castro, Castello), per i quali
+senza provincia si restituisce `null` invece di scegliere a caso.
+
 ## Validazione
 
 `src/lib/validation/` contiene i controlli formali, condivisi da client e

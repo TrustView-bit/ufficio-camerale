@@ -1,6 +1,7 @@
+import type { VersioneAteco } from "@/lib/ateco";
 import type { Ateco, Bilancio, Indirizzo, UnitaLocale } from "@/lib/db/schema";
 
-export type { Ateco, Bilancio, Indirizzo, UnitaLocale };
+export type { Ateco, Bilancio, Indirizzo, UnitaLocale, VersioneAteco };
 
 /** Stato attività di un'impresa nel Registro Imprese. */
 export const STATI_ATTIVITA = [
@@ -24,7 +25,11 @@ export type CompanyData = {
   reaNumero: string | null;
   reaCciaa: string | null;
   capitaleSociale: number | null;
+  /** Codice grezzo del fornitore, mai riscritto. */
   atecoPrimario: string | null;
+  /** In quale classificazione è espresso `atecoPrimario`. */
+  atecoVersione: VersioneAteco | null;
+  /** Descrizione risolta sui dataset Istat. */
   atecoPrimarioDescrizione: string | null;
   atecoSecondari: Ateco[];
   sede: Indirizzo | null;

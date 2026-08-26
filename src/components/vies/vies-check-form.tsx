@@ -19,6 +19,7 @@ import {
   type ViesResult,
   type ViesUnavailableReason,
 } from "@/lib/providers/vies";
+import { formatIndirizzo } from "@/lib/format";
 import { analyzeQuery, formatPartitaIva } from "@/lib/validation";
 
 type State =
@@ -238,10 +239,12 @@ function ResultCard({
             </>
           )}
 
-          {result.address && (
+          {(result.sede || result.address) && (
             <>
               <dt className="text-muted-foreground">Indirizzo</dt>
-              <dd className="whitespace-pre-line">{result.address}</dd>
+              <dd className="whitespace-pre-line">
+                {formatIndirizzo(result.sede) ?? result.address}
+              </dd>
             </>
           )}
         </dl>

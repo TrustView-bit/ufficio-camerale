@@ -170,6 +170,8 @@ export function mapOpenapiCompany(
     reaCciaa: toText(raw.cciaa),
     capitaleSociale: toNumber(raw.shareCapital),
     atecoPrimario: toText(ateco?.code),
+    // openapi.it non dichiara la classificazione: lo stabilisce descriviAteco
+    atecoVersione: null,
     atecoPrimarioDescrizione: toText(ateco?.description),
     atecoSecondari: [],
     sede: mapIndirizzo(raw.address?.registeredOffice),

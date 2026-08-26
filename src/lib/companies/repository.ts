@@ -1,5 +1,6 @@
 import { eq } from "drizzle-orm";
 
+import { descriviAteco } from "@/lib/ateco";
 import type { CacheStore } from "@/lib/cache/store";
 // Lo schema si importa direttamente: `@/lib/db` include "server-only",
 // che non è caricabile dai test. Il tipo Database, essendo solo un tipo,
@@ -58,6 +59,29 @@ function toNumber(value: string | null): number | null {
   return Number.isFinite(parsed) ? parsed : null;
 }
 
+/**
+ * Risolve la descrizione ATECO sui dataset Istat, conservando intatto il
+ * codice grezzo del fornitore. La descrizione del fornitore resta come
+ * ripiego: meglio la sua che nessuna, se Istat non riconosce il codice.
+ */
+export function arricchisciAteco(company: CompanyData): CompanyData {
+  if (!company.atecoPrimario) return company;
+
+  const risolto = descriviAteco(
+    company.atecoPrimario,
+    company.atecoVersione ?? undefined,
+  );
+  if (!risolto) return company;
+
+  return {
+    ...company,
+    // la versione riconosciuta va conservata: serve a ricalcolare tutto
+    // quando Istat pubblicherà il raccordo successivo
+    atecoVersione: company.atecoVersione ?? risolto.versioneRisolta,
+    atecoPrimarioDescrizione: risolto.descrizione,
+  };
+}
+
 export function rowToCompany(row: CompanyRow): CompanyData {
   return {
     partitaIva: row.partitaIva,
@@ -70,6 +94,7 @@ export function rowToCompany(row: CompanyRow): CompanyData {
     reaCciaa: row.reaCciaa,
     capitaleSociale: toNumber(row.capitaleSociale),
     atecoPrimario: row.atecoPrimario,
+    atecoVersione: (row.atecoVersione as CompanyData["atecoVersione"]) ?? null,
     atecoPrimarioDescrizione: row.atecoPrimarioDescrizione,
     atecoSecondari: row.atecoSecondari ?? [],
     sede: row.sede ?? null,
@@ -156,18 +181,15 @@ export async function getCompany(
   });
 
   if (result.status === "found") {
-    await upsertRow(db, result.company, provider.name, result.raw, now);
+    const company = arricchisciAteco(result.company);
+
+    await upsertRow(db, company, provider.name, result.raw, now);
     await cache.set<CachedEntry>(
       key,
-      { company: result.company, fetchedAt: now.toISOString() },
+      { company, fetchedAt: now.toISOString() },
       CACHE_TTL_SECONDS,
     );
-    return {
-      status: "found",
-      company: result.company,
-      source: "provider",
-      fetchedAt: now,
-    };
+    return { status: "found", company, source: "provider", fetchedAt: now };
   }
 
   if (result.status === "unavailable") {
@@ -224,6 +246,7 @@ async function upsertRow(
     reaCciaa: company.reaCciaa,
     capitaleSociale: company.capitaleSociale?.toFixed(2) ?? null,
     atecoPrimario: company.atecoPrimario,
+    atecoVersione: company.atecoVersione,
     atecoPrimarioDescrizione: company.atecoPrimarioDescrizione,
     atecoSecondari: company.atecoSecondari,
     sede: company.sede,

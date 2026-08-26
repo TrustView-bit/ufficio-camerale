@@ -64,7 +64,13 @@ export const companies = pgTable(
     reaCciaa: text("rea_cciaa"),
     capitaleSociale: numeric("capitale_sociale", { precision: 15, scale: 2 }),
 
+    /** Codice così come arriva dal fornitore: non va mai sovrascritto con
+        quello convertito, altrimenti al prossimo raccordo Istat non si
+        potrebbe più ricalcolare nulla. */
     atecoPrimario: text("ateco_primario"),
+    /** Classificazione in cui è espresso il codice grezzo: 2022 o 2025. */
+    atecoVersione: text("ateco_versione"),
+    /** Descrizione risolta sui dataset Istat al momento della scrittura. */
     atecoPrimarioDescrizione: text("ateco_primario_descrizione"),
     atecoSecondari: jsonb("ateco_secondari").$type<Ateco[]>().default([]),
 

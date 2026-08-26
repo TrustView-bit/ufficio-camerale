@@ -18,6 +18,7 @@ const AZIENDE: Record<string, CompanyData> = {
     reaCciaa: "MI",
     capitaleSociale: 2_500_000,
     atecoPrimario: "25.62.00",
+    atecoVersione: "2025",
     atecoPrimarioDescrizione: "Lavori di meccanica generale",
     atecoSecondari: [
       {
@@ -67,6 +68,8 @@ const AZIENDE: Record<string, CompanyData> = {
     reaCciaa: "TO",
     capitaleSociale: 50_000,
     atecoPrimario: "62.01.00",
+    // codice ATECO 2022, come lo mandano ancora molti fornitori
+    atecoVersione: "2022",
     atecoPrimarioDescrizione: "Produzione di software non connesso all'edizione",
     atecoSecondari: [],
     sede: {
@@ -96,6 +99,7 @@ const AZIENDE: Record<string, CompanyData> = {
     reaCciaa: "RM",
     capitaleSociale: null,
     atecoPrimario: "47.11.30",
+    atecoVersione: "2022",
     atecoPrimarioDescrizione: "Discount di alimentari",
     atecoSecondari: [],
     sede: {

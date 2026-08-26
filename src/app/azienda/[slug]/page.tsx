@@ -16,6 +16,7 @@ import { QuickLinks } from "@/components/azienda/quick-links";
 import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { descriviAteco } from "@/lib/ateco";
 import { lookupCompany } from "@/lib/companies";
 import {
   anniDi,
@@ -226,6 +227,13 @@ function Sede({ company }: { company: CompanyData }) {
 }
 
 function Attivita({ company }: { company: CompanyData }) {
+  // La descrizione si risolve sui dataset Istat al momento di mostrarla: il
+  // codice grezzo resta quello del fornitore, e resta visibile.
+  const risolto = company.atecoPrimario
+    ? descriviAteco(company.atecoPrimario, company.atecoVersione ?? undefined)
+    : null;
+  const descrizione = risolto?.descrizione ?? company.atecoPrimarioDescrizione;
+
   return (
     <SchedaDati
       titolo="Attività"
@@ -235,23 +243,41 @@ function Attivita({ company }: { company: CompanyData }) {
       {company.atecoPrimario && (
         <Dato etichetta="ATECO primario">
           <span className="num font-medium">{company.atecoPrimario}</span>
-          {company.atecoPrimarioDescrizione && (
-            <span className="text-muted-foreground">
-              {" "}
-              — {company.atecoPrimarioDescrizione}
+          {descrizione && (
+            <span className="text-muted-foreground"> — {descrizione}</span>
+          )}
+          {risolto && !risolto.esatta && (
+            <span className="text-muted-foreground mt-1 block text-xs">
+              Descrizione del livello superiore ({risolto.codice}): la
+              corrispondenza con la classificazione ATECO 2025 non è univoca.
+            </span>
+          )}
+          {risolto?.versioneRisolta === "2022" && (
+            <span className="text-muted-foreground mt-1 block text-xs">
+              Codice espresso in ATECO 2022, tradotto sulla classificazione 2025 in
+              vigore.
             </span>
           )}
         </Dato>
       )}
 
-      {company.atecoSecondari.map((ateco) => (
-        <Dato key={ateco.codice} etichetta="ATECO secondario">
-          <span className="num font-medium">{ateco.codice}</span>
-          {ateco.descrizione && (
-            <span className="text-muted-foreground"> — {ateco.descrizione}</span>
-          )}
-        </Dato>
-      ))}
+      {company.atecoSecondari.map((ateco) => {
+        const secondario = descriviAteco(
+          ateco.codice,
+          company.atecoVersione ?? undefined,
+        );
+        return (
+          <Dato key={ateco.codice} etichetta="ATECO secondario">
+            <span className="num font-medium">{ateco.codice}</span>
+            {(secondario?.descrizione ?? ateco.descrizione) && (
+              <span className="text-muted-foreground">
+                {" "}
+                — {secondario?.descrizione ?? ateco.descrizione}
+              </span>
+            )}
+          </Dato>
+        );
+      })}
     </SchedaDati>
   );
 }

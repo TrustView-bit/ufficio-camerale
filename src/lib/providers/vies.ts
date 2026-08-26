@@ -11,6 +11,8 @@
 
 import { z } from "zod";
 
+import { analizzaIndirizzoItaliano } from "@/lib/geo";
+import type { Indirizzo } from "@/lib/db/schema";
 import { isValidPartitaIva, normalizePartitaIva } from "@/lib/validation";
 
 const VIES_BASE = "https://ec.europa.eu/taxation_customs/vies/rest-api";
@@ -35,7 +37,10 @@ export type ViesResult =
       vatNumber: string;
       /** VIES restituisce "---" quando lo Stato membro non divulga il dato. */
       name: string | null;
+      /** L'indirizzo come lo scrive VIES: maiuscolo, su più righe. */
       address: string | null;
+      /** Lo stesso indirizzo interpretato e normalizzato sui dati Istat. */
+      sede: Indirizzo | null;
       requestDate: string | null;
     }
   | { status: "invalid"; countryCode: string; vatNumber: string }
@@ -98,13 +103,34 @@ export function parseViesResponse(
     return { status: "invalid", countryCode, vatNumber };
   }
 
+  const address = cleanField(data.address);
+
   return {
     status: "valid",
     countryCode,
     vatNumber,
     name: cleanField(data.name),
-    address: cleanField(data.address),
+    address,
+    sede: address ? normalizzaSede(address) : null,
     requestDate: cleanField(data.requestDate),
+  };
+}
+
+/**
+ * VIES restituisce l'indirizzo tutto in maiuscolo e su più righe. Lo si
+ * riporta a una forma leggibile riconoscendo il comune sui dati Istat; se il
+ * comune non risulta si conserva comunque il testo, senza inventare provincia.
+ */
+function normalizzaSede(address: string): Indirizzo | null {
+  const analizzato = analizzaIndirizzoItaliano(address);
+  if (!analizzato) return null;
+
+  return {
+    via: analizzato.via,
+    cap: analizzato.cap,
+    comune: analizzato.comune,
+    provincia: analizzato.provincia,
+    nazione: analizzato.nazione,
   };
 }
 

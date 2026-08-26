@@ -1,0 +1,1 @@
+ALTER TABLE "companies" ADD COLUMN "ateco_versione" text;

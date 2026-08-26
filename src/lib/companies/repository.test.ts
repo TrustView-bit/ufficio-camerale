@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import { PGlite } from "@electric-sql/pglite";
@@ -14,6 +14,7 @@ import type {
 } from "@/lib/providers/types";
 
 import {
+  arricchisciAteco,
   getCompany,
   isStale,
   rowToCompany,
@@ -21,9 +22,8 @@ import {
   type RepositoryDeps,
 } from "./repository";
 
-const MIGRATION = fileURLToPath(
-  new URL("../../../drizzle/0000_schema_iniziale.sql", import.meta.url),
-);
+/** Cartella delle migrazioni: si applicano tutte, in ordine. */
+const MIGRAZIONI = fileURLToPath(new URL("../../../drizzle", import.meta.url));
 
 const AZIENDA: CompanyData = {
   partitaIva: "00743110157",
@@ -36,6 +36,7 @@ const AZIENDA: CompanyData = {
   reaCciaa: "MI",
   capitaleSociale: 2_500_000,
   atecoPrimario: "25.62.00",
+  atecoVersione: "2025",
   atecoPrimarioDescrizione: "Lavori di meccanica generale",
   atecoSecondari: [{ codice: "46.69.19", descrizione: "Commercio all'ingrosso" }],
   sede: {
@@ -61,10 +62,16 @@ async function makeDb() {
   const client = new PGlite();
   const db = drizzle(client);
 
-  const sql = readFileSync(MIGRATION, "utf8");
-  for (const statement of sql.split("--> statement-breakpoint")) {
-    const trimmed = statement.trim();
-    if (trimmed) await client.exec(trimmed);
+  const file = readdirSync(MIGRAZIONI)
+    .filter((nome) => nome.endsWith(".sql"))
+    .sort();
+
+  for (const nome of file) {
+    const sql = readFileSync(`${MIGRAZIONI}/${nome}`, "utf8");
+    for (const statement of sql.split("--> statement-breakpoint")) {
+      const trimmed = statement.trim();
+      if (trimmed) await client.exec(trimmed);
+    }
   }
 
   return db as unknown as Database;
@@ -296,5 +303,56 @@ describe("getCompany", () => {
     const rows = await db.select().from(companies);
     expect(rows).toHaveLength(1);
     expect(rows[0]!.denominazione).toBe("Esempio Manifattura S.r.l.");
+  });
+});
+
+describe("arricchisciAteco", () => {
+  it("risolve la descrizione sui dati Istat", () => {
+    const risultato = arricchisciAteco({
+      ...AZIENDA,
+      atecoPrimario: "62.10.00",
+      atecoVersione: "2025",
+      atecoPrimarioDescrizione: null,
+    });
+
+    expect(risultato.atecoPrimarioDescrizione).toBe(
+      "Attività di programmazione informatica",
+    );
+  });
+
+  it("non tocca il codice grezzo, nemmeno convertendo dal 2022", () => {
+    const risultato = arricchisciAteco({
+      ...AZIENDA,
+      atecoPrimario: "62.01.00",
+      atecoVersione: "2022",
+      atecoPrimarioDescrizione: null,
+    });
+
+    expect(risultato.atecoPrimario).toBe("62.01.00");
+    expect(risultato.atecoPrimarioDescrizione).toBe(
+      "Attività di programmazione informatica",
+    );
+  });
+
+  it("deduce la classificazione quando il fornitore non la dichiara", () => {
+    const risultato = arricchisciAteco({
+      ...AZIENDA,
+      atecoPrimario: "62.01.00",
+      atecoVersione: null,
+      atecoPrimarioDescrizione: null,
+    });
+
+    expect(risultato.atecoVersione).toBe("2022");
+  });
+
+  it("conserva la descrizione del fornitore se Istat non riconosce il codice", () => {
+    const risultato = arricchisciAteco({
+      ...AZIENDA,
+      atecoPrimario: "04.99.99",
+      atecoVersione: null,
+      atecoPrimarioDescrizione: "Descrizione del fornitore",
+    });
+
+    expect(risultato.atecoPrimarioDescrizione).toBe("Descrizione del fornitore");
   });
 });

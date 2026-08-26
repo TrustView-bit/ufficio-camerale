@@ -186,3 +186,32 @@ describe("checkVies", () => {
     expect(init.signal).toBeInstanceOf(AbortSignal);
   });
 });
+
+describe("normalizzazione dell'indirizzo VIES", () => {
+  it("interpreta l'indirizzo maiuscolo restituito da VIES", () => {
+    const result = parseViesResponse(OK_RESPONSE, FALLBACK);
+
+    expect(result).toMatchObject({
+      status: "valid",
+      sede: {
+        via: "Largo Francesco Richini 6",
+        cap: "20122",
+        comune: "Milano",
+        provincia: "MI",
+        nazione: "IT",
+      },
+    });
+  });
+
+  it("conserva comunque l'indirizzo grezzo", () => {
+    const result = parseViesResponse(OK_RESPONSE, FALLBACK);
+
+    expect(result).toMatchObject({ address: OK_RESPONSE.address.trim() });
+  });
+
+  it("non produce una sede quando VIES non divulga l'indirizzo", () => {
+    const result = parseViesResponse({ ...OK_RESPONSE, address: "---" }, FALLBACK);
+
+    expect(result).toMatchObject({ address: null, sede: null });
+  });
+});
