@@ -13,7 +13,7 @@ azienda chiara e veloce.
 |---|---|---|
 | 1 | Scaffold, design token, layout | ✅ fatto |
 | 2 | Validazione P.IVA / CF + UI ricerca | ✅ fatto |
-| 3 | Provider VIES + `/verifica-partita-iva` | ⬜ |
+| 3 | Provider VIES + `/verifica-partita-iva` | ✅ fatto |
 | 4 | Schema DB, cache, provider camerale | ⬜ |
 | 5 | Scheda azienda + SEO | ⬜ |
 | 6 | Descrizioni AI asincrone | ⬜ |
@@ -92,6 +92,28 @@ server e privi di dipendenze di rete:
 
 La stessa analisi viene rieseguita lato server sulla pagina `/ricerca`: il
 parametro `q` arriva dall'URL e non ci si può fidare del client.
+
+## VIES
+
+`src/lib/providers/vies.ts` interroga il servizio VIES della Commissione
+europea, che conferma se una Partita IVA è valida per gli scambi
+intracomunitari. È gratuito e non richiede chiavi, ma è lento e spesso
+indisponibile: interroga in tempo reale l'anagrafe tributaria dello Stato
+membro, che può non rispondere.
+
+Per questo `checkVies()` **non lancia mai**. Qualunque problema diventa uno
+stato `unavailable` con un motivo esplicito (`TIMEOUT`, `MS_UNAVAILABLE`,
+`SERVICE_UNAVAILABLE`, `MS_MAX_CONCURRENT_REQ`, `GLOBAL_MAX_CONCURRENT_REQ`,
+`NETWORK`, `UNEXPECTED`), e la UI degrada dicendo chiaramente all'utente che
+*non sa*, invece di far passare un'assenza di risposta per un esito negativo.
+L'attesa è interrotta dopo 5 secondi (`VIES_TIMEOUT_MS`).
+
+La chiamata parte dalla Route Handler `/api/vies?piva=…`: il browser non
+contatta mai direttamente la Commissione. Le risposte sono messe in cache per
+un'ora, per non gravare su un servizio già fragile.
+
+Nota: VIES riempie denominazione e indirizzo con `---` quando lo Stato membro
+non li divulga; il provider li normalizza a `null` e la UI lo spiega.
 
 ## Aggiungere un provider dati (dallo step 4)
 
