@@ -1,0 +1,941 @@
+{
+  "nota": "Dati di sviluppo. Solo campi identificativi (denominazione, sede, partita IVA). Ogni colonna che legava queste imprese al procedimento amministrativo di origine è stata scartata di proposito: non riaggiungerla senza una valutazione legale.",
+  "origine": "elenco pubblico di imprese richiedenti, dicembre 2025",
+  "imprese": [
+    {
+      "denominazione": "TRIBUNO DARIO (D.I.)",
+      "sede": "VIA NAZIONALE SANNITICA, 5 - CASTELVENERE",
+      "partitaIva": "01643080623"
+    },
+    {
+      "denominazione": "PETRIELLA ANTONIO REMO (D.I.)",
+      "sede": "VIA DELLE LAME, SNC - COLLE SANNITA",
+      "partitaIva": "00961880622"
+    },
+    {
+      "denominazione": "COSTRUZIONI SANNITE S.R.L.",
+      "sede": "VIA AC",
+      "partitaIva": "01636200626"
+    },
+    {
+      "denominazione": "GARDEN HOUSE S.R.L.S.",
+      "sede": "C.DA SAN CHIRICO, SNC - BENEVENTO",
+      "partitaIva": "01856680622"
+    },
+    {
+      "denominazione": "EDILIZIA E TRASPORTI S.R.L.",
+      "sede": "VIA SANNITA, 16 AIROLA",
+      "partitaIva": "01881520629"
+    },
+    {
+      "denominazione": "M.V.N. EDILIZIA S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA ROCCARAINOLA, 1 - FORCHIA",
+      "partitaIva": "01677840629"
+    },
+    {
+      "denominazione": "VOBO S.R.L.",
+      "sede": "C.DA OLIVOLA VIA SPEZZAMADONNA, 61 BENEVENTO",
+      "partitaIva": "01883300624"
+    },
+    {
+      "denominazione": "CIELLE SOCIETA' A RESPOSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA NAZIONALE, 15 - DUGENTA",
+      "partitaIva": "01850480623"
+    },
+    {
+      "denominazione": "ROAP S.R.L.",
+      "sede": "VIA STRADA STATALE TELESINA 372, SNC FAICCHIO",
+      "partitaIva": "01682810625"
+    },
+    {
+      "denominazione": "FIERRO SERVICE S.R.L.",
+      "sede": "VIALE DELLA STORIA, 12 APICE",
+      "partitaIva": "01343270623"
+    },
+    {
+      "denominazione": "BARTOLOLONGO - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON RESPONSABILITA' LIMITATA",
+      "sede": "VIA MARIO V BENEVENTO",
+      "partitaIva": "01449740628"
+    },
+    {
+      "denominazione": "EDIL MASTRILLO S.R.L.",
+      "sede": "VIA SAN GIUSEPPE, 82 CUSANO MUTRI",
+      "partitaIva": "01400060628"
+    },
+    {
+      "denominazione": "ITAL.CO. S.R.L.",
+      "sede": "VIA RICCI, SNC SAN LEUCIO DEL SANNIO",
+      "partitaIva": "01842280628"
+    },
+    {
+      "denominazione": "ALFA SIDERIS SOCIETA' COOPERATIVA SOCIALE ONLUS",
+      "sede": "VIA II V PESCO SANNITA",
+      "partitaIva": "01729570620"
+    },
+    {
+      "denominazione": "MASTRANTUONO ANNAMARIA (D.I.)",
+      "sede": "CORSO ITALIA, SNC MORCONE",
+      "partitaIva": "01841140625"
+    },
+    {
+      "denominazione": "FANCY TOUR S.R.L.",
+      "sede": "VIA 9/1, 185 SAN BARTOLOMEO IN GALDO",
+      "partitaIva": "01257170629"
+    },
+    {
+      "denominazione": "RUSSO ING. UMBERTO (D.I.)",
+      "sede": "CONTRADA SAN VITALE SNC BENEVENTO",
+      "partitaIva": "00926890625"
+    },
+    {
+      "denominazione": "TERME LUCANE S.R.L.",
+      "sede": "PIAZZA MINIERI, 1 - TELESE TERME",
+      "partitaIva": "01317880621"
+    },
+    {
+      "denominazione": "SANTUCCI IMPRESA AMBIENTALE S.R.L.",
+      "sede": "CONTRADA PIANA S.N.C. - MORCONE",
+      "partitaIva": "01873910622"
+    },
+    {
+      "denominazione": "ALFRA SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA TOMMASO ROSSI, 33 SAN GIORGIO DEL SANNIO",
+      "partitaIva": "01867760629"
+    },
+    {
+      "denominazione": "ALPHA BUILDING S.R.L.",
+      "sede": "VIA DON LUIGI STURZO, 29 - BENEVENTO",
+      "partitaIva": "01573370622"
+    },
+    {
+      "denominazione": "BENEVENTANA APPALTI DI FUSCO PASQUALE (D.I.)",
+      "sede": "VIA VIGNE, 5 - CAUTANO",
+      "partitaIva": "01881690620"
+    },
+    {
+      "denominazione": "L.K. TRASPORTI S.R.L.",
+      "sede": "VIA SAN GIOVANNI BATTISTA DE LA SALLE,10 BENEVENTO",
+      "partitaIva": "01629430628"
+    },
+    {
+      "denominazione": "RESTAURI NARDONE S.R.L.",
+      "sede": "VIALE MICHELANGELO, 29 SANT'ANGELO A CUPOLO",
+      "partitaIva": "01796980629"
+    },
+    {
+      "denominazione": "EDIL SCAVI GENERALI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "LARGO FILIPPO LOMAGLIO, 16 APICE",
+      "partitaIva": "01856560626"
+    },
+    {
+      "denominazione": "GREEN LINE S.R.L.",
+      "sede": "VIA ROMA, 203 - ARPAIA",
+      "partitaIva": "01822350615"
+    },
+    {
+      "denominazione": "OFFICINE MARINO S.R.L.",
+      "sede": "ZONA INDUSTRIALE TORREPALAZZO, SNC TORRECUSO",
+      "partitaIva": "01570640621"
+    },
+    {
+      "denominazione": "IESCE AUTOTRASPORTI S.R.L.",
+      "sede": "CONTRADA PAGANI, 8 PAUPISI",
+      "partitaIva": "01673060628"
+    },
+    {
+      "denominazione": "M.G. ZACCARI S.R.L.",
+      "sede": "CONTRADA SAN PAOLO, 3 REINO",
+      "partitaIva": "01777640622"
+    },
+    {
+      "denominazione": "I \"PENTRI\" DI VITELLI GIUSEPPE (D.I.)",
+      "sede": "CONTRADA SAN FELICE, 31 CUSANO MUTRI",
+      "partitaIva": "01597590627"
+    },
+    {
+      "denominazione": "VANNAS SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
+      "sede": "C/DA CUFFIANO, 424 MORCONE",
+      "partitaIva": "01873020620"
+    },
+    {
+      "denominazione": "IMM.PAC. S.R.L.",
+      "sede": "VIA S. ROSA, 7 BENEVENTO",
+      "partitaIva": "01474170626"
+    },
+    {
+      "denominazione": "STRIKE S.N.C. DI CARDONE VITTORIO & C.",
+      "sede": "VIA FRANCESCO PAGA PI",
+      "partitaIva": "00927060624"
+    },
+    {
+      "denominazione": "MILLENIUM S.R.L.",
+      "sede": "VIA SALA 11 FOGLIANISE",
+      "partitaIva": "01831280621"
+    },
+    {
+      "denominazione": "POLO DELLE ENERGIE RINNOVABILI S.R.L.",
+      "sede": "VIA CAPONE 3 MONTESARCHIO",
+      "partitaIva": "01747840625"
+    },
+    {
+      "denominazione": "P.M. COSTRUZIONI S.R.L.",
+      "sede": "VIA RAFFAELE DELCOGLIANO 7/A APICE",
+      "partitaIva": "01870620620"
+    },
+    {
+      "denominazione": "CONSTRUCTIONS COMPANY - S.R.L.",
+      "sede": "VIA VALFORTORE 18 SAN BARTOLOMEO IN GALDO",
+      "partitaIva": "01333590626"
+    },
+    {
+      "denominazione": "TCL SPORT DI VALENTE PASQUALE (D.I.)",
+      "sede": "CONTRADA PIANA - ZONA INDUSTRIALE MORCONE",
+      "partitaIva": "01684830704"
+    },
+    {
+      "denominazione": "ZAINO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA GENNARO CICE, 10 DURAZZANO",
+      "partitaIva": "01874710625"
+    },
+    {
+      "denominazione": "CALZONE ANTONIO (D.I.)",
+      "sede": "VIA POMPILIO 12 REINO",
+      "partitaIva": "01305580621"
+    },
+    {
+      "denominazione": "ZAINO FRANCESCO (D.I.)",
+      "sede": "VIA GENNARO CICE, 10 DURAZZANO",
+      "partitaIva": "01767020629"
+    },
+    {
+      "denominazione": "OPERA S.R.L.",
+      "sede": "VIA LATINA 2 BENEVENTO",
+      "partitaIva": "01508420625"
+    },
+    {
+      "denominazione": "ALBERINI GROUP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA MANDRE 35 CUSANO MUTRI",
+      "partitaIva": "01724370620"
+    },
+    {
+      "denominazione": "KRONOS SOCIETA' COOPERATIVA",
+      "sede": "VIA PRATO 29 FOGLIANISE",
+      "partitaIva": "01760070621"
+    },
+    {
+      "denominazione": "COOPERATIVA SOCIALE BENESSERE A R.L.",
+      "sede": "VIA B. BACHEL BENEVENTO",
+      "partitaIva": "00797290624"
+    },
+    {
+      "denominazione": "WORLD OF SERVICE S.R.L. RICCI ELIA (D.I.)",
+      "sede": "VIA GIUSTINIANI, 21 BENEVENTO CONTRADA PRAINELLA CIRCELLO",
+      "partitaIva": "01873660623"
+    },
+    {
+      "denominazione": "EDIL LAVORGNA S.R.L.",
+      "sede": "VIA CERRETO 62 SAN SALVATORE TELESINO",
+      "partitaIva": "01828190627"
+    },
+    {
+      "denominazione": "S.C. IMPIANTI, SERVIZI E MANUTENZIONE DI SEBASTIANO COVINO",
+      "sede": "VIA MAI SNC CEPPALONI",
+      "partitaIva": "01750830620"
+    },
+    {
+      "denominazione": "IL TRATTURO DI CALZONE FRANCESCO",
+      "sede": "VIA FIUME 15 REINO",
+      "partitaIva": "01806490627"
+    },
+    {
+      "denominazione": "GSA S.R.L.",
+      "sede": "VIA NAZIONALE 67/B FOIANO DI VAL FORTORE",
+      "partitaIva": "01651120626"
+    },
+    {
+      "denominazione": "LA NEOLITICA S.R.L.",
+      "sede": "CONTRADA GROTTICELLE 2 SAN LUPO",
+      "partitaIva": "01002970620"
+    },
+    {
+      "denominazione": "GARDEN SUMMER VILLAGE S.R.L.",
+      "sede": "LOCALITA' VENEZIA SNC LIMATOLA",
+      "partitaIva": "01720000627"
+    },
+    {
+      "denominazione": "AUTOTRASPORTI SANTA MARIA SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA PALERMO CL",
+      "sede": "VIA GIOVANNI PAOLO II 23 PAOLISI VIALE PRINCIPE DI NAPOLI 38",
+      "partitaIva": "01837460623"
+    },
+    {
+      "denominazione": "COOPERATIVA SOCIALE LA MERIDIANA A R.L. ONLUS",
+      "sede": "VIA DEI LONGOBARDI, SNC BENEVENTO",
+      "partitaIva": "01043200623"
+    },
+    {
+      "denominazione": "COOPERATIVA SOCIALE SATURNO ONLUS - SOC. COOP. A R.L.",
+      "sede": "CONTRADA PEZZAPIANA, SNC BENEVENTO",
+      "partitaIva": "01288730623"
+    },
+    {
+      "denominazione": "BELPERIO LUIGI & FIGLI SRL",
+      "sede": "CONTRADA ROSELLI 10 SAN GIORGIO LA MOLARA",
+      "partitaIva": "01242010625"
+    },
+    {
+      "denominazione": "DI MARIA SAVERIA (D.I.)",
+      "sede": "VIA CROCELLA SANTA CROCE DEL SANNIO",
+      "partitaIva": "01279590622"
+    },
+    {
+      "denominazione": "COSTRUZIONI EDILI SANNITE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA TORALDO 34 - LIMATOLA",
+      "partitaIva": "01648130621"
+    },
+    {
+      "denominazione": "CO. GE. FRA. COSTRUZIONI SRL - UNIPERSONALE",
+      "sede": "VIA PIANA 115 MORCONE",
+      "partitaIva": "01518620628"
+    },
+    {
+      "denominazione": "AMETISTA SOCIETA' COOPERATIVA SOCIALE ONLUS",
+      "sede": "VIA GIOACCHINO TOMA, 8 BENEVENTO",
+      "partitaIva": "01640890628"
+    },
+    {
+      "denominazione": "SOLIDALIA - COOPERATIVA SOCIALE PER AZIONI",
+      "sede": "VIA GIOACCHINO TOMA, 8",
+      "partitaIva": "01529390625"
+    },
+    {
+      "denominazione": "HUMANITAS SOCIETA' CONSORTILE A RESPONSABILITA' LIMITATA",
+      "sede": "VIA BENEVENTO, 3 COLLE SANNITA",
+      "partitaIva": "01740340623"
+    },
+    {
+      "denominazione": "GIADA ONLUS SOCIETA' COOPERATIVA SOCIALE PER AZIONI",
+      "sede": "VIA DELLE LAME COLLE SANNITA",
+      "partitaIva": "01088990625"
+    },
+    {
+      "denominazione": "SAT S.R.L.",
+      "sede": "VIA GIARDINO 19 SAN NICOLA MANFREDI",
+      "partitaIva": "16304881002"
+    },
+    {
+      "denominazione": "TICHE S.R.L.",
+      "sede": "VIA DEL COMMERCIO, 32 MOIANO",
+      "partitaIva": "01856730625"
+    },
+    {
+      "denominazione": "SERAPIDE S.R.L.",
+      "sede": "CONTRADA PIANO BOREA, SNC BENEVENTO",
+      "partitaIva": "01435020621"
+    },
+    {
+      "denominazione": "SANTILLO GIANFRANCO (D.I.)",
+      "sede": "VIA PIANA SNC PONTE",
+      "partitaIva": "01407790623"
+    },
+    {
+      "denominazione": "SOCIAL CARE - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON LUCRATIVA DI UTILITA' SOCIALE\"",
+      "sede": "VIA PADULI - BUONALBERGO 6 PADULI",
+      "partitaIva": "01627000621"
+    },
+    {
+      "denominazione": "ARPA TRASPORTI SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA GIOVANNI FALCONE, SNC ARPAIA",
+      "partitaIva": "01618700627"
+    },
+    {
+      "denominazione": "ILCA - S.R.L.",
+      "sede": "VIA DEI MULINI 27/BIS BENEVENTO",
+      "partitaIva": "01837150620"
+    },
+    {
+      "denominazione": "PEZZUTO VINCENZO E FIGLI SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "CONTRADA TOPPO DEGLI ZINGARI SNC FRA",
+      "partitaIva": "00757920624"
+    },
+    {
+      "denominazione": "CO.MA SUD S.R.L.",
+      "sede": "VIA LUNGOCALORE MANFREDI DI SVEVIA 15 BENEVENTO",
+      "partitaIva": "01653270627"
+    },
+    {
+      "denominazione": "S.E.A. S.R.L.",
+      "sede": "VIA CAPPELLONE 3 - LIMATOLA",
+      "partitaIva": "05102851218"
+    },
+    {
+      "denominazione": "VI.NI.CA. SOCIETA' COOPERATIVA SOCIALE",
+      "sede": "CONTRADA PIANE 294 - PAGO VEIANO",
+      "partitaIva": "01400070627"
+    },
+    {
+      "denominazione": "EDILIZIA TICHE S.R.L.",
+      "sede": "VIA PUGLIANO SNC - SAN SALVATORE TELESINO",
+      "partitaIva": "01659240624"
+    },
+    {
+      "denominazione": "LONGO S.R.L.",
+      "sede": "CONTRADA CERZA CUPA SNC - MOLINARA",
+      "partitaIva": "01617710627"
+    },
+    {
+      "denominazione": "I.M.A.L. DI MAZZAMAURO ALFREDO LUPO (D.I.)",
+      "sede": "VIA NAZIONALE 2 - SAN LUPO",
+      "partitaIva": "01706320627"
+    },
+    {
+      "denominazione": "TS IMPIANTI E SERVIZI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA PASQUALE CIRCELLI 32 SAN BARTOLOMENO IN GALDO",
+      "partitaIva": "01705160628"
+    },
+    {
+      "denominazione": "C.E.M. S.R.L. COSTRUZIONI EL",
+      "sede": "VIA PEZZE 9 - MONTESARCHIO",
+      "partitaIva": "01243290622"
+    },
+    {
+      "denominazione": "GRUPPO RACIOPPI S.R.L.",
+      "sede": "CORSO PADRE PIO SNC - APICE",
+      "partitaIva": "01769610625"
+    },
+    {
+      "denominazione": "EDIL SERVICE RANDELLI S.R.L.",
+      "sede": "CONTRADA SAN PI",
+      "partitaIva": "01604550622"
+    },
+    {
+      "denominazione": "GAAD COSTRUZIONI - S.R.L.",
+      "sede": "VIA ANTONIO VIVALDI 1 - BENEVENTO",
+      "partitaIva": "01585030628"
+    },
+    {
+      "denominazione": "SIDERSAN S.P.A.",
+      "sede": "VIA VALFORTORE 2 - BENEVENTO",
+      "partitaIva": "01166170629"
+    },
+    {
+      "denominazione": "D.R.D. COSTRUZIONI S.R.L.",
+      "sede": "VIA CERVINARA 97 - MONTESARCHIO",
+      "partitaIva": "01511910620"
+    },
+    {
+      "denominazione": "EDIL TRIVELLAZIONI DI PICCOLI GIOVANNI & C. S.A.S. PALUMBO FRANCESCO (D.I.)",
+      "sede": "CONTRADA BADESSA S.N.C. - BENEVENTO VIA MILANO 15/A - APOLLOSA",
+      "partitaIva": "01944750601"
+    },
+    {
+      "denominazione": "DUEDI ENGINES S.R.L.",
+      "sede": "STRADA STATALE APPIA KM 251 - CEPPALONI",
+      "partitaIva": "01607510623"
+    },
+    {
+      "denominazione": "FUCCIO COSTRUZIONI S.R.L. SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA V. EMANUELE 77 - PAOLISI",
+      "partitaIva": "01165450626"
+    },
+    {
+      "denominazione": "TELLURAD S.R.L.",
+      "sede": "VIA ALCIDE DE GASPERI 5C SAN BARTOLOMENO IN GALDO",
+      "partitaIva": "01853180626"
+    },
+    {
+      "denominazione": "DR TEX S.R.L.",
+      "sede": "VIA CARACCIANO 4 AIROLA",
+      "partitaIva": "01710970623"
+    },
+    {
+      "denominazione": "ARG SERVICE S.R.L.",
+      "sede": "VIA BENEVENTO SNC MONTESARCHIO",
+      "partitaIva": "01631060629"
+    },
+    {
+      "denominazione": "ANTER S.R.L.",
+      "sede": "VIA FERRARISI SNC CASALDUNI",
+      "partitaIva": "01851670628"
+    },
+    {
+      "denominazione": "NON SOLO ZUCCHERO S.N.C. DI TEDESCO ROSAMARIA",
+      "sede": "VIA CASE SPARSE SNC - VITULANO",
+      "partitaIva": "01605830627"
+    },
+    {
+      "denominazione": "CARBONE ALESSANDRO S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA CERVINARA SNC - MONTESARCHIO",
+      "partitaIva": "01678820620"
+    },
+    {
+      "denominazione": "CITTA' VERDE DI SACCONE VINCENZO (D.I.)",
+      "sede": "VIA FIRENZE 2 - BENEVENTO",
+      "partitaIva": "01807700628"
+    },
+    {
+      "denominazione": "I RAGAZZI DEL SOLE SOCIETA' COOPERATIVA",
+      "sede": "VIA CARLO PISACANE 7 - BENEVENTO",
+      "partitaIva": "01638960623"
+    },
+    {
+      "denominazione": "COSTRUZIONI IORIO S.R.L.",
+      "sede": "VIA JACOPO DA BENEVENTO 36 - BENEVENTO",
+      "partitaIva": "01698980628"
+    },
+    {
+      "denominazione": "ANTONY ECOLOGIA SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA G. D'ANDREA SNC - PONTE",
+      "partitaIva": "01682940620"
+    },
+    {
+      "denominazione": "PARADISO SELVAGGIO DI BENE",
+      "sede": "VIA VIGNALE DI IORIO 75 - PESCO SANNITA",
+      "partitaIva": "01669420620"
+    },
+    {
+      "denominazione": "RISTORANTE PIZZERIA MASTRILLO S.N.C. DI MASTRILLO MICHELANGELO E FRANCO MARILENA",
+      "sede": "CONTRADA GIOCAGNI 32 CUSANO MUTRI",
+      "partitaIva": "00837600626"
+    },
+    {
+      "denominazione": "R.A. MARTINO S.R.L.S.",
+      "sede": "VIA TORE 21 BIS DUGENTA",
+      "partitaIva": "01761560620"
+    },
+    {
+      "denominazione": "ASSTEAS SOCIETA' COOPERATIVA",
+      "sede": "VIA BENEVENTO 64 MONTESARCHIO",
+      "partitaIva": "01736910629"
+    },
+    {
+      "denominazione": "TECHNO VISION FAV SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA SAN MARTINO 87/Q - MONTESARCHIO",
+      "partitaIva": "01846020624"
+    },
+    {
+      "denominazione": "ITAL.PA S.R.L.",
+      "sede": "VIA CAUDINA 20 SANT'AGATA DE' GOTI",
+      "partitaIva": "07325831217"
+    },
+    {
+      "denominazione": "COPPOLARO S.R.L.S.",
+      "sede": "VIA TRIVELLA S.N.C. - CAMPOLI DEL MONTE TABURNO",
+      "partitaIva": "01609900624"
+    },
+    {
+      "denominazione": "AMAR S.N.C. DI IMPAVIDO DI VIRGILIO MARILISA",
+      "sede": "VIA GALANO, 37 GUARDIA SANFRAMONDI",
+      "partitaIva": "01546470624"
+    },
+    {
+      "denominazione": "TEKNOEDIL SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA SAN BENE",
+      "partitaIva": "01746890621"
+    },
+    {
+      "denominazione": "IGMC SOCIETA' COOPERATIVA SOCIALE",
+      "sede": "VIA SANTISI, 35 SANT'AGATA DE' GOTI",
+      "partitaIva": "01811590627"
+    },
+    {
+      "denominazione": "HOTEL IL CASTELLO S.R.L.",
+      "sede": "VIA VITULANESE MONTESARCHIO",
+      "partitaIva": "01106050626"
+    },
+    {
+      "denominazione": "MIRRA COSTRUZIONI SRLS",
+      "sede": "VIA DELL'UMANITA' 7 - APICE",
+      "partitaIva": "01714240627"
+    },
+    {
+      "denominazione": "ENGENEERING EVOLUTION S.R.L.",
+      "sede": "VIA ENRICO DE NICOLA, 10 APICE",
+      "partitaIva": "01772210629"
+    },
+    {
+      "denominazione": "MECCANICA S.A.S. DI IORIO SALVATORE & C.",
+      "sede": "C.DA SANTO STEFANO SNC VITULANO",
+      "partitaIva": "01342740626"
+    },
+    {
+      "denominazione": "SPEEDY TRANS S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA GIROLAMO D'AMELIO 21 MONTESARCHIO",
+      "partitaIva": "01485610628"
+    },
+    {
+      "denominazione": "CASAMASSA GIOVANNI SALVATORE (D.I.)",
+      "sede": "VIA GREGARIA 61 MOLINARA",
+      "partitaIva": "00893680629"
+    },
+    {
+      "denominazione": "IL LEONE D'ORO S.R.L.",
+      "sede": "VIA PAPA GIOVANNI XXIII 54 - SAN MARCO DEI CAVOTI",
+      "partitaIva": "00982820623"
+    },
+    {
+      "denominazione": "GEMIRA S.R.L.",
+      "sede": "VIA SAN GIOVANNI 4/A - TELESE TERME",
+      "partitaIva": "09913611217"
+    },
+    {
+      "denominazione": "RISTORANTE - PIZZERIA LA LANTERNA DI DE PALMA ALMERICO & C. S.N.C.",
+      "sede": "PIAZZA UMBERTO I 34/A - SAN BARTOLOMEO IN GALDO (BN)",
+      "partitaIva": "00817390628"
+    },
+    {
+      "denominazione": "EDIL PARENTE S.R.L.",
+      "sede": "CONTRADA CERQUELLE, 51 CERRETO SANNITA",
+      "partitaIva": "01442120620"
+    },
+    {
+      "denominazione": "N.G.M. CONSULTING & CONSTRUCTION S.R.L.",
+      "sede": "VIA SANNITA 16 AIROLA",
+      "partitaIva": "09841241210"
+    },
+    {
+      "denominazione": "IMPRESA EDILE E STRADALE F.LLI VECCHIOLLA & FIGLI SRL",
+      "sede": "VIA GIA' FONTANA- MONTEFALCONE DI VAL FORTORE",
+      "partitaIva": "01343880629"
+    },
+    {
+      "denominazione": "OPI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "CORSO DANTE, 12 BENEVENTO",
+      "partitaIva": "01762180626"
+    },
+    {
+      "denominazione": "LUNA SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
+      "sede": "VIALE DELLA VITTORIA SNC - GUARDIA SANFRAMONDI",
+      "partitaIva": "01289520627"
+    },
+    {
+      "denominazione": "MC GREEN SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA APPIA EST, 31 ARPAIA",
+      "partitaIva": "01844450625"
+    },
+    {
+      "denominazione": "PLP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA SPINAZZOLA SNC - CUSANO MUTRI",
+      "partitaIva": "01832050627"
+    },
+    {
+      "denominazione": "RM COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "CONTRADA SAN DONATO SNC APICE",
+      "partitaIva": "01679950624"
+    },
+    {
+      "denominazione": "G.V.A.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA CARACCIANO 13 - AIROLA",
+      "partitaIva": "01823550627"
+    },
+    {
+      "denominazione": "PROJECT SERVICE S.R.L.S. - SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "C.DA RAPINELLA SNC - FRA",
+      "partitaIva": "01689200622"
+    },
+    {
+      "denominazione": "A.M.S. 2020 S.R.L.",
+      "sede": "PIAZZA CARMINE PAGNOZZI 15 MONTESARCHIO",
+      "partitaIva": "01779790623"
+    },
+    {
+      "denominazione": "DASA S.R.L.",
+      "sede": "VIA NAZIONALE 235 DUGENTA",
+      "partitaIva": "01730910625"
+    },
+    {
+      "denominazione": "CMG SUD S.R.L.",
+      "sede": "CONTRADA SAN DONATO SNC APICE",
+      "partitaIva": "01649670625"
+    },
+    {
+      "denominazione": "CI.MAR.S.R.L.",
+      "sede": "VIA PROVINCIALE CAUDINA SNC AIROLA",
+      "partitaIva": "01289750620"
+    },
+    {
+      "denominazione": "EDILTEC RUOTOLO S.R.L.",
+      "sede": "VIA CUPA SANT'ANDREA 8/B PAOLISI",
+      "partitaIva": "01603510627"
+    },
+    {
+      "denominazione": "LA SPIGA SOC",
+      "sede": "VIA PRATO, I TRAVERSA 12 FOGLIANISE",
+      "partitaIva": "01579130624"
+    },
+    {
+      "denominazione": "EDIELAN S.R.L.",
+      "sede": "VIA M. MATTEI 17 BENEVENTO",
+      "partitaIva": "01612280626"
+    },
+    {
+      "denominazione": "PADULI MULTISERVIZI S.N.C. DI ZOTTI FABRIZIO E TRUGLIA MOIRA CLAUDIA",
+      "sede": "VIA ENZO MARMORALE 4 PADULI",
+      "partitaIva": "01416840625"
+    },
+    {
+      "denominazione": "GRUPPO FRACH S.R.L.",
+      "sede": "VIA SAN GIOVANNI 29C - TELESE TERME",
+      "partitaIva": "01770270625"
+    },
+    {
+      "denominazione": "RICCIO ANTONIO (IMPRESA INDIVIDUALE)",
+      "sede": "VIA CAPPUCCINI MONTESARCHIO",
+      "partitaIva": "01288140625"
+    },
+    {
+      "denominazione": "WASTE LOGISTIC S.R.L.",
+      "sede": "VIA NAPOLI SNC MONTESARCHIO",
+      "partitaIva": "03080950649"
+    },
+    {
+      "denominazione": "GU.ECO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA CUPE 4 SAN LUPO",
+      "partitaIva": "01833580622"
+    },
+    {
+      "denominazione": "ECOLOGIA PANELLA SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA BADIA - ZONA PIP SNC MONTESARCHIO",
+      "partitaIva": "01688200623"
+    },
+    {
+      "denominazione": "TRIVELLAZIONI EDILMESSERE S.N.C. DI MESSERE PIO FRANCESCO, EMILIO E CRISTIAN",
+      "sede": "VIA CIRCONVALLAZIONE CARPINE SNC",
+      "partitaIva": "01808670622"
+    },
+    {
+      "denominazione": "CALCESTRUZZI CALZONE S.R.L.",
+      "sede": "VIA VITTORIO EMANUELE, 96 REINO",
+      "partitaIva": "01437180621"
+    },
+    {
+      "denominazione": "TRIVEL PALI S.R.L.",
+      "sede": "VIA CESCOLA, 2 MOIANO (BN)",
+      "partitaIva": "01195140627"
+    },
+    {
+      "denominazione": "M.A.S. S.R.L.",
+      "sede": "VIA MORISI, 2 SANT'ANGELO A CUPOLO",
+      "partitaIva": "01832550626"
+    },
+    {
+      "denominazione": "TRIVEL GROUP S.R.L.",
+      "sede": "C.DA CAPITOLO PADULI",
+      "partitaIva": "01650060625"
+    },
+    {
+      "denominazione": "INGEGNERIA, LAMINATI E SERVIZI STEEL S.R.L.",
+      "sede": "C.DA PIANA, ZONA IND.LE PONTE",
+      "partitaIva": "01681610620"
+    },
+    {
+      "denominazione": "FACCHINO MARIO IMPRESA INDIVIDUALE TRIVEL CAUDIUM DI IANNUCCI ANGELO",
+      "sede": "C.DA SPONSILLI, 1 BENEVENTO VIA CONTRADA CORTECALCE AIROLA",
+      "partitaIva": "01811350626"
+    },
+    {
+      "denominazione": "A.D.R. COSTRUZIONI SANNITE S.R.L.",
+      "sede": "VIALE AURORA 34/C - TELESE TERME",
+      "partitaIva": "01790820623"
+    },
+    {
+      "denominazione": "L'OASI SUL SABATO S.R.L.",
+      "sede": "VIA FONDOVALLE SABATO, 1 CEPPALONI",
+      "partitaIva": "01672400627"
+    },
+    {
+      "denominazione": "P.F. COSTRUZIONI S.R.L.S.",
+      "sede": "VIA DELL'OLMO,1 MORCONE",
+      "partitaIva": "01687690626"
+    },
+    {
+      "denominazione": "MP SERVICE S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIALE DEI",
+      "partitaIva": "01735030627"
+    },
+    {
+      "denominazione": "CASTALDO COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA TINELL, 23 CALVI",
+      "partitaIva": "01820130621"
+    },
+    {
+      "denominazione": "LA RIVIERA PULIZIE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA SAN GIACOMO, 59 SAN GIORGIO DEL SANNIO",
+      "partitaIva": "01815790629"
+    },
+    {
+      "denominazione": "GLOBAL SERVICE 2020 SOCIETA' COOPERATIVA A R.L. CO.GE.VI. SOCIETA' A RESPONSABILITA' LIMITATA EDILARTE S.R.L.",
+      "sede": "VIA CONTRADA DIFESA SNC SANT'ARCANGELO TRIMONTE VIA PENNINO, 19 MONTESARCHIO CONTRADA SAN DONATO ZONA INDUSTRIALE APICE",
+      "partitaIva": "01763710629"
+    },
+    {
+      "denominazione": "PROFESSIONAL GREEN S.R.L. ECO COSTRUZIONI S.R.L.",
+      "sede": "CONTRADA SAGLIETA, S.S. 90 BIS 11/A PADULI VIA CASE SPARSE, FRAZIONE MASSA, 67 FAICCHIO",
+      "partitaIva": "01785940626"
+    },
+    {
+      "denominazione": "E.P. SERVICE S.R.L.",
+      "sede": "VIA VITULANESE, 176 MONTESARCHIO",
+      "partitaIva": "01810800621"
+    },
+    {
+      "denominazione": "FORMEC STRUTTURE S.R.L.",
+      "sede": "VIA TESA 23, MONTESARCHIO",
+      "partitaIva": "01588360626"
+    },
+    {
+      "denominazione": "G M G S.R.L.",
+      "sede": "ZONA INDUSTRIALE, SNC SAN SALVATORE TELESINO",
+      "partitaIva": "01158990620"
+    },
+    {
+      "denominazione": "CE.DIS. MULTISERVICE S.R.L.",
+      "sede": "VIA NICOLA GIUSTINIANI, 36 BENEVENTO",
+      "partitaIva": "01598330627"
+    },
+    {
+      "denominazione": "G.V. TRASPORTI S.R.L.",
+      "sede": "CORSO EUROPA, 10/A APICE",
+      "partitaIva": "01552310623"
+    },
+    {
+      "denominazione": "IMG FINITURE DI PREGIO DI ONORATO CATERINA",
+      "sede": "VIA PIE' DI CASALE, 20 DURAZZANO",
+      "partitaIva": "01802230621"
+    },
+    {
+      "denominazione": "SOCOS S.R.L.S.",
+      "sede": "VIA TOMA, 13 BENEVENTO",
+      "partitaIva": "01745140622"
+    },
+    {
+      "denominazione": "EDICA S.N.C. DI PISCOPO VINCENZO",
+      "sede": "VIA PASQUALE COLUMBRO, 30 BENEVENTO",
+      "partitaIva": "01549300620"
+    },
+    {
+      "denominazione": "E.F. DI ELMESE FRANCESCO",
+      "sede": "VIA BENEVENTO, 185 MONTESARCHIO",
+      "partitaIva": "01792520627"
+    },
+    {
+      "denominazione": "EDIL PAOLO S.R.L.",
+      "sede": "VIA EDOARDO DE FILIPPO, SNC MONTESARCHIO",
+      "partitaIva": "01794730620"
+    },
+    {
+      "denominazione": "IMPRESA MMLAVORI S.R.L.",
+      "sede": "VIA UMBERTO I, SNC FRA",
+      "partitaIva": "01650300625"
+    },
+    {
+      "denominazione": "D & G GROUP S.R.L.",
+      "sede": "VIA TABURNO I^ TRAVERSA, SNC MONTESARCHIO",
+      "partitaIva": "01710090620"
+    },
+    {
+      "denominazione": "AMG PALL",
+      "sede": "VIA GIOACCHINO TOMA, 13 BENEVENTO",
+      "partitaIva": "01773500622"
+    },
+    {
+      "denominazione": "G. & G. S.R.L.",
+      "sede": "VIA TRIVELLA, SNC CAMPOLI DEL MONTE TABURNO",
+      "partitaIva": "01380450625"
+    },
+    {
+      "denominazione": "CONSORZIO ALBATROS",
+      "sede": "VIA FILIPPO RAGUZZINI, 5 BENEVENTO",
+      "partitaIva": "01766870628"
+    },
+    {
+      "denominazione": "TECNO SERVICE DI FRANCO ANIELLO",
+      "sede": "VIA SELV",
+      "partitaIva": "01214420620"
+    },
+    {
+      "denominazione": "TUTTI INSIEME S.R.L. - SOCIETA'A RESPONSABILITA' LIMITATA",
+      "sede": "VIA BIAGIO CUSANO, 13 BENEVENTO",
+      "partitaIva": "01689300620"
+    },
+    {
+      "denominazione": "POLVERINO GROUP S.R.L.",
+      "sede": "VIA DEI CAPPUCCINI, 18 BENEVENTO",
+      "partitaIva": "01751800622"
+    },
+    {
+      "denominazione": "I. R. LUX SERVICE S.R.L.",
+      "sede": "VIA COSTANTINO GRILLO, 2 MONTESARCHIO",
+      "partitaIva": "01641850621"
+    },
+    {
+      "denominazione": "INGECO S.R.L.",
+      "sede": "VIA NAZIONALE ,64 MELIZZANO",
+      "partitaIva": "06793251213"
+    },
+    {
+      "denominazione": "AQUA ITALIA S.R.L.",
+      "sede": "VIA VALLONE NAZIONALE SANNITICA, 35 TELESE TERME",
+      "partitaIva": "01393030620"
+    },
+    {
+      "denominazione": "M.L.P.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sede": "VIA CESARE BATTISTI, 1 - BENEVENTO",
+      "partitaIva": "01650940628"
+    },
+    {
+      "denominazione": "RESTAURI SUD S.R.L.",
+      "sede": "VIA GALANO, 26- GUARDIA SANFRAMONDI",
+      "partitaIva": "02647960604"
+    },
+    {
+      "denominazione": "ERPA FER S.R.L.",
+      "sede": "C.DA SAN VITALE, 244 - BENEVENTO",
+      "partitaIva": "03983200613"
+    },
+    {
+      "denominazione": "INNOVAZIONE CAUDINA S.R.L.",
+      "sede": "VIA SORLATI, 56 - AIROLA",
+      "partitaIva": "01480310620"
+    },
+    {
+      "denominazione": "F.G.C. GROUP SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sede": "VIA SANT'ANTONIO 55/A - LIMATOLA",
+      "partitaIva": "01582510622"
+    },
+    {
+      "denominazione": "C.R. MULTISERVICE DI CORBO ROSARIA",
+      "sede": "C.DA EPITAFFIO BENEVENTO",
+      "partitaIva": "01568790628"
+    },
+    {
+      "denominazione": "C.M.P. S.R.L.- Società A RESPONSABILITA LIMITATA SEMPLIFICATA",
+      "sede": "VIA ROMA, 2 - SOLOPACA",
+      "partitaIva": "01627530627"
+    },
+    {
+      "denominazione": "COMPAGNIA GENERALE DI COSTRUZIONE S.R.L. in sigla C.G.C. S.R.L.",
+      "sede": "LOCALITA' SELVA DI SOTTO - Z.I. snc SAN SALVATORE TELESINO",
+      "partitaIva": "01655010625"
+    },
+    {
+      "denominazione": "IMPRESUD S.R.L. LAVORI GENERALI CONTESTABILE S.R.L.",
+      "sede": "CONTRADA SAN VITALE - BENEVENTO VIA BAGNI, 4 - SAN SALVATORE TELESINO",
+      "partitaIva": "01520510627"
+    },
+    {
+      "denominazione": "RAVITEX S.R.L.",
+      "sede": "ZONA INDUSTRIALE PIP N. 25- FORCHIA",
+      "partitaIva": "01529830620"
+    },
+    {
+      "denominazione": "S.O.G.E.S.I. S.R.L.",
+      "sede": "VIA MASSERIA DELLA SIGNORA MONTESARCHIO",
+      "partitaIva": "01208550622"
+    },
+    {
+      "denominazione": "A.M.G. COSTRUZIONI S.R.L.",
+      "sede": "CONTRADA VOCITO, 8 - TOCCO CAUDIO",
+      "partitaIva": "01551160623"
+    }
+  ]
+}
