@@ -1,0 +1,179 @@
+/**
+ * Provider VIES (VAT Information Exchange System) della Commissione europea.
+ *
+ * Gratuito e senza chiavi, ma notoriamente lento e spesso indisponibile:
+ * l'endpoint interroga in tempo reale l'anagrafe tributaria dello Stato
+ * membro, che può non rispondere. Ogni esito non positivo è quindi un caso
+ * previsto, non un errore da propagare: la pagina non deve mai bloccarsi.
+ *
+ * Documentazione: https://ec.europa.eu/taxation_customs/vies/
+ */
+
+import { z } from "zod";
+
+import { isValidPartitaIva, normalizePartitaIva } from "@/lib/validation";
+
+const VIES_BASE = "https://ec.europa.eu/taxation_customs/vies/rest-api";
+
+/** Oltre questa soglia si smette di aspettare e si degrada. */
+export const VIES_TIMEOUT_MS = 5000;
+
+/** Motivi per cui VIES non ha potuto rispondere. */
+export type ViesUnavailableReason =
+  | "TIMEOUT"
+  | "MS_UNAVAILABLE"
+  | "SERVICE_UNAVAILABLE"
+  | "MS_MAX_CONCURRENT_REQ"
+  | "GLOBAL_MAX_CONCURRENT_REQ"
+  | "NETWORK"
+  | "UNEXPECTED";
+
+export type ViesResult =
+  | {
+      status: "valid";
+      countryCode: string;
+      vatNumber: string;
+      /** VIES restituisce "---" quando lo Stato membro non divulga il dato. */
+      name: string | null;
+      address: string | null;
+      requestDate: string | null;
+    }
+  | { status: "invalid"; countryCode: string; vatNumber: string }
+  | { status: "invalid-input"; countryCode: string; vatNumber: string }
+  | { status: "unavailable"; reason: ViesUnavailableReason };
+
+/** Risposta REST di VIES, validata prima di essere usata. */
+const viesResponseSchema = z.object({
+  isValid: z.boolean(),
+  requestDate: z.string().nullish(),
+  userError: z.string().nullish(),
+  name: z.string().nullish(),
+  address: z.string().nullish(),
+  vatNumber: z.string().nullish(),
+  countryCode: z.string().nullish(),
+});
+
+/** I codici di errore che indicano un'indisponibilità, non un esito. */
+const UNAVAILABLE_ERRORS = new Set<string>([
+  "MS_UNAVAILABLE",
+  "SERVICE_UNAVAILABLE",
+  "MS_MAX_CONCURRENT_REQ",
+  "GLOBAL_MAX_CONCURRENT_REQ",
+  "TIMEOUT",
+]);
+
+/**
+ * VIES riempie name e address con "---" (o stringa vuota) quando lo Stato
+ * membro non consente di divulgarli: meglio null che un trattino nella UI.
+ */
+function cleanField(value: string | null | undefined): string | null {
+  if (!value) return null;
+  const trimmed = value.trim();
+  if (trimmed === "" || /^-+$/.test(trimmed)) return null;
+  return trimmed;
+}
+
+/** Traduce la risposta grezza di VIES nel nostro tipo di dominio. */
+export function parseViesResponse(
+  raw: unknown,
+  fallback: { countryCode: string; vatNumber: string },
+): ViesResult {
+  const parsed = viesResponseSchema.safeParse(raw);
+  if (!parsed.success) return { status: "unavailable", reason: "UNEXPECTED" };
+
+  const data = parsed.data;
+  const countryCode = data.countryCode ?? fallback.countryCode;
+  const vatNumber = data.vatNumber ?? fallback.vatNumber;
+  const userError = data.userError?.toUpperCase();
+
+  if (userError && UNAVAILABLE_ERRORS.has(userError)) {
+    return { status: "unavailable", reason: userError as ViesUnavailableReason };
+  }
+
+  if (userError === "INVALID_INPUT") {
+    return { status: "invalid-input", countryCode, vatNumber };
+  }
+
+  if (!data.isValid) {
+    return { status: "invalid", countryCode, vatNumber };
+  }
+
+  return {
+    status: "valid",
+    countryCode,
+    vatNumber,
+    name: cleanField(data.name),
+    address: cleanField(data.address),
+    requestDate: cleanField(data.requestDate),
+  };
+}
+
+/**
+ * Interroga VIES per una Partita IVA.
+ *
+ * Non lancia mai: qualunque problema diventa uno stato `unavailable`, così
+ * chi chiama non deve incapsulare la chiamata in un try/catch.
+ */
+export async function checkVies(
+  partitaIva: string,
+  countryCode = "IT",
+): Promise<ViesResult> {
+  const vatNumber = normalizePartitaIva(partitaIva);
+
+  // Il controllo formale è gratuito: evita una chiamata di rete inutile
+  if (countryCode === "IT" && !isValidPartitaIva(vatNumber)) {
+    return { status: "invalid-input", countryCode, vatNumber };
+  }
+
+  const url = `${VIES_BASE}/ms/${countryCode}/vat/${vatNumber}`;
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(VIES_TIMEOUT_MS),
+      // VIES cambia di rado per una singola partita: un'ora di cache riduce
+      // il carico su un servizio già fragile.
+      next: { revalidate: 3600 },
+    });
+  } catch (error) {
+    const isTimeout =
+      error instanceof DOMException &&
+      (error.name === "TimeoutError" || error.name === "AbortError");
+    return { status: "unavailable", reason: isTimeout ? "TIMEOUT" : "NETWORK" };
+  }
+
+  if (!response.ok) {
+    return {
+      status: "unavailable",
+      reason: response.status >= 500 ? "SERVICE_UNAVAILABLE" : "UNEXPECTED",
+    };
+  }
+
+  let body: unknown;
+  try {
+    body = await response.json();
+  } catch {
+    return { status: "unavailable", reason: "UNEXPECTED" };
+  }
+
+  return parseViesResponse(body, { countryCode, vatNumber });
+}
+
+/** Messaggio da mostrare all'utente per ciascun motivo di indisponibilità. */
+export const VIES_UNAVAILABLE_MESSAGE: Record<ViesUnavailableReason, string> = {
+  TIMEOUT:
+    "VIES non ha risposto entro cinque secondi. È un disservizio frequente: riprova fra qualche minuto.",
+  MS_UNAVAILABLE:
+    "L'anagrafe tributaria italiana non è raggiungibile in questo momento. Il problema è a monte, non dipende dalla Partita IVA cercata.",
+  SERVICE_UNAVAILABLE:
+    "Il servizio VIES della Commissione europea è temporaneamente fuori servizio.",
+  MS_MAX_CONCURRENT_REQ:
+    "L'anagrafe tributaria italiana ha troppe richieste in corso. Riprova fra qualche istante.",
+  GLOBAL_MAX_CONCURRENT_REQ:
+    "VIES ha troppe richieste in corso in tutta Europa. Riprova fra qualche istante.",
+  NETWORK:
+    "Non è stato possibile raggiungere VIES. Controlla la connessione e riprova.",
+  UNEXPECTED:
+    "VIES ha risposto in un modo che non sappiamo interpretare. Riprova più tardi.",
+};
