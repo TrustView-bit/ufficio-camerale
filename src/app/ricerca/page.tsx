@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CircleAlert, Database, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { SearchForm } from "@/components/search/search-form";
 import { Badge } from "@/components/ui/badge";
@@ -24,6 +25,12 @@ export default async function RicercaPage({
   // arriva dall'URL e non ci si può fidare di quanto ha fatto il client.
   const parsed = searchQuerySchema.safeParse(q ?? "");
   const analysis = parsed.success ? analyzeQuery(parsed.data) : null;
+
+  // Una Partita IVA valida identifica una sola impresa: non ha senso mostrare
+  // una lista di un elemento, si va dritti alla scheda.
+  if (analysis?.kind === "partita-iva" && analysis.isValid) {
+    redirect(`/azienda/${analysis.value}`);
+  }
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
