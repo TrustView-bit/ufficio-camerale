@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
-import { CircleAlert, Database, ShieldCheck } from "lucide-react";
+import { Building2, CircleAlert, SearchX } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { SearchForm } from "@/components/search/search-form";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { analyzeQuery, QUERY_KIND_TEXT, searchQuerySchema } from "@/lib/validation";
+import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { cercaAziende } from "@/lib/companies";
+import type { EsitoRicerca, RisultatoAzienda } from "@/lib/providers/types";
+import { buildAziendaSlug } from "@/lib/slug";
+import { analyzeQuery, QUERY_KIND_TEXT } from "@/lib/validation";
+
+/** Quante schede per pagina. */
+const PER_PAGINA = 20;
 
 export const metadata: Metadata = {
   title: "Ricerca aziende",
@@ -15,78 +20,79 @@ export const metadata: Metadata = {
     "Cerca un'azienda italiana per Partita IVA, codice fiscale o ragione sociale.",
 };
 
-export default async function RicercaPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string }>;
-}) {
-  const { q } = await searchParams;
-  // La stessa validazione della UI viene rieseguita lato server: il parametro
-  // arriva dall'URL e non ci si può fidare di quanto ha fatto il client.
-  const parsed = searchQuerySchema.safeParse(q ?? "");
-  const analysis = parsed.success ? analyzeQuery(parsed.data) : null;
+type Props = {
+  searchParams: Promise<{ q?: string; provincia?: string; pagina?: string }>;
+};
 
-  // Una Partita IVA valida identifica una sola impresa: non ha senso mostrare
-  // una lista di un elemento, si va dritti alla scheda.
-  if (analysis?.kind === "partita-iva" && analysis.isValid) {
-    redirect(`/azienda/${analysis.value}`);
+export default async function RicercaPage({ searchParams }: Props) {
+  const parametri = await searchParams;
+  const query = (parametri.q ?? "").trim().slice(0, 120);
+  const provincia = parametri.provincia?.trim().toUpperCase().slice(0, 2);
+  const pagina = Math.max(1, Number(parametri.pagina) || 1);
+
+  const analisi = query ? analyzeQuery(query) : null;
+
+  // Una Partita IVA valida identifica una sola impresa: si va dritti alla scheda
+  if (analisi?.kind === "partita-iva" && analisi.isValid) {
+    redirect(`/azienda/${analisi.value}`);
   }
+
+  const numeroNonValido =
+    analisi && analisi.kind !== "denominazione" && !analisi.isValid;
+
+  const esito = numeroNonValido
+    ? null
+    : await cercaAziende(query, {
+        provincia,
+        offset: (pagina - 1) * PER_PAGINA,
+        limite: PER_PAGINA,
+      });
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <h1 className="text-2xl font-semibold tracking-tight">Ricerca aziende</h1>
 
       <div className="mt-6 max-w-2xl">
-        <SearchForm
-          defaultValue={parsed.success ? parsed.data : ""}
-          size="compact"
-        />
+        <SearchForm defaultValue={query} size="compact" />
       </div>
 
       <div className="mt-8">
-        {!analysis ? (
-          <EmptyQuery
-            message={parsed.success ? undefined : parsed.error.issues[0]?.message}
-          />
-        ) : !analysis.isValid ? (
-          <InvalidQuery analysis={analysis} />
+        {numeroNonValido ? (
+          <NumeroNonValido analisi={analisi} />
+        ) : esito === null ? (
+          <RicercaNonDisponibile />
         ) : (
-          <ValidQuery analysis={analysis} />
+          <Risultati
+            esito={esito}
+            query={query}
+            provincia={provincia}
+            pagina={pagina}
+          />
         )}
       </div>
     </div>
   );
 }
 
-function EmptyQuery({ message }: { message?: string }) {
-  return (
-    <Card className="shadow-card max-w-2xl">
-      <CardContent className="text-muted-foreground text-sm">
-        {message ??
-          "Digita una Partita IVA, un codice fiscale o una ragione sociale."}
-      </CardContent>
-    </Card>
-  );
-}
-
-function InvalidQuery({
-  analysis,
+function NumeroNonValido({
+  analisi,
 }: {
-  analysis: NonNullable<ReturnType<typeof analyzeQuery>>;
+  analisi: NonNullable<ReturnType<typeof analyzeQuery>>;
 }) {
   return (
     <Card className="border-danger/25 bg-danger-subtle/40 shadow-card max-w-2xl">
       <CardHeader>
-        <CardTitle className="text-danger flex items-center gap-2 text-base">
+        <h2
+          data-slot="card-title"
+          className="text-danger font-heading flex items-center gap-2 text-base leading-snug font-medium"
+        >
           <CircleAlert className="size-4" aria-hidden />
-          {QUERY_KIND_TEXT[analysis.kind].invalidTitle}
-        </CardTitle>
+          {QUERY_KIND_TEXT[analisi.kind].invalidTitle}
+        </h2>
       </CardHeader>
-      {/* Il messaggio puntuale è già sotto il campo di ricerca: qui si spiega
-          soltanto che cosa significa. */}
       <CardContent className="text-muted-foreground text-sm">
         Hai cercato{" "}
-        <span className="num text-foreground font-medium">{analysis.raw}</span>. Il
+        <span className="num text-foreground font-medium">{analisi.raw}</span>. Il
         controllo è puramente formale e avviene senza interrogare nessun servizio
         esterno: se la cifra di controllo non torna, il numero non può esistere.
       </CardContent>
@@ -94,56 +100,221 @@ function InvalidQuery({
   );
 }
 
-function ValidQuery({
-  analysis,
-}: {
-  analysis: NonNullable<ReturnType<typeof analyzeQuery>>;
-}) {
-  // VIES verifica solo le partite IVA comunitarie, non i codici fiscali
-  const isPartitaIva = analysis.kind === "partita-iva";
-
+function RicercaNonDisponibile() {
   return (
-    <div className="space-y-4">
+    <Card className="shadow-card max-w-2xl">
+      <CardContent className="text-muted-foreground text-sm">
+        Il fornitore di dati configurato non offre la ricerca per ragione sociale.
+        Puoi comunque aprire la scheda di un&apos;azienda cercandone la Partita IVA.
+      </CardContent>
+    </Card>
+  );
+}
+
+function Risultati({
+  esito,
+  query,
+  provincia,
+  pagina,
+}: {
+  esito: EsitoRicerca;
+  query: string;
+  provincia?: string;
+  pagina: number;
+}) {
+  const pagine = Math.max(1, Math.ceil(esito.totale / PER_PAGINA));
+
+  if (esito.totale === 0) {
+    return (
       <Card className="shadow-card max-w-2xl">
         <CardHeader>
-          <CardTitle className="flex flex-wrap items-center gap-2 text-base">
-            <ShieldCheck className="text-success size-4" aria-hidden />
-            <span className="num">{analysis.value}</span>
-            <Badge
-              variant="outline"
-              className="border-success/25 bg-success-subtle text-success"
-            >
-              {QUERY_KIND_TEXT[analysis.kind].label}
-            </Badge>
-          </CardTitle>
+          <h2
+            data-slot="card-title"
+            className="font-heading flex items-center gap-2 text-base leading-snug font-medium"
+          >
+            <SearchX className="text-muted-foreground size-4" aria-hidden />
+            Nessuna azienda trovata
+          </h2>
         </CardHeader>
         <CardContent className="text-muted-foreground text-sm">
-          {QUERY_KIND_TEXT[analysis.kind].meaning}
+          Nessuna azienda corrisponde a{" "}
+          <span className="text-foreground font-medium">{query}</span>. Prova con
+          meno parole, o cerca direttamente la Partita IVA.
         </CardContent>
       </Card>
+    );
+  }
 
-      <Card className="max-w-2xl border-dashed shadow-none">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-base">
-            <Database className="text-muted-foreground size-4" aria-hidden />
-            Risultati non ancora disponibili
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="text-muted-foreground space-y-4 text-sm">
-          <p>
-            Il collegamento alle fonti dati arriva agli step successivi: VIES per
-            l&apos;esistenza europea della Partita IVA, il Registro Imprese per
-            l&apos;anagrafica camerale completa.
-          </p>
-          {isPartitaIva && (
-            <Button asChild variant="outline" size="sm">
-              <Link href={`/verifica-partita-iva?piva=${analysis.value}`}>
-                Verifica su VIES
-              </Link>
-            </Button>
+  return (
+    <div className="flex flex-col gap-5">
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <p className="text-muted-foreground text-sm">
+          <span className="num text-foreground font-medium">{esito.totale}</span>{" "}
+          {esito.totale === 1 ? "azienda trovata" : "aziende trovate"}
+          {query && (
+            <>
+              {" "}
+              per <span className="text-foreground font-medium">{query}</span>
+            </>
           )}
-        </CardContent>
-      </Card>
+        </p>
+        {pagine > 1 && (
+          <p className="text-muted-foreground num text-sm">
+            Pagina {pagina} di {pagine}
+          </p>
+        )}
+      </div>
+
+      <FiltroProvince esito={esito} query={query} attiva={provincia} />
+
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {esito.risultati.map((azienda) => (
+          <li key={azienda.partitaIva}>
+            <SchedaRisultato azienda={azienda} />
+          </li>
+        ))}
+      </ul>
+
+      <Paginazione
+        pagina={pagina}
+        pagine={pagine}
+        query={query}
+        provincia={provincia}
+      />
     </div>
+  );
+}
+
+function SchedaRisultato({ azienda }: { azienda: RisultatoAzienda }) {
+  const luogo = [azienda.comune, azienda.provincia && `(${azienda.provincia})`]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <Link
+      href={`/azienda/${buildAziendaSlug(azienda.denominazione, azienda.partitaIva)}`}
+      className="border-border bg-card shadow-card ease-ui hover:border-primary/40 flex h-full flex-col gap-2 rounded-xl border p-4 transition-colors duration-150"
+    >
+      <div className="flex items-start gap-2">
+        <Building2 className="text-primary mt-0.5 size-4 shrink-0" aria-hidden />
+        <h2 className="text-sm leading-snug font-semibold text-balance">
+          {azienda.denominazione}
+        </h2>
+      </div>
+
+      <p className="num text-muted-foreground text-xs">{azienda.partitaIva}</p>
+
+      <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
+        {luogo && <span className="text-muted-foreground text-xs">{luogo}</span>}
+        {azienda.statoAttivita !== "sconosciuto" && (
+          <StatusBadge status={azienda.statoAttivita as CompanyStatus} />
+        )}
+      </div>
+    </Link>
+  );
+}
+
+function FiltroProvince({
+  esito,
+  query,
+  attiva,
+}: {
+  esito: EsitoRicerca;
+  query: string;
+  attiva?: string;
+}) {
+  if (esito.province.length < 2) return null;
+
+  const indirizzo = (provincia?: string) => {
+    const parametri = new URLSearchParams();
+    if (query) parametri.set("q", query);
+    if (provincia) parametri.set("provincia", provincia);
+    const stringa = parametri.toString();
+    return stringa ? `/ricerca?${stringa}` : "/ricerca";
+  };
+
+  return (
+    <nav aria-label="Filtra per provincia" className="flex flex-wrap gap-2">
+      <Link
+        href={indirizzo()}
+        aria-current={attiva ? undefined : "true"}
+        className={`ease-ui rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 ${
+          attiva
+            ? "border-border bg-card text-muted-foreground hover:border-primary/40"
+            : "border-primary bg-primary text-primary-foreground"
+        }`}
+      >
+        Tutte
+      </Link>
+
+      {esito.province.slice(0, 14).map((provincia) => {
+        const selezionata = attiva === provincia.sigla;
+        return (
+          <Link
+            key={provincia.sigla}
+            href={indirizzo(provincia.sigla)}
+            aria-current={selezionata ? "true" : undefined}
+            className={`ease-ui rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 ${
+              selezionata
+                ? "border-primary bg-primary text-primary-foreground"
+                : "border-border bg-card text-muted-foreground hover:border-primary/40"
+            }`}
+          >
+            {provincia.sigla}{" "}
+            <span className="num opacity-70">{provincia.quante}</span>
+          </Link>
+        );
+      })}
+    </nav>
+  );
+}
+
+function Paginazione({
+  pagina,
+  pagine,
+  query,
+  provincia,
+}: {
+  pagina: number;
+  pagine: number;
+  query: string;
+  provincia?: string;
+}) {
+  if (pagine < 2) return null;
+
+  const indirizzo = (numero: number) => {
+    const parametri = new URLSearchParams();
+    if (query) parametri.set("q", query);
+    if (provincia) parametri.set("provincia", provincia);
+    if (numero > 1) parametri.set("pagina", String(numero));
+    const stringa = parametri.toString();
+    return stringa ? `/ricerca?${stringa}` : "/ricerca";
+  };
+
+  const stile =
+    "border-border bg-card ease-ui hover:border-primary/40 rounded-md border px-3 py-1.5 text-sm transition-colors duration-150";
+
+  return (
+    <nav aria-label="Pagine dei risultati" className="flex items-center gap-2">
+      {pagina > 1 ? (
+        <Link href={indirizzo(pagina - 1)} className={stile} rel="prev">
+          Precedente
+        </Link>
+      ) : (
+        <span className={`${stile} text-muted-foreground opacity-50`}>
+          Precedente
+        </span>
+      )}
+
+      {pagina < pagine ? (
+        <Link href={indirizzo(pagina + 1)} className={stile} rel="next">
+          Successiva
+        </Link>
+      ) : (
+        <span className={`${stile} text-muted-foreground opacity-50`}>
+          Successiva
+        </span>
+      )}
+    </nav>
   );
 }

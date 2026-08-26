@@ -113,6 +113,62 @@ test.describe("dalla ricerca alla scheda azienda", () => {
   });
 });
 
+test.describe("consultare l'elenco delle aziende", () => {
+  test("senza query mostra l'elenco navigabile", async ({ page }) => {
+    await page.goto("/ricerca");
+
+    await expect(page.getByText(/aziende trovate/)).toBeVisible();
+    // ogni scheda dell'elenco è un collegamento alla pagina dell'azienda
+    const schede = page.locator('a[href^="/azienda/"]');
+    expect(await schede.count()).toBeGreaterThan(5);
+  });
+
+  test("dall'elenco si apre la scheda", async ({ page }) => {
+    await page.goto("/ricerca?q=cooperativa");
+
+    const prima = page.locator('a[href^="/azienda/"]').first();
+    const nome = (await prima.locator("h2").textContent())?.trim();
+    await prima.click();
+
+    await expect(page).toHaveURL(/\/azienda\//);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(nome!);
+    await expect(
+      page.getByRole("heading", { name: "Dati della società" }),
+    ).toBeVisible();
+  });
+
+  test("la ricerca per nome restringe i risultati", async ({ page }) => {
+    await page.goto("/ricerca");
+    const totale = await page.getByText(/aziende trovate/).textContent();
+
+    await page.goto("/ricerca?q=cooperativa");
+    const filtrato = await page.getByText(/aziende trovate/).textContent();
+
+    expect(filtrato).not.toBe(totale);
+    await expect(page.getByText(/per cooperativa/i)).toBeVisible();
+  });
+
+  test("il filtro per provincia funziona", async ({ page }) => {
+    await page.goto("/ricerca?q=cooperativa");
+
+    const filtro = page.getByRole("link", { name: /^BN/ });
+    await filtro.click();
+
+    await expect(page).toHaveURL(/provincia=BN/);
+    await expect(page.getByText("(BN)").first()).toBeVisible();
+  });
+
+  test("una ricerca senza esito lo dice, invece di mostrare il vuoto", async ({
+    page,
+  }) => {
+    await page.goto("/ricerca?q=zzzznonesistequestaazienda");
+
+    await expect(
+      page.getByRole("heading", { name: /nessuna azienda trovata/i }),
+    ).toBeVisible();
+  });
+});
+
 test.describe("verifica su VIES", () => {
   test("il controllo formale avviene prima di interrogare il servizio", async ({
     page,

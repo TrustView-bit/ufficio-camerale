@@ -1,11 +1,16 @@
 import impreseJson from "../../../data/imprese-sviluppo.json";
 import { normalizzaComune, riconosciComuneInCoda, titoloProprio } from "@/lib/geo";
 
+import { punteggio } from "@/lib/ricerca";
+
 import type {
   CompanyData,
   CompanyProvider,
+  EsitoRicerca,
   Indirizzo,
+  OpzioniRicerca,
   ProviderResult,
+  RisultatoAzienda,
   UnitaLocale,
 } from "./types";
 
@@ -243,6 +248,71 @@ export class MockCompanyProvider implements CompanyProvider {
     return company
       ? { status: "found", company, raw: { mock: true } }
       : { status: "not-found" };
+  }
+
+  /**
+   * Ricerca per ragione sociale sulle imprese caricate in memoria.
+   *
+   * Con la query vuota restituisce tutto in ordine alfabetico: la pagina di
+   * ricerca diventa così anche un elenco navigabile.
+   */
+  async cercaPerNome(
+    query: string,
+    opzioni: OpzioniRicerca = {},
+  ): Promise<EsitoRicerca> {
+    const { provincia, offset = 0, limite = 20 } = opzioni;
+    const termine = query.trim();
+
+    let trovate = Object.values(TUTTE);
+
+    if (termine) {
+      trovate = trovate
+        .map((azienda) => ({
+          azienda,
+          punti: punteggio(azienda.denominazione, termine),
+        }))
+        .filter((riga) => riga.punti > 0)
+        .sort(
+          (a, b) =>
+            b.punti - a.punti ||
+            a.azienda.denominazione.localeCompare(b.azienda.denominazione, "it"),
+        )
+        .map((riga) => riga.azienda);
+    } else {
+      trovate = [...trovate].sort((a, b) =>
+        a.denominazione.localeCompare(b.denominazione, "it"),
+      );
+    }
+
+    // le province si contano prima di filtrare, altrimenti il filtro
+    // nasconderebbe le alternative fra cui scegliere
+    const conteggio = new Map<string, number>();
+    for (const azienda of trovate) {
+      const sigla = azienda.sede?.provincia;
+      if (sigla) conteggio.set(sigla, (conteggio.get(sigla) ?? 0) + 1);
+    }
+
+    if (provincia) {
+      trovate = trovate.filter((azienda) => azienda.sede?.provincia === provincia);
+    }
+
+    const risultati: RisultatoAzienda[] = trovate
+      .slice(offset, offset + limite)
+      .map((azienda) => ({
+        partitaIva: azienda.partitaIva,
+        denominazione: azienda.denominazione,
+        comune: azienda.sede?.comune ?? null,
+        provincia: azienda.sede?.provincia ?? null,
+        statoAttivita: azienda.statoAttivita,
+      }));
+
+    return {
+      totale: trovate.length,
+      risultati,
+      province: [...conteggio.entries()]
+        .map(([sigla, quante]) => ({ sigla, quante }))
+        .sort((a, b) => b.quante - a.quante || a.sigla.localeCompare(b.sigla)),
+    };
   }
 }
 

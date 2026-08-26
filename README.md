@@ -166,6 +166,27 @@ quindi `Bozen` da solo non risolve (`Bolzano/Bozen` sì); e sei nomi sono usati
 da più comuni (Samone, Calliano, Livo, Peglio, Castro, Castello), per i quali
 senza provincia si restituisce `null` invece di scegliere a caso.
 
+## Ricerca e consultazione
+
+`/ricerca` è insieme pagina dei risultati ed elenco navigabile: senza query
+mostra tutte le aziende in ordine alfabetico, impaginate, con i filtri per
+provincia. Ogni scheda dell'elenco è un collegamento all'indirizzo canonico
+dell'azienda.
+
+La ricerca per ragione sociale è un metodo **facoltativo** di
+`CompanyProvider`: chi non la offre semplicemente non lo implementa, e la
+pagina lo dice apertamente invece di mostrare zero risultati come se non
+esistesse nulla.
+
+Il confronto passa da `src/lib/ricerca.ts`, che appiattisce accenti e
+punteggiatura — le ragioni sociali sono piene di «S.R.L.» e «SOCIETA'
+COOPERATIVA» — e richiede che **tutte** le parole digitate compaiano: chi
+cerca due parole non vuole i risultati che ne contengono una sola.
+
+Nota: `robots.txt` esclude `/ricerca` dall'indicizzazione. Le pagine di
+risultato non hanno contenuto proprio, e tenerle fuori riduce la superficie di
+ripubblicazione. Le schede azienda restano indicizzabili.
+
 ## Validazione
 
 `src/lib/validation/` contiene i controlli formali, condivisi da client e

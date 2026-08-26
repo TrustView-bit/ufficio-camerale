@@ -66,6 +66,29 @@ export type ProviderResult =
       httpStatus?: number;
     };
 
+/** Riga di un elenco di risultati: quel poco che serve a decidere se aprire. */
+export type RisultatoAzienda = {
+  partitaIva: string;
+  denominazione: string;
+  comune: string | null;
+  provincia: string | null;
+  statoAttivita: StatoAttivita;
+};
+
+export type EsitoRicerca = {
+  /** Quanti risultati esistono in tutto, non quanti ne sono stati restituiti. */
+  totale: number;
+  risultati: RisultatoAzienda[];
+  /** Le province presenti fra i risultati, per costruire il filtro. */
+  province: { sigla: string; quante: number }[];
+};
+
+export type OpzioniRicerca = {
+  provincia?: string;
+  offset?: number;
+  limite?: number;
+};
+
 /**
  * Contratto comune a tutti i fornitori di dati camerali.
  *
@@ -77,7 +100,16 @@ export interface CompanyProvider {
   readonly name: string;
   /** Costo stimato di una singola interrogazione, in euro. */
   readonly costPerLookupEur: number;
+
   getByPartitaIva(partitaIva: string): Promise<ProviderResult>;
+
+  /**
+   * Ricerca per ragione sociale. Facoltativa: non tutti i fornitori la
+   * offrono, e chi non la offre semplicemente non la implementa. La pagina di
+   * ricerca lo rileva e lo dice all'utente, invece di mostrare zero risultati
+   * come se non esistesse nulla.
+   */
+  cercaPerNome?(query: string, opzioni?: OpzioniRicerca): Promise<EsitoRicerca>;
 }
 
 export const PROVIDER_UNAVAILABLE_MESSAGE: Record<
