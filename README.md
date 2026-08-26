@@ -12,7 +12,7 @@ azienda chiara e veloce.
 | Step | Contenuto | Stato |
 |---|---|---|
 | 1 | Scaffold, design token, layout | ✅ fatto |
-| 2 | Validazione P.IVA / CF + UI ricerca | ⬜ |
+| 2 | Validazione P.IVA / CF + UI ricerca | ✅ fatto |
 | 3 | Provider VIES + `/verifica-partita-iva` | ⬜ |
 | 4 | Schema DB, cache, provider camerale | ⬜ |
 | 5 | Scheda azienda + SEO | ⬜ |
@@ -48,12 +48,17 @@ Il sito è su http://localhost:3000, l'health check su `/api/health`.
 ## Comandi
 
 ```bash
-npm run dev     # server di sviluppo
-npm run build   # build di produzione
-npm run start   # avvia la build
-npm run lint    # ESLint
-npm run format  # Prettier su tutto il progetto
+npm run dev        # server di sviluppo
+npm run build      # build di produzione
+npm run start      # avvia la build
+npm run lint       # ESLint
+npm run typecheck  # TypeScript senza emettere output
+npm run test       # unit test (vitest)
+npm run format     # Prettier su tutto il progetto
 ```
+
+> `npm run build` e `npm run dev` si contendono la cartella `.next`: ferma il
+> server di sviluppo prima di lanciare una build di produzione.
 
 ## Design token
 
@@ -70,6 +75,23 @@ Convenzioni:
 - `--success` / `--warning` / `--danger` — **solo** stati reali (attiva, in
   liquidazione, cessata, errori). Mai decorativi.
 - `.num` — attiva i numeri tabulari per P.IVA, REA, capitale sociale
+
+## Validazione
+
+`src/lib/validation/` contiene i controlli formali, condivisi da client e
+server e privi di dipendenze di rete:
+
+- `partita-iva.ts` — normalizzazione (spazi, punteggiatura, prefisso `IT`) e
+  cifra di controllo secondo l'algoritmo di Luhn.
+- `codice-fiscale.ts` — carattere di controllo del CF di persona fisica,
+  gestione dell'omocodia, e CF di persona giuridica (11 cifre come la P.IVA).
+- `query.ts` — riconosce da solo se l'utente ha digitato una P.IVA, un codice
+  fiscale o una ragione sociale, e raccoglie i testi corrispondenti in
+  `QUERY_KIND_TEXT` (in italiano l'accordo cambia con il genere: *Partita IVA
+  valida* ma *codice fiscale valido*).
+
+La stessa analisi viene rieseguita lato server sulla pagina `/ricerca`: il
+parametro `q` arriva dall'URL e non ci si può fidare del client.
 
 ## Aggiungere un provider dati (dallo step 4)
 
