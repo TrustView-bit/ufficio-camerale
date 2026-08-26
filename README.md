@@ -117,9 +117,21 @@ successivo, tutto si ricalcola da capo.
 
 ### Imprese di sviluppo
 
-`data/imprese-sviluppo.json` contiene 187 imprese reali con partita IVA vera,
-estratte da un elenco pubblico con `scripts/estrai-imprese-pdf.py`. Servono a
-provare la resa su dati veri invece che sui tre esempi inventati.
+`data/imprese-sviluppo.json` contiene 322 imprese reali con partita IVA vera e
+127 unità locali, estratte da elenchi pubblici con
+`scripts/estrai-imprese-pdf.py`. Servono a provare la resa su dati veri invece
+che sui tre esempi inventati.
+
+```bash
+python3 scripts/estrai-imprese-pdf.py <formato> <file.pdf> [origine]
+```
+
+Lo script conosce due disposizioni di colonne (`elenco-imprese`,
+`rete-vendita`) e **unisce** i record a quelli già presenti, con la partita IVA
+come chiave: righe che condividono la stessa partita diventano unità locali
+della stessa impresa. Legge la tabella dalle coordinate del testo nella pagina,
+non dall'ordine dei frammenti, perché le celle del PDF vanno a capo e
+l'accostamento per vicinanza mescola i campi.
 
 Di queste si conoscono **solo** denominazione, sede e partita IVA, e solo
 quelli vengono esposti: attribuire a un'impresa esistente un codice ATECO, un
@@ -140,6 +152,14 @@ qualunque modo: maiuscolo, senza accenti, con o senza apostrofi, o nella forma
 bilingue con la barra (`Bolzano/Bozen`). Serve soprattutto agli indirizzi VIES,
 che arrivano tutti in maiuscolo: `"LARGO FRANCESCO RICHINI 6 \n20122 MILANO MI"`
 diventa via, CAP, comune e provincia riconosciuti.
+
+Le coordinate del centro di ogni comune servono a centrare la mappa statica
+nelle schede. La sorgente ne sbaglia alcune: undici righe scrivono la
+coordinata senza punto decimale (`45581` invece di `45.581`) e vengono
+ricostruite in automatico, perché nessuna coordinata italiana supera 47,2 di
+latitudine; per Brescia, collocata 31 km a nord-est del centro città, c'è una
+correzione manuale motivata nello script. Al termine nessuna coordinata cade
+fuori dai confini d'Italia.
 
 Due limiti dichiarati: il dataset contiene i soli nomi **italiani** dei comuni,
 quindi `Bozen` da solo non risolve (`Bolzano/Bozen` sì); e sei nomi sono usati
@@ -202,14 +222,25 @@ dati strutturati `Organization` e un'immagine Open Graph generata al volo.
 Il pulsante «Stampa o PDF» usa `window.print()` con un foglio di stile
 dedicato in `globals.css`: niente dipendenze e niente generazione lato server.
 
-### Mappa statica: cosa manca
+### Mappa statica
 
-Il piano prevedeva una mappa statica leggera della sede. Non è stata
-implementata perché ogni servizio di tile utilizzabile (Mapbox, Google Static
-Maps, Geoapify) richiede una chiave, e non ne è stata configurata nessuna. Al
-suo posto la barra dei link rapidi apre l'indirizzo su Google Maps. Per
-aggiungerla basta una chiave e un `<Image>` verso l'endpoint statico del
-fornitore scelto: nessuna modifica strutturale.
+`MappaStatica` compone le tile di OpenStreetMap in un riquadro fisso: nessuna
+libreria, nessun iframe, nessun JavaScript, solo immagini posizionate. Le
+coordinate sono quelle del **centro del comune**, non del numero civico — per
+puntare l'indirizzo esatto servirebbe una geocodifica — e la didascalia lo
+dichiara invece di lasciarlo intendere.
+
+Le tile pubbliche di `openstreetmap.org` hanno una politica d'uso che
+scoraggia il traffico elevato: prima di mettere il sito sotto carico vero
+conviene passare a un fornitore di tile proprio.
+
+### Documenti ordinabili
+
+`src/lib/documenti.ts` elenca i documenti camerali con i relativi prezzi. **I
+prezzi sono segnaposto e l'ordine non è attivo**: non c'è un fornitore
+collegato né un incasso. I pulsanti sono disabilitati e la sezione lo dichiara
+apertamente — un pulsante d'acquisto che sembra funzionante ma non lo è
+sarebbe peggio di nessun pulsante.
 
 ## Limite di richieste
 

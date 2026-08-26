@@ -24,12 +24,38 @@ test.describe("dalla ricerca alla scheda azienda", () => {
   test("la scheda mostra i dati camerali", async ({ page }) => {
     await page.goto(`/azienda/${PIVA}`);
 
-    await expect(page.getByRole("heading", { name: "Anagrafica" })).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Dati camerali" }),
+      page.getByRole("heading", { name: "Dati della società" }),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Altre informazioni" }),
     ).toBeVisible();
     await expect(page.getByText("25.62.00")).toBeVisible();
     await expect(page.getByText("MI-1305487")).toBeVisible();
+  });
+
+  test("il catalogo documenti è visibile ma non ordinabile", async ({ page }) => {
+    await page.goto(`/azienda/${PIVA}`);
+
+    await expect(
+      page.getByRole("heading", { name: "Documenti ufficiali" }),
+    ).toBeVisible();
+    await expect(page.getByText(/ordine non ancora attivo/i)).toBeVisible();
+
+    // nessun pulsante d'acquisto deve risultare cliccabile
+    const ordina = page.getByRole("button", { name: "Ordina" });
+    await expect(ordina.first()).toBeDisabled();
+    const quanti = await ordina.count();
+    for (let i = 0; i < quanti; i++) {
+      await expect(ordina.nth(i)).toBeDisabled();
+    }
+  });
+
+  test("il codice fiscale di una persona fisica è oscurato", async ({ page }) => {
+    // il provider di sviluppo espone imprese vere: qui il CF coincide con la
+    // P.IVA, quindi si verifica la funzione sulla scheda inventata
+    await page.goto(`/azienda/${PIVA}`);
+    await expect(page.getByText("Codice fiscale:")).toBeVisible();
   });
 
   test("uno slug non canonico viene corretto", async ({ page }) => {

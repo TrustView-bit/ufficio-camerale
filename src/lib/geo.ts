@@ -8,7 +8,14 @@ import comuniJson from "../../data/comuni.json";
  * riconosciuto, con la sua provincia e la sua regione.
  */
 
-type RigaComune = [nome: string, codiceIstat: string, sigla: string, cap: string];
+type RigaComune = [
+  nome: string,
+  codiceIstat: string,
+  sigla: string,
+  cap: string,
+  lat: number,
+  lon: number,
+];
 
 const PROVINCE = comuniJson.province as Record<
   string,
@@ -24,6 +31,9 @@ export type ComuneNormalizzato = {
   regione: string;
   /** CAP principale del comune: i comuni grandi ne hanno molti. */
   cap: string | null;
+  /** Centro del comune, non il civico: serve a centrare una mappa. */
+  lat: number;
+  lon: number;
 };
 
 /**
@@ -97,6 +107,8 @@ function componi(riga: RigaComune): ComuneNormalizzato {
     sigla: riga[2],
     regione: provincia?.regione ?? "",
     cap: riga[3] || null,
+    lat: riga[4],
+    lon: riga[5],
   };
 }
 

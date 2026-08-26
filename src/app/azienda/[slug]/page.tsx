@@ -1,32 +1,33 @@
 import type { Metadata } from "next";
-import {
-  Briefcase,
-  Building2,
-  Contact,
-  Landmark,
-  MapPin,
-  TriangleAlert,
-} from "lucide-react";
+import { TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
-import { Dato, SchedaDati } from "@/components/azienda/dati";
+import { DocumentiAcquistabili } from "@/components/azienda/documenti-acquistabili";
 import { FonteDati } from "@/components/azienda/fonte-dati";
+import { MappaStatica } from "@/components/azienda/mappa-statica";
 import { QuickLinks } from "@/components/azienda/quick-links";
+import {
+  BoxDati,
+  type Riga,
+  type RigaOpzionale,
+} from "@/components/azienda/righe-dati";
 import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { descriviAteco } from "@/lib/ateco";
 import { lookupCompany } from "@/lib/companies";
+import { env } from "@/lib/env";
 import {
   anniDi,
   formatDataIso,
   formatEuro,
   formatIndirizzo,
   hostnameDi,
+  mascheraCodiceFiscale,
   toSitoHref,
 } from "@/lib/format";
-import { env } from "@/lib/env";
+import { normalizzaComune } from "@/lib/geo";
 import type { CompanyData } from "@/lib/providers/types";
 import { buildAziendaSlug, parsePartitaIvaFromSlug } from "@/lib/slug";
 
@@ -39,8 +40,7 @@ async function caricaAzienda(slug: string) {
   const partitaIva = parsePartitaIvaFromSlug(slug);
   if (!partitaIva) return null;
 
-  const result = await lookupCompany(partitaIva);
-  return { partitaIva, result };
+  return { partitaIva, result: await lookupCompany(partitaIva) };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -86,24 +86,21 @@ export default async function AziendaPage({ params }: Props) {
   const caricata = await caricaAzienda(slug);
 
   if (!caricata) notFound();
-
   const { result } = caricata;
 
   if (result.status === "not-found") notFound();
-
-  if (result.status === "unavailable") {
-    return <ServizioNonDisponibile />;
-  }
+  if (result.status === "unavailable") return <ServizioNonDisponibile />;
 
   const { company, source, fetchedAt } = result;
 
-  // Se si arriva da uno slug vecchio o storpiato si corregge l'indirizzo:
-  // un solo URL canonico per azienda, che è anche ciò che vuole Google.
+  // Un solo indirizzo canonico per azienda, che è anche ciò che vuole Google
   const canonico = buildAziendaSlug(company.denominazione, company.partitaIva);
   if (slug !== canonico) permanentRedirect(`/azienda/${canonico}`);
 
+  const eSocieta = !/\(D\.I\.\)|ditta individuale/i.test(company.denominazione);
+
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(company)) }}
@@ -111,20 +108,20 @@ export default async function AziendaPage({ params }: Props) {
 
       <Intestazione company={company} />
 
-      <div className="mt-6">
+      <div className="mt-5">
         <QuickLinks company={company} />
       </div>
 
-      <div className="mt-6">
+      <div className="mt-5">
         <FonteDati source={source} fetchedAt={fetchedAt} />
       </div>
 
-      <div className="mt-8 grid gap-4 lg:grid-cols-2">
-        <Anagrafica company={company} />
-        <Sede company={company} />
-        <Attivita company={company} />
-        <DatiCamerali company={company} />
-        <Contatti company={company} />
+      <div className="mt-8 grid gap-8">
+        <DatiSocieta company={company} />
+        <AltreInformazioni company={company} />
+        <UnitaLocali company={company} />
+        <Mappa company={company} />
+        <DocumentiAcquistabili eSocieta={eSocieta} />
       </div>
     </div>
   );
@@ -154,208 +151,201 @@ function Intestazione({ company }: { company: CompanyData }) {
   );
 }
 
-function Anagrafica({ company }: { company: CompanyData }) {
-  const anni = anniDi(company.dataCostituzione);
+function DatiSocieta({ company }: { company: CompanyData }) {
+  const indirizzo = formatIndirizzo(company.sede);
+  const sito = toSitoHref(company.sitoWeb);
 
-  return (
-    <SchedaDati
-      titolo="Anagrafica"
-      icona={<Building2 className="text-primary size-4" aria-hidden />}
-    >
-      <Dato etichetta="Denominazione">{company.denominazione}</Dato>
-      <Dato etichetta="Partita IVA" numerico>
-        {company.partitaIva}
-      </Dato>
-      {company.codiceFiscale && (
-        <Dato etichetta="Codice fiscale" numerico>
-          {company.codiceFiscale}
-        </Dato>
-      )}
-      {company.formaGiuridica && (
-        <Dato etichetta="Forma giuridica">{company.formaGiuridica}</Dato>
-      )}
-      {company.dataCostituzione && (
-        <Dato etichetta="Costituita il">
+  const righe: RigaOpzionale[] = [
+    { etichetta: "Partita IVA", valore: company.partitaIva, numerico: true },
+    company.codiceFiscale && {
+      etichetta: "Codice fiscale",
+      valore: mascheraCodiceFiscale(company.codiceFiscale),
+      numerico: true,
+    },
+    {
+      etichetta: "VAT europeo",
+      valore: `IT${company.partitaIva}`,
+      numerico: true,
+      azione: (
+        <Button asChild size="sm" variant="outline" className="print:hidden">
+          <Link href={`/verifica-partita-iva?piva=${company.partitaIva}`}>
+            Verifica su VIES
+          </Link>
+        </Button>
+      ),
+    },
+    { etichetta: "Ragione sociale", valore: company.denominazione },
+    company.formaGiuridica && {
+      etichetta: "Forma giuridica",
+      valore: company.formaGiuridica,
+    },
+    indirizzo && { etichetta: "Indirizzo", valore: indirizzo },
+    company.reaNumero && {
+      etichetta: "REA",
+      valore: company.reaCciaa
+        ? `${company.reaCciaa}-${company.reaNumero}`
+        : company.reaNumero,
+      numerico: true,
+    },
+    company.pec && {
+      etichetta: "PEC",
+      valore: (
+        <a className="text-primary hover:underline" href={`mailto:${company.pec}`}>
+          {company.pec}
+        </a>
+      ),
+    },
+    sito && {
+      etichetta: "Sito web",
+      valore: (
+        <a
+          className="text-primary hover:underline"
+          href={sito}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {hostnameDi(company.sitoWeb)}
+        </a>
+      ),
+    },
+    company.telefono && {
+      etichetta: "Telefono",
+      valore: company.telefono,
+      numerico: true,
+    },
+    company.dipendenti !== null && {
+      etichetta: "Dipendenti",
+      valore: String(company.dipendenti),
+      numerico: true,
+    },
+  ];
+
+  return <BoxDati titolo="Dati della società" righe={righe} />;
+}
+
+function AltreInformazioni({ company }: { company: CompanyData }) {
+  const anni = anniDi(company.dataCostituzione);
+  const capitale = formatEuro(company.capitaleSociale);
+
+  const risolto = company.atecoPrimario
+    ? descriviAteco(company.atecoPrimario, company.atecoVersione ?? undefined)
+    : null;
+  const descrizioneAteco = risolto?.descrizione ?? company.atecoPrimarioDescrizione;
+
+  const righe: RigaOpzionale[] = [
+    company.dataCostituzione && {
+      etichetta: "Costituita il",
+      valore: (
+        <>
           {formatDataIso(company.dataCostituzione)}
           {anni !== null && (
-            <span className="text-muted-foreground">
+            <span className="text-muted-foreground font-normal">
               {" "}
               · {anni} anni di attività
             </span>
           )}
-        </Dato>
-      )}
-      {company.dipendenti !== null && (
-        <Dato etichetta="Dipendenti" numerico>
-          {company.dipendenti}
-          {company.classeDipendenti && (
+        </>
+      ),
+    },
+    capitale && {
+      etichetta: "Capitale sociale",
+      valore: capitale,
+      numerico: true,
+    },
+    company.atecoPrimario && {
+      etichetta: "ATECO primario",
+      valore: (
+        <>
+          <span className="num">{company.atecoPrimario}</span>
+          {descrizioneAteco && (
             <span className="text-muted-foreground font-normal">
               {" "}
-              (classe {company.classeDipendenti})
+              — {descrizioneAteco}
             </span>
           )}
-        </Dato>
-      )}
-    </SchedaDati>
-  );
-}
-
-function Sede({ company }: { company: CompanyData }) {
-  const indirizzo = formatIndirizzo(company.sede);
-
-  return (
-    <SchedaDati
-      titolo="Sede e unità locali"
-      icona={<MapPin className="text-primary size-4" aria-hidden />}
-      vuota={!indirizzo && company.unitaLocali.length === 0}
-    >
-      {indirizzo && <Dato etichetta="Sede legale">{indirizzo}</Dato>}
-
-      {company.unitaLocali.map((unita, indice) => {
-        const riga = formatIndirizzo(unita.indirizzo);
-        return (
-          <Dato
-            key={`${unita.denominazione ?? "unita"}-${indice}`}
-            etichetta={unita.denominazione ?? `Unità locale ${indice + 1}`}
-          >
-            {riga ?? "Indirizzo non disponibile"}
-          </Dato>
-        );
-      })}
-    </SchedaDati>
-  );
-}
-
-function Attivita({ company }: { company: CompanyData }) {
-  // La descrizione si risolve sui dataset Istat al momento di mostrarla: il
-  // codice grezzo resta quello del fornitore, e resta visibile.
-  const risolto = company.atecoPrimario
-    ? descriviAteco(company.atecoPrimario, company.atecoVersione ?? undefined)
-    : null;
-  const descrizione = risolto?.descrizione ?? company.atecoPrimarioDescrizione;
-
-  return (
-    <SchedaDati
-      titolo="Attività"
-      icona={<Briefcase className="text-primary size-4" aria-hidden />}
-      vuota={!company.atecoPrimario && company.atecoSecondari.length === 0}
-    >
-      {company.atecoPrimario && (
-        <Dato etichetta="ATECO primario">
-          <span className="num font-medium">{company.atecoPrimario}</span>
-          {descrizione && (
-            <span className="text-muted-foreground"> — {descrizione}</span>
-          )}
           {risolto && !risolto.esatta && (
-            <span className="text-muted-foreground mt-1 block text-xs">
+            <span className="text-muted-foreground mt-1 block text-xs font-normal">
               Descrizione del livello superiore ({risolto.codice}): la
               corrispondenza con la classificazione ATECO 2025 non è univoca.
             </span>
           )}
           {risolto?.versioneRisolta === "2022" && (
-            <span className="text-muted-foreground mt-1 block text-xs">
+            <span className="text-muted-foreground mt-1 block text-xs font-normal">
               Codice espresso in ATECO 2022, tradotto sulla classificazione 2025 in
               vigore.
             </span>
           )}
-        </Dato>
-      )}
-
-      {company.atecoSecondari.map((ateco) => {
-        const secondario = descriviAteco(
-          ateco.codice,
-          company.atecoVersione ?? undefined,
-        );
-        return (
-          <Dato key={ateco.codice} etichetta="ATECO secondario">
-            <span className="num font-medium">{ateco.codice}</span>
+        </>
+      ),
+    },
+    ...company.atecoSecondari.map((ateco) => {
+      const secondario = descriviAteco(
+        ateco.codice,
+        company.atecoVersione ?? undefined,
+      );
+      return {
+        etichetta: "ATECO secondario",
+        valore: (
+          <>
+            <span className="num">{ateco.codice}</span>
             {(secondario?.descrizione ?? ateco.descrizione) && (
-              <span className="text-muted-foreground">
+              <span className="text-muted-foreground font-normal">
                 {" "}
                 — {secondario?.descrizione ?? ateco.descrizione}
               </span>
             )}
-          </Dato>
-        );
-      })}
-    </SchedaDati>
+          </>
+        ),
+      };
+    }),
+    ...company.bilanci.map((bilancio) => ({
+      etichetta: `Fatturato ${bilancio.anno}`,
+      valore: formatEuro(bilancio.fatturato) ?? "non disponibile",
+      numerico: true,
+    })),
+  ];
+
+  return <BoxDati titolo="Altre informazioni" righe={righe} />;
+}
+
+function UnitaLocali({ company }: { company: CompanyData }) {
+  if (company.unitaLocali.length === 0) return null;
+
+  const righe: Riga[] = company.unitaLocali.map((unita, indice) => ({
+    etichetta: unita.denominazione ?? `Unità locale ${indice + 1}`,
+    valore: formatIndirizzo(unita.indirizzo) ?? "Indirizzo non disponibile",
+  }));
+
+  return (
+    <BoxDati
+      titolo={`Unità locali (${company.unitaLocali.length})`}
+      righe={righe}
+    />
   );
 }
 
-function DatiCamerali({ company }: { company: CompanyData }) {
-  const capitale = formatEuro(company.capitaleSociale);
+function Mappa({ company }: { company: CompanyData }) {
+  const comune = company.sede?.comune
+    ? normalizzaComune(company.sede.comune, company.sede.provincia)
+    : null;
+
+  if (!comune) return null;
 
   return (
-    <SchedaDati
-      titolo="Dati camerali"
-      icona={<Landmark className="text-primary size-4" aria-hidden />}
-      vuota={!company.reaNumero && !capitale && company.bilanci.length === 0}
-    >
-      {company.reaNumero && (
-        <Dato etichetta="Numero REA" numerico>
-          {company.reaCciaa
-            ? `${company.reaCciaa}-${company.reaNumero}`
-            : company.reaNumero}
-        </Dato>
-      )}
-      {company.reaCciaa && <Dato etichetta="CCIAA">{company.reaCciaa}</Dato>}
-      {capitale && (
-        <Dato etichetta="Capitale sociale" numerico>
-          {capitale}
-        </Dato>
-      )}
-      {company.bilanci.map((bilancio) => (
-        <Dato key={bilancio.anno} etichetta={`Fatturato ${bilancio.anno}`} numerico>
-          {formatEuro(bilancio.fatturato) ?? "non disponibile"}
-        </Dato>
-      ))}
-    </SchedaDati>
-  );
-}
-
-function Contatti({ company }: { company: CompanyData }) {
-  const sito = toSitoHref(company.sitoWeb);
-
-  return (
-    <SchedaDati
-      titolo="Contatti"
-      icona={<Contact className="text-primary size-4" aria-hidden />}
-      vuota={!company.pec && !sito && !company.telefono}
-    >
-      {company.pec && (
-        <Dato etichetta="PEC">
-          <a
-            className="text-primary hover:underline"
-            href={`mailto:${company.pec}`}
-          >
-            {company.pec}
-          </a>
-        </Dato>
-      )}
-      {sito && (
-        <Dato etichetta="Sito web">
-          <a
-            className="text-primary hover:underline"
-            href={sito}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {hostnameDi(company.sitoWeb)}
-          </a>
-        </Dato>
-      )}
-      {company.telefono && (
-        <Dato etichetta="Telefono" numerico>
-          {company.telefono}
-        </Dato>
-      )}
-    </SchedaDati>
+    <section className="print:hidden">
+      <h2 className="mb-3 text-lg font-semibold tracking-tight">Dove si trova</h2>
+      <MappaStatica
+        lat={comune.lat}
+        lon={comune.lon}
+        etichetta={`${comune.comune} (${comune.sigla})`}
+      />
+    </section>
   );
 }
 
 function ServizioNonDisponibile() {
   return (
-    <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
+    <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
       <Card className="border-warning/25 bg-warning-subtle/40 shadow-card max-w-2xl">
         <CardContent className="flex flex-col items-start gap-4">
           <TriangleAlert className="text-warning size-6" aria-hidden />

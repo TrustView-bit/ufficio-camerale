@@ -1,941 +1,3751 @@
 {
-  "nota": "Dati di sviluppo. Solo campi identificativi (denominazione, sede, partita IVA). Ogni colonna che legava queste imprese al procedimento amministrativo di origine è stata scartata di proposito: non riaggiungerla senza una valutazione legale.",
-  "origine": "elenco pubblico di imprese richiedenti, dicembre 2025",
+  "nota": "Dati di sviluppo. Solo campi identificativi (denominazione, sede, partita IVA, unità locali). Ogni colonna che legava queste imprese al contesto dell'elenco di origine è stata scartata di proposito: non riaggiungerla senza una valutazione legale.",
   "imprese": [
     {
-      "denominazione": "TRIBUNO DARIO (D.I.)",
-      "sede": "VIA NAZIONALE SANNITICA, 5 - CASTELVENERE",
-      "partitaIva": "01643080623"
-    },
-    {
-      "denominazione": "PETRIELLA ANTONIO REMO (D.I.)",
-      "sede": "VIA DELLE LAME, SNC - COLLE SANNITA",
-      "partitaIva": "00961880622"
-    },
-    {
-      "denominazione": "COSTRUZIONI SANNITE S.R.L.",
-      "sede": "VIA AC",
-      "partitaIva": "01636200626"
-    },
-    {
-      "denominazione": "GARDEN HOUSE S.R.L.S.",
-      "sede": "C.DA SAN CHIRICO, SNC - BENEVENTO",
-      "partitaIva": "01856680622"
-    },
-    {
-      "denominazione": "EDILIZIA E TRASPORTI S.R.L.",
-      "sede": "VIA SANNITA, 16 AIROLA",
-      "partitaIva": "01881520629"
-    },
-    {
-      "denominazione": "M.V.N. EDILIZIA S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA ROCCARAINOLA, 1 - FORCHIA",
-      "partitaIva": "01677840629"
-    },
-    {
-      "denominazione": "VOBO S.R.L.",
-      "sede": "C.DA OLIVOLA VIA SPEZZAMADONNA, 61 BENEVENTO",
-      "partitaIva": "01883300624"
-    },
-    {
-      "denominazione": "CIELLE SOCIETA' A RESPOSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA NAZIONALE, 15 - DUGENTA",
-      "partitaIva": "01850480623"
-    },
-    {
-      "denominazione": "ROAP S.R.L.",
-      "sede": "VIA STRADA STATALE TELESINA 372, SNC FAICCHIO",
-      "partitaIva": "01682810625"
-    },
-    {
-      "denominazione": "FIERRO SERVICE S.R.L.",
-      "sede": "VIALE DELLA STORIA, 12 APICE",
-      "partitaIva": "01343270623"
-    },
-    {
-      "denominazione": "BARTOLOLONGO - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON RESPONSABILITA' LIMITATA",
-      "sede": "VIA MARIO V BENEVENTO",
-      "partitaIva": "01449740628"
-    },
-    {
-      "denominazione": "EDIL MASTRILLO S.R.L.",
-      "sede": "VIA SAN GIUSEPPE, 82 CUSANO MUTRI",
-      "partitaIva": "01400060628"
-    },
-    {
-      "denominazione": "ITAL.CO. S.R.L.",
-      "sede": "VIA RICCI, SNC SAN LEUCIO DEL SANNIO",
-      "partitaIva": "01842280628"
-    },
-    {
-      "denominazione": "ALFA SIDERIS SOCIETA' COOPERATIVA SOCIALE ONLUS",
-      "sede": "VIA II V PESCO SANNITA",
-      "partitaIva": "01729570620"
-    },
-    {
-      "denominazione": "MASTRANTUONO ANNAMARIA (D.I.)",
-      "sede": "CORSO ITALIA, SNC MORCONE",
-      "partitaIva": "01841140625"
-    },
-    {
-      "denominazione": "FANCY TOUR S.R.L.",
-      "sede": "VIA 9/1, 185 SAN BARTOLOMEO IN GALDO",
-      "partitaIva": "01257170629"
-    },
-    {
-      "denominazione": "RUSSO ING. UMBERTO (D.I.)",
-      "sede": "CONTRADA SAN VITALE SNC BENEVENTO",
-      "partitaIva": "00926890625"
-    },
-    {
-      "denominazione": "TERME LUCANE S.R.L.",
-      "sede": "PIAZZA MINIERI, 1 - TELESE TERME",
-      "partitaIva": "01317880621"
-    },
-    {
-      "denominazione": "SANTUCCI IMPRESA AMBIENTALE S.R.L.",
-      "sede": "CONTRADA PIANA S.N.C. - MORCONE",
-      "partitaIva": "01873910622"
-    },
-    {
-      "denominazione": "ALFRA SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA TOMMASO ROSSI, 33 SAN GIORGIO DEL SANNIO",
-      "partitaIva": "01867760629"
-    },
-    {
-      "denominazione": "ALPHA BUILDING S.R.L.",
-      "sede": "VIA DON LUIGI STURZO, 29 - BENEVENTO",
-      "partitaIva": "01573370622"
-    },
-    {
-      "denominazione": "BENEVENTANA APPALTI DI FUSCO PASQUALE (D.I.)",
-      "sede": "VIA VIGNE, 5 - CAUTANO",
-      "partitaIva": "01881690620"
-    },
-    {
-      "denominazione": "L.K. TRASPORTI S.R.L.",
-      "sede": "VIA SAN GIOVANNI BATTISTA DE LA SALLE,10 BENEVENTO",
-      "partitaIva": "01629430628"
-    },
-    {
-      "denominazione": "RESTAURI NARDONE S.R.L.",
-      "sede": "VIALE MICHELANGELO, 29 SANT'ANGELO A CUPOLO",
-      "partitaIva": "01796980629"
-    },
-    {
-      "denominazione": "EDIL SCAVI GENERALI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "LARGO FILIPPO LOMAGLIO, 16 APICE",
-      "partitaIva": "01856560626"
-    },
-    {
-      "denominazione": "GREEN LINE S.R.L.",
-      "sede": "VIA ROMA, 203 - ARPAIA",
-      "partitaIva": "01822350615"
-    },
-    {
-      "denominazione": "OFFICINE MARINO S.R.L.",
-      "sede": "ZONA INDUSTRIALE TORREPALAZZO, SNC TORRECUSO",
-      "partitaIva": "01570640621"
-    },
-    {
-      "denominazione": "IESCE AUTOTRASPORTI S.R.L.",
-      "sede": "CONTRADA PAGANI, 8 PAUPISI",
-      "partitaIva": "01673060628"
-    },
-    {
-      "denominazione": "M.G. ZACCARI S.R.L.",
-      "sede": "CONTRADA SAN PAOLO, 3 REINO",
-      "partitaIva": "01777640622"
-    },
-    {
-      "denominazione": "I \"PENTRI\" DI VITELLI GIUSEPPE (D.I.)",
-      "sede": "CONTRADA SAN FELICE, 31 CUSANO MUTRI",
-      "partitaIva": "01597590627"
-    },
-    {
-      "denominazione": "VANNAS SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
-      "sede": "C/DA CUFFIANO, 424 MORCONE",
-      "partitaIva": "01873020620"
-    },
-    {
-      "denominazione": "IMM.PAC. S.R.L.",
-      "sede": "VIA S. ROSA, 7 BENEVENTO",
-      "partitaIva": "01474170626"
-    },
-    {
-      "denominazione": "STRIKE S.N.C. DI CARDONE VITTORIO & C.",
-      "sede": "VIA FRANCESCO PAGA PI",
-      "partitaIva": "00927060624"
-    },
-    {
-      "denominazione": "MILLENIUM S.R.L.",
-      "sede": "VIA SALA 11 FOGLIANISE",
-      "partitaIva": "01831280621"
-    },
-    {
-      "denominazione": "POLO DELLE ENERGIE RINNOVABILI S.R.L.",
-      "sede": "VIA CAPONE 3 MONTESARCHIO",
-      "partitaIva": "01747840625"
-    },
-    {
-      "denominazione": "P.M. COSTRUZIONI S.R.L.",
-      "sede": "VIA RAFFAELE DELCOGLIANO 7/A APICE",
-      "partitaIva": "01870620620"
-    },
-    {
-      "denominazione": "CONSTRUCTIONS COMPANY - S.R.L.",
-      "sede": "VIA VALFORTORE 18 SAN BARTOLOMEO IN GALDO",
-      "partitaIva": "01333590626"
-    },
-    {
-      "denominazione": "TCL SPORT DI VALENTE PASQUALE (D.I.)",
-      "sede": "CONTRADA PIANA - ZONA INDUSTRIALE MORCONE",
-      "partitaIva": "01684830704"
-    },
-    {
-      "denominazione": "ZAINO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA GENNARO CICE, 10 DURAZZANO",
-      "partitaIva": "01874710625"
-    },
-    {
-      "denominazione": "CALZONE ANTONIO (D.I.)",
-      "sede": "VIA POMPILIO 12 REINO",
-      "partitaIva": "01305580621"
-    },
-    {
-      "denominazione": "ZAINO FRANCESCO (D.I.)",
-      "sede": "VIA GENNARO CICE, 10 DURAZZANO",
-      "partitaIva": "01767020629"
-    },
-    {
-      "denominazione": "OPERA S.R.L.",
-      "sede": "VIA LATINA 2 BENEVENTO",
-      "partitaIva": "01508420625"
-    },
-    {
-      "denominazione": "ALBERINI GROUP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA MANDRE 35 CUSANO MUTRI",
-      "partitaIva": "01724370620"
-    },
-    {
-      "denominazione": "KRONOS SOCIETA' COOPERATIVA",
-      "sede": "VIA PRATO 29 FOGLIANISE",
-      "partitaIva": "01760070621"
-    },
-    {
-      "denominazione": "COOPERATIVA SOCIALE BENESSERE A R.L.",
-      "sede": "VIA B. BACHEL BENEVENTO",
-      "partitaIva": "00797290624"
-    },
-    {
-      "denominazione": "WORLD OF SERVICE S.R.L. RICCI ELIA (D.I.)",
-      "sede": "VIA GIUSTINIANI, 21 BENEVENTO CONTRADA PRAINELLA CIRCELLO",
-      "partitaIva": "01873660623"
-    },
-    {
-      "denominazione": "EDIL LAVORGNA S.R.L.",
-      "sede": "VIA CERRETO 62 SAN SALVATORE TELESINO",
-      "partitaIva": "01828190627"
-    },
-    {
-      "denominazione": "S.C. IMPIANTI, SERVIZI E MANUTENZIONE DI SEBASTIANO COVINO",
-      "sede": "VIA MAI SNC CEPPALONI",
-      "partitaIva": "01750830620"
-    },
-    {
-      "denominazione": "IL TRATTURO DI CALZONE FRANCESCO",
-      "sede": "VIA FIUME 15 REINO",
-      "partitaIva": "01806490627"
-    },
-    {
-      "denominazione": "GSA S.R.L.",
-      "sede": "VIA NAZIONALE 67/B FOIANO DI VAL FORTORE",
-      "partitaIva": "01651120626"
-    },
-    {
-      "denominazione": "LA NEOLITICA S.R.L.",
-      "sede": "CONTRADA GROTTICELLE 2 SAN LUPO",
-      "partitaIva": "01002970620"
-    },
-    {
-      "denominazione": "GARDEN SUMMER VILLAGE S.R.L.",
-      "sede": "LOCALITA' VENEZIA SNC LIMATOLA",
-      "partitaIva": "01720000627"
-    },
-    {
-      "denominazione": "AUTOTRASPORTI SANTA MARIA SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA PALERMO CL",
-      "sede": "VIA GIOVANNI PAOLO II 23 PAOLISI VIALE PRINCIPE DI NAPOLI 38",
-      "partitaIva": "01837460623"
-    },
-    {
-      "denominazione": "COOPERATIVA SOCIALE LA MERIDIANA A R.L. ONLUS",
-      "sede": "VIA DEI LONGOBARDI, SNC BENEVENTO",
-      "partitaIva": "01043200623"
-    },
-    {
-      "denominazione": "COOPERATIVA SOCIALE SATURNO ONLUS - SOC. COOP. A R.L.",
-      "sede": "CONTRADA PEZZAPIANA, SNC BENEVENTO",
-      "partitaIva": "01288730623"
-    },
-    {
-      "denominazione": "BELPERIO LUIGI & FIGLI SRL",
-      "sede": "CONTRADA ROSELLI 10 SAN GIORGIO LA MOLARA",
-      "partitaIva": "01242010625"
-    },
-    {
-      "denominazione": "DI MARIA SAVERIA (D.I.)",
-      "sede": "VIA CROCELLA SANTA CROCE DEL SANNIO",
-      "partitaIva": "01279590622"
-    },
-    {
-      "denominazione": "COSTRUZIONI EDILI SANNITE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA TORALDO 34 - LIMATOLA",
-      "partitaIva": "01648130621"
-    },
-    {
-      "denominazione": "CO. GE. FRA. COSTRUZIONI SRL - UNIPERSONALE",
-      "sede": "VIA PIANA 115 MORCONE",
-      "partitaIva": "01518620628"
-    },
-    {
-      "denominazione": "AMETISTA SOCIETA' COOPERATIVA SOCIALE ONLUS",
-      "sede": "VIA GIOACCHINO TOMA, 8 BENEVENTO",
-      "partitaIva": "01640890628"
-    },
-    {
-      "denominazione": "SOLIDALIA - COOPERATIVA SOCIALE PER AZIONI",
-      "sede": "VIA GIOACCHINO TOMA, 8",
-      "partitaIva": "01529390625"
-    },
-    {
-      "denominazione": "HUMANITAS SOCIETA' CONSORTILE A RESPONSABILITA' LIMITATA",
-      "sede": "VIA BENEVENTO, 3 COLLE SANNITA",
-      "partitaIva": "01740340623"
-    },
-    {
-      "denominazione": "GIADA ONLUS SOCIETA' COOPERATIVA SOCIALE PER AZIONI",
-      "sede": "VIA DELLE LAME COLLE SANNITA",
-      "partitaIva": "01088990625"
-    },
-    {
-      "denominazione": "SAT S.R.L.",
-      "sede": "VIA GIARDINO 19 SAN NICOLA MANFREDI",
-      "partitaIva": "16304881002"
-    },
-    {
-      "denominazione": "TICHE S.R.L.",
-      "sede": "VIA DEL COMMERCIO, 32 MOIANO",
-      "partitaIva": "01856730625"
-    },
-    {
-      "denominazione": "SERAPIDE S.R.L.",
-      "sede": "CONTRADA PIANO BOREA, SNC BENEVENTO",
-      "partitaIva": "01435020621"
-    },
-    {
-      "denominazione": "SANTILLO GIANFRANCO (D.I.)",
-      "sede": "VIA PIANA SNC PONTE",
-      "partitaIva": "01407790623"
-    },
-    {
-      "denominazione": "SOCIAL CARE - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON LUCRATIVA DI UTILITA' SOCIALE\"",
-      "sede": "VIA PADULI - BUONALBERGO 6 PADULI",
-      "partitaIva": "01627000621"
-    },
-    {
-      "denominazione": "ARPA TRASPORTI SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA GIOVANNI FALCONE, SNC ARPAIA",
-      "partitaIva": "01618700627"
-    },
-    {
-      "denominazione": "ILCA - S.R.L.",
-      "sede": "VIA DEI MULINI 27/BIS BENEVENTO",
-      "partitaIva": "01837150620"
-    },
-    {
-      "denominazione": "PEZZUTO VINCENZO E FIGLI SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "CONTRADA TOPPO DEGLI ZINGARI SNC FRA",
-      "partitaIva": "00757920624"
-    },
-    {
-      "denominazione": "CO.MA SUD S.R.L.",
-      "sede": "VIA LUNGOCALORE MANFREDI DI SVEVIA 15 BENEVENTO",
-      "partitaIva": "01653270627"
-    },
-    {
-      "denominazione": "S.E.A. S.R.L.",
-      "sede": "VIA CAPPELLONE 3 - LIMATOLA",
-      "partitaIva": "05102851218"
-    },
-    {
-      "denominazione": "VI.NI.CA. SOCIETA' COOPERATIVA SOCIALE",
-      "sede": "CONTRADA PIANE 294 - PAGO VEIANO",
-      "partitaIva": "01400070627"
-    },
-    {
-      "denominazione": "EDILIZIA TICHE S.R.L.",
-      "sede": "VIA PUGLIANO SNC - SAN SALVATORE TELESINO",
-      "partitaIva": "01659240624"
-    },
-    {
-      "denominazione": "LONGO S.R.L.",
-      "sede": "CONTRADA CERZA CUPA SNC - MOLINARA",
-      "partitaIva": "01617710627"
-    },
-    {
-      "denominazione": "I.M.A.L. DI MAZZAMAURO ALFREDO LUPO (D.I.)",
-      "sede": "VIA NAZIONALE 2 - SAN LUPO",
-      "partitaIva": "01706320627"
-    },
-    {
-      "denominazione": "TS IMPIANTI E SERVIZI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA PASQUALE CIRCELLI 32 SAN BARTOLOMENO IN GALDO",
-      "partitaIva": "01705160628"
-    },
-    {
-      "denominazione": "C.E.M. S.R.L. COSTRUZIONI EL",
-      "sede": "VIA PEZZE 9 - MONTESARCHIO",
-      "partitaIva": "01243290622"
-    },
-    {
-      "denominazione": "GRUPPO RACIOPPI S.R.L.",
-      "sede": "CORSO PADRE PIO SNC - APICE",
-      "partitaIva": "01769610625"
-    },
-    {
-      "denominazione": "EDIL SERVICE RANDELLI S.R.L.",
-      "sede": "CONTRADA SAN PI",
-      "partitaIva": "01604550622"
-    },
-    {
-      "denominazione": "GAAD COSTRUZIONI - S.R.L.",
-      "sede": "VIA ANTONIO VIVALDI 1 - BENEVENTO",
-      "partitaIva": "01585030628"
-    },
-    {
-      "denominazione": "SIDERSAN S.P.A.",
-      "sede": "VIA VALFORTORE 2 - BENEVENTO",
-      "partitaIva": "01166170629"
-    },
-    {
-      "denominazione": "D.R.D. COSTRUZIONI S.R.L.",
-      "sede": "VIA CERVINARA 97 - MONTESARCHIO",
-      "partitaIva": "01511910620"
-    },
-    {
-      "denominazione": "EDIL TRIVELLAZIONI DI PICCOLI GIOVANNI & C. S.A.S. PALUMBO FRANCESCO (D.I.)",
-      "sede": "CONTRADA BADESSA S.N.C. - BENEVENTO VIA MILANO 15/A - APOLLOSA",
-      "partitaIva": "01944750601"
-    },
-    {
-      "denominazione": "DUEDI ENGINES S.R.L.",
-      "sede": "STRADA STATALE APPIA KM 251 - CEPPALONI",
-      "partitaIva": "01607510623"
-    },
-    {
-      "denominazione": "FUCCIO COSTRUZIONI S.R.L. SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA V. EMANUELE 77 - PAOLISI",
-      "partitaIva": "01165450626"
-    },
-    {
-      "denominazione": "TELLURAD S.R.L.",
-      "sede": "VIA ALCIDE DE GASPERI 5C SAN BARTOLOMENO IN GALDO",
-      "partitaIva": "01853180626"
-    },
-    {
-      "denominazione": "DR TEX S.R.L.",
-      "sede": "VIA CARACCIANO 4 AIROLA",
-      "partitaIva": "01710970623"
-    },
-    {
-      "denominazione": "ARG SERVICE S.R.L.",
-      "sede": "VIA BENEVENTO SNC MONTESARCHIO",
-      "partitaIva": "01631060629"
-    },
-    {
-      "denominazione": "ANTER S.R.L.",
-      "sede": "VIA FERRARISI SNC CASALDUNI",
-      "partitaIva": "01851670628"
-    },
-    {
-      "denominazione": "NON SOLO ZUCCHERO S.N.C. DI TEDESCO ROSAMARIA",
-      "sede": "VIA CASE SPARSE SNC - VITULANO",
-      "partitaIva": "01605830627"
-    },
-    {
-      "denominazione": "CARBONE ALESSANDRO S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA CERVINARA SNC - MONTESARCHIO",
-      "partitaIva": "01678820620"
-    },
-    {
-      "denominazione": "CITTA' VERDE DI SACCONE VINCENZO (D.I.)",
-      "sede": "VIA FIRENZE 2 - BENEVENTO",
-      "partitaIva": "01807700628"
-    },
-    {
-      "denominazione": "I RAGAZZI DEL SOLE SOCIETA' COOPERATIVA",
-      "sede": "VIA CARLO PISACANE 7 - BENEVENTO",
-      "partitaIva": "01638960623"
-    },
-    {
-      "denominazione": "COSTRUZIONI IORIO S.R.L.",
-      "sede": "VIA JACOPO DA BENEVENTO 36 - BENEVENTO",
-      "partitaIva": "01698980628"
-    },
-    {
-      "denominazione": "ANTONY ECOLOGIA SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA G. D'ANDREA SNC - PONTE",
-      "partitaIva": "01682940620"
-    },
-    {
-      "denominazione": "PARADISO SELVAGGIO DI BENE",
-      "sede": "VIA VIGNALE DI IORIO 75 - PESCO SANNITA",
-      "partitaIva": "01669420620"
-    },
-    {
-      "denominazione": "RISTORANTE PIZZERIA MASTRILLO S.N.C. DI MASTRILLO MICHELANGELO E FRANCO MARILENA",
-      "sede": "CONTRADA GIOCAGNI 32 CUSANO MUTRI",
-      "partitaIva": "00837600626"
-    },
-    {
-      "denominazione": "R.A. MARTINO S.R.L.S.",
-      "sede": "VIA TORE 21 BIS DUGENTA",
-      "partitaIva": "01761560620"
-    },
-    {
-      "denominazione": "ASSTEAS SOCIETA' COOPERATIVA",
-      "sede": "VIA BENEVENTO 64 MONTESARCHIO",
-      "partitaIva": "01736910629"
-    },
-    {
-      "denominazione": "TECHNO VISION FAV SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA SAN MARTINO 87/Q - MONTESARCHIO",
-      "partitaIva": "01846020624"
-    },
-    {
-      "denominazione": "ITAL.PA S.R.L.",
-      "sede": "VIA CAUDINA 20 SANT'AGATA DE' GOTI",
-      "partitaIva": "07325831217"
-    },
-    {
-      "denominazione": "COPPOLARO S.R.L.S.",
-      "sede": "VIA TRIVELLA S.N.C. - CAMPOLI DEL MONTE TABURNO",
-      "partitaIva": "01609900624"
-    },
-    {
-      "denominazione": "AMAR S.N.C. DI IMPAVIDO DI VIRGILIO MARILISA",
-      "sede": "VIA GALANO, 37 GUARDIA SANFRAMONDI",
-      "partitaIva": "01546470624"
-    },
-    {
-      "denominazione": "TEKNOEDIL SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA SAN BENE",
-      "partitaIva": "01746890621"
-    },
-    {
-      "denominazione": "IGMC SOCIETA' COOPERATIVA SOCIALE",
-      "sede": "VIA SANTISI, 35 SANT'AGATA DE' GOTI",
-      "partitaIva": "01811590627"
-    },
-    {
-      "denominazione": "HOTEL IL CASTELLO S.R.L.",
-      "sede": "VIA VITULANESE MONTESARCHIO",
-      "partitaIva": "01106050626"
-    },
-    {
-      "denominazione": "MIRRA COSTRUZIONI SRLS",
-      "sede": "VIA DELL'UMANITA' 7 - APICE",
-      "partitaIva": "01714240627"
-    },
-    {
-      "denominazione": "ENGENEERING EVOLUTION S.R.L.",
-      "sede": "VIA ENRICO DE NICOLA, 10 APICE",
-      "partitaIva": "01772210629"
-    },
-    {
-      "denominazione": "MECCANICA S.A.S. DI IORIO SALVATORE & C.",
-      "sede": "C.DA SANTO STEFANO SNC VITULANO",
-      "partitaIva": "01342740626"
-    },
-    {
-      "denominazione": "SPEEDY TRANS S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA GIROLAMO D'AMELIO 21 MONTESARCHIO",
-      "partitaIva": "01485610628"
-    },
-    {
-      "denominazione": "CASAMASSA GIOVANNI SALVATORE (D.I.)",
-      "sede": "VIA GREGARIA 61 MOLINARA",
-      "partitaIva": "00893680629"
-    },
-    {
-      "denominazione": "IL LEONE D'ORO S.R.L.",
-      "sede": "VIA PAPA GIOVANNI XXIII 54 - SAN MARCO DEI CAVOTI",
-      "partitaIva": "00982820623"
-    },
-    {
-      "denominazione": "GEMIRA S.R.L.",
-      "sede": "VIA SAN GIOVANNI 4/A - TELESE TERME",
-      "partitaIva": "09913611217"
-    },
-    {
-      "denominazione": "RISTORANTE - PIZZERIA LA LANTERNA DI DE PALMA ALMERICO & C. S.N.C.",
-      "sede": "PIAZZA UMBERTO I 34/A - SAN BARTOLOMEO IN GALDO (BN)",
-      "partitaIva": "00817390628"
-    },
-    {
-      "denominazione": "EDIL PARENTE S.R.L.",
-      "sede": "CONTRADA CERQUELLE, 51 CERRETO SANNITA",
-      "partitaIva": "01442120620"
-    },
-    {
-      "denominazione": "N.G.M. CONSULTING & CONSTRUCTION S.R.L.",
-      "sede": "VIA SANNITA 16 AIROLA",
-      "partitaIva": "09841241210"
-    },
-    {
-      "denominazione": "IMPRESA EDILE E STRADALE F.LLI VECCHIOLLA & FIGLI SRL",
-      "sede": "VIA GIA' FONTANA- MONTEFALCONE DI VAL FORTORE",
-      "partitaIva": "01343880629"
-    },
-    {
-      "denominazione": "OPI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "CORSO DANTE, 12 BENEVENTO",
-      "partitaIva": "01762180626"
-    },
-    {
-      "denominazione": "LUNA SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
-      "sede": "VIALE DELLA VITTORIA SNC - GUARDIA SANFRAMONDI",
-      "partitaIva": "01289520627"
-    },
-    {
-      "denominazione": "MC GREEN SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA APPIA EST, 31 ARPAIA",
-      "partitaIva": "01844450625"
-    },
-    {
-      "denominazione": "PLP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA SPINAZZOLA SNC - CUSANO MUTRI",
-      "partitaIva": "01832050627"
-    },
-    {
-      "denominazione": "RM COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "CONTRADA SAN DONATO SNC APICE",
-      "partitaIva": "01679950624"
-    },
-    {
-      "denominazione": "G.V.A.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA CARACCIANO 13 - AIROLA",
-      "partitaIva": "01823550627"
-    },
-    {
-      "denominazione": "PROJECT SERVICE S.R.L.S. - SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "C.DA RAPINELLA SNC - FRA",
-      "partitaIva": "01689200622"
-    },
-    {
-      "denominazione": "A.M.S. 2020 S.R.L.",
-      "sede": "PIAZZA CARMINE PAGNOZZI 15 MONTESARCHIO",
-      "partitaIva": "01779790623"
-    },
-    {
-      "denominazione": "DASA S.R.L.",
-      "sede": "VIA NAZIONALE 235 DUGENTA",
-      "partitaIva": "01730910625"
-    },
-    {
-      "denominazione": "CMG SUD S.R.L.",
-      "sede": "CONTRADA SAN DONATO SNC APICE",
-      "partitaIva": "01649670625"
-    },
-    {
-      "denominazione": "CI.MAR.S.R.L.",
-      "sede": "VIA PROVINCIALE CAUDINA SNC AIROLA",
-      "partitaIva": "01289750620"
-    },
-    {
-      "denominazione": "EDILTEC RUOTOLO S.R.L.",
-      "sede": "VIA CUPA SANT'ANDREA 8/B PAOLISI",
-      "partitaIva": "01603510627"
-    },
-    {
-      "denominazione": "LA SPIGA SOC",
-      "sede": "VIA PRATO, I TRAVERSA 12 FOGLIANISE",
-      "partitaIva": "01579130624"
-    },
-    {
-      "denominazione": "EDIELAN S.R.L.",
-      "sede": "VIA M. MATTEI 17 BENEVENTO",
-      "partitaIva": "01612280626"
-    },
-    {
-      "denominazione": "PADULI MULTISERVIZI S.N.C. DI ZOTTI FABRIZIO E TRUGLIA MOIRA CLAUDIA",
-      "sede": "VIA ENZO MARMORALE 4 PADULI",
-      "partitaIva": "01416840625"
-    },
-    {
-      "denominazione": "GRUPPO FRACH S.R.L.",
-      "sede": "VIA SAN GIOVANNI 29C - TELESE TERME",
-      "partitaIva": "01770270625"
-    },
-    {
-      "denominazione": "RICCIO ANTONIO (IMPRESA INDIVIDUALE)",
-      "sede": "VIA CAPPUCCINI MONTESARCHIO",
-      "partitaIva": "01288140625"
-    },
-    {
-      "denominazione": "WASTE LOGISTIC S.R.L.",
-      "sede": "VIA NAPOLI SNC MONTESARCHIO",
-      "partitaIva": "03080950649"
-    },
-    {
-      "denominazione": "GU.ECO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA CUPE 4 SAN LUPO",
-      "partitaIva": "01833580622"
-    },
-    {
-      "denominazione": "ECOLOGIA PANELLA SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA BADIA - ZONA PIP SNC MONTESARCHIO",
-      "partitaIva": "01688200623"
-    },
-    {
-      "denominazione": "TRIVELLAZIONI EDILMESSERE S.N.C. DI MESSERE PIO FRANCESCO, EMILIO E CRISTIAN",
-      "sede": "VIA CIRCONVALLAZIONE CARPINE SNC",
-      "partitaIva": "01808670622"
-    },
-    {
-      "denominazione": "CALCESTRUZZI CALZONE S.R.L.",
-      "sede": "VIA VITTORIO EMANUELE, 96 REINO",
-      "partitaIva": "01437180621"
-    },
-    {
-      "denominazione": "TRIVEL PALI S.R.L.",
-      "sede": "VIA CESCOLA, 2 MOIANO (BN)",
-      "partitaIva": "01195140627"
-    },
-    {
-      "denominazione": "M.A.S. S.R.L.",
-      "sede": "VIA MORISI, 2 SANT'ANGELO A CUPOLO",
-      "partitaIva": "01832550626"
-    },
-    {
-      "denominazione": "TRIVEL GROUP S.R.L.",
-      "sede": "C.DA CAPITOLO PADULI",
-      "partitaIva": "01650060625"
-    },
-    {
-      "denominazione": "INGEGNERIA, LAMINATI E SERVIZI STEEL S.R.L.",
-      "sede": "C.DA PIANA, ZONA IND.LE PONTE",
-      "partitaIva": "01681610620"
-    },
-    {
-      "denominazione": "FACCHINO MARIO IMPRESA INDIVIDUALE TRIVEL CAUDIUM DI IANNUCCI ANGELO",
-      "sede": "C.DA SPONSILLI, 1 BENEVENTO VIA CONTRADA CORTECALCE AIROLA",
-      "partitaIva": "01811350626"
-    },
-    {
+      "partitaIva": "01790820623",
       "denominazione": "A.D.R. COSTRUZIONI SANNITE S.R.L.",
-      "sede": "VIALE AURORA 34/C - TELESE TERME",
-      "partitaIva": "01790820623"
+      "sedeTesto": "VIALE AURORA 34/C - TELESE TERME",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
-      "denominazione": "L'OASI SUL SABATO S.R.L.",
-      "sede": "VIA FONDOVALLE SABATO, 1 CEPPALONI",
-      "partitaIva": "01672400627"
-    },
-    {
-      "denominazione": "P.F. COSTRUZIONI S.R.L.S.",
-      "sede": "VIA DELL'OLMO,1 MORCONE",
-      "partitaIva": "01687690626"
-    },
-    {
-      "denominazione": "MP SERVICE S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIALE DEI",
-      "partitaIva": "01735030627"
-    },
-    {
-      "denominazione": "CASTALDO COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA TINELL, 23 CALVI",
-      "partitaIva": "01820130621"
-    },
-    {
-      "denominazione": "LA RIVIERA PULIZIE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA SAN GIACOMO, 59 SAN GIORGIO DEL SANNIO",
-      "partitaIva": "01815790629"
-    },
-    {
-      "denominazione": "GLOBAL SERVICE 2020 SOCIETA' COOPERATIVA A R.L. CO.GE.VI. SOCIETA' A RESPONSABILITA' LIMITATA EDILARTE S.R.L.",
-      "sede": "VIA CONTRADA DIFESA SNC SANT'ARCANGELO TRIMONTE VIA PENNINO, 19 MONTESARCHIO CONTRADA SAN DONATO ZONA INDUSTRIALE APICE",
-      "partitaIva": "01763710629"
-    },
-    {
-      "denominazione": "PROFESSIONAL GREEN S.R.L. ECO COSTRUZIONI S.R.L.",
-      "sede": "CONTRADA SAGLIETA, S.S. 90 BIS 11/A PADULI VIA CASE SPARSE, FRAZIONE MASSA, 67 FAICCHIO",
-      "partitaIva": "01785940626"
-    },
-    {
-      "denominazione": "E.P. SERVICE S.R.L.",
-      "sede": "VIA VITULANESE, 176 MONTESARCHIO",
-      "partitaIva": "01810800621"
-    },
-    {
-      "denominazione": "FORMEC STRUTTURE S.R.L.",
-      "sede": "VIA TESA 23, MONTESARCHIO",
-      "partitaIva": "01588360626"
-    },
-    {
-      "denominazione": "G M G S.R.L.",
-      "sede": "ZONA INDUSTRIALE, SNC SAN SALVATORE TELESINO",
-      "partitaIva": "01158990620"
-    },
-    {
-      "denominazione": "CE.DIS. MULTISERVICE S.R.L.",
-      "sede": "VIA NICOLA GIUSTINIANI, 36 BENEVENTO",
-      "partitaIva": "01598330627"
-    },
-    {
-      "denominazione": "G.V. TRASPORTI S.R.L.",
-      "sede": "CORSO EUROPA, 10/A APICE",
-      "partitaIva": "01552310623"
-    },
-    {
-      "denominazione": "IMG FINITURE DI PREGIO DI ONORATO CATERINA",
-      "sede": "VIA PIE' DI CASALE, 20 DURAZZANO",
-      "partitaIva": "01802230621"
-    },
-    {
-      "denominazione": "SOCOS S.R.L.S.",
-      "sede": "VIA TOMA, 13 BENEVENTO",
-      "partitaIva": "01745140622"
-    },
-    {
-      "denominazione": "EDICA S.N.C. DI PISCOPO VINCENZO",
-      "sede": "VIA PASQUALE COLUMBRO, 30 BENEVENTO",
-      "partitaIva": "01549300620"
-    },
-    {
-      "denominazione": "E.F. DI ELMESE FRANCESCO",
-      "sede": "VIA BENEVENTO, 185 MONTESARCHIO",
-      "partitaIva": "01792520627"
-    },
-    {
-      "denominazione": "EDIL PAOLO S.R.L.",
-      "sede": "VIA EDOARDO DE FILIPPO, SNC MONTESARCHIO",
-      "partitaIva": "01794730620"
-    },
-    {
-      "denominazione": "IMPRESA MMLAVORI S.R.L.",
-      "sede": "VIA UMBERTO I, SNC FRA",
-      "partitaIva": "01650300625"
-    },
-    {
-      "denominazione": "D & G GROUP S.R.L.",
-      "sede": "VIA TABURNO I^ TRAVERSA, SNC MONTESARCHIO",
-      "partitaIva": "01710090620"
-    },
-    {
-      "denominazione": "AMG PALL",
-      "sede": "VIA GIOACCHINO TOMA, 13 BENEVENTO",
-      "partitaIva": "01773500622"
-    },
-    {
-      "denominazione": "G. & G. S.R.L.",
-      "sede": "VIA TRIVELLA, SNC CAMPOLI DEL MONTE TABURNO",
-      "partitaIva": "01380450625"
-    },
-    {
-      "denominazione": "CONSORZIO ALBATROS",
-      "sede": "VIA FILIPPO RAGUZZINI, 5 BENEVENTO",
-      "partitaIva": "01766870628"
-    },
-    {
-      "denominazione": "TECNO SERVICE DI FRANCO ANIELLO",
-      "sede": "VIA SELV",
-      "partitaIva": "01214420620"
-    },
-    {
-      "denominazione": "TUTTI INSIEME S.R.L. - SOCIETA'A RESPONSABILITA' LIMITATA",
-      "sede": "VIA BIAGIO CUSANO, 13 BENEVENTO",
-      "partitaIva": "01689300620"
-    },
-    {
-      "denominazione": "POLVERINO GROUP S.R.L.",
-      "sede": "VIA DEI CAPPUCCINI, 18 BENEVENTO",
-      "partitaIva": "01751800622"
-    },
-    {
-      "denominazione": "I. R. LUX SERVICE S.R.L.",
-      "sede": "VIA COSTANTINO GRILLO, 2 MONTESARCHIO",
-      "partitaIva": "01641850621"
-    },
-    {
-      "denominazione": "INGECO S.R.L.",
-      "sede": "VIA NAZIONALE ,64 MELIZZANO",
-      "partitaIva": "06793251213"
-    },
-    {
-      "denominazione": "AQUA ITALIA S.R.L.",
-      "sede": "VIA VALLONE NAZIONALE SANNITICA, 35 TELESE TERME",
-      "partitaIva": "01393030620"
-    },
-    {
-      "denominazione": "M.L.P.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
-      "sede": "VIA CESARE BATTISTI, 1 - BENEVENTO",
-      "partitaIva": "01650940628"
-    },
-    {
-      "denominazione": "RESTAURI SUD S.R.L.",
-      "sede": "VIA GALANO, 26- GUARDIA SANFRAMONDI",
-      "partitaIva": "02647960604"
-    },
-    {
-      "denominazione": "ERPA FER S.R.L.",
-      "sede": "C.DA SAN VITALE, 244 - BENEVENTO",
-      "partitaIva": "03983200613"
-    },
-    {
-      "denominazione": "INNOVAZIONE CAUDINA S.R.L.",
-      "sede": "VIA SORLATI, 56 - AIROLA",
-      "partitaIva": "01480310620"
-    },
-    {
-      "denominazione": "F.G.C. GROUP SOCIETA' A RESPONSABILITA' LIMITATA",
-      "sede": "VIA SANT'ANTONIO 55/A - LIMATOLA",
-      "partitaIva": "01582510622"
-    },
-    {
-      "denominazione": "C.R. MULTISERVICE DI CORBO ROSARIA",
-      "sede": "C.DA EPITAFFIO BENEVENTO",
-      "partitaIva": "01568790628"
-    },
-    {
-      "denominazione": "C.M.P. S.R.L.- Società A RESPONSABILITA LIMITATA SEMPLIFICATA",
-      "sede": "VIA ROMA, 2 - SOLOPACA",
-      "partitaIva": "01627530627"
-    },
-    {
-      "denominazione": "COMPAGNIA GENERALE DI COSTRUZIONE S.R.L. in sigla C.G.C. S.R.L.",
-      "sede": "LOCALITA' SELVA DI SOTTO - Z.I. snc SAN SALVATORE TELESINO",
-      "partitaIva": "01655010625"
-    },
-    {
-      "denominazione": "IMPRESUD S.R.L. LAVORI GENERALI CONTESTABILE S.R.L.",
-      "sede": "CONTRADA SAN VITALE - BENEVENTO VIA BAGNI, 4 - SAN SALVATORE TELESINO",
-      "partitaIva": "01520510627"
-    },
-    {
-      "denominazione": "RAVITEX S.R.L.",
-      "sede": "ZONA INDUSTRIALE PIP N. 25- FORCHIA",
-      "partitaIva": "01529830620"
-    },
-    {
-      "denominazione": "S.O.G.E.S.I. S.R.L.",
-      "sede": "VIA MASSERIA DELLA SIGNORA MONTESARCHIO",
-      "partitaIva": "01208550622"
-    },
-    {
+      "partitaIva": "01551160623",
       "denominazione": "A.M.G. COSTRUZIONI S.R.L.",
-      "sede": "CONTRADA VOCITO, 8 - TOCCO CAUDIO",
-      "partitaIva": "01551160623"
+      "sedeTesto": "CONTRADA VOCITO, 8 - TOCCO CAUDIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01779790623",
+      "denominazione": "A.M.S. 2020 S.R.L.",
+      "sedeTesto": "PIAZZA CARMINE PAGNOZZI 15 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "11930070963",
+      "denominazione": "ADDA STORE S.R.L. PDV TREZZO",
+      "sede": {
+        "via": "VIA MAZZINI, SNC",
+        "cap": "20056",
+        "comune": "TREZZO SULL'ADDA",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01724370620",
+      "denominazione": "ALBERINI GROUP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA MANDRE 35 CUSANO MUTRI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01729570620",
+      "denominazione": "ALFA SIDERIS SOCIETA' COOPERATIVA SOCIALE ONLUS",
+      "sedeTesto": "VIA II V PESCO SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01867760629",
+      "denominazione": "ALFRA SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA TOMMASO ROSSI, 33 SAN GIORGIO DEL SANNIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02054170168",
+      "denominazione": "ALIMARK",
+      "sede": {
+        "via": "VIA ALBERICI, 27",
+        "cap": "24040",
+        "comune": "ARZAGO D'ADDA",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03228070169",
+      "denominazione": "ALIMENTARI PASSERA DI PASSERA ANGELA",
+      "sede": {
+        "via": "VIA ALESSANDRO, MANZONI 11",
+        "cap": "24040",
+        "comune": "ARCENE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "09713070960",
+      "denominazione": "ALMA & CO. S.R.L. PDV MILANO STAZIONE CENTRALE",
+      "sede": {
+        "via": "PIAZZA DUCA D'AOSTA, 1- STAZIONE CENTRALE",
+        "cap": "20124",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FRANCESCO BURLAMACCHI, 2",
+          "cap": "20135",
+          "comune": "MILANO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA PANAGULIS SNC",
+          "cap": "20059",
+          "comune": "CASARILE",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01573370622",
+      "denominazione": "ALPHA BUILDING S.R.L.",
+      "sedeTesto": "VIA DON LUIGI STURZO, 29 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01546470624",
+      "denominazione": "AMAR S.N.C. DI IMPAVIDO DI VIRGILIO MARILISA",
+      "sedeTesto": "VIA GALANO, 37 GUARDIA SANFRAMONDI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01640890628",
+      "denominazione": "AMETISTA SOCIETA' COOPERATIVA SOCIALE ONLUS",
+      "sedeTesto": "VIA GIOACCHINO TOMA, 8 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01773500622",
+      "denominazione": "AMG PALL",
+      "sedeTesto": "VIA GIOACCHINO TOMA, 13 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01851670628",
+      "denominazione": "ANTER S.R.L.",
+      "sedeTesto": "VIA FERRARISI SNC CASALDUNI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01682940620",
+      "denominazione": "ANTONY ECOLOGIA SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA G. D'ANDREA SNC - PONTE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01393030620",
+      "denominazione": "AQUA ITALIA S.R.L.",
+      "sedeTesto": "VIA VALLONE NAZIONALE SANNITICA, 35 TELESE TERME",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03803580137",
+      "denominazione": "ARCADIA STORES S.R.L. PDV SESTO",
+      "sede": {
+        "via": "VIA FEDERICO CONFALONIERI, 16",
+        "cap": "20099",
+        "comune": "SESTO SAN GIOVANNI",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA GUGLIELMO MARCONI, 3-5",
+          "cap": "23875",
+          "comune": "OSNAGO",
+          "provincia": "LC"
+        },
+        {
+          "via": "VIA GIUSEPPE DI VITTORIO, 20",
+          "cap": "20851",
+          "comune": "LISSONE",
+          "provincia": "MB"
+        },
+        {
+          "via": "VIA ALCIDE DE GASPERI, 10",
+          "cap": "20854",
+          "comune": "VEDANO AL LAMBRO",
+          "provincia": "MB"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01631060629",
+      "denominazione": "ARG SERVICE S.R.L.",
+      "sedeTesto": "VIA BENEVENTO SNC MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01618700627",
+      "denominazione": "ARPA TRASPORTI SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA GIOVANNI FALCONE, SNC ARPAIA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01736910629",
+      "denominazione": "ASSTEAS SOCIETA' COOPERATIVA",
+      "sedeTesto": "VIA BENEVENTO 64 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01837460623",
+      "denominazione": "AUTOTRASPORTI SANTA MARIA SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA PALERMO CL",
+      "sedeTesto": "VIA GIOVANNI PAOLO II 23 PAOLISI VIALE PRINCIPE DI NAPOLI 38",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04485050167",
+      "denominazione": "AVALON S.R.L. PDV CITY GORLAGO",
+      "sede": {
+        "via": "VIA REGINA MARGHERITA, 42",
+        "cap": "24060",
+        "comune": "GORLAGO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DELLE ROSE, 3",
+          "cap": "24060",
+          "comune": "BOLGARE",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02351520164",
+      "denominazione": "B. & B. S.N.C. DI BELOTTI DOMENICO & C.",
+      "sede": {
+        "via": "VIA TIRONI, 1",
+        "cap": "24060",
+        "comune": "CHIUDUNO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "11426020969",
+      "denominazione": "BANO S.R.L. PDV LODI",
+      "sede": {
+        "via": "VIA CAVEZZALI, SNC",
+        "cap": "26900",
+        "comune": "LODI",
+        "provincia": "LO"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA TRIESTE, 1",
+          "cap": "20078",
+          "comune": "SAN COLOMBANO AL LAMBRO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA REPUBBLICA, 3",
+          "cap": "26855",
+          "comune": "LODI VECCHIO",
+          "provincia": "LO"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01449740628",
+      "denominazione": "BARTOLOLONGO - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA MARIO V BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01242010625",
+      "denominazione": "BELPERIO LUIGI & FIGLI SRL",
+      "sedeTesto": "CONTRADA ROSELLI 10 SAN GIORGIO LA MOLARA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01881690620",
+      "denominazione": "BENEVENTANA APPALTI DI FUSCO PASQUALE (D.I.)",
+      "sedeTesto": "VIA VIGNE, 5 - CAUTANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01033050335",
+      "denominazione": "BERGAMO SUPERMERCATI S.R.L. PDV CLUSONE",
+      "sede": {
+        "via": "VIALE G. GUSMINI, 14",
+        "cap": "24023",
+        "comune": "CLUSONE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "CORSO EUROPA, 10",
+          "cap": "24050",
+          "comune": "GHISALBA",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02693010353",
+      "denominazione": "BON GUST S.R.L.",
+      "sede": {
+        "via": "VIA S.MATTEO, 56/2",
+        "cap": "42020",
+        "comune": "SAN POLO D'ENZA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01509000350",
+      "denominazione": "BORGONUOVO S.R.L. PDV GONZAGA",
+      "sede": {
+        "via": "VIA MADRE TERESA DI CALCUTTA, 2/A",
+        "cap": "46023",
+        "comune": "GONZAGA",
+        "provincia": "MN"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FERDINANDO PASOTTI, SNC",
+          "cap": "25013",
+          "comune": "CARPENEDOLO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01517210355",
+      "denominazione": "BRUSCHI S.N.C. DI FRANCESCO BRUSCHI & C.",
+      "sede": {
+        "via": "VIA CARLO MARX, 60",
+        "cap": "42100",
+        "comune": "REGGIO EMILIA RONCOCESI",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01243290622",
+      "denominazione": "C.E.M. S.R.L. COSTRUZIONI EL",
+      "sedeTesto": "VIA PEZZE 9 - MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01627530627",
+      "denominazione": "C.M.P. S.R.L.- Società A RESPONSABILITA LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA ROMA, 2 - SOLOPACA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01568790628",
+      "denominazione": "C.R. MULTISERVICE DI CORBO ROSARIA",
+      "sedeTesto": "C.DA EPITAFFIO BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04253690988",
+      "denominazione": "C.S.A. MARK",
+      "sede": {
+        "via": "VIA G. MAZZINI, 34/38",
+        "cap": "25082",
+        "comune": "BOTTICINO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA GIOVANNI PAOLO I, 7",
+          "cap": "25080",
+          "comune": "NUVOLENTO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01437180621",
+      "denominazione": "CALCESTRUZZI CALZONE S.R.L.",
+      "sedeTesto": "VIA VITTORIO EMANUELE, 96 REINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01305580621",
+      "denominazione": "CALZONE ANTONIO (D.I.)",
+      "sedeTesto": "VIA POMPILIO 12 REINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02239810340",
+      "denominazione": "CAMPUS S.N.C. DI MUNARI STEFANO & C. PDV PARMA CAMPUS",
+      "sede": {
+        "via": "VIA BRUNO SCHREIBER, 15/E INT. 7",
+        "cap": "43124",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "PIAZZA GHIAIA, 3/G",
+          "cap": "43121",
+          "comune": "PARMA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA MANTOVA, 20",
+          "cap": "43058",
+          "comune": "SORBOLO",
+          "provincia": "PR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01678820620",
+      "denominazione": "CARBONE ALESSANDRO S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA CERVINARA SNC - MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00893680629",
+      "denominazione": "CASAMASSA GIOVANNI SALVATORE (D.I.)",
+      "sedeTesto": "VIA GREGARIA 61 MOLINARA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01820130621",
+      "denominazione": "CASTALDO COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA TINELL, 23 CALVI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01741480139",
+      "denominazione": "CAVIGIOLI S.A.S. DI DANIELI STEFANIA & C.",
+      "sede": {
+        "via": "VIA MARCONI, 3",
+        "cap": "22017",
+        "comune": "MENAGGIO",
+        "provincia": "CO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01598330627",
+      "denominazione": "CE.DIS. MULTISERVICE S.R.L.",
+      "sedeTesto": "VIA NICOLA GIUSTINIANI, 36 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03841920162",
+      "denominazione": "CENTRO MARK",
+      "sede": {
+        "via": "VIA ALDO MORO, 11",
+        "cap": "24010",
+        "comune": "UBIALE CLANEZZO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01613190352",
+      "denominazione": "CENTRO MERCATO REGGIO SUD S.R.L. PDV CADELBOSCO",
+      "sede": {
+        "via": "VIA MONSIGNOR G. SACCANI, 46",
+        "cap": "42023",
+        "comune": "CADELBOSCO DI SOPRA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FRATELLI CERVI, 72/B",
+          "cap": "42124",
+          "comune": "REGGIO EMILIA PIEVE MODOLOENA",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA ROSA LUXEMBURG, 1",
+          "cap": "42123",
+          "comune": "REGGIO EMILIA",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA MAIELLA, 55",
+          "cap": "42123",
+          "comune": "REGGIO EMILIA",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "10301860960",
+      "denominazione": "CERNUSCOSTORE S.R.L.",
+      "sede": {
+        "via": "VIA GIUSEPPE LAZZATI, 7",
+        "cap": "20063",
+        "comune": "CERNUSCO SUL NAVIGLIO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04277560985",
+      "denominazione": "CHIAR",
+      "sede": {
+        "via": "VIA MONTESSORI, 1",
+        "cap": "25087",
+        "comune": "SALO'",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "PIAZZALE SALVO D'ACQUISTO, 19",
+          "cap": "25088",
+          "comune": "TOSCOLANO MADERNO",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA TRENTO, 20",
+          "cap": "25087",
+          "comune": "SALO' BARBARANO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01289750620",
+      "denominazione": "CI.MAR.S.R.L.",
+      "sedeTesto": "VIA PROVINCIALE CAUDINA SNC AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01850480623",
+      "denominazione": "CIELLE SOCIETA' A RESPOSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA NAZIONALE, 15 - DUGENTA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01807700628",
+      "denominazione": "CITTA' VERDE DI SACCONE VINCENZO (D.I.)",
+      "sedeTesto": "VIA FIRENZE 2 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01649670625",
+      "denominazione": "CMG SUD S.R.L.",
+      "sedeTesto": "CONTRADA SAN DONATO SNC APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01518620628",
+      "denominazione": "CO. GE. FRA. COSTRUZIONI SRL - UNIPERSONALE",
+      "sedeTesto": "VIA PIANA 115 MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01653270627",
+      "denominazione": "CO.MA SUD S.R.L.",
+      "sedeTesto": "VIA LUNGOCALORE MANFREDI DI SVEVIA 15 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01655010625",
+      "denominazione": "COMPAGNIA GENERALE DI COSTRUZIONE S.R.L. in sigla C.G.C. S.R.L.",
+      "sedeTesto": "LOCALITA' SELVA DI SOTTO - Z.I. snc SAN SALVATORE TELESINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01766870628",
+      "denominazione": "CONSORZIO ALBATROS",
+      "sedeTesto": "VIA FILIPPO RAGUZZINI, 5 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01333590626",
+      "denominazione": "CONSTRUCTIONS COMPANY - S.R.L.",
+      "sedeTesto": "VIA VALFORTORE 18 SAN BARTOLOMEO IN GALDO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00205000136",
+      "denominazione": "COOPERATIVA DI CONSUMO LA POPOLARE SOCI",
+      "sede": {
+        "via": "VIALE F. TURATI, 4",
+        "cap": "23900",
+        "comune": "LECCO",
+        "provincia": "LC"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DELLA FILANDA, 4/6",
+          "cap": "20010",
+          "comune": "VANZAGO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA DELLA FERRIERA, 15",
+          "cap": "22060",
+          "comune": "FIGINO SERENZA",
+          "provincia": "CO"
+        },
+        {
+          "via": "VIA DON L. ORIONE, 2",
+          "cap": "23900",
+          "comune": "LECCO",
+          "provincia": "LC"
+        },
+        {
+          "via": "VIA NAZIONALE, 121",
+          "cap": "23823",
+          "comune": "COLICO",
+          "provincia": "LC"
+        },
+        {
+          "via": "VIA SAN GIOVANNI BOSCO, 16",
+          "cap": "23826",
+          "comune": "MANDELLO DEL LARIO",
+          "provincia": "LC"
+        },
+        {
+          "via": "VIA DIAZ, 1",
+          "cap": "20029",
+          "comune": "TURBIGO",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01002360152",
+      "denominazione": "COOPERATIVA LOMBARDA DI CONSUMO SOCI",
+      "sede": {
+        "via": "VIA PONTIDA, 7",
+        "cap": "20063",
+        "comune": "CERNUSCO SUL NAVIGLIO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA TICINO, 4",
+          "cap": "20020",
+          "comune": "LAINATE",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA GIUSEPPE MASCHERPA, 14",
+          "cap": "20048",
+          "comune": "CARATE BRIANZA",
+          "provincia": "MB"
+        },
+        {
+          "via": "VIA CARLO CATTANEO, 14",
+          "cap": "20090",
+          "comune": "VIMODRONE",
+          "provincia": "MI"
+        },
+        {
+          "via": "PIAZZA MATTEOTTI, 8",
+          "cap": "20063",
+          "comune": "CERNUSCO SUL NAVIGLIO",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00797290624",
+      "denominazione": "COOPERATIVA SOCIALE BENESSERE A R.L.",
+      "sedeTesto": "VIA B. BACHEL BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01043200623",
+      "denominazione": "COOPERATIVA SOCIALE LA MERIDIANA A R.L. ONLUS",
+      "sedeTesto": "VIA DEI LONGOBARDI, SNC BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01288730623",
+      "denominazione": "COOPERATIVA SOCIALE SATURNO ONLUS - SOC. COOP. A R.L.",
+      "sedeTesto": "CONTRADA PEZZAPIANA, SNC BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01609900624",
+      "denominazione": "COPPOLARO S.R.L.S.",
+      "sedeTesto": "VIA TRIVELLA S.N.C. - CAMPOLI DEL MONTE TABURNO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00530910140",
+      "denominazione": "CORVI & C. S.R.L.",
+      "sede": {
+        "via": "VIA ROMA, 122",
+        "cap": "23031",
+        "comune": "APRICA",
+        "provincia": "SO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01648130621",
+      "denominazione": "COSTRUZIONI EDILI SANNITE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA TORALDO 34 - LIMATOLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01698980628",
+      "denominazione": "COSTRUZIONI IORIO S.R.L.",
+      "sedeTesto": "VIA JACOPO DA BENEVENTO 36 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01636200626",
+      "denominazione": "COSTRUZIONI SANNITE S.R.L.",
+      "sedeTesto": "VIA AC",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01710090620",
+      "denominazione": "D & G GROUP S.R.L.",
+      "sedeTesto": "VIA TABURNO I^ TRAVERSA, SNC MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04226830984",
+      "denominazione": "D&V R",
+      "sede": {
+        "via": "VIA TRIUMPLINA, 173",
+        "cap": "25135",
+        "comune": "BRESCIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA SAN ZENO, 76",
+          "cap": "25124",
+          "comune": "BRESCIA",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA CEFALONIA, 16",
+          "cap": "25124",
+          "comune": "BRESCIA",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA CIPRO, 54",
+          "cap": "25124",
+          "comune": "BRESCIA",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01511910620",
+      "denominazione": "D.R.D. COSTRUZIONI S.R.L.",
+      "sedeTesto": "VIA CERVINARA 97 - MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01730910625",
+      "denominazione": "DASA S.R.L.",
+      "sedeTesto": "VIA NAZIONALE 235 DUGENTA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02588580965",
+      "denominazione": "DELIZIA S.R.L. PDV BELLUSCO",
+      "sede": {
+        "via": "VIA BRIANZA, 2",
+        "cap": "20882",
+        "comune": "BELLUSCO",
+        "provincia": "MB"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA VERDI, 17",
+          "cap": "20864",
+          "comune": "AGRATE BRIANZA",
+          "provincia": "MB"
+        },
+        {
+          "via": "VIA DONATORE AVIS, 7",
+          "cap": "24052",
+          "comune": "AZZANO SAN PAOLO",
+          "provincia": "BG"
+        },
+        {
+          "via": "VIA E. MATTEI ,11",
+          "cap": "20064",
+          "comune": "GORGONZOLA",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01279590622",
+      "denominazione": "DI MARIA SAVERIA (D.I.)",
+      "sedeTesto": "VIA CROCELLA SANTA CROCE DEL SANNIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "12505640966",
+      "denominazione": "DIVA S.R.L.",
+      "sede": {
+        "via": "VIA ROMA, 50/A",
+        "cap": "20881",
+        "comune": "BERNAREGGIO",
+        "provincia": "MB"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04253700985",
+      "denominazione": "DM STORE S.R.L. PDV CONAD BOVEZZO",
+      "sede": {
+        "via": "VIA DEI PRATI, 33/B",
+        "cap": "25073",
+        "comune": "BOVEZZO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01710970623",
+      "denominazione": "DR TEX S.R.L.",
+      "sedeTesto": "VIA CARACCIANO 4 AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "11361700963",
+      "denominazione": "DREAM FOODS S.R.L. PDV MILANO BOVISASCA",
+      "sede": {
+        "via": "VIA UMBERTO CEVA, 2",
+        "cap": "20157",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA CEFALONIA, 10",
+          "cap": "20156",
+          "comune": "MILANO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA FRANCESCO GONIN, 71",
+          "cap": "20147",
+          "comune": "MILANO",
+          "provincia": "MI"
+        },
+        {
+          "via": "PIAZZA SANDRO PERTINI, SNC",
+          "cap": "21042",
+          "comune": "CARONNO PERTUSELLA",
+          "provincia": "VA"
+        },
+        {
+          "via": "VIA CRISTOFORO COLOMBO, 7",
+          "cap": "20090",
+          "comune": "TREZZANO SUL NAVIGLIO",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02913420960",
+      "denominazione": "DUE G MARK",
+      "sede": {
+        "via": "VIA VOLTURNO, 5",
+        "cap": "20047",
+        "comune": "BRUGHERIO",
+        "provincia": "MB"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01607510623",
+      "denominazione": "DUEDI ENGINES S.R.L.",
+      "sedeTesto": "STRADA STATALE APPIA KM 251 - CEPPALONI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04258790163",
+      "denominazione": "DUEPI MARK",
+      "sede": {
+        "via": "VIA XXV APRILE ANG. VIA VITTORIO VEN",
+        "cap": "24040",
+        "comune": "BONATE SOTTO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01792520627",
+      "denominazione": "E.F. DI ELMESE FRANCESCO",
+      "sedeTesto": "VIA BENEVENTO, 185 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01810800621",
+      "denominazione": "E.P. SERVICE S.R.L.",
+      "sedeTesto": "VIA VITULANESE, 176 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01688200623",
+      "denominazione": "ECOLOGIA PANELLA SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA BADIA - ZONA PIP SNC MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01549300620",
+      "denominazione": "EDICA S.N.C. DI PISCOPO VINCENZO",
+      "sedeTesto": "VIA PASQUALE COLUMBRO, 30 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01612280626",
+      "denominazione": "EDIELAN S.R.L.",
+      "sedeTesto": "VIA M. MATTEI 17 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01828190627",
+      "denominazione": "EDIL LAVORGNA S.R.L.",
+      "sedeTesto": "VIA CERRETO 62 SAN SALVATORE TELESINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01400060628",
+      "denominazione": "EDIL MASTRILLO S.R.L.",
+      "sedeTesto": "VIA SAN GIUSEPPE, 82 CUSANO MUTRI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01794730620",
+      "denominazione": "EDIL PAOLO S.R.L.",
+      "sedeTesto": "VIA EDOARDO DE FILIPPO, SNC MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01442120620",
+      "denominazione": "EDIL PARENTE S.R.L.",
+      "sedeTesto": "CONTRADA CERQUELLE, 51 CERRETO SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01856560626",
+      "denominazione": "EDIL SCAVI GENERALI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "LARGO FILIPPO LOMAGLIO, 16 APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01604550622",
+      "denominazione": "EDIL SERVICE RANDELLI S.R.L.",
+      "sedeTesto": "CONTRADA SAN PI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01944750601",
+      "denominazione": "EDIL TRIVELLAZIONI DI PICCOLI GIOVANNI & C. S.A.S. PALUMBO FRANCESCO (D.I.)",
+      "sedeTesto": "CONTRADA BADESSA S.N.C. - BENEVENTO VIA MILANO 15/A - APOLLOSA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01881520629",
+      "denominazione": "EDILIZIA E TRASPORTI S.R.L.",
+      "sedeTesto": "VIA SANNITA, 16 AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01659240624",
+      "denominazione": "EDILIZIA TICHE S.R.L.",
+      "sedeTesto": "VIA PUGLIANO SNC - SAN SALVATORE TELESINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01603510627",
+      "denominazione": "EDILTEC RUOTOLO S.R.L.",
+      "sedeTesto": "VIA CUPA SANT'ANDREA 8/B PAOLISI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02138460130",
+      "denominazione": "EFFEGI S.N.C. DI GOSSI PI",
+      "sede": {
+        "via": "VIA G.P MATTERI, 24",
+        "cap": "22014",
+        "comune": "DONGO",
+        "provincia": "CO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04484470168",
+      "denominazione": "EMAR S.R.L. PDV ALZANO LOMBARDO",
+      "sede": {
+        "via": "PIAZZA PAPA GIOVANNI PAOLO II, 11",
+        "cap": "24022",
+        "comune": "ALZANO LOMBARDO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01927210342",
+      "denominazione": "EMILIA EST 2000 S.R.L. DI BAROTTI DINA & C. PDV COLORNO",
+      "sede": {
+        "via": "VIA MONSIGNOR AMILCARE PASINI, 1/8-1/9",
+        "cap": "43052",
+        "comune": "COLORNO",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01772210629",
+      "denominazione": "ENGENEERING EVOLUTION S.R.L.",
+      "sedeTesto": "VIA ENRICO DE NICOLA, 10 APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03983200613",
+      "denominazione": "ERPA FER S.R.L.",
+      "sedeTesto": "C.DA SAN VITALE, 244 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "09300480960",
+      "denominazione": "ESSEBI MARK",
+      "sede": {
+        "via": "VIA DEI PLATANI, 6",
+        "cap": "20020",
+        "comune": "ARESE",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01582510622",
+      "denominazione": "F.G.C. GROUP SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA SANT'ANTONIO 55/A - LIMATOLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04483410165",
+      "denominazione": "F.LLI BRONZIERI 2 S.R.L. PDV TRESCORE",
+      "sede": {
+        "via": "VIA AMELLINA, 100",
+        "cap": "24069",
+        "comune": "TRESCORE BALNEARIO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03313700175",
+      "denominazione": "F.LLI BRONZIERI SUPERMERCATI S.R.L. PDV SAN PAOLO D'ARGON",
+      "sede": {
+        "via": "VIA PAPA GIOVANNI XXIII, 9",
+        "cap": "24060",
+        "comune": "SAN PAOLO D'ARGON",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DON L. PALAZZOLO",
+          "cap": "24020",
+          "comune": "TORRE BOLDONE",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01042910339",
+      "denominazione": "F.LLI CORDANI S.R.L. PDV RIVERGARO",
+      "sede": {
+        "via": "S.S. 45 ANG.ST. PROV. PER GOSSOLENGO, 2",
+        "cap": "29029",
+        "comune": "RIVERGARO",
+        "provincia": "PC"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FIRENZE LOC. PORCELLI",
+          "cap": "29019",
+          "comune": "SAN GIORGIO PIACENTINO PORCELLI",
+          "provincia": "PC"
+        },
+        {
+          "via": "VIA ATL",
+          "cap": "29121",
+          "comune": "PIACENZA",
+          "provincia": "PC"
+        },
+        {
+          "via": "VIA TOGLIATTI, S.S. VALNURE",
+          "cap": "29027",
+          "comune": "PODENZANO",
+          "provincia": "PC"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04314800980",
+      "denominazione": "FA.TA S.R.L. PDV URAGO D'OGLIO",
+      "sede": {
+        "via": "VIA FERMI, 67",
+        "cap": "25030",
+        "comune": "URAGO D'OGLIO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01811350626",
+      "denominazione": "FACCHINO MARIO IMPRESA INDIVIDUALE TRIVEL CAUDIUM DI IANNUCCI ANGELO",
+      "sedeTesto": "C.DA SPONSILLI, 1 BENEVENTO VIA CONTRADA CORTECALCE AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02981170166",
+      "denominazione": "FAGGIOLI GIANMARCO",
+      "sede": {
+        "via": "VIA BOSELLI, 36",
+        "cap": "24015",
+        "comune": "SAN GIOVANNI BIANCO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01257170629",
+      "denominazione": "FANCY TOUR S.R.L.",
+      "sedeTesto": "VIA 9/1, 185 SAN BARTOLOMEO IN GALDO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01343270623",
+      "denominazione": "FIERRO SERVICE S.R.L.",
+      "sedeTesto": "VIALE DELLA STORIA, 12 APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01588360626",
+      "denominazione": "FORMEC STRUTTURE S.R.L.",
+      "sedeTesto": "VIA TESA 23, MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03576960987",
+      "denominazione": "FORTY S.R.L. PDV CONAD TIRANDI CITY",
+      "sede": {
+        "via": "VIA TIRANDI, 30",
+        "cap": "25028",
+        "comune": "BRESCIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DELL'ARMONIA, 72",
+          "cap": "24058",
+          "comune": "ROMANO DI LOMBARDIA",
+          "provincia": "BG"
+        },
+        {
+          "via": "VIA ENRICO MATTEI, 37/39",
+          "cap": "25030",
+          "comune": "RONCADELLE",
+          "provincia": "BS"
+        },
+        {
+          "via": "SS9, 100",
+          "cap": "26865",
+          "comune": "SAN ROCCO AL PORTO",
+          "provincia": "LO"
+        },
+        {
+          "via": "VIA BRESCIA, 155",
+          "cap": "25039",
+          "comune": "TRAVAGLIATO",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA VIVANTI, 19",
+          "cap": "25133",
+          "comune": "BRESCIA",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA MONTELLO, SNC",
+          "cap": "25020",
+          "comune": "GAMBARA",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA TRIESTE, 38",
+          "cap": "24060",
+          "comune": "CHIUDUNO",
+          "provincia": "BG"
+        },
+        {
+          "via": "VIA KENNEDY, 32",
+          "cap": "25086",
+          "comune": "REZZATO",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA DANTE, 3",
+          "cap": "24065",
+          "comune": "LOVERE",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "07680980963",
+      "denominazione": "FRAME S.A.S. DI FRATTINI FELICITA & C.",
+      "sede": {
+        "via": "VIA EDISON, SNC",
+        "cap": "20010",
+        "comune": "BERNATE TICINO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01634960163",
+      "denominazione": "FRATELLI CARRARA S.N.C. DI CARRARA & C.",
+      "sede": {
+        "via": "VIA SANTA BARTOLOMEA CAPITANIO, 8/A",
+        "cap": "24125",
+        "comune": "BERGAMO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01165450626",
+      "denominazione": "FUCCIO COSTRUZIONI S.R.L. SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA V. EMANUELE 77 - PAOLISI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "10735120965",
+      "denominazione": "FUTURA STORE S.R.L. PDV CASALPUSTERLENGO",
+      "sede": {
+        "via": "VIA SALVO D'ACQUISTO, 8",
+        "cap": "26841",
+        "comune": "CASALPUSTERLENGO",
+        "provincia": "LO"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DEI MULINI, 2",
+          "cap": "26845",
+          "comune": "CODOGNO",
+          "provincia": "LO"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01158990620",
+      "denominazione": "G M G S.R.L.",
+      "sedeTesto": "ZONA INDUSTRIALE, SNC SAN SALVATORE TELESINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01380450625",
+      "denominazione": "G. & G. S.R.L.",
+      "sedeTesto": "VIA TRIVELLA, SNC CAMPOLI DEL MONTE TABURNO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04277580983",
+      "denominazione": "G.F.R. CAPITAL S.R.L. PDV CONAD RODENGO",
+      "sede": {
+        "via": "VIA INDUSTRIALE, 8",
+        "cap": "25050",
+        "comune": "RODENGO SAIANO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "PIAZZA CADUTI NASSIRYA, 15",
+          "cap": "25030",
+          "comune": "MACLODIO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04232430985",
+      "denominazione": "G.M.G. MARK",
+      "sede": {
+        "via": "VIA MASACCIO, 20",
+        "cap": "25124",
+        "comune": "BRESCIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIALE ITALIA, 5",
+          "cap": "25064",
+          "comune": "GUSSAGO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01552310623",
+      "denominazione": "G.V. TRASPORTI S.R.L.",
+      "sedeTesto": "CORSO EUROPA, 10/A APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01823550627",
+      "denominazione": "G.V.A.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA CARACCIANO 13 - AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01585030628",
+      "denominazione": "GAAD COSTRUZIONI - S.R.L.",
+      "sedeTesto": "VIA ANTONIO VIVALDI 1 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02087810343",
+      "denominazione": "GANDALF S.R.L. DI CATTINI ROSANNA & C. PDV LANGHIRANO",
+      "sede": {
+        "via": "VIA FANTI D'ITALIA, 9",
+        "cap": "43013",
+        "comune": "LANGHIRANO",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "CORSO EGUAGLIANZA, 6",
+          "cap": "43044",
+          "comune": "COLLECCHIO",
+          "provincia": "PR"
+        },
+        {
+          "via": "LARGO BRIGATE ALPINE, 1",
+          "cap": "43035",
+          "comune": "FELINO",
+          "provincia": "PR"
+        },
+        {
+          "via": "STRADA DELLA CISA LOC. RICCO', 107/109",
+          "cap": "43045",
+          "comune": "FORNOVO DI TARO RICCO'",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA CARLO AZEGLIO CIAMPI, 1",
+          "cap": "43043",
+          "comune": "BORGO VAL DI TARO",
+          "provincia": "PR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01856680622",
+      "denominazione": "GARDEN HOUSE S.R.L.S.",
+      "sedeTesto": "C.DA SAN CHIRICO, SNC - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01720000627",
+      "denominazione": "GARDEN SUMMER VILLAGE S.R.L.",
+      "sedeTesto": "LOCALITA' VENEZIA SNC LIMATOLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "05781080964",
+      "denominazione": "GELSO MORO S.R.L. PDV CASSANO MAGNAGO",
+      "sede": {
+        "via": "VIA ALBINO BONICALZA, 81",
+        "cap": "21012",
+        "comune": "CASSANO MAGNAGO",
+        "provincia": "VA"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "09913611217",
+      "denominazione": "GEMIRA S.R.L.",
+      "sedeTesto": "VIA SAN GIOVANNI 4/A - TELESE TERME",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02470440187",
+      "denominazione": "GESTISTORE S.R.L. PDV CASORATE",
+      "sede": {
+        "via": "VIA MOTTA VISCONTI, 24",
+        "cap": "27022",
+        "comune": "CASORATE PRIMO",
+        "provincia": "PV"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA GIOVANNI FALCONE",
+          "cap": "20084",
+          "comune": "LACCHIARELLA",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA LEONARDO DA VINCI, 2",
+          "cap": "27029",
+          "comune": "VIGEVANO",
+          "provincia": "PV"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01088990625",
+      "denominazione": "GIADA ONLUS SOCIETA' COOPERATIVA SOCIALE PER AZIONI",
+      "sedeTesto": "VIA DELLE LAME COLLE SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01763710629",
+      "denominazione": "GLOBAL SERVICE 2020 SOCIETA' COOPERATIVA A R.L. CO.GE.VI. SOCIETA' A RESPONSABILITA' LIMITATA EDILARTE S.R.L.",
+      "sedeTesto": "VIA CONTRADA DIFESA SNC SANT'ARCANGELO TRIMONTE VIA PENNINO, 19 MONTESARCHIO CONTRADA SAN DONATO ZONA INDUSTRIALE APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03516110172",
+      "denominazione": "GLOBO S.R.L. PDV CASTIGLIONE",
+      "sede": {
+        "via": "VIA CALLISTO PIAZZA, 34",
+        "cap": "46043",
+        "comune": "CASTIGLIONE DELLE STIVIERE",
+        "provincia": "MN"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA ROSSELLINI ANGOLO VIA VIRGILIO",
+          "cap": "46029",
+          "comune": "SUZZARA",
+          "provincia": "MN"
+        },
+        {
+          "via": "VIA GUERZONI, 66",
+          "cap": "46042",
+          "comune": "CASTEL GOFFREDO",
+          "provincia": "MN"
+        },
+        {
+          "via": "VIALE ITALIA, 555",
+          "cap": "20099",
+          "comune": "SESTO SAN GIOVANNI",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA LEONARDO DA VINCI, 57",
+          "cap": "27026",
+          "comune": "GARLASCO",
+          "provincia": "PV"
+        },
+        {
+          "via": "VIA ISONZO, 26",
+          "cap": "24058",
+          "comune": "ROMANO DI LOMBARDIA",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01822350615",
+      "denominazione": "GREEN LINE S.R.L.",
+      "sedeTesto": "VIA ROMA, 203 - ARPAIA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01770270625",
+      "denominazione": "GRUPPO FRACH S.R.L.",
+      "sedeTesto": "VIA SAN GIOVANNI 29C - TELESE TERME",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01769610625",
+      "denominazione": "GRUPPO RACIOPPI S.R.L.",
+      "sedeTesto": "CORSO PADRE PIO SNC - APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01651120626",
+      "denominazione": "GSA S.R.L.",
+      "sedeTesto": "VIA NAZIONALE 67/B FOIANO DI VAL FORTORE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01833580622",
+      "denominazione": "GU.ECO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA CUPE 4 SAN LUPO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01106050626",
+      "denominazione": "HOTEL IL CASTELLO S.R.L.",
+      "sedeTesto": "VIA VITULANESE MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01740340623",
+      "denominazione": "HUMANITAS SOCIETA' CONSORTILE A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA BENEVENTO, 3 COLLE SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01597590627",
+      "denominazione": "I \"PENTRI\" DI VITELLI GIUSEPPE (D.I.)",
+      "sedeTesto": "CONTRADA SAN FELICE, 31 CUSANO MUTRI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01638960623",
+      "denominazione": "I RAGAZZI DEL SOLE SOCIETA' COOPERATIVA",
+      "sedeTesto": "VIA CARLO PISACANE 7 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01641850621",
+      "denominazione": "I. R. LUX SERVICE S.R.L.",
+      "sedeTesto": "VIA COSTANTINO GRILLO, 2 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01706320627",
+      "denominazione": "I.M.A.L. DI MAZZAMAURO ALFREDO LUPO (D.I.)",
+      "sedeTesto": "VIA NAZIONALE 2 - SAN LUPO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01673060628",
+      "denominazione": "IESCE AUTOTRASPORTI S.R.L.",
+      "sedeTesto": "CONTRADA PAGANI, 8 PAUPISI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01811590627",
+      "denominazione": "IGMC SOCIETA' COOPERATIVA SOCIALE",
+      "sedeTesto": "VIA SANTISI, 35 SANT'AGATA DE' GOTI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02076570353",
+      "denominazione": "IL CASTELLO S.N.C. DI TAMAGNINI ROBERTO & C.",
+      "sede": {
+        "via": "VIA BERGIANTI, 1",
+        "cap": "42010",
+        "comune": "SCANDIANO ARC",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01678910355",
+      "denominazione": "IL COLLE S.R.L. PDV ALBINEA",
+      "sede": {
+        "via": "VIA XXV APRILE, 1/B",
+        "cap": "42020",
+        "comune": "ALBINEA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIALE PIACENZA, 25/A",
+          "cap": "43126",
+          "comune": "PARMA",
+          "provincia": "PR"
+        },
+        {
+          "via": "STRADA XXII LUGLIO, 27/C",
+          "cap": "43100",
+          "comune": "PARMA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA TOGLIATTI, 22/A",
+          "cap": "42020",
+          "comune": "QUATTRO CASTELLA MONTECAVOLO",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04312920160",
+      "denominazione": "IL GRANATO S.R.L. PDV DALMINE VIA SALMEGGIA",
+      "sede": {
+        "via": "VIA SALMEGGIA, 5/7",
+        "cap": "24044",
+        "comune": "DALMINE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DEGLI ALPINI, 11",
+          "cap": "24019",
+          "comune": "ZOGNO",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00982820623",
+      "denominazione": "IL LEONE D'ORO S.R.L.",
+      "sedeTesto": "VIA PAPA GIOVANNI XXIII 54 - SAN MARCO DEI CAVOTI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04012440162",
+      "denominazione": "IL QUADRIFOGLIO BLU S.R.L.",
+      "sede": {
+        "via": "VIA CARDINAL GUSTAVO TESTA, 38",
+        "cap": "24040",
+        "comune": "BOLTIERE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01806490627",
+      "denominazione": "IL TRATTURO DI CALZONE FRANCESCO",
+      "sedeTesto": "VIA FIUME 15 REINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01837150620",
+      "denominazione": "ILCA - S.R.L.",
+      "sedeTesto": "VIA DEI MULINI 27/BIS BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04484590981",
+      "denominazione": "IMAGNA MARK",
+      "sede": {
+        "via": "PIAZZA PI",
+        "cap": "24038",
+        "comune": "SANT'OMOBONO TERME",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01802230621",
+      "denominazione": "IMG FINITURE DI PREGIO DI ONORATO CATERINA",
+      "sedeTesto": "VIA PIE' DI CASALE, 20 DURAZZANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01474170626",
+      "denominazione": "IMM.PAC. S.R.L.",
+      "sedeTesto": "VIA S. ROSA, 7 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01343880629",
+      "denominazione": "IMPRESA EDILE E STRADALE F.LLI VECCHIOLLA & FIGLI SRL",
+      "sedeTesto": "VIA GIA' FONTANA- MONTEFALCONE DI VAL FORTORE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01650300625",
+      "denominazione": "IMPRESA MMLAVORI S.R.L.",
+      "sedeTesto": "VIA UMBERTO I, SNC FRA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01520510627",
+      "denominazione": "IMPRESUD S.R.L. LAVORI GENERALI CONTESTABILE S.R.L.",
+      "sedeTesto": "CONTRADA SAN VITALE - BENEVENTO VIA BAGNI, 4 - SAN SALVATORE TELESINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "06793251213",
+      "denominazione": "INGECO S.R.L.",
+      "sedeTesto": "VIA NAZIONALE ,64 MELIZZANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01681610620",
+      "denominazione": "INGEGNERIA, LAMINATI E SERVIZI STEEL S.R.L.",
+      "sedeTesto": "C.DA PIANA, ZONA IND.LE PONTE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01480310620",
+      "denominazione": "INNOVAZIONE CAUDINA S.R.L.",
+      "sedeTesto": "VIA SORLATI, 56 - AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02888480981",
+      "denominazione": "INVERARDI MICHELE S.R.L.",
+      "sede": {
+        "via": "VIA LIBERTA', 50",
+        "cap": "25050",
+        "comune": "PASSIRANO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04464760166",
+      "denominazione": "IPER CARDUCCI S.R.L. PDV BERGAMO IPER",
+      "sede": {
+        "via": "VIA GIOSUE' CARDUCCI, 55",
+        "cap": "24127",
+        "comune": "BERGAMO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04232440984",
+      "denominazione": "IRIDEA MARK",
+      "sede": {
+        "via": "VIA OGLIO, 14",
+        "cap": "25081",
+        "comune": "BEDIZZOLE",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA ANTONIO MEUCCI, 77/C",
+          "cap": "25080",
+          "comune": "PADENGHE",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA DIAZ, SNC",
+          "cap": "25080",
+          "comune": "MANERBA DEL GARDA",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04302950987",
+      "denominazione": "ISEO MARK",
+      "sede": {
+        "via": "VIA PAOLO VI, 52",
+        "cap": "25049",
+        "comune": "ISEO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01842280628",
+      "denominazione": "ITAL.CO. S.R.L.",
+      "sedeTesto": "VIA RICCI, SNC SAN LEUCIO DEL SANNIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "07325831217",
+      "denominazione": "ITAL.PA S.R.L.",
+      "sedeTesto": "VIA CAUDINA 20 SANT'AGATA DE' GOTI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "10713850963",
+      "denominazione": "KIWI STORE S.R.L PDV PIAZZALE BOLOGNA",
+      "sede": {
+        "via": "PIAZZALE BOLOGNA, 7",
+        "cap": "20139",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA BERNARDO QUARANTA, 42",
+          "cap": "20139",
+          "comune": "MILANO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA PELLEGRINO ROSSI, 80",
+          "cap": "20161",
+          "comune": "MILANO",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01760070621",
+      "denominazione": "KRONOS SOCIETA' COOPERATIVA",
+      "sedeTesto": "VIA PRATO 29 FOGLIANISE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02950250353",
+      "denominazione": "L&G SUPERMERCATI S.R.L. PDV FABBRICO",
+      "sede": {
+        "via": "VIA EDMONDO DE AMICIS, 45/47",
+        "cap": "42042",
+        "comune": "FABBRICO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA CELESTINO GOLDONI, 4",
+          "cap": "42010",
+          "comune": "RIO SALIC",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01672400627",
+      "denominazione": "L'OASI SUL SABATO S.R.L.",
+      "sedeTesto": "VIA FONDOVALLE SABATO, 1 CEPPALONI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01629430628",
+      "denominazione": "L.K. TRASPORTI S.R.L.",
+      "sedeTesto": "VIA SAN GIOVANNI BATTISTA DE LA SALLE,10 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02783080357",
+      "denominazione": "LA CAPPA S.N.C. DI SMANIA PATRIZIA & VYNNYK HALYNA",
+      "sede": {
+        "via": "PIAZZA MATTEOTTI GIACOMO, 42/44",
+        "cap": "42026",
+        "comune": "CANOSSA CIANO D'ENZA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02782140350",
+      "denominazione": "LA MACINA S.R.L.",
+      "sede": {
+        "via": "VIA TOMBA, 6",
+        "cap": "42045",
+        "comune": "LUZZARA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01002970620",
+      "denominazione": "LA NEOLITICA S.R.L.",
+      "sedeTesto": "CONTRADA GROTTICELLE 2 SAN LUPO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01815790629",
+      "denominazione": "LA RIVIERA PULIZIE SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA SAN GIACOMO, 59 SAN GIORGIO DEL SANNIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03809790169",
+      "denominazione": "LA SPERTINA S.R.L. PDV LECCO",
+      "sede": {
+        "via": "CORSO BERGAMO, 56",
+        "cap": "22053",
+        "comune": "LECCO",
+        "provincia": "LC"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DEL COMMERCIO, 2",
+          "cap": "24030",
+          "comune": "ALMENNO SAN BARTOLOMEO",
+          "provincia": "BG"
+        },
+        {
+          "via": "VIALE ITALIA, 90",
+          "cap": "24011",
+          "comune": "ALME'",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01579130624",
+      "denominazione": "LA SPIGA SOC",
+      "sedeTesto": "VIA PRATO, I TRAVERSA 12 FOGLIANISE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00707090148",
+      "denominazione": "LACOP ALIMENTARI DI CONSUMO S.N.C. DI MAZZONI STEFANIA & C. PDV TALAMONA",
+      "sede": {
+        "via": "VIA CIAPONI CARLO, 84/B",
+        "cap": "23018",
+        "comune": "TALAMONA",
+        "provincia": "SO"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA MALTA, 1",
+          "cap": "23100",
+          "comune": "SONDRIO",
+          "provincia": "SO"
+        },
+        {
+          "via": "VIA DAMIANO CHIESA, 2/6",
+          "cap": "23100",
+          "comune": "SONDRIO",
+          "provincia": "SO"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00556540987",
+      "denominazione": "LAFFRANCHI S.N.C. DI LAFFRANCHI GIOVANNI LORENZO & C.",
+      "sede": {
+        "via": "VIA C. BATTISTI, 1",
+        "cap": "25029",
+        "comune": "VEROLAVECCHIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02863520355",
+      "denominazione": "LE GHIANDE S.R.L.",
+      "sede": {
+        "via": "VIA ERNESTO ARDUINI, 12",
+        "cap": "42025",
+        "comune": "CAVRIAGO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04220310983",
+      "denominazione": "LE QUADRE 2 S.R.L. PDV CHIARI",
+      "sede": {
+        "via": "VIA VECCHIA PER CASTELCOVATI, 2",
+        "cap": "25032",
+        "comune": "CHIARI",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DEL PERO, 2",
+          "cap": "25039",
+          "comune": "TRAVAGLIATO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04170130167",
+      "denominazione": "LE TERRE DELLA VALGANDINO S.R.L.",
+      "sede": {
+        "via": "VIA PIAVE, 8",
+        "cap": "24026",
+        "comune": "LEFFE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02692120351",
+      "denominazione": "LE VELE S.R.L.",
+      "sede": {
+        "via": "VIALE REGINA MARGHERITA, 33",
+        "cap": "42100",
+        "comune": "REGGIO EMILIA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01617710627",
+      "denominazione": "LONGO S.R.L.",
+      "sedeTesto": "CONTRADA CERZA CUPA SNC - MOLINARA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01289520627",
+      "denominazione": "LUNA SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIALE DELLA VITTORIA SNC - GUARDIA SANFRAMONDI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03801070131",
+      "denominazione": "LUNABLU S.R.L. PDV MOZZATE",
+      "sede": {
+        "via": "VIA VARESE, PIAZZA EINAUDI 13/15",
+        "cap": "22076",
+        "comune": "MOZZATE",
+        "provincia": "CO"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA COLOMBO, 58",
+          "cap": "21055",
+          "comune": "GORLA MINORE",
+          "provincia": "VA"
+        },
+        {
+          "via": "PIAZZA DON RINO VILLA, 1",
+          "cap": "20001",
+          "comune": "INVERUNO",
+          "provincia": "MI"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00271060352",
+      "denominazione": "LUS",
+      "sede": {
+        "via": "VIA LEONARDO DA VINCI, 2",
+        "cap": "42100",
+        "comune": "REGGIO EMILIA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01832550626",
+      "denominazione": "M.A.S. S.R.L.",
+      "sedeTesto": "VIA MORISI, 2 SANT'ANGELO A CUPOLO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01777640622",
+      "denominazione": "M.G. ZACCARI S.R.L.",
+      "sedeTesto": "CONTRADA SAN PAOLO, 3 REINO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01650940628",
+      "denominazione": "M.L.P.A. SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA CESARE BATTISTI, 1 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01677840629",
+      "denominazione": "M.V.N. EDILIZIA S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA ROCCARAINOLA, 1 - FORCHIA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03566790121",
+      "denominazione": "MA.GA. S.R.L. PDV ANGERA",
+      "sede": {
+        "via": "VIA VARESINA, 62",
+        "cap": "21021",
+        "comune": "ANGERA",
+        "provincia": "VA"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01053720338",
+      "denominazione": "MARK",
+      "sede": {
+        "via": "VIA E. MONTALE, 9",
+        "cap": "29010",
+        "comune": "PONTENURE",
+        "provincia": "PC"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FRATELLI CERVI, 138",
+          "cap": "29010",
+          "comune": "ALSENO",
+          "provincia": "PC"
+        },
+        {
+          "via": "VIA EINSTEIN ANG. VIA CERLESI, SNC",
+          "cap": "29017",
+          "comune": "FIORENZUOLA D'ARDA",
+          "provincia": "PC"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04219150168",
+      "denominazione": "MARK",
+      "sede": {
+        "via": "VIALE FRATELLI KENNEDY, 17",
+        "cap": "24060",
+        "comune": "CAROBBIO DEGLI ANGELI CICOLA",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "08657580158",
+      "denominazione": "MARK",
+      "sede": {
+        "via": "VIA ROMAGNA, 10",
+        "cap": "20096",
+        "comune": "PIOLTELLO LIMITO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01841140625",
+      "denominazione": "MASTRANTUONO ANNAMARIA (D.I.)",
+      "sedeTesto": "CORSO ITALIA, SNC MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01844450625",
+      "denominazione": "MC GREEN SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA APPIA EST, 31 ARPAIA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01342740626",
+      "denominazione": "MECCANICA S.A.S. DI IORIO SALVATORE & C.",
+      "sedeTesto": "C.DA SANTO STEFANO SNC VITULANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03622040164",
+      "denominazione": "MICH",
+      "sede": {
+        "via": "VIA DON SPINELLI, 2",
+        "cap": "24020",
+        "comune": "SCANZOROSCIATE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01831280621",
+      "denominazione": "MILLENIUM S.R.L.",
+      "sedeTesto": "VIA SALA 11 FOGLIANISE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03159820178",
+      "denominazione": "MINIMARK",
+      "sede": {
+        "via": "VIA ALCIDE DE GASPERI, 192",
+        "cap": "25086",
+        "comune": "REZZATO VIRLE",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01714240627",
+      "denominazione": "MIRRA COSTRUZIONI SRLS",
+      "sedeTesto": "VIA DELL'UMANITA' 7 - APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04462910987",
+      "denominazione": "MONTORFANO SUPERMERCATI S.R.L. PDV COCCAGLIO",
+      "sede": {
+        "via": "VIA CHIARI, 12",
+        "cap": "25033",
+        "comune": "COCCAGLIO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA PIANTONI, 18",
+          "cap": "25033",
+          "comune": "COLOGNE",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00900000142",
+      "denominazione": "MOR",
+      "sede": {
+        "via": "VIA ADUA, 138",
+        "cap": "23010",
+        "comune": "BERBENNO DI VALTELLINA",
+        "provincia": "SO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01735030627",
+      "denominazione": "MP SERVICE S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIALE DEI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "09841241210",
+      "denominazione": "N.G.M. CONSULTING & CONSTRUCTION S.R.L.",
+      "sedeTesto": "VIA SANNITA 16 AIROLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01936280344",
+      "denominazione": "NOC",
+      "sede": {
+        "via": "PIAZZA CALIPARI, 1",
+        "cap": "43015",
+        "comune": "NOC",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01605830627",
+      "denominazione": "NON SOLO ZUCCHERO S.N.C. DI TEDESCO ROSAMARIA",
+      "sedeTesto": "VIA CASE SPARSE SNC - VITULANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04205860986",
+      "denominazione": "NUOVA SIRIO MARK",
+      "sede": {
+        "via": "VIA ENRICO BERLINGUER, 24",
+        "cap": "25010",
+        "comune": "BORGOSATOLLO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA MAESTRI DEL LAVORO, 2-4",
+          "cap": "25021",
+          "comune": "BAGNOLO MELLA",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02303110353",
+      "denominazione": "NUOVA SUPERMERCATI BOIARDO S.R.L. PDV VIA CORTI",
+      "sede": {
+        "via": "VIA CORTI BONAVENTURA, 35/D",
+        "cap": "42019",
+        "comune": "SCANDIANO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA MAZZINI, 72/1",
+          "cap": "42019",
+          "comune": "SCANDIANO",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA PROVINCIALE",
+          "cap": "42030",
+          "comune": "VIANO",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02657790206",
+      "denominazione": "NUOVA VIADANA S.R.L. PDV VIADANA",
+      "sede": {
+        "via": "VIA ALDO MORO, 1/E",
+        "cap": "46019",
+        "comune": "VIADANA",
+        "provincia": "MN"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01960400354",
+      "denominazione": "NUOVO SUPERMERCATO POVIGLIO S.N.C. DI LEONI LORENZO & C. PDV POVIGLIO",
+      "sede": {
+        "via": "VIA ROMANA, 76",
+        "cap": "42028",
+        "comune": "POVIGLIO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01570640621",
+      "denominazione": "OFFICINE MARINO S.R.L.",
+      "sedeTesto": "ZONA INDUSTRIALE TORREPALAZZO, SNC TORRECUSO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04232450983",
+      "denominazione": "OLTRE S.R.L. PDV BRESCIA SAPORI & DINTORNI",
+      "sede": {
+        "via": "PIAZZA DELLA VITTORIA, 2",
+        "cap": "25121",
+        "comune": "BRESCIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA SAN BARTOLOMEO, 23",
+          "cap": "25128",
+          "comune": "BRESCIA",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01508420625",
+      "denominazione": "OPERA S.R.L.",
+      "sedeTesto": "VIA LATINA 2 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01762180626",
+      "denominazione": "OPI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "CORSO DANTE, 12 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01904230164",
+      "denominazione": "P",
+      "sede": {
+        "via": "VIA SOLFERINO, 4",
+        "cap": "24055",
+        "comune": "COLOGNO AL SERIO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01687690626",
+      "denominazione": "P.F. COSTRUZIONI S.R.L.S.",
+      "sedeTesto": "VIA DELL'OLMO,1 MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01870620620",
+      "denominazione": "P.M. COSTRUZIONI S.R.L.",
+      "sedeTesto": "VIA RAFFAELE DELCOGLIANO 7/A APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01416840625",
+      "denominazione": "PADULI MULTISERVIZI S.N.C. DI ZOTTI FABRIZIO E TRUGLIA MOIRA CLAUDIA",
+      "sedeTesto": "VIA ENZO MARMORALE 4 PADULI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03809060167",
+      "denominazione": "PANFIDELIUS S.R.L.",
+      "sede": {
+        "via": "VIA GARIBALDI, 7",
+        "cap": "24100",
+        "comune": "BERGAMO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01669420620",
+      "denominazione": "PARADISO SELVAGGIO DI BENE",
+      "sedeTesto": "VIA VIGNALE DI IORIO 75 - PESCO SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00961890340",
+      "denominazione": "PELAGATTI S.N.C. DI PELAGATTI GABRIELE & MASSIMO",
+      "sede": {
+        "via": "VIA PARIGI, 25/A",
+        "cap": "43100",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00961880622",
+      "denominazione": "PETRIELLA ANTONIO REMO (D.I.)",
+      "sedeTesto": "VIA DELLE LAME, SNC - COLLE SANNITA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00757920624",
+      "denominazione": "PEZZUTO VINCENZO E FIGLI SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "CONTRADA TOPPO DEGLI ZINGARI SNC FRA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01832050627",
+      "denominazione": "PLP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA SPINAZZOLA SNC - CUSANO MUTRI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01747840625",
+      "denominazione": "POLO DELLE ENERGIE RINNOVABILI S.R.L.",
+      "sedeTesto": "VIA CAPONE 3 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01751800622",
+      "denominazione": "POLVERINO GROUP S.R.L.",
+      "sedeTesto": "VIA DEI CAPPUCCINI, 18 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04203850989",
+      "denominazione": "PONTEVICO MARK",
+      "sede": {
+        "via": "VIA DEL LAZZAR",
+        "cap": "25026",
+        "comune": "PONTEVICO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01785940626",
+      "denominazione": "PROFESSIONAL GREEN S.R.L. ECO COSTRUZIONI S.R.L.",
+      "sedeTesto": "CONTRADA SAGLIETA, S.S. 90 BIS 11/A PADULI VIA CASE SPARSE, FRAZIONE MASSA, 67 FAICCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01689200622",
+      "denominazione": "PROJECT SERVICE S.R.L.S. - SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "C.DA RAPINELLA SNC - FRA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01761560620",
+      "denominazione": "R.A. MARTINO S.R.L.S.",
+      "sedeTesto": "VIA TORE 21 BIS DUGENTA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02457260350",
+      "denominazione": "R.M. S.R.L.",
+      "sede": {
+        "via": "VIA TOLSTOJ, 2",
+        "cap": "42023",
+        "comune": "REGGIO EMILIA CANALI",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01529830620",
+      "denominazione": "RAVITEX S.R.L.",
+      "sedeTesto": "ZONA INDUSTRIALE PIP N. 25- FORCHIA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01796980629",
+      "denominazione": "RESTAURI NARDONE S.R.L.",
+      "sedeTesto": "VIALE MICHELANGELO, 29 SANT'ANGELO A CUPOLO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02647960604",
+      "denominazione": "RESTAURI SUD S.R.L.",
+      "sedeTesto": "VIA GALANO, 26- GUARDIA SANFRAMONDI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01295960197",
+      "denominazione": "RICAM SUPERMERCATI S.R.L. DI CERESA MASSIMILIANO & STEFANO & C. PDV CREMA",
+      "sede": {
+        "via": "VIALE DELLA REPUBBLICA 20/22",
+        "cap": "26013",
+        "comune": "CREMA",
+        "provincia": "CR"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA MILANO, 72",
+          "cap": "20067",
+          "comune": "PAULLO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA 1° MAGGIO, 1/3",
+          "cap": "26019",
+          "comune": "VAILATE",
+          "provincia": "CR"
+        },
+        {
+          "via": "VIA MONSIGNOR QUAINI, 18",
+          "cap": "26016",
+          "comune": "SPINO D'ADDA",
+          "provincia": "CR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01288140625",
+      "denominazione": "RICCIO ANTONIO (IMPRESA INDIVIDUALE)",
+      "sedeTesto": "VIA CAPPUCCINI MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00817390628",
+      "denominazione": "RISTORANTE - PIZZERIA LA LANTERNA DI DE PALMA ALMERICO & C. S.N.C.",
+      "sedeTesto": "PIAZZA UMBERTO I 34/A - SAN BARTOLOMEO IN GALDO (BN)",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00837600626",
+      "denominazione": "RISTORANTE PIZZERIA MASTRILLO S.N.C. DI MASTRILLO MICHELANGELO E FRANCO MARILENA",
+      "sedeTesto": "CONTRADA GIOCAGNI 32 CUSANO MUTRI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01679950624",
+      "denominazione": "RM COSTRUZIONI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "CONTRADA SAN DONATO SNC APICE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01682810625",
+      "denominazione": "ROAP S.R.L.",
+      "sedeTesto": "VIA STRADA STATALE TELESINA 372, SNC FAICCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02917990968",
+      "denominazione": "RUSCONI TOMMASO",
+      "sede": {
+        "via": "VIA XX S",
+        "cap": "26866",
+        "comune": "SANT'ANGELO LODIGIANO",
+        "provincia": "LO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00926890625",
+      "denominazione": "RUSSO ING. UMBERTO (D.I.)",
+      "sedeTesto": "CONTRADA SAN VITALE SNC BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04450180981",
+      "denominazione": "S. FEDELE S.R.L. PDV PALAZZOLO SULL'OGLIO",
+      "sede": {
+        "via": "VIALE EUROPA, 6",
+        "cap": "25036",
+        "comune": "PALAZZOLO SULL'OGLIO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01750830620",
+      "denominazione": "S.C. IMPIANTI, SERVIZI E MANUTENZIONE DI SEBASTIANO COVINO",
+      "sedeTesto": "VIA MAI SNC CEPPALONI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "05102851218",
+      "denominazione": "S.E.A. S.R.L.",
+      "sedeTesto": "VIA CAPPELLONE 3 - LIMATOLA",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01208550622",
+      "denominazione": "S.O.G.E.S.I. S.R.L.",
+      "sedeTesto": "VIA MASSERIA DELLA SIGNORA MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01626980344",
+      "denominazione": "SAL.CO S.R.L.",
+      "sede": {
+        "via": "VIA VALENTINI, 19",
+        "cap": "43039",
+        "comune": "SALSOMAGGIORE TERME",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02924620343",
+      "denominazione": "SALSOMAGGIORE S.R.L. PDV CONAD",
+      "sede": {
+        "via": "VIA PARMA, 23",
+        "cap": "43039",
+        "comune": "SALSOMAGGIORE TERME",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01407790623",
+      "denominazione": "SANTILLO GIANFRANCO (D.I.)",
+      "sedeTesto": "VIA PIANA SNC PONTE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01873910622",
+      "denominazione": "SANTUCCI IMPRESA AMBIENTALE S.R.L.",
+      "sedeTesto": "CONTRADA PIANA S.N.C. - MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01801520337",
+      "denominazione": "SAPORI DI PIACENZA S.R.L. PDV CREMONA",
+      "sede": {
+        "via": "PIAZZA MARCONI,15/A",
+        "cap": "26100",
+        "comune": "CREMONA",
+        "provincia": "CR"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA XX S",
+          "cap": "29121",
+          "comune": "PIACENZA",
+          "provincia": "PC"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "16304881002",
+      "denominazione": "SAT S.R.L.",
+      "sedeTesto": "VIA GIARDINO 19 SAN NICOLA MANFREDI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01435020621",
+      "denominazione": "SERAPIDE S.R.L.",
+      "sedeTesto": "CONTRADA PIANO BOREA, SNC BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03000640163",
+      "denominazione": "SI.RO. S.R.L. PDV URGNANO",
+      "sede": {
+        "via": "VIA G.B. BONAITA",
+        "cap": "24059",
+        "comune": "URGNANO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DIONISIO BERIZZI",
+          "cap": "24055",
+          "comune": "COLOGNO AL SERIO",
+          "provincia": "BG"
+        },
+        {
+          "via": "VIA DEL COMMERCIO, SNC",
+          "cap": "24058",
+          "comune": "ROMANO DI LOMBARDIA",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01166170629",
+      "denominazione": "SIDERSAN S.P.A.",
+      "sedeTesto": "VIA VALFORTORE 2 - BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04418750164",
+      "denominazione": "SIF ALIMENTARI S.R.L. PDV COMUN NUOVO",
+      "sede": {
+        "via": "VIA ZANICA, SNC",
+        "cap": "24040",
+        "comune": "COMUN NUOVO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01702360197",
+      "denominazione": "SILVER MARK",
+      "sede": {
+        "via": "VIA GIUSEPPE PACCHIONI ANG. VIA UNIONE EUROPEA",
+        "cap": "46045",
+        "comune": "MARMIROLO",
+        "provincia": "MN"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FERRARIS, 1",
+          "cap": "26034",
+          "comune": "PIADENA",
+          "provincia": "CR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01627000621",
+      "denominazione": "SOCIAL CARE - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON LUCRATIVA DI UTILITA' SOCIALE\"",
+      "sedeTesto": "VIA PADULI - BUONALBERGO 6 PADULI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01745140622",
+      "denominazione": "SOCOS S.R.L.S.",
+      "sedeTesto": "VIA TOMA, 13 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01529390625",
+      "denominazione": "SOLIDALIA - COOPERATIVA SOCIALE PER AZIONI",
+      "sedeTesto": "VIA GIOACCHINO TOMA, 8",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01485610628",
+      "denominazione": "SPEEDY TRANS S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA GIROLAMO D'AMELIO 21 MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02387380161",
+      "denominazione": "STARMARK",
+      "sede": {
+        "via": "VIA PESCHIERA, 1/B",
+        "cap": "24060",
+        "comune": "BOLGARE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03572570988",
+      "denominazione": "STORE HOUSE S.R.L. PDV CAPRIOLO",
+      "sede": {
+        "via": "VIA SARNICO,35",
+        "cap": "25031",
+        "comune": "CAPRIOLO",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA RUDONE, 28",
+          "cap": "25038",
+          "comune": "ROVATO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00927060624",
+      "denominazione": "STRIKE S.N.C. DI CARDONE VITTORIO & C.",
+      "sedeTesto": "VIA FRANCESCO PAGA PI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04405460165",
+      "denominazione": "SUPER DEL LAGO S.R.L. PDV SARNICO VIA MONTE GRAPPA",
+      "sede": {
+        "via": "VIA MONTE GRAPPA, 3",
+        "cap": "24067",
+        "comune": "SARNICO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA L. SUARDO, 14",
+          "cap": "24067",
+          "comune": "SARNICO",
+          "provincia": "BG"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03809050168",
+      "denominazione": "SUPER DEL MONTE S.R.L.",
+      "sede": {
+        "via": "VIA MARCONI",
+        "cap": "24064",
+        "comune": "GRUMELLO DEL MONTE",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03768780136",
+      "denominazione": "SUPER ERRE S.R.L.",
+      "sede": {
+        "via": "VIA RESEGONE, 1",
+        "cap": "23801",
+        "comune": "CALOLZIOCORTE",
+        "provincia": "LC"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03000650162",
+      "denominazione": "SUPER SEBINO S.R.L.",
+      "sede": {
+        "via": "VIA S. ANNA, 2",
+        "cap": "24060",
+        "comune": "VILLONGO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03367130980",
+      "denominazione": "SUPERBENACO S.R.L. PDV RIVOLTELLA",
+      "sede": {
+        "via": "VIA DURIGHELLO",
+        "cap": "25010",
+        "comune": "DESENZANO DEL GARDA RIVOLTELLA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA RAMBOTTI, 119",
+          "cap": "25015",
+          "comune": "DESENZANO DEL GARDA",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02303490342",
+      "denominazione": "SUPERBORGO S.R.L. PDV 5 FIDENZA VIA GRAMIZZI",
+      "sede": {
+        "via": "VIA F.GRAMIZZI, 13/A",
+        "cap": "43036",
+        "comune": "FIDENZA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "STRADA PROV. CASTELLANA LOC. MARTELLA",
+          "cap": "29014",
+          "comune": "CASTELL'ARQUATO",
+          "provincia": "PC"
+        },
+        {
+          "via": "VIA G. FERRARIS",
+          "cap": "43036",
+          "comune": "FIDENZA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA SANDRO PERTINI, 1",
+          "cap": "43012",
+          "comune": "FONTANELLATO",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA TRIESTE, SNC",
+          "cap": "43036",
+          "comune": "FIDENZA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA GRAZIA DELEDDA, 36/38",
+          "cap": "29121",
+          "comune": "PIACENZA",
+          "provincia": "PC"
+        },
+        {
+          "via": "VIA G.MODONESI, 6",
+          "cap": "29122",
+          "comune": "PIACENZA",
+          "provincia": "PC"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01965490350",
+      "denominazione": "SUPERM. FELINA S.N.C. DI CONSONNO ANDREA & C. PDV CASINA",
+      "sede": {
+        "via": "VIA ROMA, 6",
+        "cap": "42034",
+        "comune": "CASINA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA FONTANESI, 19",
+          "cap": "42038",
+          "comune": "CASTELNOVO NE' MONTI FELINA",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02692110352",
+      "denominazione": "SUPERM. LE QUERCE S.R.L.",
+      "sede": {
+        "via": "VIA MUZIO CLEMENTI, 20",
+        "cap": "42100",
+        "comune": "REGGIO EMILIA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01597400355",
+      "denominazione": "SUPERM. PRIMAVERA S.N.C. DI SCHIAR",
+      "sede": {
+        "via": "VIA GUGLIEMO TIRELLI, 11",
+        "cap": "42124",
+        "comune": "REGGIO EMILIA SESSO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA PI",
+          "cap": "42100",
+          "comune": "REGGIO EMILIA",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02738230354",
+      "denominazione": "SUPERMERCATI BELVEDERE S.R.L.",
+      "sede": {
+        "via": "VIA CANALE, 29",
+        "cap": "42013",
+        "comune": "CASALGRANDE",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01732490196",
+      "denominazione": "SUPERMERCATI CREMA S.R.L.",
+      "sede": {
+        "via": "VIA DEL MACELLO, 19",
+        "cap": "26013",
+        "comune": "CREMA",
+        "provincia": "CR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02187680349",
+      "denominazione": "SUPERMERCATI CRONOS S.N.C. DI CHIOSSI MAURO & C.",
+      "sede": {
+        "via": "VIA VENEZIA, 40/A",
+        "cap": "43100",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02465120349",
+      "denominazione": "SUPERMERCATI DEL DUCATO S.N.C. DI USBERTI MARIO & C. PDV SAN PANCRAZIO",
+      "sede": {
+        "via": "VIA FERDINANDO VI",
+        "cap": "43016",
+        "comune": "PARMA S.PANCRAZIO PARMENSE",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "LARGO AVIATORI D' ITALIA, 1/A, 5/A",
+          "cap": "43019",
+          "comune": "SORAGNA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA PARTIGIANI D'ITALIA, 1",
+          "cap": "43011",
+          "comune": "BUSS",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA PROVINCIALE PER CREMONA, SNC",
+          "cap": "43017",
+          "comune": "SAN SECONDO PARMENSE",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIALE PO', 119",
+          "cap": "26100",
+          "comune": "CREMONA",
+          "provincia": "CR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02024920353",
+      "denominazione": "SUPERMERCATI DEL PO S.R.L. PDV VIA TONDELLI",
+      "sede": {
+        "via": "VIA TONDELLI, 4",
+        "cap": "42015",
+        "comune": "CORREGGIO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA VECCHIA FERROVIA SNC (INDIRIZZO PROVVISORIO)",
+          "cap": "42015",
+          "comune": "CORREGGIO",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04205870985",
+      "denominazione": "SUPERMERCATI DEL SOLE S.R.L.",
+      "sede": {
+        "via": "VIA ROV",
+        "cap": "25028",
+        "comune": "VEROLANUOVA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "09620330960",
+      "denominazione": "SUPERMERCATI DELL'ADDA S.R.L. PDV CANONICA D'ADDA",
+      "sede": {
+        "via": "VIA BERGAMO, 1",
+        "cap": "24040",
+        "comune": "CANONICA D'ADDA",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02868150356",
+      "denominazione": "SUPERMERCATI HERBERIA SRL",
+      "sede": {
+        "via": "VIA ROCCO CHINNICI, 7/A",
+        "cap": "42048",
+        "comune": "RUBIERA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03166340988",
+      "denominazione": "SUPERMERCATI TERRE BASSE S.R.L. PDV OFFANENGO",
+      "sede": {
+        "via": "VIA CIRCONVALLAZIONE SUD, 6",
+        "cap": "26010",
+        "comune": "OFFANENGO",
+        "provincia": "CR"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA XXV APRILE, 153",
+          "cap": "25020",
+          "comune": "FLERO",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA BORGO BELVEDERE, 15",
+          "cap": "25020",
+          "comune": "DELLO",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01251870356",
+      "denominazione": "SUPERMERCATO CELLA S.N.C. DI TAGLIAVINI LORENZO & C.",
+      "sede": {
+        "via": "VIA G.B.VICO, 23/25",
+        "cap": "42124",
+        "comune": "REGGIO EMILIA CELLA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02380880027",
+      "denominazione": "SUPERMERCATO DELLA ROTONDA S.R.L.",
+      "sede": {
+        "via": "VIA GIUSEPPE DI VITTORIO, 43",
+        "cap": "21029",
+        "comune": "VERGIATE",
+        "provincia": "VA"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03026580344",
+      "denominazione": "SUPERMERCATO GIOVENALE S.R.L.",
+      "sede": {
+        "via": "VIA GIOVENALE, 2/A",
+        "cap": "43100",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02016730356",
+      "denominazione": "SUPERMERCATO LE FORNACI S.R.L. PDV CASALMAGGIORE",
+      "sede": {
+        "via": "VIA REPUBBLICA, 2",
+        "cap": "26041",
+        "comune": "CASALMAGGIORE",
+        "provincia": "CR"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA 11 S",
+          "cap": "42016",
+          "comune": "GUASTALLA",
+          "provincia": "RE"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02992980355",
+      "denominazione": "SUPERMERCATO LE PRADELLE S.R.L. PDV REGGIOLO",
+      "sede": {
+        "via": "VIA GUGLIELMO MARCONI, 5/7, 5/9",
+        "cap": "42046",
+        "comune": "REGGIOLO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02555490354",
+      "denominazione": "SUPERMERCATO NOVELLARA S.N.C. DI MARIOTTI ANDREA & C.",
+      "sede": {
+        "via": "GALLERIA MAESTRI DEL LAVORO, 3",
+        "cap": "42017",
+        "comune": "NOVELLARA",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01533810352",
+      "denominazione": "SUPERMERCATO NUOVA BARAGALLA S.R.L. DI CARL",
+      "sede": {
+        "via": "VIA SPADOLINI, 6",
+        "cap": "43022",
+        "comune": "MONTECHIARUGOLO MONTICELLI TERME",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA PORTELLA DELLE GINESTRE, 28/C",
+          "cap": "42123",
+          "comune": "REGGIO EMILIA",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA MORANDI, 9",
+          "cap": "42021",
+          "comune": "BIBBIANO",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA DONATI ANGOLO VIA CARMI",
+          "cap": "42043",
+          "comune": "GATTATICO TAN",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA GUID",
+          "cap": "42049",
+          "comune": "SANT'ILARIO D'ENZA",
+          "provincia": "RE"
+        },
+        {
+          "via": "PIAZZA MORSELLI, 1",
+          "cap": "46014",
+          "comune": "CASTELLUCCHIO",
+          "provincia": "MN"
+        },
+        {
+          "via": "VIA CANUSINA, SNC",
+          "cap": "42021",
+          "comune": "BIBBIANO",
+          "provincia": "RE"
+        },
+        {
+          "via": "VIA CROCE AZZURRA SNC",
+          "cap": "43029",
+          "comune": "TRAVERS",
+          "provincia": "PR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02290420351",
+      "denominazione": "TARABELLONI DAVIDE",
+      "sede": {
+        "via": "VIA RIVASI, 7/A",
+        "cap": "42025",
+        "comune": "CAVRIAGO",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01684830704",
+      "denominazione": "TCL SPORT DI VALENTE PASQUALE (D.I.)",
+      "sedeTesto": "CONTRADA PIANA - ZONA INDUSTRIALE MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01846020624",
+      "denominazione": "TECHNO VISION FAV SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA SAN MARTINO 87/Q - MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01214420620",
+      "denominazione": "TECNO SERVICE DI FRANCO ANIELLO",
+      "sedeTesto": "VIA SELV",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01746890621",
+      "denominazione": "TEKNOEDIL SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA SAN BENE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01853180626",
+      "denominazione": "TELLURAD S.R.L.",
+      "sedeTesto": "VIA ALCIDE DE GASPERI 5C SAN BARTOLOMENO IN GALDO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01317880621",
+      "denominazione": "TERME LUCANE S.R.L.",
+      "sedeTesto": "PIAZZA MINIERI, 1 - TELESE TERME",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01856730625",
+      "denominazione": "TICHE S.R.L.",
+      "sedeTesto": "VIA DEL COMMERCIO, 32 MOIANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02074870128",
+      "denominazione": "TRE EFFE MARK",
+      "sede": {
+        "via": "VIA FABIO FILZI, 2",
+        "cap": "21020",
+        "comune": "TAINO",
+        "provincia": "VA"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04482470988",
+      "denominazione": "TRENTAPASSI S.R.L. PDV MARONE",
+      "sede": {
+        "via": "VIA ROMA, 13",
+        "cap": "25054",
+        "comune": "MARONE",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01643080623",
+      "denominazione": "TRIBUNO DARIO (D.I.)",
+      "sedeTesto": "VIA NAZIONALE SANNITICA, 5 - CASTELVENERE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01650060625",
+      "denominazione": "TRIVEL GROUP S.R.L.",
+      "sedeTesto": "C.DA CAPITOLO PADULI",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01195140627",
+      "denominazione": "TRIVEL PALI S.R.L.",
+      "sedeTesto": "VIA CESCOLA, 2 MOIANO (BN)",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01808670622",
+      "denominazione": "TRIVELLAZIONI EDILMESSERE S.N.C. DI MESSERE PIO FRANCESCO, EMILIO E CRISTIAN",
+      "sedeTesto": "VIA CIRCONVALLAZIONE CARPINE SNC",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01705160628",
+      "denominazione": "TS IMPIANTI E SERVIZI SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA PASQUALE CIRCELLI 32 SAN BARTOLOMENO IN GALDO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01689300620",
+      "denominazione": "TUTTI INSIEME S.R.L. - SOCIETA'A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "VIA BIAGIO CUSANO, 13 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "05045510962",
+      "denominazione": "UGGERI S.A.S. DI ROBERTA UGGERI & C.",
+      "sede": {
+        "via": "VIA GARIBALDI, 2",
+        "cap": "26828",
+        "comune": "TURANO LODIGIANO",
+        "provincia": "LO"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02993730353",
+      "denominazione": "V",
+      "sede": {
+        "via": "PIAZZA MARCONI, 5",
+        "cap": "42020",
+        "comune": "V",
+        "provincia": "RE"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01873020620",
+      "denominazione": "VANNAS SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA",
+      "sedeTesto": "C/DA CUFFIANO, 424 MORCONE",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02469060137",
+      "denominazione": "VERCELLONI SILVIA",
+      "sede": {
+        "via": "VIA PAPA GIOVANNI XXIII, 12",
+        "cap": "23822",
+        "comune": "BELLANO",
+        "provincia": "LC"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01400070627",
+      "denominazione": "VI.NI.CA. SOCIETA' COOPERATIVA SOCIALE",
+      "sedeTesto": "CONTRADA PIANE 294 - PAGO VEIANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03576970986",
+      "denominazione": "VILLA S.R.L. PDV OSPEDALE NIGUARDA",
+      "sede": {
+        "via": "PIAZZA OSPEDALE MAGGIORE, 3 - GALL.COMM.BLOCCO NORD",
+        "cap": "20162",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [
+        {
+          "via": "VIA DELLA PEC",
+          "cap": "20155",
+          "comune": "MILANO",
+          "provincia": "MI"
+        },
+        {
+          "via": "VIA FAEDE, 5/C",
+          "cap": "25040",
+          "comune": "ESINE",
+          "provincia": "BS"
+        },
+        {
+          "via": "VIA NAZIONALE, 89",
+          "cap": "23030",
+          "comune": "VILLA DI TIRANO",
+          "provincia": "SO"
+        },
+        {
+          "via": "VIA MANIFATTURA, SNC",
+          "cap": "25047",
+          "comune": "DARFO BOARIO TERME",
+          "provincia": "BS"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01922330343",
+      "denominazione": "VISCONTI S.N.C. DI CASTAGNOLI PAOLO E C. PDV PARMA PARRI",
+      "sede": {
+        "via": "LARGO FERRUCCIO PARRI, 37/E",
+        "cap": "43100",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [
+        {
+          "via": "LARGO LUCHINO VISCONTI, 1/A",
+          "cap": "43100",
+          "comune": "PARMA",
+          "provincia": "PR"
+        },
+        {
+          "via": "VIA GUIDO ROSSA, 12/A",
+          "cap": "43100",
+          "comune": "PARMA",
+          "provincia": "PR"
+        }
+      ],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01883300624",
+      "denominazione": "VOBO S.R.L.",
+      "sedeTesto": "C.DA OLIVOLA VIA SPEZZAMADONNA, 61 BENEVENTO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03080950649",
+      "denominazione": "WASTE LOGISTIC S.R.L.",
+      "sedeTesto": "VIA NAPOLI SNC MONTESARCHIO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01873660623",
+      "denominazione": "WORLD OF SERVICE S.R.L. RICCI ELIA (D.I.)",
+      "sedeTesto": "VIA GIUSTINIANI, 21 BENEVENTO CONTRADA PRAINELLA CIRCELLO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01767020629",
+      "denominazione": "ZAINO FRANCESCO (D.I.)",
+      "sedeTesto": "VIA GENNARO CICE, 10 DURAZZANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01874710625",
+      "denominazione": "ZAINO SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
+      "sedeTesto": "VIA GENNARO CICE, 10 DURAZZANO",
+      "unitaLocali": [],
+      "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "10006990153",
+      "denominazione": "ZANZOTTERA S.A.S DI ZANZOTTERA CLAUDIA & C.",
+      "sede": {
+        "via": "VIA LONATE, 28 ANG. VIA BERNINI",
+        "cap": "20022",
+        "comune": "CASTANO PRIMO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04484440161",
+      "denominazione": "ZIMA S.R.L. PDV CAPRIATE",
+      "sede": {
+        "via": "VIA CARLO ALBERTO DALLA CHIESA, 3/5",
+        "cap": "24042",
+        "comune": "CAPRIATE SAN GERVASIO",
+        "provincia": "BG"
+      },
+      "unitaLocali": [],
+      "origine": "rete di vendita Conad Centro Nord"
     }
   ]
 }

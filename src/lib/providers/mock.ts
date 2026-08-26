@@ -1,7 +1,13 @@
 import impreseJson from "../../../data/imprese-sviluppo.json";
-import { riconosciComuneInCoda } from "@/lib/geo";
+import { normalizzaComune, riconosciComuneInCoda, titoloProprio } from "@/lib/geo";
 
-import type { CompanyData, CompanyProvider, ProviderResult } from "./types";
+import type {
+  CompanyData,
+  CompanyProvider,
+  Indirizzo,
+  ProviderResult,
+  UnitaLocale,
+} from "./types";
 
 /**
  * Provider finto, usato finché non c'è un contratto con un fornitore reale.
@@ -123,20 +129,68 @@ const AZIENDE: Record<string, CompanyData> = {
 };
 
 /**
- * Imprese reali usate come dati di sviluppo, estratte da un elenco pubblico
- * con `scripts/estrai-imprese-pdf.py`.
+ * Imprese reali usate come dati di sviluppo, estratte da elenchi pubblici con
+ * `scripts/estrai-imprese-pdf.py`.
  *
- * Di queste conosciamo soltanto denominazione, sede e partita IVA, e soltanto
- * quelli vengono esposti: attribuire a un'impresa vera un codice ATECO, un
- * capitale sociale o un numero REA inventati significherebbe pubblicare
- * informazioni false su un soggetto esistente. I campi che non abbiamo
- * restano null, e la scheda semplicemente non mostra quelle sezioni.
+ * Di queste conosciamo soltanto denominazione, sede, partita IVA e — dove
+ * l'elenco le riportava — le unità locali. Soltanto quelli vengono esposti:
+ * attribuire a un'impresa vera un codice ATECO, un capitale sociale o un
+ * numero REA inventati significherebbe pubblicare informazioni false su un
+ * soggetto esistente. I campi che non abbiamo restano null, e la scheda
+ * semplicemente non mostra quelle sezioni.
  */
-function daElencoPubblico(): Record<string, CompanyData> {
+type SedeGrezza = {
+  via: string | null;
+  cap: string | null;
+  comune: string | null;
+  provincia: string | null;
+};
+
+/** Alcuni elenchi danno l'indirizzo già diviso, altri su una riga sola. */
+function indirizzoDa(
+  sede: SedeGrezza | null | undefined,
+  sedeTesto: string | null | undefined,
+): Indirizzo | null {
+  if (sede?.comune) {
+    const riconosciuto = normalizzaComune(sede.comune, sede.provincia);
+    return {
+      via: sede.via ? titoloProprio(sede.via) : null,
+      cap: sede.cap ?? riconosciuto?.cap ?? null,
+      comune: riconosciuto?.comune ?? titoloProprio(sede.comune),
+      provincia: riconosciuto?.sigla ?? sede.provincia ?? null,
+      nazione: "IT",
+    };
+  }
+
+  if (sedeTesto) {
+    const riconosciuto = riconosciComuneInCoda(sedeTesto);
+    if (riconosciuto) {
+      return {
+        via: riconosciuto.via,
+        cap: riconosciuto.comune.cap,
+        comune: riconosciuto.comune.comune,
+        provincia: riconosciuto.comune.sigla,
+        nazione: "IT",
+      };
+    }
+  }
+
+  return null;
+}
+
+function daElenchiPubblici(): Record<string, CompanyData> {
   const mappa: Record<string, CompanyData> = {};
 
   for (const impresa of impreseJson.imprese) {
-    const riconosciuto = riconosciComuneInCoda(impresa.sede);
+    const sede = indirizzoDa(
+      "sede" in impresa ? (impresa.sede as SedeGrezza) : null,
+      "sedeTesto" in impresa ? (impresa.sedeTesto as string | null) : null,
+    );
+
+    const unitaLocali: UnitaLocale[] = (impresa.unitaLocali ?? [])
+      .map((unita) => indirizzoDa(unita as SedeGrezza, null))
+      .filter((indirizzo): indirizzo is Indirizzo => indirizzo !== null)
+      .map((indirizzo) => ({ denominazione: null, indirizzo, ateco: null }));
 
     mappa[impresa.partitaIva] = {
       partitaIva: impresa.partitaIva,
@@ -152,16 +206,8 @@ function daElencoPubblico(): Record<string, CompanyData> {
       atecoVersione: null,
       atecoPrimarioDescrizione: null,
       atecoSecondari: [],
-      sede: riconosciuto
-        ? {
-            via: riconosciuto.via,
-            cap: riconosciuto.comune.cap,
-            comune: riconosciuto.comune.comune,
-            provincia: riconosciuto.comune.sigla,
-            nazione: "IT",
-          }
-        : null,
-      unitaLocali: [],
+      sede,
+      unitaLocali,
       bilanci: [],
       pec: null,
       sitoWeb: null,
@@ -177,7 +223,7 @@ function daElencoPubblico(): Record<string, CompanyData> {
 /** Le tre aziende inventate hanno la precedenza: servono a provare la resa
     con tutti i campi valorizzati. */
 const TUTTE: Record<string, CompanyData> = {
-  ...daElencoPubblico(),
+  ...daElenchiPubblici(),
   ...AZIENDE,
 };
 

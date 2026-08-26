@@ -83,3 +83,23 @@ export function hostnameDi(sito: string | null): string | null {
     return null;
   }
 }
+
+/**
+ * Oscura la parte centrale del codice fiscale di una persona fisica.
+ *
+ * I sei caratteri centrali codificano data e luogo di nascita: pubblicarli in
+ * chiaro accanto a nome e cognome di un titolare di ditta individuale
+ * significa diffondere dati personali che non servono a identificare
+ * l'impresa. "FRRGPPXXAXXG535B" diventa "FRRGPP*****G535B".
+ *
+ * Il codice fiscale di una persona giuridica coincide con la Partita IVA e
+ * non viene toccato: non riguarda una persona fisica.
+ */
+export function mascheraCodiceFiscale(codice: string | null): string | null {
+  if (!codice) return null;
+
+  const pulito = codice.trim().toUpperCase();
+  if (pulito.length !== 16) return pulito;
+
+  return `${pulito.slice(0, 6)}${"*".repeat(5)}${pulito.slice(11)}`;
+}

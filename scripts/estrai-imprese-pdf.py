@@ -1,22 +1,30 @@
 #!/usr/bin/env python3
 """
-Estrae denominazione, sede e partita IVA da un elenco di imprese in PDF, per
-usarli come dati di sviluppo.
+Estrae imprese da elenchi in PDF, per usarle come dati di sviluppo.
 
-    python3 scripts/estrai-imprese-pdf.py <file.pdf> [origine]
+    python3 scripts/estrai-imprese-pdf.py <formato> <file.pdf> [origine]
+
+Formati riconosciuti:
+    elenco-imprese   ragione sociale | sede legale | partita IVA
+    rete-vendita     codice | ragione sociale | indirizzo | comune | frazione |
+                     provincia | CAP | partita IVA | canale | zona
+
+I record vengono UNITI a data/imprese-sviluppo.json, non sovrascritti: più
+elenchi possono contribuire allo stesso dataset. La chiave è la partita IVA;
+le righe che condividono la stessa partita diventano unità locali della stessa
+impresa.
 
 COSA VIENE ESTRATTO DI PROPOSITO, E COSA NO
 -------------------------------------------
-Vengono presi solo i campi identificativi: ragione sociale, sede legale,
-partita IVA. Sono gli stessi dati che risultano dalla visura camerale di
-qualunque impresa.
+Solo i campi identificativi: ragione sociale, sede, partita IVA, indirizzi
+delle unità locali. Sono gli stessi dati che risultano da una visura camerale.
 
-Vengono SCARTATE tutte le colonne che legano l'impresa al procedimento
-amministrativo da cui proviene l'elenco — attività richiesta, data di
-presentazione dell'istanza, esito. Non è una dimenticanza: gli elenchi di
-questo tipo possono contenere ditte individuali, cioè persone fisiche, e
-associare un nome e cognome al procedimento su un sito indicizzabile è un
-trattamento diverso dalla pubblicazione istituzionale per trasparenza.
+Vengono SCARTATE le colonne che legano l'impresa al contesto dell'elenco di
+origine — nel caso di un procedimento amministrativo: attività richiesta, data
+d'istanza, esito. Non è una dimenticanza: elenchi di quel tipo contengono
+ditte individuali, cioè persone fisiche, e associare un nome e cognome al
+procedimento su un sito indicizzabile è un trattamento diverso dalla
+pubblicazione istituzionale per trasparenza.
 
 Non riaggiungere quelle colonne senza una valutazione legale.
 
@@ -30,13 +38,29 @@ import sys
 import zlib
 
 RADICE = pathlib.Path(__file__).resolve().parent.parent
+DESTINAZIONE = RADICE / "data" / "imprese-sviluppo.json"
 
-# Colonne individuate dalla posizione orizzontale del testo nella pagina
-COLONNE = ((200, "denominazione"), (410, "sede"), (470, "piva"))
+# Per ogni formato: i limiti orizzontali delle colonne, letti dalla posizione
+# del testo nella pagina. Attenzione: le intestazioni stanno spesso a
+# coordinate diverse dai dati, quindi i limiti si ricavano dai dati.
+FORMATI = {
+    "elenco-imprese": [(200, "denominazione"), (410, "sede"), (470, "piva")],
+    "rete-vendita": [
+        (80, "codice"),
+        (300, "denominazione"),
+        (450, "indirizzo"),
+        (540, "comune"),
+        (568, "frazione"),
+        (580, "provincia"),
+        (600, "cap"),
+        (632, "piva"),
+        (682, "canale"),
+        (99999, "zona"),
+    ],
+}
 
 
 def flussi_testo(pdf: bytes):
-    """I flussi compressi del PDF che contengono operatori di testo."""
     for m in re.finditer(rb"stream\r?\n", pdf):
         inizio = m.end()
         fine = pdf.find(b"endstream", inizio)
@@ -51,14 +75,13 @@ def flussi_testo(pdf: bytes):
 
 
 def testo_del_blocco(blocco: bytes) -> str:
-    pezzi = re.findall(rb"\((?:\\.|[^\\()])*\)", blocco)
     return "".join(
         p[1:-1]
         .replace(b"\\(", b"(")
         .replace(b"\\)", b")")
         .replace(b"\\\\", b"\\")
         .decode("latin1")
-        for p in pezzi
+        for p in re.findall(rb"\((?:\\.|[^\\()])*\)", blocco)
     )
 
 
@@ -87,11 +110,20 @@ def frammenti(pdf: bytes):
             yield pagina, round(y, 1), round(x, 1), testo
 
 
-def colonna(x: float):
-    for limite, nome in COLONNE:
-        if x < limite:
-            return nome
-    return None
+def righe_della_tabella(pdf: bytes, tolleranza: float):
+    """Le celle sulla stessa altezza appartengono alla stessa riga."""
+    pezzi = sorted(frammenti(pdf), key=lambda f: (f[0], -f[1], f[2]))
+
+    righe = []
+    corrente = None
+    for pagina, y, x, testo in pezzi:
+        if corrente and corrente["pagina"] == pagina and abs(corrente["y"] - y) < tolleranza:
+            corrente["celle"].append((x, testo))
+        else:
+            corrente = {"pagina": pagina, "y": y, "celle": [(x, testo)]}
+            righe.append(corrente)
+
+    return righe
 
 
 def cifra_di_controllo_valida(piva: str) -> bool:
@@ -109,23 +141,23 @@ def cifra_di_controllo_valida(piva: str) -> bool:
     return (10 - somma % 10) % 10 == int(piva[10])
 
 
-def estrai(pdf: bytes):
-    pezzi = sorted(frammenti(pdf), key=lambda f: (f[0], -f[1], f[2]))
+def ripulisci(testo: str) -> str:
+    return re.sub(r"\s+", " ", testo).strip()
 
-    # le celle sulla stessa altezza appartengono alla stessa riga
-    righe = []
-    corrente = None
-    for pagina, y, x, testo in pezzi:
-        if corrente and corrente["pagina"] == pagina and abs(corrente["y"] - y) < 6:
-            corrente["celle"].append((x, testo))
-        else:
-            corrente = {"pagina": pagina, "y": y, "celle": [(x, testo)]}
-            righe.append(corrente)
+
+def estrai_elenco_imprese(pdf: bytes):
+    colonne = FORMATI["elenco-imprese"]
+
+    def colonna(x):
+        for limite, nome in colonne:
+            if x < limite:
+                return nome
+        return None
 
     record = []
     ultimo = None
 
-    for riga in righe:
+    for riga in righe_della_tabella(pdf, tolleranza=6):
         campi = {"denominazione": [], "sede": [], "piva": []}
         for x, testo in riga["celle"]:
             nome = colonna(x)
@@ -137,7 +169,7 @@ def estrai(pdf: bytes):
         if re.fullmatch(r"\d{11}", piva):
             ultimo = {
                 "denominazione": " ".join(campi["denominazione"]),
-                "sede": " ".join(campi["sede"]),
+                "sedeTesto": " ".join(campi["sede"]),
                 "piva": piva,
             }
             record.append(ultimo)
@@ -146,56 +178,129 @@ def estrai(pdf: bytes):
             if campi["denominazione"]:
                 ultimo["denominazione"] += " " + " ".join(campi["denominazione"])
             if campi["sede"]:
-                ultimo["sede"] += " " + " ".join(campi["sede"])
+                ultimo["sedeTesto"] += " " + " ".join(campi["sede"])
 
-    puliti = []
-    viste = set()
+    imprese = {}
     for r in record:
-        denominazione = re.sub(r"\s+", " ", r["denominazione"]).strip()
-        sede = re.sub(r"\s+", " ", r["sede"]).strip()
-
+        denominazione = ripulisci(r["denominazione"])
         if not denominazione or denominazione.startswith("Ragione"):
             continue
-        if r["piva"] in viste or not cifra_di_controllo_valida(r["piva"]):
+        if not cifra_di_controllo_valida(r["piva"]) or r["piva"] in imprese:
             continue
 
-        viste.add(r["piva"])
-        puliti.append(
-            {"denominazione": denominazione, "sede": sede, "partitaIva": r["piva"]}
+        imprese[r["piva"]] = {
+            "partitaIva": r["piva"],
+            "denominazione": denominazione,
+            "sedeTesto": ripulisci(r["sedeTesto"]) or None,
+            "unitaLocali": [],
+        }
+
+    return imprese
+
+
+def estrai_rete_vendita(pdf: bytes):
+    colonne = FORMATI["rete-vendita"]
+
+    def colonna(x):
+        for limite, nome in colonne:
+            if x < limite:
+                return nome
+        return "zona"
+
+    imprese = {}
+
+    for riga in righe_della_tabella(pdf, tolleranza=5):
+        campi = {}
+        for x, testo in riga["celle"]:
+            campi.setdefault(colonna(x), []).append(testo)
+
+        unisci = lambda chiave: ripulisci(" ".join(campi.get(chiave, [])))
+        piva = unisci("piva")
+
+        if not cifra_di_controllo_valida(piva):
+            continue
+
+        denominazione = unisci("denominazione")
+        if not denominazione:
+            continue
+
+        sede = {
+            "via": unisci("indirizzo") or None,
+            "cap": unisci("cap") or None,
+            "comune": unisci("comune") or None,
+            "provincia": unisci("provincia") or None,
+        }
+
+        impresa = imprese.setdefault(
+            piva,
+            {
+                "partitaIva": piva,
+                "denominazione": denominazione,
+                "sede": sede,
+                "unitaLocali": [],
+            },
         )
 
-    return puliti
+        # la prima riga è la sede, le successive sono unità locali
+        if impresa["sede"] != sede:
+            impresa["unitaLocali"].append(sede)
+
+    return imprese
+
+
+ESTRATTORI = {
+    "elenco-imprese": estrai_elenco_imprese,
+    "rete-vendita": estrai_rete_vendita,
+}
+
+
+def carica_esistenti() -> dict:
+    if not DESTINAZIONE.exists():
+        return {}
+    dati = json.loads(DESTINAZIONE.read_text(encoding="utf8"))
+    return {i["partitaIva"]: i for i in dati.get("imprese", [])}
 
 
 def main() -> int:
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3 or sys.argv[1] not in ESTRATTORI:
         print(__doc__)
         return 1
 
-    percorso = pathlib.Path(sys.argv[1])
-    origine = sys.argv[2] if len(sys.argv) > 2 else percorso.name
+    formato, percorso = sys.argv[1], pathlib.Path(sys.argv[2])
+    origine = sys.argv[3] if len(sys.argv) > 3 else percorso.name
 
     if not percorso.exists():
         print(f"✗ file non trovato: {percorso}")
         return 1
 
-    imprese = estrai(percorso.read_bytes())
+    nuove = ESTRATTORI[formato](percorso.read_bytes())
 
-    if not imprese:
-        print("✗ nessuna impresa estratta: il PDF ha una struttura diversa da quella attesa.")
+    if not nuove:
+        print(
+            f"✗ nessuna impresa estratta con il formato «{formato}»: "
+            "il PDF ha una struttura diversa da quella attesa."
+        )
         return 1
 
-    destinazione = RADICE / "data" / "imprese-sviluppo.json"
-    destinazione.write_text(
+    esistenti = carica_esistenti()
+    aggiunte = sum(1 for piva in nuove if piva not in esistenti)
+    for piva, impresa in nuove.items():
+        impresa["origine"] = origine
+        esistenti[piva] = impresa
+
+    imprese = sorted(esistenti.values(), key=lambda i: i["denominazione"])
+    unita = sum(len(i.get("unitaLocali") or []) for i in imprese)
+
+    DESTINAZIONE.write_text(
         json.dumps(
             {
                 "nota": (
                     "Dati di sviluppo. Solo campi identificativi (denominazione, "
-                    "sede, partita IVA). Ogni colonna che legava queste imprese al "
-                    "procedimento amministrativo di origine è stata scartata di "
-                    "proposito: non riaggiungerla senza una valutazione legale."
+                    "sede, partita IVA, unità locali). Ogni colonna che legava "
+                    "queste imprese al contesto dell'elenco di origine è stata "
+                    "scartata di proposito: non riaggiungerla senza una "
+                    "valutazione legale."
                 ),
-                "origine": origine,
                 "imprese": imprese,
             },
             ensure_ascii=False,
@@ -205,8 +310,9 @@ def main() -> int:
         encoding="utf8",
     )
 
-    individuali = sum(1 for i in imprese if "D.I." in i["denominazione"])
-    print(f"→ data/imprese-sviluppo.json ({len(imprese)} imprese, {individuali} ditte individuali)")
+    print(f"→ data/imprese-sviluppo.json")
+    print(f"  {len(nuove)} imprese dal formato «{formato}» ({aggiunte} nuove)")
+    print(f"  totale in archivio: {len(imprese)} imprese, {unita} unità locali")
     print("  Partite IVA verificate: tutte con cifra di controllo corretta.")
     return 0
 

@@ -6,6 +6,7 @@ import {
   formatEuro,
   formatIndirizzo,
   hostnameDi,
+  mascheraCodiceFiscale,
   toSitoHref,
   toTelHref,
 } from "./format";
@@ -109,5 +110,28 @@ describe("toSitoHref e hostnameDi", () => {
   it("non produce link da valori vuoti", () => {
     expect(toSitoHref("   ")).toBeNull();
     expect(hostnameDi(null)).toBeNull();
+  });
+});
+
+describe("mascheraCodiceFiscale", () => {
+  it("oscura data e luogo di nascita di una persona fisica", () => {
+    expect(mascheraCodiceFiscale("FRRGPP80A01G535B")).toBe("FRRGPP*****G535B");
+    expect(mascheraCodiceFiscale("MRTMTT25D09F205Z")).toBe("MRTMTT*****F205Z");
+  });
+
+  it("conserva la lunghezza e le parti che identificano l'impresa", () => {
+    const mascherato = mascheraCodiceFiscale("MRTMTT25D09F205Z")!;
+    expect(mascherato).toHaveLength(16);
+    expect(mascherato.startsWith("MRTMTT")).toBe(true);
+    expect(mascherato.endsWith("F205Z")).toBe(true);
+  });
+
+  it("non tocca il codice fiscale di una società, che è la Partita IVA", () => {
+    expect(mascheraCodiceFiscale("00743110157")).toBe("00743110157");
+  });
+
+  it("regge input assenti o irregolari", () => {
+    expect(mascheraCodiceFiscale(null)).toBeNull();
+    expect(mascheraCodiceFiscale("  mrtmtt25d09f205z  ")).toBe("MRTMTT*****F205Z");
   });
 });

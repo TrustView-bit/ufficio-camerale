@@ -70,6 +70,46 @@ function leggiCsv(testo: string): Record<string, string>[] {
     .map((r) => Object.fromEntries(intestazioni.map((h, i) => [h, r[i] ?? ""])));
 }
 
+/** L'Italia sta tutta dentro questo rettangolo, isole comprese. */
+const CONFINI = { latMin: 35.4, latMax: 47.2, lonMin: 6.5, lonMax: 18.7 };
+
+/**
+ * Undici righe della sorgente scrivono la coordinata senza punto decimale
+ * ("45581" invece di "45.581", "9527" invece di "9.527"). È un errore
+ * recuperabile: nessuna coordinata italiana supera 47.2 di latitudine o 18.7
+ * di longitudine, quindi il punto va reinserito in un solo modo possibile.
+ */
+function riparaCoordinata(grezzo: string, min: number, max: number): number | null {
+  const valore = Number(grezzo);
+  if (!Number.isFinite(valore)) return null;
+  if (valore >= min && valore <= max) return valore;
+
+  const cifre = grezzo.replace(/[^\d]/g, "");
+  for (let posizione = 1; posizione <= 2; posizione++) {
+    const candidato = Number(
+      `${cifre.slice(0, posizione)}.${cifre.slice(posizione)}`,
+    );
+    if (candidato >= min && candidato <= max) return candidato;
+  }
+
+  return null;
+}
+
+/**
+ * Correzioni puntuali a errori della sorgente che non sono riconoscibili in
+ * automatico, perché la coordinata è formalmente valida ma sbagliata.
+ *
+ * Ogni voce va motivata: qui la sorgente colloca Brescia una trentina di
+ * chilometri a nord-est del centro città, in Val Trompia.
+ */
+const CORREZIONI: Record<string, { lat: number; lon: number; perche: string }> = {
+  "017029": {
+    lat: 45.5416,
+    lon: 10.2118,
+    perche: "la sorgente indica 45.77958,10.42587: 31 km a nord-est di Brescia",
+  },
+};
+
 async function main() {
   process.stdout.write("Scarico i comuni… ");
 
@@ -98,7 +138,16 @@ async function main() {
 
   const righe = leggiCsv(testo);
 
-  const attese = ["comune", "pro_com_t", "den_prov", "sigla", "den_reg", "cap"];
+  const attese = [
+    "comune",
+    "pro_com_t",
+    "den_prov",
+    "sigla",
+    "den_reg",
+    "cap",
+    "lat",
+    "long",
+  ];
   const mancanti = attese.filter((colonna) => !(colonna in (righe[0] ?? {})));
   if (mancanti.length > 0) {
     console.error(
@@ -109,8 +158,13 @@ async function main() {
     process.exit(1);
   }
 
+  const scartati: string[] = [];
+  const riparati: string[] = [];
+  const corretti: string[] = [];
+
   const province: Record<string, { nome: string; regione: string }> = {};
-  const comuni: [string, string, string, string][] = [];
+  // [nome, codice Istat, sigla provincia, CAP, latitudine, longitudine]
+  const comuni: [string, string, string, string, number, number][] = [];
 
   for (const riga of righe) {
     const nome = riga.comune?.trim();
@@ -123,7 +177,34 @@ async function main() {
       regione: riga.den_reg?.trim() ?? "",
     };
 
-    comuni.push([nome, codiceIstat, sigla, riga.cap?.trim() ?? ""]);
+    // le coordinate sono del centro del comune, non del civico: bastano a
+    // centrare una mappa, non a puntare un indirizzo
+    const correzione = CORREZIONI[codiceIstat];
+    const lat =
+      correzione?.lat ??
+      riparaCoordinata(riga.lat ?? "", CONFINI.latMin, CONFINI.latMax);
+    const lon =
+      correzione?.lon ??
+      riparaCoordinata(riga.long ?? "", CONFINI.lonMin, CONFINI.lonMax);
+
+    if (lat === null || lon === null) {
+      scartati.push(`${nome} (${sigla}): lat=${riga.lat} long=${riga.long}`);
+      continue;
+    }
+
+    if (correzione) corretti.push(`${nome}: ${correzione.perche}`);
+    else if (Number(riga.lat) !== lat || Number(riga.long) !== lon) {
+      riparati.push(`${nome}: ${riga.lat},${riga.long} → ${lat},${lon}`);
+    }
+
+    comuni.push([
+      nome,
+      codiceIstat,
+      sigla,
+      riga.cap?.trim() ?? "",
+      Math.round(lat * 1e5) / 1e5,
+      Math.round(lon * 1e5) / 1e5,
+    ]);
   }
 
   if (comuni.length < 7000) {
@@ -150,6 +231,23 @@ async function main() {
   console.log(
     `  → data/comuni.json (${comuni.length} comuni, ${Object.keys(province).length} province)`,
   );
+
+  if (riparati.length > 0) {
+    console.log(
+      `  ${riparati.length} coordinate senza punto decimale, ricostruite:`,
+    );
+    for (const riga of riparati) console.log(`    · ${riga}`);
+  }
+  if (corretti.length > 0) {
+    console.log(`  ${corretti.length} correzioni manuali applicate:`);
+    for (const riga of corretti) console.log(`    · ${riga}`);
+  }
+  if (scartati.length > 0) {
+    console.error(
+      `  ⚠ ${scartati.length} comuni scartati per coordinate illeggibili:`,
+    );
+    for (const riga of scartati) console.error(`    · ${riga}`);
+  }
   console.log("\nFatto. Ricordati di committare il file in data/.");
 }
 
