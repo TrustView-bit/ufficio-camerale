@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 
 import { lookupCompany } from "@/lib/companies";
 import { PROVIDER_UNAVAILABLE_MESSAGE } from "@/lib/providers/types";
+import { applicaLimite } from "@/lib/rate-limit/guard";
 import { partitaIvaSchema } from "@/lib/validation";
 
 /**
@@ -14,6 +15,9 @@ export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ partitaIva: string }> },
 ) {
+  const limite = await applicaLimite(request);
+  if (limite.bloccato) return limite.risposta;
+
   const { partitaIva } = await params;
 
   const parsed = partitaIvaSchema.safeParse(partitaIva);
@@ -49,5 +53,5 @@ export async function GET(
     );
   }
 
-  return NextResponse.json(result);
+  return NextResponse.json(result, { headers: limite.intestazioni });
 }

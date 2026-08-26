@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { checkVies } from "@/lib/providers/vies";
+import { applicaLimite } from "@/lib/rate-limit/guard";
 import { partitaIvaSchema } from "@/lib/validation";
 
 /**
@@ -10,6 +11,9 @@ import { partitaIvaSchema } from "@/lib/validation";
  * direttamente con la Commissione europea.
  */
 export async function GET(request: NextRequest) {
+  const limite = await applicaLimite(request);
+  if (limite.bloccato) return limite.risposta;
+
   const raw = request.nextUrl.searchParams.get("piva");
 
   if (!raw) {
@@ -35,6 +39,9 @@ export async function GET(request: NextRequest) {
   // Un'indisponibilità di VIES non è un errore di questo servizio: si
   // risponde 200 con lo stato, e la UI decide come degradare.
   return NextResponse.json(result, {
-    headers: { "Cache-Control": "public, max-age=0, s-maxage=3600" },
+    headers: {
+      ...limite.intestazioni,
+      "Cache-Control": "public, max-age=0, s-maxage=3600",
+    },
   });
 }
