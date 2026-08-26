@@ -30,6 +30,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const db = getDb();
   if (!db) return statiche;
 
+  // in archivio finiscono anche le schede del dataset dimostrativo: quelle
+  // non vanno proposte ai motori di ricerca
+
   try {
     const rows = await db
       .select({

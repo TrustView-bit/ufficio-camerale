@@ -41,7 +41,6 @@ describe("mapStatoAttivita", () => {
     expect(mapStatoAttivita("ATTIVA")).toBe("attiva");
     expect(mapStatoAttivita("Impresa attiva")).toBe("attiva");
     expect(mapStatoAttivita("CESSATA")).toBe("cessata");
-    expect(mapStatoAttivita("INATTIVA")).toBe("cessata");
     expect(mapStatoAttivita("IN LIQUIDAZIONE")).toBe("in-liquidazione");
   });
 
@@ -223,5 +222,16 @@ describe("OpenapiCompanyProvider", () => {
     await expect(provider.getByPartitaIva("00743110157")).resolves.toMatchObject({
       status: "not-found",
     });
+  });
+});
+
+describe("mapStatoAttivita — inattiva è uno stato a sé", () => {
+  it("non confonde inattiva con cessata", () => {
+    expect(mapStatoAttivita("INATTIVA")).toBe("inattiva");
+    expect(mapStatoAttivita("CESSATA")).toBe("cessata");
+  });
+
+  it("la liquidazione resta prioritaria", () => {
+    expect(mapStatoAttivita("INATTIVA IN LIQUIDAZIONE")).toBe("in-liquidazione");
   });
 });

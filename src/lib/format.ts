@@ -21,6 +21,11 @@ export function formatEuro(value: number | null): string | null {
 /** Da "1962-04-17" a "17 aprile 1962". */
 export function formatDataIso(iso: string | null): string | null {
   if (!iso) return null;
+
+  // di molte imprese si conosce solo l'anno: meglio mostrare "2011" che
+  // inventare un 1° gennaio che nessuno ha mai dichiarato
+  if (/^\d{4}$/.test(iso)) return iso;
+
   const date = new Date(`${iso}T00:00:00Z`);
   return Number.isNaN(date.getTime()) ? null : DATA_LUNGA.format(date);
 }
@@ -32,6 +37,13 @@ export function formatDataOra(date: Date): string {
 /** Anni compiuti dalla data di costituzione. */
 export function anniDi(iso: string | null, now = new Date()): number | null {
   if (!iso) return null;
+
+  // con il solo anno si contano gli anni solari, senza fingere precisione
+  if (/^\d{4}$/.test(iso)) {
+    const anni = now.getUTCFullYear() - Number(iso);
+    return anni >= 0 ? anni : null;
+  }
+
   const start = new Date(`${iso}T00:00:00Z`);
   if (Number.isNaN(start.getTime())) return null;
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { TriangleAlert } from "lucide-react";
+import { FlaskConical, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
@@ -70,6 +70,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: company.denominazione,
     description: descrizione,
     alternates: { canonical: url },
+    // una scheda inventata non deve finire nei motori di ricerca
+    robots: company.fittizia ? { index: false, follow: false } : undefined,
     openGraph: {
       type: "profile",
       title: company.denominazione,
@@ -106,6 +108,8 @@ export default async function AziendaPage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(company)) }}
       />
 
+      {company.fittizia && <AvvisoDatiFittizi />}
+
       <Intestazione company={company} />
 
       <div className="mt-5">
@@ -124,6 +128,24 @@ export default async function AziendaPage({ params }: Props) {
         <DocumentiAcquistabili eSocieta={eSocieta} />
       </div>
     </div>
+  );
+}
+
+/**
+ * Le schede del dataset dimostrativo devono essere riconoscibili a colpo
+ * d'occhio: nome, recapiti e numeri sono inventati, e una scheda finta
+ * indistinguibile da una vera è un'informazione falsa.
+ */
+function AvvisoDatiFittizi() {
+  return (
+    <p className="border-warning/25 bg-warning-subtle/40 text-warning mb-6 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-sm">
+      <FlaskConical className="mt-0.5 size-4 shrink-0" aria-hidden />
+      <span>
+        <strong className="font-medium">Azienda di esempio.</strong> Questa scheda
+        appartiene a un dataset dimostrativo: denominazione, recapiti e dati
+        camerali sono inventati e non corrispondono ad alcuna impresa reale.
+      </span>
+    </p>
   );
 }
 
@@ -241,7 +263,7 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
           {anni !== null && (
             <span className="text-muted-foreground font-normal">
               {" "}
-              · {anni} anni di attività
+              · {anni} {anni === 1 ? "anno" : "anni"} di attività
             </span>
           )}
         </>

@@ -11,6 +11,10 @@ Formati riconosciuti:
     tabella          TSV con intestazione: denominazione, partitaIva, via,
                      comune, provincia. Serve per gli elenchi che arrivano
                      già in forma tabellare invece che dentro un PDF.
+    demo-json        JSON dimostrativo completo. Ogni record deve dichiarare
+                     dati_fittizi="SI": i record non marcati vengono scartati,
+                     perché il campo è ciò che permette alla scheda di
+                     avvertire che i dati sono inventati.
 
 I record vengono UNITI a data/imprese-sviluppo.json, non sovrascritti: più
 elenchi possono contribuire allo stesso dataset. La chiave è la partita IVA;
@@ -293,10 +297,109 @@ def estrai_tabella(contenuto: bytes):
     return imprese
 
 
+# Le diciture dello stato attività, riportate al nostro vocabolario.
+# "inattiva" non è "cessata": iscritta ma non operativa.
+STATI = {
+    "attiva": "attiva",
+    "inattiva": "inattiva",
+    "in liquidazione": "in-liquidazione",
+    "cessata": "cessata",
+}
+
+
+def numero(valore):
+    if isinstance(valore, (int, float)):
+        return valore
+    if isinstance(valore, str) and valore.strip():
+        try:
+            return float(valore.replace(",", "."))
+        except ValueError:
+            return None
+    return None
+
+
+def estrai_demo_json(contenuto: bytes):
+    """
+    Dataset dimostrativo: si possono usare tutti i campi, perché le aziende
+    non esistono. Proprio per questo ogni record deve dichiararlo, e la
+    scheda lo mostrerà: una scheda finta indistinguibile da una vera sarebbe
+    un'informazione falsa.
+    """
+    dati = json.loads(contenuto.decode("utf8"))
+    if isinstance(dati, dict):
+        for valore in dati.values():
+            if isinstance(valore, list):
+                dati = valore
+                break
+
+    if not isinstance(dati, list):
+        print("✗ il JSON deve contenere un elenco di aziende.")
+        return {}
+
+    imprese = {}
+    non_marcati = 0
+
+    for record in dati:
+        if not isinstance(record, dict):
+            continue
+
+        if str(record.get("dati_fittizi", "")).strip().upper() != "SI":
+            non_marcati += 1
+            continue
+
+        piva = str(record.get("partita_iva") or "").replace("IT", "").strip()
+        piva = piva.zfill(11) if piva.isdigit() else piva
+        denominazione = ripulisci(str(record.get("ragione_sociale") or ""))
+
+        if not denominazione or not cifra_di_controllo_valida(piva):
+            continue
+
+        rea = str(record.get("rea") or "").strip()
+        cciaa, _, numero_rea = rea.partition("-")
+
+        anno = record.get("anno_costituzione")
+
+        cap = str(record.get("cap") or "").strip()
+        imprese[piva] = {
+            "partitaIva": piva,
+            "denominazione": denominazione,
+            "codiceFiscale": str(record.get("codice_fiscale") or "").strip() or None,
+            "formaGiuridica": ripulisci(str(record.get("forma_giuridica") or "")) or None,
+            "statoAttivita": STATI.get(
+                str(record.get("stato_attivita") or "").strip().lower(), "sconosciuto"
+            ),
+            # si conosce l'anno, non il giorno: non si inventa una data intera
+            "annoCostituzione": int(anno) if isinstance(anno, int) else None,
+            "reaCciaa": cciaa.strip() or None if numero_rea else None,
+            "reaNumero": (numero_rea or cciaa).strip() or None,
+            "capitaleSociale": numero(record.get("capitale_sociale")),
+            "dipendenti": numero(record.get("numero_dipendenti")),
+            "atecoPrimario": str(record.get("ateco_2022") or "").strip() or None,
+            "atecoVersione": "2022" if record.get("ateco_2022") else None,
+            "pec": str(record.get("pec") or "").strip() or None,
+            "telefono": str(record.get("telefono") or "").strip() or None,
+            "sitoWeb": str(record.get("sito_web") or "").strip() or None,
+            "sede": {
+                "via": ripulisci(str(record.get("indirizzo") or "")) or None,
+                "cap": cap.zfill(5) if cap.isdigit() else (cap or None),
+                "comune": ripulisci(str(record.get("comune") or "")) or None,
+                "provincia": str(record.get("provincia") or "").strip() or None,
+            },
+            "unitaLocali": [],
+            "fittizia": True,
+        }
+
+    if non_marcati:
+        print(f"  ⚠ {non_marcati} record scartati perché non marcati dati_fittizi=SI")
+
+    return imprese
+
+
 ESTRATTORI = {
     "elenco-imprese": estrai_elenco_imprese,
     "rete-vendita": estrai_rete_vendita,
     "tabella": estrai_tabella,
+    "demo-json": estrai_demo_json,
 }
 
 

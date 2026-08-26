@@ -197,28 +197,39 @@ function daElenchiPubblici(): Record<string, CompanyData> {
       .filter((indirizzo): indirizzo is Indirizzo => indirizzo !== null)
       .map((indirizzo) => ({ denominazione: null, indirizzo, ateco: null }));
 
+    // Il campo c'è solo dove l'elenco di origine lo forniva. Per le imprese
+    // reali resta null: attribuire loro un capitale o un REA inventati
+    // sarebbe pubblicare informazioni false su un soggetto esistente.
+    const campo = <T>(chiave: string): T | null =>
+      (impresa as Record<string, unknown>)[chiave] as T | null;
+
     mappa[impresa.partitaIva] = {
       partitaIva: impresa.partitaIva,
-      codiceFiscale: impresa.partitaIva,
+      codiceFiscale: campo<string>("codiceFiscale") ?? impresa.partitaIva,
       denominazione: impresa.denominazione,
-      formaGiuridica: null,
-      statoAttivita: "sconosciuto",
-      dataCostituzione: null,
-      reaNumero: null,
-      reaCciaa: null,
-      capitaleSociale: null,
-      atecoPrimario: null,
-      atecoVersione: null,
+      formaGiuridica: campo<string>("formaGiuridica"),
+      statoAttivita:
+        campo<CompanyData["statoAttivita"]>("statoAttivita") ?? "sconosciuto",
+      // di queste imprese si conosce l'anno, non il giorno
+      dataCostituzione: campo<number>("annoCostituzione")
+        ? String(campo<number>("annoCostituzione"))
+        : null,
+      reaNumero: campo<string>("reaNumero"),
+      reaCciaa: campo<string>("reaCciaa"),
+      capitaleSociale: campo<number>("capitaleSociale"),
+      atecoPrimario: campo<string>("atecoPrimario"),
+      atecoVersione: campo<CompanyData["atecoVersione"]>("atecoVersione"),
       atecoPrimarioDescrizione: null,
       atecoSecondari: [],
       sede,
       unitaLocali,
       bilanci: [],
-      pec: null,
-      sitoWeb: null,
-      telefono: null,
-      dipendenti: null,
+      pec: campo<string>("pec"),
+      sitoWeb: campo<string>("sitoWeb"),
+      telefono: campo<string>("telefono"),
+      dipendenti: campo<number>("dipendenti"),
       classeDipendenti: null,
+      fittizia: campo<boolean>("fittizia") ?? false,
     };
   }
 

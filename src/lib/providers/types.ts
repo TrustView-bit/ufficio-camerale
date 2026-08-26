@@ -6,8 +6,10 @@ export type { Ateco, Bilancio, Indirizzo, UnitaLocale, VersioneAteco };
 /** Stato attività di un'impresa nel Registro Imprese. */
 export const STATI_ATTIVITA = [
   "attiva",
-  "cessata",
+  /** Iscritta ma non operativa: non è la stessa cosa di cessata. */
+  "inattiva",
   "in-liquidazione",
+  "cessata",
   "sconosciuto",
 ] as const;
 
@@ -40,6 +42,12 @@ export type CompanyData = {
   telefono: string | null;
   dipendenti: number | null;
   classeDipendenti: string | null;
+  /**
+   * true per le aziende di un dataset dimostrativo: nomi, recapiti e numeri
+   * sono inventati. La scheda lo dichiara in modo visibile, perché una
+   * scheda finta indistinguibile da una vera sarebbe una informazione falsa.
+   */
+  fittizia?: boolean;
 };
 
 export type ProviderUnavailableReason =

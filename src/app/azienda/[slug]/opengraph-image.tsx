@@ -27,6 +27,7 @@ const COLORI = {
 
 const ETICHETTA_STATO = {
   attiva: { testo: "Attiva", colore: COLORI.attiva },
+  inattiva: { testo: "Inattiva", colore: COLORI.cessata },
   "in-liquidazione": { testo: "In liquidazione", colore: COLORI.liquidazione },
   cessata: { testo: "Cessata", colore: COLORI.cessata },
   sconosciuto: null,

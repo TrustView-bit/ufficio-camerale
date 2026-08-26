@@ -135,3 +135,20 @@ describe("mascheraCodiceFiscale", () => {
     expect(mascheraCodiceFiscale("  mrtmtt25d09f205z  ")).toBe("MRTMTT*****F205Z");
   });
 });
+
+describe("date di cui si conosce solo l'anno", () => {
+  it("mostra l'anno invece di inventare un 1° gennaio", () => {
+    expect(formatDataIso("2011")).toBe("2011");
+  });
+
+  it("conta gli anni solari", () => {
+    const oggi = new Date("2026-08-27T00:00:00Z");
+    expect(anniDi("2011", oggi)).toBe(15);
+    expect(anniDi("2025", oggi)).toBe(1);
+    expect(anniDi("2026", oggi)).toBe(0);
+  });
+
+  it("non accetta anni futuri", () => {
+    expect(anniDi("2030", new Date("2026-08-27T00:00:00Z"))).toBeNull();
+  });
+});

@@ -117,8 +117,8 @@ successivo, tutto si ricalcola da capo.
 
 ### Imprese di sviluppo
 
-`data/imprese-sviluppo.json` contiene 332 imprese reali con partita IVA vera e
-127 unità locali, estratte da elenchi pubblici con
+`data/imprese-sviluppo.json` contiene 1.332 imprese con partita IVA
+formalmente valida e 127 unità locali, estratte da elenchi pubblici con
 `scripts/estrai-imprese.py`. Servono a provare la resa su dati veri invece
 che sui tre esempi inventati.
 
@@ -135,12 +135,21 @@ della stessa impresa. Legge la tabella dalle coordinate del testo nella pagina,
 non dall'ordine dei frammenti, perché le celle del PDF vanno a capo e
 l'accostamento per vicinanza mescola i campi.
 
-Di queste si conoscono **solo** denominazione, sede e partita IVA, e solo
-quelli vengono esposti: attribuire a un'impresa esistente un codice ATECO, un
-capitale o un numero REA inventati significherebbe pubblicare informazioni
-false su un soggetto reale. I campi mancanti restano `null` e la scheda non
-mostra quelle sezioni — che è anche un buon banco di prova per il caso «dati
-scarsi».
+Sono di due nature diverse, e la distinzione è importante.
+
+Delle **332 imprese reali** si conoscono solo denominazione, sede e partita
+IVA, e solo quelli vengono esposti: attribuire a un'impresa esistente un
+codice ATECO, un capitale o un numero REA inventati significherebbe pubblicare
+informazioni false su un soggetto reale. I campi mancanti restano `null` e la
+scheda non mostra quelle sezioni — che è anche un buon banco di prova per il
+caso «dati scarsi».
+
+Le **1.000 aziende dimostrative** non esistono, e proprio per questo hanno
+tutti i campi valorizzati: servono a provare la resa completa. Ogni record
+deve dichiarare `dati_fittizi="SI"`, altrimenti lo script lo scarta, e la
+scheda mostra un avviso in cima, non viene indicizzata e non entra nella
+sitemap. Una scheda inventata indistinguibile da una vera sarebbe
+un'informazione falsa.
 
 Lo script scarta di proposito ogni colonna che legava quelle imprese al
 procedimento amministrativo di origine. L'elenco conteneva ditte individuali,

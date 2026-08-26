@@ -121,7 +121,9 @@ function toText(value: string | number | null | undefined): string | null {
 export function mapStatoAttivita(raw: string | null | undefined): StatoAttivita {
   const value = (raw ?? "").toLowerCase();
   if (value.includes("liquidazione")) return "in-liquidazione";
-  if (value.includes("cessat") || value.includes("inattiv")) return "cessata";
+  if (value.includes("cessat")) return "cessata";
+  // "inattiva" è uno stato a sé: iscritta ma non operativa
+  if (value.includes("inattiv")) return "inattiva";
   if (value.includes("attiv")) return "attiva";
   return "sconosciuto";
 }

@@ -1,11 +1,11 @@
-import { CircleDot, CircleSlash, TriangleAlert } from "lucide-react";
+import { CircleDashed, CircleDot, CircleSlash, TriangleAlert } from "lucide-react";
 import type { ComponentType } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 /** Stato attività di un'impresa nel Registro Imprese. */
-export type CompanyStatus = "attiva" | "cessata" | "in-liquidazione";
+export type CompanyStatus = "attiva" | "inattiva" | "cessata" | "in-liquidazione";
 
 const STATUS: Record<
   CompanyStatus,
@@ -15,6 +15,11 @@ const STATUS: Record<
     label: "Attiva",
     icon: CircleDot,
     className: "bg-success-subtle text-success border-success/25",
+  },
+  inattiva: {
+    label: "Inattiva",
+    icon: CircleDashed,
+    className: "bg-neutral-subtle text-muted-foreground border-border",
   },
   cessata: {
     label: "Cessata",
