@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeProvider } from "@/components/theme-provider";
+import { env } from "@/lib/env";
 
 import "./globals.css";
 
@@ -20,6 +21,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  // senza questo gli URL delle immagini social restano relativi e i social
+  // network non riescono a scaricarle
+  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
     default: "Ufficio Camerale — verifica Partita IVA e dati aziendali",
     template: "%s · Ufficio Camerale",

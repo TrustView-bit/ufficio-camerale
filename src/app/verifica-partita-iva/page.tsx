@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CircleCheck, CircleSlash, TriangleAlert } from "lucide-react";
 
 import { ViesCheckForm } from "@/components/vies/vies-check-form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { VIES_TIMEOUT_MS } from "@/lib/providers/vies";
 import { normalizePartitaIva } from "@/lib/validation";
 
@@ -66,10 +66,13 @@ export default async function VerificaPartitaIvaPage({
           {ESITI.map(({ icon: Icon, tone, title, body }) => (
             <Card key={title} className="shadow-card">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base">
+                <h3
+                  data-slot="card-title"
+                  className="font-heading flex items-center gap-2 text-base leading-snug font-medium"
+                >
                   <Icon className={`size-4 ${tone}`} aria-hidden />
                   {title}
-                </CardTitle>
+                </h3>
               </CardHeader>
               <CardContent className="text-muted-foreground text-sm leading-relaxed">
                 {body}

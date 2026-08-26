@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 /** Una riga "etichetta / valore" di una scheda. */
 export function Dato({
@@ -42,10 +42,15 @@ export function SchedaDati({
   return (
     <Card className="shadow-card break-inside-avoid">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 text-base">
+        {/* Un vero heading, non un div: la scheda è un documento strutturato
+            e deve poter essere percorsa per titoli. */}
+        <h2
+          data-slot="card-title"
+          className="font-heading flex items-center gap-2 text-base leading-snug font-medium"
+        >
           {icona}
           {titolo}
-        </CardTitle>
+        </h2>
       </CardHeader>
       <CardContent>
         <dl className="grid gap-3">{children}</dl>

@@ -2,7 +2,7 @@ import { Building2, ScanSearch, ShieldCheck } from "lucide-react";
 
 import { SearchForm } from "@/components/search/search-form";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 
 const PASSI = [
   {
@@ -66,10 +66,13 @@ export default function Home() {
           {PASSI.map(({ icon: Icon, title, description }) => (
             <Card key={title} className="shadow-card">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-base">
+                <h3
+                  data-slot="card-title"
+                  className="font-heading flex items-center gap-2 text-base leading-snug font-medium"
+                >
                   <Icon className="text-primary size-4" aria-hidden />
                   {title}
-                </CardTitle>
+                </h3>
                 <CardDescription className="leading-relaxed">
                   {description}
                 </CardDescription>
