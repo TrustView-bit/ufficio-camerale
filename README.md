@@ -115,6 +115,24 @@ classificazione, descrizione risolta — e il codice del fornitore non viene mai
 sovrascritto con quello convertito: quando Istat pubblicherà il raccordo
 successivo, tutto si ricalcola da capo.
 
+### Imprese di sviluppo
+
+`data/imprese-sviluppo.json` contiene 187 imprese reali con partita IVA vera,
+estratte da un elenco pubblico con `scripts/estrai-imprese-pdf.py`. Servono a
+provare la resa su dati veri invece che sui tre esempi inventati.
+
+Di queste si conoscono **solo** denominazione, sede e partita IVA, e solo
+quelli vengono esposti: attribuire a un'impresa esistente un codice ATECO, un
+capitale o un numero REA inventati significherebbe pubblicare informazioni
+false su un soggetto reale. I campi mancanti restano `null` e la scheda non
+mostra quelle sezioni — che è anche un buon banco di prova per il caso «dati
+scarsi».
+
+Lo script scarta di proposito ogni colonna che legava quelle imprese al
+procedimento amministrativo di origine. L'elenco conteneva ditte individuali,
+cioè persone fisiche: **non riaggiungere quelle colonne senza una valutazione
+legale.**
+
 ### Comuni
 
 `normalizzaComune()` in `src/lib/geo.ts` riconosce un comune scritto in

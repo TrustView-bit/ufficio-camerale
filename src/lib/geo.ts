@@ -290,3 +290,56 @@ export function analizzaIndirizzoItaliano(testo: string): {
     comuneRiconosciuto: Boolean(riconosciuto),
   };
 }
+
+/** Quante parole al massimo può avere il nome di un comune. */
+const MAX_PAROLE_COMUNE = 5;
+
+/**
+ * Riconosce il comune scritto in coda a un indirizzo su una riga sola, come
+ * "VIA NAZIONALE SANNITICA, 5 - CASTELVENERE" o "VIA SANNITA, 16 AIROLA".
+ *
+ * Prova le ultime parole dalla più lunga alla più corta, così "San Giorgio del
+ * Sannio" vince su "Sannio". Restituisce null se in coda non c'è un comune
+ * italiano riconoscibile: meglio nessuna sede che una sbagliata.
+ */
+export function riconosciComuneInCoda(indirizzo: string): {
+  via: string | null;
+  comune: ComuneNormalizzato;
+} | null {
+  const pulito = indirizzo.replace(/\s+/g, " ").trim();
+  if (!pulito) return null;
+
+  // il trattino separa spesso la via dal comune: se c'è, si prova prima quello
+  const separatore = pulito.lastIndexOf(" - ");
+  if (separatore !== -1) {
+    const coda = pulito.slice(separatore + 3).trim();
+    const comune = normalizzaComune(coda);
+    if (comune) {
+      const via = pulito.slice(0, separatore).trim();
+      return { via: via ? titoloProprio(via) : null, comune };
+    }
+  }
+
+  const parole = pulito.split(" ");
+  const massimo = Math.min(MAX_PAROLE_COMUNE, parole.length);
+
+  for (let quante = massimo; quante >= 1; quante--) {
+    const coda = parole.slice(parole.length - quante).join(" ");
+    // via una eventuale sigla di provincia fra parentesi: "GALDO (BN)"
+    const candidato = coda.replace(/\s*\([A-Za-z]{2}\)\s*$/, "").trim();
+
+    const comune = normalizzaComune(candidato);
+    if (comune) {
+      const via = parole
+        .slice(0, parole.length - quante)
+        .join(" ")
+        .trim();
+      return {
+        via: via ? titoloProprio(via.replace(/[\s,\-]+$/, "")) : null,
+        comune,
+      };
+    }
+  }
+
+  return null;
+}

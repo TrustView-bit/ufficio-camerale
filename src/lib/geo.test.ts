@@ -5,6 +5,7 @@ import {
   chiaveComune,
   normalizzaComune,
   provinciaToSigla,
+  riconosciComuneInCoda,
   siglaToProvincia,
   titoloProprio,
 } from "./geo";
@@ -172,5 +173,49 @@ describe("titoloProprio — cifre romane", () => {
   it("non scambia le preposizioni per cifre romane", () => {
     expect(titoloProprio("VIA DI VILLA CHIGI")).toBe("Via di Villa Chigi");
     expect(titoloProprio("VIA DEL CORSO")).toBe("Via del Corso");
+  });
+});
+
+describe("riconosciComuneInCoda", () => {
+  it("separa via e comune quando c'è il trattino", () => {
+    const esito = riconosciComuneInCoda(
+      "VIA NAZIONALE SANNITICA, 5 - CASTELVENERE",
+    );
+
+    expect(esito?.via).toBe("Via Nazionale Sannitica, 5");
+    expect(esito?.comune.comune).toBe("Castelvenere");
+    expect(esito?.comune.sigla).toBe("BN");
+  });
+
+  it("riconosce il comune anche senza separatore", () => {
+    const esito = riconosciComuneInCoda("VIA SANNITA, 16 AIROLA");
+
+    expect(esito?.via).toBe("Via Sannita, 16");
+    expect(esito?.comune.comune).toBe("Airola");
+  });
+
+  it("preferisce il nome di comune più lungo", () => {
+    const esito = riconosciComuneInCoda("VIA ROMA 1 SAN GIORGIO DEL SANNIO");
+
+    expect(esito?.comune.comune).toBe("San Giorgio del Sannio");
+    expect(esito?.via).toBe("Via Roma 1");
+  });
+
+  it("ignora la sigla di provincia fra parentesi", () => {
+    expect(
+      riconosciComuneInCoda("PIAZZA UMBERTO I 34 BENEVENTO (BN)")?.comune.comune,
+    ).toBe("Benevento");
+  });
+
+  it("restituisce null se in coda non c'è un comune", () => {
+    expect(riconosciComuneInCoda("VIA AC")).toBeNull();
+    expect(riconosciComuneInCoda("")).toBeNull();
+  });
+
+  it("regge un indirizzo fatto del solo comune", () => {
+    const esito = riconosciComuneInCoda("BENEVENTO");
+
+    expect(esito?.comune.comune).toBe("Benevento");
+    expect(esito?.via).toBeNull();
   });
 });

@@ -1,3 +1,6 @@
+import impreseJson from "../../../data/imprese-sviluppo.json";
+import { riconosciComuneInCoda } from "@/lib/geo";
+
 import type { CompanyData, CompanyProvider, ProviderResult } from "./types";
 
 /**
@@ -119,6 +122,65 @@ const AZIENDE: Record<string, CompanyData> = {
   },
 };
 
+/**
+ * Imprese reali usate come dati di sviluppo, estratte da un elenco pubblico
+ * con `scripts/estrai-imprese-pdf.py`.
+ *
+ * Di queste conosciamo soltanto denominazione, sede e partita IVA, e soltanto
+ * quelli vengono esposti: attribuire a un'impresa vera un codice ATECO, un
+ * capitale sociale o un numero REA inventati significherebbe pubblicare
+ * informazioni false su un soggetto esistente. I campi che non abbiamo
+ * restano null, e la scheda semplicemente non mostra quelle sezioni.
+ */
+function daElencoPubblico(): Record<string, CompanyData> {
+  const mappa: Record<string, CompanyData> = {};
+
+  for (const impresa of impreseJson.imprese) {
+    const riconosciuto = riconosciComuneInCoda(impresa.sede);
+
+    mappa[impresa.partitaIva] = {
+      partitaIva: impresa.partitaIva,
+      codiceFiscale: impresa.partitaIva,
+      denominazione: impresa.denominazione,
+      formaGiuridica: null,
+      statoAttivita: "sconosciuto",
+      dataCostituzione: null,
+      reaNumero: null,
+      reaCciaa: null,
+      capitaleSociale: null,
+      atecoPrimario: null,
+      atecoVersione: null,
+      atecoPrimarioDescrizione: null,
+      atecoSecondari: [],
+      sede: riconosciuto
+        ? {
+            via: riconosciuto.via,
+            cap: riconosciuto.comune.cap,
+            comune: riconosciuto.comune.comune,
+            provincia: riconosciuto.comune.sigla,
+            nazione: "IT",
+          }
+        : null,
+      unitaLocali: [],
+      bilanci: [],
+      pec: null,
+      sitoWeb: null,
+      telefono: null,
+      dipendenti: null,
+      classeDipendenti: null,
+    };
+  }
+
+  return mappa;
+}
+
+/** Le tre aziende inventate hanno la precedenza: servono a provare la resa
+    con tutti i campi valorizzati. */
+const TUTTE: Record<string, CompanyData> = {
+  ...daElencoPubblico(),
+  ...AZIENDE,
+};
+
 export class MockCompanyProvider implements CompanyProvider {
   readonly name = "mock";
   readonly costPerLookupEur = 0;
@@ -131,12 +193,12 @@ export class MockCompanyProvider implements CompanyProvider {
       await new Promise((resolve) => setTimeout(resolve, this.delayMs));
     }
 
-    const company = AZIENDE[partitaIva];
+    const company = TUTTE[partitaIva];
     return company
       ? { status: "found", company, raw: { mock: true } }
       : { status: "not-found" };
   }
 }
 
-/** Le Partite IVA per cui il provider finto ha dei dati. */
-export const MOCK_PARTITE_IVA = Object.keys(AZIENDE);
+/** Le Partite IVA per cui il provider di sviluppo ha dei dati. */
+export const MOCK_PARTITE_IVA = Object.keys(TUTTE);
