@@ -219,3 +219,31 @@ describe("riconosciComuneInCoda", () => {
     expect(esito?.via).toBeNull();
   });
 });
+
+describe("CAP", () => {
+  it("conserva lo zero iniziale, che la sorgente perde", () => {
+    // la sorgente scrive "4020": il CAP italiano ha sempre cinque cifre
+    expect(normalizzaComune("Spigno Saturnia", "LT")?.cap).toBe("04020");
+    expect(normalizzaComune("Abbasanta", "OR")?.cap).toBe("09071");
+  });
+
+  it("ha sempre cinque cifre, ovunque", () => {
+    for (const nome of ["Milano", "Roma", "Palermo", "Aosta", "Vo'"]) {
+      expect(normalizzaComune(nome)?.cap).toMatch(/^\d{5}$/);
+    }
+  });
+});
+
+describe("coordinate", () => {
+  it("colloca i capoluoghi dove sono davvero", () => {
+    const milano = normalizzaComune("Milano")!;
+    expect(milano.lat).toBeCloseTo(45.47, 1);
+    expect(milano.lon).toBeCloseTo(9.19, 1);
+  });
+
+  it("usa la correzione manuale per Brescia, che la sorgente sbaglia", () => {
+    const brescia = normalizzaComune("Brescia")!;
+    expect(brescia.lat).toBeCloseTo(45.54, 2);
+    expect(brescia.lon).toBeCloseTo(10.21, 2);
+  });
+});

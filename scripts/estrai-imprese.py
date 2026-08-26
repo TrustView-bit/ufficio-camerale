@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-Estrae imprese da elenchi in PDF, per usarle come dati di sviluppo.
+Estrae imprese da elenchi, per usarle come dati di sviluppo.
 
-    python3 scripts/estrai-imprese-pdf.py <formato> <file.pdf> [origine]
+    python3 scripts/estrai-imprese.py <formato> <file> [origine]
 
 Formati riconosciuti:
-    elenco-imprese   ragione sociale | sede legale | partita IVA
-    rete-vendita     codice | ragione sociale | indirizzo | comune | frazione |
-                     provincia | CAP | partita IVA | canale | zona
+    elenco-imprese   PDF: ragione sociale | sede legale | partita IVA
+    rete-vendita     PDF: codice | ragione sociale | indirizzo | comune |
+                     frazione | provincia | CAP | partita IVA | canale | zona
+    tabella          TSV con intestazione: denominazione, partitaIva, via,
+                     comune, provincia. Serve per gli elenchi che arrivano
+                     già in forma tabellare invece che dentro un PDF.
 
 I record vengono UNITI a data/imprese-sviluppo.json, non sovrascritti: più
 elenchi possono contribuire allo stesso dataset. La chiave è la partita IVA;
@@ -248,9 +251,52 @@ def estrai_rete_vendita(pdf: bytes):
     return imprese
 
 
+def estrai_tabella(contenuto: bytes):
+    """Legge un TSV con intestazione. Nessuna magia: le colonne sono nomi."""
+    righe = contenuto.decode("utf8").splitlines()
+    if not righe:
+        return {}
+
+    intestazioni = [c.strip() for c in righe[0].split("\t")]
+    necessarie = {"denominazione", "partitaIva"}
+    if not necessarie.issubset(intestazioni):
+        print(
+            f"✗ il TSV deve avere almeno le colonne {sorted(necessarie)}.\n"
+            f"  Trovate: {intestazioni}"
+        )
+        return {}
+
+    imprese = {}
+    for riga in righe[1:]:
+        if not riga.strip():
+            continue
+        valori = dict(zip(intestazioni, [c.strip() for c in riga.split("\t")]))
+
+        piva = valori.get("partitaIva", "").replace("IT", "").strip()
+        denominazione = ripulisci(valori.get("denominazione", ""))
+
+        if not denominazione or not cifra_di_controllo_valida(piva):
+            continue
+
+        imprese[piva] = {
+            "partitaIva": piva,
+            "denominazione": denominazione,
+            "sede": {
+                "via": valori.get("via") or None,
+                "cap": valori.get("cap") or None,
+                "comune": valori.get("comune") or None,
+                "provincia": valori.get("provincia") or None,
+            },
+            "unitaLocali": [],
+        }
+
+    return imprese
+
+
 ESTRATTORI = {
     "elenco-imprese": estrai_elenco_imprese,
     "rete-vendita": estrai_rete_vendita,
+    "tabella": estrai_tabella,
 }
 
 

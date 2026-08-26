@@ -70,6 +70,17 @@ function leggiCsv(testo: string): Record<string, string>[] {
     .map((r) => Object.fromEntries(intestazioni.map((h, i) => [h, r[i] ?? ""])));
 }
 
+/**
+ * Un CAP italiano ha sempre cinque cifre. La sorgente lo ha passato per un
+ * tipo numerico e ha perso gli zeri iniziali in 848 comuni su 7904: Spigno
+ * Saturnia risulta "4020" invece di "04020". Si ricostruisce con certezza.
+ */
+function normalizzaCap(grezzo: string | undefined): string {
+  const cifre = (grezzo ?? "").replace(/\D/g, "");
+  if (cifre.length === 0 || cifre.length > 5) return "";
+  return cifre.padStart(5, "0");
+}
+
 /** L'Italia sta tutta dentro questo rettangolo, isole comprese. */
 const CONFINI = { latMin: 35.4, latMax: 47.2, lonMin: 6.5, lonMax: 18.7 };
 
@@ -201,11 +212,15 @@ async function main() {
       nome,
       codiceIstat,
       sigla,
-      riga.cap?.trim() ?? "",
+      normalizzaCap(riga.cap),
       Math.round(lat * 1e5) / 1e5,
       Math.round(lon * 1e5) / 1e5,
     ]);
   }
+
+  const capCorretti = righe.filter(
+    (riga) => (riga.cap ?? "").trim().length in { 1: 1, 2: 1, 3: 1, 4: 1 },
+  ).length;
 
   if (comuni.length < 7000) {
     console.error(
@@ -232,6 +247,9 @@ async function main() {
     `  → data/comuni.json (${comuni.length} comuni, ${Object.keys(province).length} province)`,
   );
 
+  if (capCorretti > 0) {
+    console.log(`  ${capCorretti} CAP con lo zero iniziale ripristinato`);
+  }
   if (riparati.length > 0) {
     console.log(
       `  ${riparati.length} coordinate senza punto decimale, ricostruite:`,

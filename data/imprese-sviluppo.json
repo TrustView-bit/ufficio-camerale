@@ -352,6 +352,18 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "00190560268",
+      "denominazione": "BRUSSI COSTRUZIONI S.R.L.",
+      "sede": {
+        "via": "VIA FOSCARINI 2/A",
+        "cap": null,
+        "comune": "Nervesa della Battaglia",
+        "provincia": "Treviso"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "01243290622",
       "denominazione": "C.E.M. S.R.L. COSTRUZIONI EL",
       "sedeTesto": "VIA PEZZE 9 - MONTESARCHIO",
@@ -728,6 +740,18 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "02685080844",
+      "denominazione": "COREPP SRL",
+      "sede": {
+        "via": "VIA ANTONIO RUSSELLO 5",
+        "cap": null,
+        "comune": "Favara",
+        "provincia": "Agrigento"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "00530910140",
       "denominazione": "CORVI & C. S.R.L.",
       "sede": {
@@ -759,6 +783,18 @@
       "sedeTesto": "VIA AC",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03274590284",
+      "denominazione": "COSTRUZIONI STRADALI MARTINI SILVESTRO S.R.L.",
+      "sede": {
+        "via": "VIA IV NOVEMBRE 1232",
+        "cap": null,
+        "comune": "Vo'",
+        "provincia": "Padova"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
     },
     {
       "partitaIva": "01710090620",
@@ -1117,6 +1153,18 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "03790280659",
+      "denominazione": "EUROSCAVI - S.N.C. DI FALCONE E FIGLIO",
+      "sede": {
+        "via": "CONTRADA PANTANITO 5",
+        "cap": null,
+        "comune": "Valva",
+        "provincia": "Salerno"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "01582510622",
       "denominazione": "F.G.C. GROUP SOCIETA' A RESPONSABILITA' LIMITATA",
       "sedeTesto": "VIA SANT'ANTONIO 55/A - LIMATOLA",
@@ -1317,6 +1365,18 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "01297860205",
+      "denominazione": "FRANZONI E BERTOLETTI - S.R.L.",
+      "sede": {
+        "via": "VIA LIGURIA 36",
+        "cap": null,
+        "comune": "San Giorgio Bigarello",
+        "provincia": "Mantova"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "01634960163",
       "denominazione": "FRATELLI CARRARA S.N.C. DI CARRARA & C.",
       "sede": {
@@ -1407,6 +1467,18 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "02196990366",
+      "denominazione": "G.S.P. COSTRUZIONI S.R.L.",
+      "sede": {
+        "via": "VIA GRAZIOSI 660",
+        "cap": null,
+        "comune": "San Cesario sul Panaro",
+        "provincia": "Modena"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "01552310623",
       "denominazione": "G.V. TRASPORTI S.R.L.",
       "sedeTesto": "CORSO EUROPA, 10/A APICE",
@@ -1477,6 +1549,18 @@
       "sedeTesto": "LOCALITA' VENEZIA SNC LIMATOLA",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02333050843",
+      "denominazione": "GDM COSTRUZIONI DI DI MARIA GAETANO S.A.S",
+      "sede": {
+        "via": "VIALE LEONARDO SCIASCIA 45",
+        "cap": null,
+        "comune": "Agrigento",
+        "provincia": "Agrigento"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
     },
     {
       "partitaIva": "05781080964",
@@ -2134,6 +2218,18 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "03040140265",
+      "denominazione": "LF COSTRUZIONI S.R.L.",
+      "sede": {
+        "via": "VIA LEONARDO DA VINCI 6",
+        "cap": null,
+        "comune": "Ponzano Veneto",
+        "provincia": "Treviso"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
     },
     {
       "partitaIva": "01617710627",
@@ -3608,6 +3704,18 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00786700237",
+      "denominazione": "VE.COS S.R.L.",
+      "sede": {
+        "via": "VIA CASALANDRI 877",
+        "cap": null,
+        "comune": "Isola Rizza",
+        "provincia": "Verona"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
+    },
+    {
       "partitaIva": "02469060137",
       "denominazione": "VERCELLONI SILVIA",
       "sede": {
@@ -3662,6 +3770,18 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02310630591",
+      "denominazione": "VIMA S.R.L.",
+      "sede": {
+        "via": "VIA ARACOELI 24",
+        "cap": null,
+        "comune": "Spigno Saturnia",
+        "provincia": "Latina"
+      },
+      "unitaLocali": [],
+      "origine": "elenco imprese di costruzioni"
     },
     {
       "partitaIva": "01922330343",

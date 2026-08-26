@@ -117,17 +117,19 @@ successivo, tutto si ricalcola da capo.
 
 ### Imprese di sviluppo
 
-`data/imprese-sviluppo.json` contiene 322 imprese reali con partita IVA vera e
+`data/imprese-sviluppo.json` contiene 332 imprese reali con partita IVA vera e
 127 unità locali, estratte da elenchi pubblici con
-`scripts/estrai-imprese-pdf.py`. Servono a provare la resa su dati veri invece
+`scripts/estrai-imprese.py`. Servono a provare la resa su dati veri invece
 che sui tre esempi inventati.
 
 ```bash
-python3 scripts/estrai-imprese-pdf.py <formato> <file.pdf> [origine]
+python3 scripts/estrai-imprese.py <formato> <file> [origine]
 ```
 
-Lo script conosce due disposizioni di colonne (`elenco-imprese`,
-`rete-vendita`) e **unisce** i record a quelli già presenti, con la partita IVA
+Lo script conosce due disposizioni di colonne nei PDF (`elenco-imprese`,
+`rete-vendita`) e un formato tabellare (`tabella`, un TSV con intestazione, per
+gli elenchi che non arrivano dentro un PDF; le sorgenti stanno in
+`data/sorgenti/`). **Unisce** i record a quelli già presenti, con la partita IVA
 come chiave: righe che condividono la stessa partita diventano unità locali
 della stessa impresa. Legge la tabella dalle coordinate del testo nella pagina,
 non dall'ordine dei frammenti, perché le celle del PDF vanno a capo e
@@ -153,8 +155,14 @@ bilingue con la barra (`Bolzano/Bozen`). Serve soprattutto agli indirizzi VIES,
 che arrivano tutti in maiuscolo: `"LARGO FRANCESCO RICHINI 6 \n20122 MILANO MI"`
 diventa via, CAP, comune e provincia riconosciuti.
 
+La sorgente dei comuni ha due difetti sistematici, entrambi corretti in fase
+di build e segnalati a schermo. Il **CAP** è passato per un tipo numerico e ha
+perso lo zero iniziale in 848 comuni su 7904 (Spigno Saturnia risulta `4020`
+invece di `04020`): un CAP italiano ha sempre cinque cifre, quindi si
+ricostruisce con certezza.
+
 Le coordinate del centro di ogni comune servono a centrare la mappa statica
-nelle schede. La sorgente ne sbaglia alcune: undici righe scrivono la
+nelle schede. Anche qui la sorgente ne sbaglia alcune: undici righe scrivono la
 coordinata senza punto decimale (`45581` invece di `45.581`) e vengono
 ricostruite in automatico, perché nessuna coordinata italiana supera 47,2 di
 latitudine; per Brescia, collocata 31 km a nord-est del centro città, c'è una
