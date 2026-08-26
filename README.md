@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Ufficio Camerale
 
-## Getting Started
+Portale italiano di verifica Partita IVA e consultazione dati camerali.
+Ricerca una P.IVA, un codice fiscale o una ragione sociale e ottieni una scheda
+azienda chiara e veloce.
 
-First, run the development server:
+> **Servizio indipendente.** Non affiliato a Camere di Commercio, InfoCamere o
+> Unioncamere. I dati provengono da fonti pubbliche.
+
+## Stato del progetto
+
+| Step | Contenuto | Stato |
+|---|---|---|
+| 1 | Scaffold, design token, layout | ✅ fatto |
+| 2 | Validazione P.IVA / CF + UI ricerca | ⬜ |
+| 3 | Provider VIES + `/verifica-partita-iva` | ⬜ |
+| 4 | Schema DB, cache, provider camerale | ⬜ |
+| 5 | Scheda azienda + SEO | ⬜ |
+| 6 | Descrizioni AI asincrone | ⬜ |
+| 7 | Rate limiting, pagine legali, test, deploy | ⬜ |
+
+## Stack
+
+- **Next.js 16** (App Router) + **TypeScript strict**
+- **Tailwind CSS v4** + **shadcn/ui** (preset radix-nova) + **lucide-react**
+- **next-themes** per il dark mode
+- **zod** per validare ogni input e ogni risposta esterna
+- In arrivo: Drizzle + Neon Postgres, Upstash Redis, `@anthropic-ai/sdk`
+
+## Requisiti
+
+Node.js 22 (vedi `.nvmrc`). Con nvm:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+cp .env.example .env.local
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Il sito è su http://localhost:3000, l'health check su `/api/health`.
 
-## Learn More
+## Comandi
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run dev     # server di sviluppo
+npm run build   # build di produzione
+npm run start   # avvia la build
+npm run lint    # ESLint
+npm run format  # Prettier su tutto il progetto
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Design token
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tutti i colori, i raggi e le ombre sono definiti **una sola volta** in
+[`src/app/globals.css`](src/app/globals.css), sia per il tema chiaro (`:root`)
+che per quello scuro (`.dark`). I componenti non devono mai contenere valori
+cromatici hardcodati: usa le utility Tailwind generate dai token
+(`bg-primary`, `text-accent`, `bg-success-subtle`, …).
 
-## Deploy on Vercel
+Convenzioni:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `--primary` — blu profondo istituzionale, azioni principali
+- `--accent` — teal/salvia, semantica di "verificato"
+- `--success` / `--warning` / `--danger` — **solo** stati reali (attiva, in
+  liquidazione, cessata, errori). Mai decorativi.
+- `.num` — attiva i numeri tabulari per P.IVA, REA, capitale sociale
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Aggiungere un provider dati (dallo step 4)
+
+I provider vivranno in `src/lib/providers/` e implementeranno tutti la stessa
+interfaccia `CompanyProvider`, così la UI non cambia mai al cambiare del
+fornitore:
+
+1. crea `src/lib/providers/<nome>.ts` che esporta un oggetto `CompanyProvider`;
+2. valida la risposta esterna con uno schema zod e mappala sul tipo `Company`;
+3. registra il provider nella factory in `src/lib/providers/index.ts`;
+4. aggiungi la sua variabile d'ambiente in `.env.example` e allo schema zod;
+5. seleziona il provider con `COMPANY_PROVIDER`.
+
+Ogni chiamata a pagamento va loggata nella tabella `api_calls` con il costo
+stimato, e il risultato salvato in Postgres per essere riusato.
+
+## Deploy su Vercel
+
+1. Importa il repository su Vercel (framework rilevato: Next.js).
+2. Configura le variabili d'ambiente di `.env.example` per Production e Preview.
+3. Collega Neon (o Vercel Postgres) e Upstash Redis dal marketplace di Vercel.
+4. Le migrazioni Drizzle vanno eseguite prima del deploy (`npm run db:migrate`).
+
+## Nota di licenza sui dati
+
+I termini di quasi tutti i provider di dati camerali limitano la
+**ripubblicazione** dei dati su un sito pubblico indicizzabile. Verifica il
+contratto del provider prima di attivare la cache permanente, la sitemap
+dinamica e il JSON-LD sulle schede azienda. VIES non ha questa restrizione.
