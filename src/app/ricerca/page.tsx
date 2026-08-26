@@ -130,7 +130,9 @@ function ValidQuery({
           </p>
           {isPartitaIva && (
             <Button asChild variant="outline" size="sm">
-              <Link href="/verifica-partita-iva">Verifica su VIES</Link>
+              <Link href={`/verifica-partita-iva?piva=${analysis.value}`}>
+                Verifica su VIES
+              </Link>
             </Button>
           )}
         </CardContent>

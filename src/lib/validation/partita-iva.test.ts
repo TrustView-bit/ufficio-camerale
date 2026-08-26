@@ -7,11 +7,11 @@ import {
   partitaIvaCheckDigit,
 } from "./partita-iva";
 
-// P.IVA reali, verificabili a mano con l'algoritmo di Luhn
+// P.IVA reali, confermate valide da VIES e verificabili a mano con Luhn
 const VALIDE = [
-  "00743110157", // Fiat / Stellantis Italia
-  "12485671007", // Enel
-  "00488410010", // Iveco
+  "00743110157", // Motorola Solutions Italia S.r.l.
+  "12485671007", // Openapi S.p.A.
+  "00488410010", // TIM S.p.A.
 ];
 
 describe("normalizePartitaIva", () => {
@@ -74,7 +74,7 @@ describe("isValidPartitaIva", () => {
   });
 
   it("rifiuta una cifra di controllo sbagliata", () => {
-    // stessa P.IVA di Fiat con l'ultima cifra alterata
+    // stessa P.IVA valida, con l'ultima cifra alterata
     expect(isValidPartitaIva("00743110158")).toBe(false);
     expect(isValidPartitaIva("00743110150")).toBe(false);
   });
