@@ -17,7 +17,7 @@ azienda chiara e veloce.
 | 4 | Schema DB, cache, provider camerale | ✅ dati mock; provider reale da collegare |
 | 5 | Scheda azienda + SEO | ✅ fatto (manca la mappa statica) |
 | 6 | Descrizioni AI asincrone | ⬜ |
-| 7 | Rate limiting, pagine legali, test, deploy | ⬜ |
+| 7 | Rate limiting, pagine legali, test | ✅ fatto (deploy da fare) |
 
 ## Stack
 
@@ -54,6 +54,7 @@ npm run start      # avvia la build
 npm run lint       # ESLint
 npm run typecheck  # TypeScript senza emettere output
 npm run test       # unit test (vitest)
+npm run test:e2e   # test end-to-end (playwright, su build di produzione)
 npm run format     # Prettier su tutto il progetto
 
 npm run db:generate  # genera una migrazione dallo schema Drizzle
@@ -144,6 +145,31 @@ Maps, Geoapify) richiede una chiave, e non ne è stata configurata nessuna. Al
 suo posto la barra dei link rapidi apre l'indirizzo su Google Maps. Per
 aggiungerla basta una chiave e un `<Image>` verso l'endpoint statico del
 fornitore scelto: nessuna modifica strutturale.
+
+## Limite di richieste
+
+Dieci ricerche al minuto e cento al giorno per indirizzo IP, applicate alle
+Route Handler in `src/lib/rate-limit/`. Con Upstash configurato il conteggio è
+condiviso fra le istanze; senza, si ripiega su un contatore in memoria che
+vale solo per il singolo processo — in sviluppo va bene, in produzione **non
+protegge davvero**.
+
+Se Redis è irraggiungibile il limite lascia passare: un contatore rotto non
+deve trasformarsi in un blocco totale del servizio. Le risposte portano le
+intestazioni `RateLimit-*` e, quando bloccano, un `Retry-After` e un messaggio
+che dice fra quanto riprovare.
+
+## Pagine legali
+
+Informativa privacy, termini, cookie e chi siamo sono scritte, non più
+segnaposto. **Non sono però definitive**: i dati identificativi del titolare
+del trattamento vivono in `src/lib/site-config.ts` e sono ancora da compilare.
+Finché restano tali, ogni pagina legale mostra un avviso ben visibile che si
+spegne da solo appena i campi vengono riempiti.
+
+I testi non sono stati esaminati da un legale. Vanno fatti rivedere prima di
+pubblicare, in particolare la base giuridica dichiarata (legittimo interesse) e
+la procedura di rettifica per le imprese individuali.
 
 ## Archivio, cache e costi
 

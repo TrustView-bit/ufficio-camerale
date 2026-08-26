@@ -1,0 +1,131 @@
+import { expect, test } from "@playwright/test";
+
+/** Partita IVA reale e valida, presente nel provider finto. */
+const PIVA = "00743110157";
+const DENOMINAZIONE = "Esempio Manifattura S.p.A.";
+
+test.describe("dalla ricerca alla scheda azienda", () => {
+  test("una Partita IVA valida porta alla scheda", async ({ page }) => {
+    await page.goto("/");
+
+    const campo = page.getByRole("searchbox", { name: /cerca un'azienda/i });
+    await campo.fill(PIVA);
+
+    // il riscontro appare senza premere nulla, appena il numero è completo
+    await expect(page.getByText(/formalmente valida/i)).toBeVisible();
+
+    await page.getByRole("button", { name: "Cerca", exact: true }).click();
+
+    await expect(page).toHaveURL(/\/azienda\/.*-00743110157$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(DENOMINAZIONE);
+    await expect(page.getByText("Attiva")).toBeVisible();
+  });
+
+  test("la scheda mostra i dati camerali", async ({ page }) => {
+    await page.goto(`/azienda/${PIVA}`);
+
+    await expect(page.getByRole("heading", { name: "Anagrafica" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: "Dati camerali" }),
+    ).toBeVisible();
+    await expect(page.getByText("25.62.00")).toBeVisible();
+    await expect(page.getByText("MI-1305487")).toBeVisible();
+  });
+
+  test("uno slug non canonico viene corretto", async ({ page }) => {
+    await page.goto(`/azienda/${PIVA}`);
+    await expect(page).toHaveURL(`/azienda/esempio-manifattura-s-p-a-${PIVA}`);
+  });
+
+  test("una Partita IVA con cifra di controllo errata viene respinta subito", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    await page
+      .getByRole("searchbox", { name: /cerca un'azienda/i })
+      .fill("00743110158");
+
+    await expect(page.getByText(/cifra di controllo non torna/i)).toBeVisible();
+
+    // premendo Cerca si resta in home: non parte nessuna richiesta
+    await page.getByRole("button", { name: "Cerca", exact: true }).click();
+    await expect(page).toHaveURL("/");
+  });
+
+  test("una Partita IVA inesistente dà una spiegazione, non un errore generico", async ({
+    page,
+  }) => {
+    await page.goto("/azienda/00000000000");
+
+    await expect(
+      page.getByRole("heading", {
+        name: /nessuna impresa con questa partita iva/i,
+      }),
+    ).toBeVisible();
+  });
+
+  test("gli esempi cliccabili funzionano", async ({ page }) => {
+    await page.goto("/");
+
+    await page.getByRole("button", { name: /Cerca 00743110157/ }).click();
+
+    await expect(page).toHaveURL(/\/azienda\//);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(DENOMINAZIONE);
+  });
+
+  test("le ricerche recenti restano fra una visita e l'altra", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("button", { name: /Cerca 00743110157/ }).click();
+    await expect(page).toHaveURL(/\/azienda\//);
+
+    await page.goto("/");
+    await expect(page.getByText("Ricerche recenti:")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: PIVA, exact: true }),
+    ).toBeVisible();
+  });
+});
+
+test.describe("verifica su VIES", () => {
+  test("il controllo formale avviene prima di interrogare il servizio", async ({
+    page,
+  }) => {
+    await page.goto("/verifica-partita-iva");
+
+    const campo = page.getByRole("searchbox", {
+      name: /partita iva da verificare/i,
+    });
+    await campo.fill("12345678901");
+
+    await expect(page.getByText(/cifra di controllo non torna/i)).toBeVisible();
+  });
+
+  test("la pagina spiega che cosa significa ciascun esito", async ({ page }) => {
+    await page.goto("/verifica-partita-iva");
+
+    await expect(
+      page.getByRole("heading", { name: /che cosa significa il risultato/i }),
+    ).toBeVisible();
+    await expect(page.getByText(/non è un esito negativo/i)).toBeVisible();
+  });
+});
+
+test.describe("pagine legali", () => {
+  test("sono raggiungibili dal piè di pagina", async ({ page }) => {
+    await page.goto("/");
+
+    await page.getByRole("link", { name: "Privacy" }).click();
+    await expect(
+      page.getByRole("heading", { name: "Informativa privacy" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText(/procedura|rettifica|cancellazione/i).first(),
+    ).toBeVisible();
+  });
+
+  test("il disclaimer di indipendenza è sempre visibile", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByText(/non è affiliato/i)).toBeVisible();
+  });
+});
