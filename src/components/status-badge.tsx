@@ -1,36 +1,20 @@
-import { CircleDashed, CircleDot, CircleSlash, TriangleAlert } from "lucide-react";
-import type { ComponentType } from "react";
-
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
 /** Stato attività di un'impresa nel Registro Imprese. */
 export type CompanyStatus = "attiva" | "inattiva" | "cessata" | "in-liquidazione";
 
-const STATUS: Record<
-  CompanyStatus,
-  { label: string; icon: ComponentType<{ className?: string }>; className: string }
-> = {
-  attiva: {
-    label: "Attiva",
-    icon: CircleDot,
-    className: "bg-success-subtle text-success border-success/25",
-  },
-  inattiva: {
-    label: "Inattiva",
-    icon: CircleDashed,
-    className: "bg-neutral-subtle text-muted-foreground border-border",
-  },
-  cessata: {
-    label: "Cessata",
-    icon: CircleSlash,
-    className: "bg-neutral-subtle text-muted-foreground border-border",
-  },
-  "in-liquidazione": {
-    label: "In liquidazione",
-    icon: TriangleAlert,
-    className: "bg-warning-subtle text-warning border-warning/25",
-  },
+/**
+ * Lo stato attività, scritto come su un registro: un piccolo quadro colorato
+ * e la parola in maiuscoletto. Niente pillola, niente fondo colorato — sono
+ * dati anagrafici, non notifiche di un'applicazione.
+ *
+ * Il colore non è mai l'unica informazione: la parola c'è sempre.
+ */
+const STATO: Record<CompanyStatus, { label: string; classe: string }> = {
+  attiva: { label: "Attiva", classe: "text-success" },
+  inattiva: { label: "Inattiva", classe: "text-muted-foreground" },
+  "in-liquidazione": { label: "In liquidazione", classe: "text-warning" },
+  cessata: { label: "Cessata", classe: "text-danger" },
 };
 
 export function StatusBadge({
@@ -40,12 +24,18 @@ export function StatusBadge({
   status: CompanyStatus;
   className?: string;
 }) {
-  const { label, icon: Icon, className: tone } = STATUS[status];
+  const { label, classe } = STATO[status];
 
   return (
-    <Badge variant="outline" className={cn("h-6 gap-1.5 px-2.5", tone, className)}>
-      <Icon className="size-3" aria-hidden />
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 text-xs font-medium tracking-[0.06em] uppercase",
+        classe,
+        className,
+      )}
+    >
+      <span className="size-1.5 shrink-0 bg-current" aria-hidden />
       {label}
-    </Badge>
+    </span>
   );
 }

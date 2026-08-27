@@ -1,15 +1,17 @@
-import { FileText, Info } from "lucide-react";
+import { Info } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { documentiPer, formatPrezzo } from "@/lib/documenti";
 
 /**
- * Documenti camerali ordinabili.
+ * I documenti camerali ordinabili, presentati come un listino: una riga per
+ * documento, prezzo a destra in cifre incolonnate. Niente riquadri, niente
+ * icona ripetuta accanto a ogni voce — non aggiungerebbe informazione.
  *
  * ⚠️ L'ordine NON è attivo: non c'è un fornitore collegato né un incasso, e i
- * prezzi sono segnaposto. I pulsanti sono disabilitati e l'avviso in cima lo
- * dice esplicitamente — un pulsante d'acquisto che sembra funzionante ma non
- * lo è sarebbe peggio di nessun pulsante.
+ * prezzi sono segnaposto. I pulsanti sono disabilitati e l'avviso lo dice —
+ * un pulsante d'acquisto che sembra funzionante ma non lo è sarebbe peggio di
+ * nessun pulsante.
  */
 export function DocumentiAcquistabili({ eSocieta }: { eSocieta: boolean }) {
   const documenti = documentiPer({ eSocieta });
@@ -29,33 +31,26 @@ export function DocumentiAcquistabili({ eSocieta }: { eSocieta: boolean }) {
         </span>
       </p>
 
-      <ul className="grid gap-3 sm:grid-cols-2">
+      <ul className="border-border divide-border bg-card shadow-card divide-y overflow-hidden rounded-xl border">
         {documenti.map((documento) => (
           <li
             key={documento.id}
-            className="border-border bg-card shadow-card flex flex-col gap-3 rounded-xl border p-4"
+            className="flex flex-wrap items-baseline gap-x-4 gap-y-2 px-4 py-3.5 sm:px-5"
           >
-            <div className="flex items-start gap-2.5">
-              <FileText
-                className="text-primary mt-0.5 size-4 shrink-0"
-                aria-hidden
-              />
-              <div>
-                <h3 className="text-sm font-semibold">{documento.nome}</h3>
-                <p className="text-muted-foreground mt-1 text-sm leading-relaxed">
-                  {documento.descrizione}
-                </p>
-              </div>
+            <div className="min-w-0 flex-1">
+              <h3 className="text-sm font-semibold">{documento.nome}</h3>
+              <p className="text-muted-foreground mt-0.5 text-sm leading-relaxed">
+                {documento.descrizione}
+              </p>
             </div>
 
-            <div className="mt-auto flex items-center justify-between gap-3">
-              <span className="num text-base font-semibold">
-                {formatPrezzo(documento.prezzo)}
-              </span>
-              <Button size="sm" variant="outline" disabled>
-                Ordina
-              </Button>
-            </div>
+            <span className="num w-24 text-right text-sm font-semibold tabular-nums">
+              {formatPrezzo(documento.prezzo)}
+            </span>
+
+            <Button size="sm" variant="outline" disabled className="shrink-0">
+              Ordina
+            </Button>
           </li>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-import { Building2, FlaskConical } from "lucide-react";
+import { Building2 } from "lucide-react";
 import Link from "next/link";
 
 import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
@@ -32,10 +32,9 @@ export function SchedaAzienda({ azienda }: { azienda: RisultatoAzienda }) {
         )}
         {azienda.fittizia && (
           <span
-            className="border-warning/25 bg-warning-subtle text-warning inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[11px]"
+            className="text-warning text-xs font-medium tracking-[0.06em] uppercase"
             title="Azienda del dataset dimostrativo: dati inventati"
           >
-            <FlaskConical className="size-2.5" aria-hidden />
             esempio
           </span>
         )}
