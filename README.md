@@ -183,7 +183,7 @@ quindi `Bozen` da solo non risolve (`Bolzano/Bozen` sì); e sei nomi sono usati
 da più comuni (Samone, Calliano, Livo, Peglio, Castro, Castello), per i quali
 senza provincia si restituisce `null` invece di scegliere a caso.
 
-## Navigazione per territorio
+## Navigazione per territorio e per settore
 
 Oltre alla ricerca c'è un archivio percorribile, che è ciò che rende le schede
 raggiungibili senza conoscerne la partita IVA:
@@ -194,6 +194,17 @@ raggiungibili senza conoscerne la partita IVA:
 /aziende/lombardia/bergamo                comuni + anteprima
 /aziende/lombardia/bergamo/treviglio      aziende del comune
 ```
+
+Lo stesso vale per i settori:
+
+```
+/attivita                                 divisioni ATECO 2025
+/attivita/62-attivita-di-programmazione   aziende della divisione
+```
+
+Le due direzioni si incrociano: la pagina di un settore elenca le province in
+cui quelle aziende hanno sede, e il codice ATECO di una scheda è un
+collegamento al proprio settore.
 
 Ogni livello ha briciole di navigazione con dati strutturati `BreadcrumbList`,
 e ogni scheda azienda chiude con «Altre aziende a …»: senza collegamenti
@@ -307,6 +318,12 @@ prezzi sono segnaposto e l'ordine non è attivo**: non c'è un fornitore
 collegato né un incasso. I pulsanti sono disabilitati e la sezione lo dichiara
 apertamente — un pulsante d'acquisto che sembra funzionante ma non lo è
 sarebbe peggio di nessun pulsante.
+
+### I test non toccano l'API a pagamento
+
+`playwright.config.ts` impone `COMPANY_PROVIDER=mock` e svuota `DATABASE_URL`
+al server dei test. Senza, ogni esecuzione della suite farebbe decine di
+chiamate a pagamento e dipenderebbe da dati che cambiano.
 
 ## Limite di richieste
 

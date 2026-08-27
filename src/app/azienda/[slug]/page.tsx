@@ -18,7 +18,7 @@ import {
 import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { descriviAteco } from "@/lib/ateco";
+import { descriviAteco, slugAteco } from "@/lib/ateco";
 import { elencoAziende, lookupCompany } from "@/lib/companies";
 import { env } from "@/lib/env";
 import {
@@ -340,12 +340,23 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
       valore: (
         <>
           <span className="num">{company.atecoPrimario}</span>
-          {descrizioneAteco && (
-            <span className="text-muted-foreground font-normal">
-              {" "}
-              — {descrizioneAteco}
-            </span>
-          )}
+          {descrizioneAteco &&
+            (risolto ? (
+              <>
+                {" — "}
+                <Link
+                  href={`/attivita/${slugAteco(risolto.codice, risolto.descrizione)}`}
+                  className="text-primary font-normal hover:underline"
+                >
+                  {descrizioneAteco}
+                </Link>
+              </>
+            ) : (
+              <span className="text-muted-foreground font-normal">
+                {" "}
+                — {descrizioneAteco}
+              </span>
+            ))}
           {risolto && !risolto.esatta && (
             <span className="text-muted-foreground mt-1 block text-xs font-normal">
               Descrizione del livello superiore ({risolto.codice}): la

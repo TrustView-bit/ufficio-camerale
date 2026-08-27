@@ -30,5 +30,22 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 240_000,
     stdout: "ignore",
+
+    /**
+     * I test girano SEMPRE sul provider dimostrativo, mai su quello reale.
+     *
+     * Due motivi, entrambi decisivi: ogni esecuzione della suite chiamerebbe
+     * un'API a pagamento — decine di chiamate per volta — e i test
+     * dipenderebbero da dati che cambiano, diventando fragili senza motivo.
+     *
+     * Le variabili passate qui vincono su quelle di .env.local. `DATABASE_URL`
+     * vuota vale come assente, quindi non si tocca nemmeno l'archivio.
+     */
+    env: {
+      COMPANY_PROVIDER: "mock",
+      DATABASE_URL: "",
+      UPSTASH_REDIS_REST_URL: "",
+      UPSTASH_REDIS_REST_TOKEN: "",
+    },
   },
 });

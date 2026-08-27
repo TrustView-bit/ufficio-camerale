@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Building2, CircleAlert, SearchX } from "lucide-react";
+import { CircleAlert, SearchX } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
 import { SearchForm } from "@/components/search/search-form";
-import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { cercaAziende } from "@/lib/companies";
-import type { EsitoRicerca, RisultatoAzienda } from "@/lib/providers/types";
-import { buildAziendaSlug } from "@/lib/slug";
+import type { EsitoRicerca } from "@/lib/providers/types";
 import { analyzeQuery, QUERY_KIND_TEXT } from "@/lib/validation";
 
 /** Quante schede per pagina. */
@@ -170,7 +169,7 @@ function Risultati({
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {esito.risultati.map((azienda) => (
           <li key={azienda.partitaIva}>
-            <SchedaRisultato azienda={azienda} />
+            <SchedaAzienda azienda={azienda} />
           </li>
         ))}
       </ul>
@@ -182,35 +181,6 @@ function Risultati({
         provincia={provincia}
       />
     </div>
-  );
-}
-
-function SchedaRisultato({ azienda }: { azienda: RisultatoAzienda }) {
-  const luogo = [azienda.comune, azienda.provincia && `(${azienda.provincia})`]
-    .filter(Boolean)
-    .join(" ");
-
-  return (
-    <Link
-      href={`/azienda/${buildAziendaSlug(azienda.denominazione, azienda.partitaIva)}`}
-      className="border-border bg-card shadow-card ease-ui hover:border-primary/40 flex h-full flex-col gap-2 rounded-xl border p-4 transition-colors duration-150"
-    >
-      <div className="flex items-start gap-2">
-        <Building2 className="text-primary mt-0.5 size-4 shrink-0" aria-hidden />
-        <h2 className="text-sm leading-snug font-semibold text-balance">
-          {azienda.denominazione}
-        </h2>
-      </div>
-
-      <p className="num text-muted-foreground text-xs">{azienda.partitaIva}</p>
-
-      <div className="mt-auto flex flex-wrap items-center gap-2 pt-1">
-        {luogo && <span className="text-muted-foreground text-xs">{luogo}</span>}
-        {azienda.statoAttivita !== "sconosciuto" && (
-          <StatusBadge status={azienda.statoAttivita as CompanyStatus} />
-        )}
-      </div>
-    </Link>
   );
 }
 

@@ -187,3 +187,38 @@ export const ATECO_META = {
   fonteRaccordo: raccordoJson.fonte,
   scaricato: strutturaJson.scaricato,
 } as const;
+
+/**
+ * Indirizzo leggibile di un settore: "62-attivita-di-programmazione".
+ * Il codice resta in testa perché è l'identificatore stabile — la
+ * descrizione può cambiare fra una revisione Istat e l'altra.
+ */
+export function slugAteco(codice: string, descrizione: string): string {
+  const nome = descrizione
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60)
+    .replace(/-+$/g, "");
+
+  const pulito = codice.replace(/\./g, "-");
+  return nome ? `${pulito}-${nome}` : pulito;
+}
+
+/** Ricava il codice dall'inizio di uno slug di settore. */
+export function codiceDaSlugAteco(slug: string): string | null {
+  const trovato = /^([0-9]{1,2}(?:-[0-9]{1,2}){0,2})(?:-|$)/.exec(slug);
+  if (!trovato) return null;
+
+  return normalizzaCodiceAteco(trovato[1]!.replace(/-/g, "."));
+}
+
+/** Tutte le divisioni ATECO 2025, cioè i codici a due cifre. */
+export function divisioni(): { codice: string; titolo: string }[] {
+  return Object.entries(VOCI)
+    .filter(([codice, voce]) => voce.livello === 2 && /^\d{2}$/.test(codice))
+    .map(([codice, voce]) => ({ codice, titolo: voce.titolo }))
+    .sort((a, b) => a.codice.localeCompare(b.codice));
+}

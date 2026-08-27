@@ -3,8 +3,11 @@ import { describe, expect, it } from "vitest";
 import {
   antenatoComune,
   codici2022Di,
+  codiceDaSlugAteco,
   descriviAteco,
+  divisioni,
   normalizzaCodiceAteco,
+  slugAteco,
 } from "./ateco";
 
 describe("normalizzaCodiceAteco", () => {
@@ -173,5 +176,47 @@ describe("codici2022Di", () => {
 
   it("restituisce un elenco vuoto per un codice sconosciuto", () => {
     expect(codici2022Di("04.99.99")).toEqual([]);
+  });
+});
+
+describe("indirizzi dei settori", () => {
+  it("mette il codice in testa allo slug", () => {
+    expect(slugAteco("62", "Attività di programmazione informatica")).toBe(
+      "62-attivita-di-programmazione-informatica",
+    );
+    expect(slugAteco("62.10.00", "Programmazione")).toBe("62-10-00-programmazione");
+  });
+
+  it("ritrova il codice dallo slug", () => {
+    expect(codiceDaSlugAteco("62-attivita-di-programmazione-informatica")).toBe(
+      "62",
+    );
+    expect(codiceDaSlugAteco("62-10-00-programmazione")).toBe("62.10.00");
+    expect(codiceDaSlugAteco("62")).toBe("62");
+  });
+
+  it("rifiuta uno slug che non comincia con un codice", () => {
+    expect(codiceDaSlugAteco("programmazione")).toBeNull();
+    expect(codiceDaSlugAteco("")).toBeNull();
+  });
+
+  it("sopravvive al viaggio di andata e ritorno", () => {
+    for (const codice of ["01", "62", "62.10", "62.10.00"]) {
+      const descritto = descriviAteco(codice)!;
+      expect(codiceDaSlugAteco(slugAteco(codice, descritto.descrizione))).toBe(
+        codice,
+      );
+    }
+  });
+});
+
+describe("divisioni", () => {
+  it("elenca le divisioni a due cifre", () => {
+    const elenco = divisioni();
+    expect(elenco.length).toBeGreaterThan(70);
+    expect(elenco.every((d) => /^\d{2}$/.test(d.codice))).toBe(true);
+    expect(elenco.map((d) => d.codice)).toContain("62");
+    // la divisione 04 non esiste in ATECO 2025
+    expect(elenco.map((d) => d.codice)).not.toContain("04");
   });
 });

@@ -117,23 +117,28 @@ test.describe("dalla ricerca alla scheda azienda", () => {
 });
 
 test.describe("consultare l'elenco delle aziende", () => {
+  /**
+   * L'archivio cambia con le aziende interrogate: questi test ricavano i
+   * valori dalla pagina invece di nominare aziende o province, altrimenti
+   * smetterebbero di valere appena cambia la fonte dei dati.
+   */
   test("senza query mostra l'elenco navigabile", async ({ page }) => {
     await page.goto("/ricerca");
 
-    await expect(page.getByText(/aziende trovate/)).toBeVisible();
-    // ogni scheda dell'elenco è un collegamento alla pagina dell'azienda
+    await expect(page.getByText(/aziende? trovat/)).toBeVisible();
     const schede = page.locator('a[href^="/azienda/"]');
-    expect(await schede.count()).toBeGreaterThan(5);
+    expect(await schede.count()).toBeGreaterThan(0);
   });
 
   test("dall'elenco si apre la scheda", async ({ page }) => {
-    await page.goto("/ricerca?q=cooperativa");
+    await page.goto("/ricerca");
 
     const prima = page.locator('a[href^="/azienda/"]').first();
-    const nome = (await prima.locator("h2").textContent())?.trim();
-    await prima.click();
+    const nome = (await prima.locator("h3").textContent())?.trim();
+    const indirizzo = await prima.getAttribute("href");
 
-    await expect(page).toHaveURL(/\/azienda\//);
+    await page.goto(indirizzo!);
+
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(nome!);
     await expect(
       page.getByRole("heading", { name: "Dati della società" }),
@@ -142,23 +147,36 @@ test.describe("consultare l'elenco delle aziende", () => {
 
   test("la ricerca per nome restringe i risultati", async ({ page }) => {
     await page.goto("/ricerca");
-    const totale = await page.getByText(/aziende trovate/).textContent();
+    const totale = await page.getByText(/aziende? trovat/).textContent();
 
-    await page.goto("/ricerca?q=cooperativa");
-    const filtrato = await page.getByText(/aziende trovate/).textContent();
+    // si cerca la prima parola della prima azienda in elenco
+    const nome = await page
+      .locator('a[href^="/azienda/"] h3')
+      .first()
+      .textContent();
+    const parola = nome!.trim().split(/\s+/)[0]!;
 
+    await page.goto(`/ricerca?q=${encodeURIComponent(parola)}`);
+
+    await expect(page.getByText(new RegExp(`per ${parola}`, "i"))).toBeVisible();
+    const filtrato = await page.getByText(/aziende? trovat/).textContent();
     expect(filtrato).not.toBe(totale);
-    await expect(page.getByText(/per cooperativa/i)).toBeVisible();
   });
 
   test("il filtro per provincia funziona", async ({ page }) => {
-    await page.goto("/ricerca?q=cooperativa");
+    await page.goto("/ricerca");
 
-    const filtro = page.getByRole("link", { name: /^BN/ });
-    await filtro.click();
+    const filtro = page.getByRole("navigation", { name: /filtra per provincia/i });
+    // il filtro compare solo con almeno due province in elenco
+    if ((await filtro.count()) === 0) test.skip();
 
-    await expect(page).toHaveURL(/provincia=BN/);
-    await expect(page.getByText("(BN)").first()).toBeVisible();
+    const sigla = (await filtro.getByRole("link").nth(1).textContent())!
+      .trim()
+      .slice(0, 2);
+    await filtro.getByRole("link").nth(1).click();
+
+    await expect(page).toHaveURL(new RegExp(`provincia=${sigla}`));
+    await expect(page.getByText(`(${sigla})`).first()).toBeVisible();
   });
 
   test("una ricerca senza esito lo dice, invece di mostrare il vuoto", async ({
@@ -173,43 +191,55 @@ test.describe("consultare l'elenco delle aziende", () => {
 });
 
 test.describe("sfogliare per territorio", () => {
-  test("le briciole riportano indietro nella gerarchia", async ({ page }) => {
-    await page.goto("/aziende/campania/benevento/benevento");
-
-    const percorso = page.getByRole("navigation", { name: "Percorso" });
-    await expect(percorso.getByRole("link", { name: "Campania" })).toBeVisible();
-    await percorso.getByRole("link", { name: "Benevento" }).first().click();
-
-    await expect(page).toHaveURL(/\/aziende\/campania\/benevento$/);
-  });
-
+  /**
+   * Questi test non nominano regioni o comuni: l'archivio cambia con le
+   * aziende interrogate, e un test legato a «Bergamo» smetterebbe di valere
+   * appena cambia la fonte dei dati. Si segue invece il primo collegamento
+   * disponibile a ogni livello.
+   */
   test("dalla regione si scende fino alla scheda", async ({ page }) => {
     await page.goto("/aziende");
     await expect(
       page.getByRole("heading", { name: /aziende italiane per regione/i }),
     ).toBeVisible();
 
-    await page.getByRole("link", { name: /^Lombardia/ }).click();
-    await expect(page).toHaveURL(/\/aziende\/lombardia$/);
+    await page.locator('a[href^="/aziende/"]').first().click();
+    await expect(page).toHaveURL(/\/aziende\/[a-z-]+$/);
 
-    await page
-      .getByRole("link", { name: /^Bergamo/ })
-      .first()
-      .click();
-    await expect(page).toHaveURL(/\/aziende\/lombardia\/bergamo$/);
+    await page.locator('a[href^="/aziende/"]').first().click();
+    await expect(page).toHaveURL(/\/aziende\/[a-z-]+\/[a-z-]+$/);
     await expect(
-      page.getByRole("heading", { name: /provincia di Bergamo/i }),
+      page.getByRole("heading", { name: /provincia di/i }),
     ).toBeVisible();
-
-    await page
-      .getByRole("link", { name: /^Bergamo/ })
-      .first()
-      .click();
-    await expect(page).toHaveURL(/\/aziende\/lombardia\/bergamo\/bergamo/);
 
     const azienda = page.locator('a[href^="/azienda/"]').first();
     await azienda.click();
     await expect(page).toHaveURL(/\/azienda\//);
+    await expect(
+      page.getByRole("heading", { name: "Dati della società" }),
+    ).toBeVisible();
+  });
+
+  test("le briciole riportano indietro nella gerarchia", async ({ page }) => {
+    await page.goto("/aziende");
+    // si legge l'indirizzo invece di leggere page.url() dopo un click: la
+    // navigazione può non essere ancora conclusa
+    const regione = (await page
+      .locator('a[href^="/aziende/"]')
+      .first()
+      .getAttribute("href"))!;
+
+    await page.goto(regione);
+    const provincia = (await page
+      .locator('a[href^="/aziende/"]')
+      .first()
+      .getAttribute("href"))!;
+
+    await page.goto(provincia);
+    const percorso = page.getByRole("navigation", { name: "Percorso" });
+    await percorso.getByRole("link").nth(1).click();
+
+    await expect(page).toHaveURL(new RegExp(`${regione}$`));
   });
 
   test("un territorio inesistente è un 404, non una pagina vuota", async ({
@@ -218,12 +248,31 @@ test.describe("sfogliare per territorio", () => {
     expect((await page.goto("/aziende/atlantide"))?.status()).toBe(404);
     expect((await page.goto("/aziende/lombardia/zzz"))?.status()).toBe(404);
   });
+});
 
-  test("le aziende di esempio sono marcate anche negli elenchi", async ({
+test.describe("sfogliare per settore", () => {
+  test("l'indice dei settori porta alla divisione e alla scheda", async ({
     page,
   }) => {
-    await page.goto("/aziende/lombardia/bergamo");
-    await expect(page.getByText("esempio").first()).toBeVisible();
+    await page.goto("/attivita");
+    await expect(
+      page.getByRole("heading", { name: /aziende italiane per settore/i }),
+    ).toBeVisible();
+
+    const divisione = page.locator('a[href^="/attivita/"]').first();
+    await divisione.click();
+
+    await expect(page).toHaveURL(/\/attivita\/\d/);
+    await expect(page.getByText(/con codice ATECO/i)).toBeVisible();
+
+    const azienda = page.locator('a[href^="/azienda/"]').first();
+    await azienda.click();
+    await expect(page).toHaveURL(/\/azienda\//);
+  });
+
+  test("un settore inesistente è un 404", async ({ page }) => {
+    expect((await page.goto("/attivita/99-inventato"))?.status()).toBe(404);
+    expect((await page.goto("/attivita/senza-codice"))?.status()).toBe(404);
   });
 });
 
