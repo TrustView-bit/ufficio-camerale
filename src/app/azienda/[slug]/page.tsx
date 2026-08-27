@@ -3,10 +3,12 @@ import { FlaskConical, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
+import { AziendeSimili } from "@/components/azienda/aziende-simili";
 import { DocumentiAcquistabili } from "@/components/azienda/documenti-acquistabili";
 import { FonteDati } from "@/components/azienda/fonte-dati";
 import { MappaStatica } from "@/components/azienda/mappa-statica";
 import { QuickLinks } from "@/components/azienda/quick-links";
+import { Briciole } from "@/components/elenco/briciole";
 import {
   BoxDati,
   type Riga,
@@ -16,7 +18,7 @@ import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { descriviAteco } from "@/lib/ateco";
-import { lookupCompany } from "@/lib/companies";
+import { elencoAziende, lookupCompany } from "@/lib/companies";
 import { env } from "@/lib/env";
 import {
   anniDi,
@@ -27,8 +29,14 @@ import {
   mascheraCodiceFiscale,
   toSitoHref,
 } from "@/lib/format";
-import { normalizzaComune } from "@/lib/geo";
+import {
+  normalizzaComune,
+  regioneDiSigla,
+  siglaToProvincia,
+  slugTerritorio,
+} from "@/lib/geo";
 import type { CompanyData } from "@/lib/providers/types";
+import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
 import { buildAziendaSlug, parsePartitaIvaFromSlug } from "@/lib/slug";
 
 /** Le schede si rigenerano al massimo una volta all'ora. */
@@ -70,8 +78,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: company.denominazione,
     description: descrizione,
     alternates: { canonical: url },
-    // una scheda inventata non deve finire nei motori di ricerca
-    robots: company.fittizia ? { index: false, follow: false } : undefined,
+    // né una scheda inventata né l'intero archivio dimostrativo devono
+    // finire nei motori di ricerca
+    robots: company.fittizia
+      ? { index: false, follow: false }
+      : ROBOTS_SE_DIMOSTRATIVO,
     openGraph: {
       type: "profile",
       title: company.denominazione,
@@ -101,6 +112,25 @@ export default async function AziendaPage({ params }: Props) {
 
   const eSocieta = !/\(D\.I\.\)|ditta individuale/i.test(company.denominazione);
 
+  const sigla = company.sede?.provincia ?? null;
+  const regione = sigla ? regioneDiSigla(sigla) : null;
+  const comune = company.sede?.comune ?? null;
+
+  // altre aziende dello stesso comune, escludendo quella che si sta leggendo
+  const vicine = comune
+    ? await elencoAziende({ provincia: sigla ?? undefined, comune }, { limite: 7 })
+    : null;
+  const simili = (vicine?.risultati ?? [])
+    .filter((azienda) => azienda.partitaIva !== company.partitaIva)
+    .slice(0, 6);
+
+  const percorsoComune =
+    regione && sigla && comune
+      ? `/aziende/${slugTerritorio(regione)}/${slugTerritorio(
+          siglaToProvinciaSicura(sigla),
+        )}/${slugTerritorio(comune)}`
+      : null;
+
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <script
@@ -109,6 +139,26 @@ export default async function AziendaPage({ params }: Props) {
       />
 
       {company.fittizia && <AvvisoDatiFittizi />}
+
+      {regione && sigla && (
+        <div className="mb-5">
+          <Briciole
+            voci={[
+              { nome: regione, href: `/aziende/${slugTerritorio(regione)}` },
+              {
+                nome: siglaToProvinciaSicura(sigla),
+                href: `/aziende/${slugTerritorio(regione)}/${slugTerritorio(
+                  siglaToProvinciaSicura(sigla),
+                )}`,
+              },
+              ...(comune && percorsoComune
+                ? [{ nome: comune, href: percorsoComune }]
+                : []),
+              { nome: company.denominazione },
+            ]}
+          />
+        </div>
+      )}
 
       <Intestazione company={company} />
 
@@ -126,6 +176,15 @@ export default async function AziendaPage({ params }: Props) {
         <UnitaLocali company={company} />
         <Mappa company={company} />
         <DocumentiAcquistabili eSocieta={eSocieta} />
+        <AziendeSimili
+          titolo={comune ? `Altre aziende a ${comune}` : "Altre aziende"}
+          aziende={simili}
+          vediTutte={
+            percorsoComune && comune
+              ? { href: percorsoComune, testo: `Tutte le aziende a ${comune}` }
+              : undefined
+          }
+        />
       </div>
     </div>
   );
@@ -417,4 +476,9 @@ function jsonLd(company: CompanyData) {
         }
       : undefined,
   };
+}
+
+/** Il nome esteso di una provincia, con la sigla come ripiego. */
+function siglaToProvinciaSicura(sigla: string): string {
+  return siglaToProvincia(sigla) ?? sigla;
 }

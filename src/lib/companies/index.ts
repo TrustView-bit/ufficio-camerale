@@ -5,7 +5,13 @@ import { getDb } from "@/lib/db";
 import { env } from "@/lib/env";
 import { getCompanyProvider } from "@/lib/providers";
 
-import type { EsitoRicerca, OpzioniRicerca } from "@/lib/providers/types";
+import type {
+  EsitoElenco,
+  EsitoRicerca,
+  FiltriElenco,
+  OpzioniRicerca,
+  VoceAggregata,
+} from "@/lib/providers/types";
 
 import { getCompany, type CompanyLookup } from "./repository";
 
@@ -47,4 +53,32 @@ export async function cercaAziende(
   if (!provider.cercaPerNome) return null;
 
   return provider.cercaPerNome(query, opzioni);
+}
+
+/**
+ * Elenco filtrato per territorio o settore.
+ *
+ * Restituisce null se il fornitore non sa enumerare il proprio archivio: le
+ * API a pagamento non lo permettono, e in produzione queste pagine andranno
+ * costruite sui dati già salvati in Postgres.
+ */
+export async function elencoAziende(
+  filtri: FiltriElenco,
+  opzioni: OpzioniRicerca = {},
+): Promise<EsitoElenco | null> {
+  const provider = getCompanyProvider();
+  if (!provider.elenco) return null;
+
+  return provider.elenco(filtri, opzioni);
+}
+
+/** Conteggi per costruire i collegamenti al livello successivo. */
+export async function aggregaAziende(
+  filtri: FiltriElenco,
+  per: "regione" | "provincia" | "comune" | "ateco",
+): Promise<VoceAggregata[]> {
+  const provider = getCompanyProvider();
+  if (!provider.aggrega) return [];
+
+  return provider.aggrega(filtri, per);
 }

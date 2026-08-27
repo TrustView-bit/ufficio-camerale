@@ -81,6 +81,29 @@ export type RisultatoAzienda = {
   comune: string | null;
   provincia: string | null;
   statoAttivita: StatoAttivita;
+  /** true per le aziende del dataset dimostrativo. */
+  fittizia?: boolean;
+};
+
+/** Filtri delle pagine di elenco: territorio e settore. */
+export type FiltriElenco = {
+  regione?: string;
+  /** Sigla della provincia. */
+  provincia?: string;
+  comune?: string;
+  /** Codice ATECO, confrontato per prefisso: "62" prende tutta la divisione. */
+  ateco?: string;
+};
+
+/** Una voce di raggruppamento, con quante aziende contiene. */
+export type VoceAggregata = {
+  chiave: string;
+  quante: number;
+};
+
+export type EsitoElenco = {
+  totale: number;
+  risultati: RisultatoAzienda[];
 };
 
 export type EsitoRicerca = {
@@ -118,6 +141,21 @@ export interface CompanyProvider {
    * come se non esistesse nulla.
    */
   cercaPerNome?(query: string, opzioni?: OpzioniRicerca): Promise<EsitoRicerca>;
+
+  /**
+   * Elenco filtrato per territorio o settore, per le pagine di navigazione.
+   *
+   * Facoltativa come la ricerca: un'API a pagamento non lascia enumerare il
+   * proprio archivio, quindi in produzione queste pagine si costruiranno sui
+   * dati già salvati in Postgres, non interrogando il fornitore.
+   */
+  elenco?(filtri: FiltriElenco, opzioni?: OpzioniRicerca): Promise<EsitoElenco>;
+
+  /** Conteggi per costruire i collegamenti al livello successivo. */
+  aggrega?(
+    filtri: FiltriElenco,
+    per: "regione" | "provincia" | "comune" | "ateco",
+  ): Promise<VoceAggregata[]>;
 }
 
 export const PROVIDER_UNAVAILABLE_MESSAGE: Record<

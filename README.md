@@ -183,6 +183,34 @@ quindi `Bozen` da solo non risolve (`Bolzano/Bozen` sì); e sei nomi sono usati
 da più comuni (Samone, Calliano, Livo, Peglio, Castro, Castello), per i quali
 senza provincia si restituisce `null` invece di scegliere a caso.
 
+## Navigazione per territorio
+
+Oltre alla ricerca c'è un archivio percorribile, che è ciò che rende le schede
+raggiungibili senza conoscerne la partita IVA:
+
+```
+/aziende                                  regioni
+/aziende/lombardia                        province
+/aziende/lombardia/bergamo                comuni + anteprima
+/aziende/lombardia/bergamo/treviglio      aziende del comune
+```
+
+Ogni livello ha briciole di navigazione con dati strutturati `BreadcrumbList`,
+e ogni scheda azienda chiude con «Altre aziende a …»: senza collegamenti
+interni una scheda è un vicolo cieco.
+
+`elenco()` e `aggrega()` sono metodi **facoltativi** di `CompanyProvider`. Un
+fornitore a pagamento non lascia enumerare il proprio archivio, quindi in
+produzione queste pagine andranno costruite sui dati già salvati in Postgres,
+non interrogando il fornitore.
+
+### Indicizzazione legata alla fonte
+
+`src/lib/seo.ts` espone una regola sola: **finché `COMPANY_PROVIDER` è `mock`,
+nessuna pagina costruita sui dati aziendali viene indicizzata.** Sono dati
+dimostrativi, e non devono finire nei motori di ricerca. Collegando un
+fornitore reale l'indicizzazione si attiva da sé.
+
 ## Ricerca e consultazione
 
 `/ricerca` è insieme pagina dei risultati ed elenco navigabile: senza query

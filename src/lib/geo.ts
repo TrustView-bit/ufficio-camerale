@@ -58,15 +58,58 @@ export function chiaveComune(nome: string): string {
  * "Bozen" da solo non risolve — risolve "Bolzano/Bozen", che è la forma in cui
  * le fonti ufficiali lo scrivono.
  */
-function chiaviDi(nome: string): string[] {
-  const chiavi = new Set<string>([chiaveComune(nome)]);
+/**
+ * Le preposizioni che l'uso corrente lascia cadere: il nome ufficiale è
+ * "Reggio nell'Emilia", ma chiunque scrive "Reggio Emilia".
+ */
+const CONNETTIVI = new Set([
+  "di",
+  "de",
+  "del",
+  "dello",
+  "della",
+  "dei",
+  "degli",
+  "delle",
+  "nel",
+  "nell",
+  "nella",
+  "sul",
+  "sull",
+  "sulla",
+  "in",
+  "a",
+  "al",
+  "allo",
+  "alla",
+  "d",
+  "l",
+  "lo",
+  "la",
+  "il",
+]);
 
-  if (nome.includes("/")) {
-    for (const parte of nome.split("/")) {
-      const chiave = chiaveComune(parte);
-      if (chiave) chiavi.add(chiave);
-    }
-  }
+/** Variante del nome senza i connettivi: "reggio nell emilia" → "reggio emilia". */
+function senzaConnettivi(chiave: string): string {
+  return chiave
+    .split(" ")
+    .filter((parola, indice) => indice === 0 || !CONNETTIVI.has(parola))
+    .join(" ");
+}
+
+function chiaviDi(nome: string): string[] {
+  const chiavi = new Set<string>();
+
+  const aggiungi = (testo: string) => {
+    const chiave = chiaveComune(testo);
+    if (!chiave) return;
+    chiavi.add(chiave);
+    // così "Reggio Emilia" trova "Reggio nell'Emilia"
+    chiavi.add(senzaConnettivi(chiave));
+  };
+
+  aggiungi(nome);
+  if (nome.includes("/")) for (const parte of nome.split("/")) aggiungi(parte);
 
   return [...chiavi];
 }
@@ -351,6 +394,105 @@ export function riconosciComuneInCoda(indirizzo: string): {
         comune,
       };
     }
+  }
+
+  return null;
+}
+
+/* ---------------------------------------------------------------------------
+   Navigazione territoriale: regione → provincia → comune.
+   Gli slug servono agli indirizzi delle pagine di elenco.
+   --------------------------------------------------------------------------- */
+
+export type VoceTerritorio = { nome: string; slug: string };
+
+/** Slug di un nome geografico: "Valle d'Aosta/Vallée d'Aoste" → "valle-d-aosta". */
+export function slugTerritorio(nome: string): string {
+  const primo = nome.split("/")[0] ?? nome;
+  return primo
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+const REGIONI = (() => {
+  const nomi = new Map<string, string>();
+  for (const provincia of Object.values(PROVINCE)) {
+    if (provincia.regione)
+      nomi.set(slugTerritorio(provincia.regione), provincia.regione);
+  }
+  return [...nomi.entries()]
+    .map(([slug, nome]) => ({ slug, nome }))
+    .sort((a, b) => a.nome.localeCompare(b.nome, "it"));
+})();
+
+/** Tutte le regioni italiane, in ordine alfabetico. */
+export function regioni(): VoceTerritorio[] {
+  return REGIONI;
+}
+
+export function regioneDaSlug(slug: string): string | null {
+  return REGIONI.find((regione) => regione.slug === slug)?.nome ?? null;
+}
+
+/** Regione di appartenenza di una provincia, dalla sua sigla. */
+export function regioneDiSigla(sigla: string): string | null {
+  return PROVINCE[sigla.trim().toUpperCase()]?.regione || null;
+}
+
+/** Le province di una regione, con nome e slug. */
+export function provinceDiRegione(
+  regione: string,
+): (VoceTerritorio & { sigla: string })[] {
+  return Object.entries(PROVINCE)
+    .filter(([, provincia]) => provincia.regione === regione)
+    .map(([sigla, provincia]) => ({
+      sigla,
+      nome: provincia.nome,
+      slug: slugTerritorio(provincia.nome),
+    }))
+    .sort((a, b) => a.nome.localeCompare(b.nome, "it"));
+}
+
+/** Sigla di una provincia dal suo slug. "bergamo" → "BG". */
+export function siglaDaSlugProvincia(slug: string): string | null {
+  for (const [sigla, provincia] of Object.entries(PROVINCE)) {
+    if (slugTerritorio(provincia.nome) === slug) return sigla;
+  }
+  return null;
+}
+
+/** Nome di un comune dal suo slug, dentro una provincia. */
+export function comuneDaSlug(slug: string, sigla?: string | null): string | null {
+  const cercata = sigla?.trim().toUpperCase();
+
+  for (const riga of COMUNI) {
+    if (cercata && riga[2] !== cercata) continue;
+    if (slugTerritorio(riga[0]) === slug) return riga[0];
+  }
+
+  return null;
+}
+
+/**
+ * Riconosce il comune scritto in TESTA a una stringa, scartando ciò che
+ * segue: alcuni elenchi accodano la frazione al comune, e
+ * "Carobbio degli Angeli Cicola" non è un comune italiano.
+ */
+export function riconosciComuneInTesta(
+  testo: string,
+  provincia?: string | null,
+): ComuneNormalizzato | null {
+  const parole = testo.replace(/\s+/g, " ").trim().split(" ");
+  if (parole.length === 0) return null;
+
+  const massimo = Math.min(MAX_PAROLE_COMUNE, parole.length);
+  for (let quante = massimo; quante >= 1; quante--) {
+    const candidato = parole.slice(0, quante).join(" ");
+    const comune = normalizzaComune(candidato, provincia);
+    if (comune) return comune;
   }
 
   return null;

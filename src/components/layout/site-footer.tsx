@@ -3,6 +3,7 @@ import Link from "next/link";
 const SERVIZIO = [
   { href: "/verifica-partita-iva", label: "Verifica P.IVA" },
   { href: "/ricerca", label: "Ricerca aziende" },
+  { href: "/aziende", label: "Sfoglia per territorio" },
   { href: "/chi-siamo", label: "Chi siamo" },
 ] as const;
 

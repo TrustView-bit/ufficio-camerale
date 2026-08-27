@@ -6,8 +6,16 @@ import {
   normalizzaComune,
   provinciaToSigla,
   riconosciComuneInCoda,
+  riconosciComuneInTesta,
   siglaToProvincia,
   titoloProprio,
+  regioni,
+  regioneDaSlug,
+  regioneDiSigla,
+  provinceDiRegione,
+  siglaDaSlugProvincia,
+  comuneDaSlug,
+  slugTerritorio,
 } from "./geo";
 
 describe("chiaveComune", () => {
@@ -245,5 +253,82 @@ describe("coordinate", () => {
     const brescia = normalizzaComune("Brescia")!;
     expect(brescia.lat).toBeCloseTo(45.54, 2);
     expect(brescia.lon).toBeCloseTo(10.21, 2);
+  });
+});
+
+describe("navigazione territoriale", () => {
+  it("elenca le venti regioni italiane", () => {
+    expect(regioni()).toHaveLength(20);
+    expect(regioni().map((r) => r.nome)).toContain("Lombardia");
+  });
+
+  it("costruisce slug leggibili, anche dai nomi bilingui", () => {
+    expect(slugTerritorio("Lombardia")).toBe("lombardia");
+    expect(slugTerritorio("Valle d'Aosta/Vallée d'Aoste")).toBe("valle-d-aosta");
+    expect(slugTerritorio("Trentino-Alto Adige/Südtirol")).toBe(
+      "trentino-alto-adige",
+    );
+  });
+
+  it("ritrova la regione dal suo slug", () => {
+    expect(regioneDaSlug("lombardia")).toBe("Lombardia");
+    expect(regioneDaSlug("inesistente")).toBeNull();
+  });
+
+  it("risale dalla sigla alla regione", () => {
+    expect(regioneDiSigla("BG")).toBe("Lombardia");
+    expect(regioneDiSigla("NA")).toBe("Campania");
+    expect(regioneDiSigla("XX")).toBeNull();
+  });
+
+  it("elenca le province di una regione", () => {
+    const lombarde = provinceDiRegione("Lombardia");
+    expect(lombarde.map((p) => p.sigla)).toContain("BG");
+    expect(lombarde.map((p) => p.sigla)).not.toContain("NA");
+    expect(lombarde.length).toBeGreaterThan(10);
+  });
+
+  it("ritrova la sigla dallo slug della provincia", () => {
+    expect(siglaDaSlugProvincia("bergamo")).toBe("BG");
+    expect(siglaDaSlugProvincia("inesistente")).toBeNull();
+  });
+
+  it("ritrova il comune dal suo slug", () => {
+    expect(comuneDaSlug("treviglio", "BG")).toBe("Treviglio");
+    expect(comuneDaSlug("vo", "PD")).toBe("Vo'");
+  });
+
+  it("usa la provincia per distinguere i comuni omonimi", () => {
+    expect(comuneDaSlug("samone", "TO")).toBe("Samone");
+    expect(comuneDaSlug("samone", "MI")).toBeNull();
+  });
+});
+
+describe("nomi d'uso corrente e frazioni accodate", () => {
+  it("riconosce il nome senza le preposizioni ufficiali", () => {
+    // il nome ufficiale è "Reggio nell'Emilia"
+    expect(normalizzaComune("Reggio Emilia")?.comune).toBe("Reggio nell'Emilia");
+    expect(normalizzaComune("REGGIO EMILIA")?.sigla).toBe("RE");
+  });
+
+  it("continua a riconoscere il nome ufficiale", () => {
+    expect(normalizzaComune("Reggio nell'Emilia")?.sigla).toBe("RE");
+  });
+
+  it("riconosce il comune quando l'elenco gli accoda la frazione", () => {
+    expect(
+      riconosciComuneInTesta("CAROBBIO DEGLI ANGELI CICOLA", "BG")?.comune,
+    ).toBe("Carobbio degli Angeli");
+    expect(riconosciComuneInTesta("PIOLTELLO LIMITO", "MI")?.comune).toBe(
+      "Pioltello",
+    );
+    expect(
+      riconosciComuneInTesta("DESENZANO DEL GARDA RIVOLTELLA", "BS")?.comune,
+    ).toBe("Desenzano del Garda");
+  });
+
+  it("non inventa un comune quando in testa non ce n'è uno", () => {
+    expect(riconosciComuneInTesta("NOC", "RE")).toBeNull();
+    expect(riconosciComuneInTesta("", "RE")).toBeNull();
   });
 });

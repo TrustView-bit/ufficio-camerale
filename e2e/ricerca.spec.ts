@@ -18,7 +18,10 @@ test.describe("dalla ricerca alla scheda azienda", () => {
 
     await expect(page).toHaveURL(/\/azienda\/.*-00743110157$/);
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(DENOMINAZIONE);
-    await expect(page.getByText("Attiva")).toBeVisible();
+    // lo stato accanto al titolo, non quello delle aziende simili in fondo
+    await expect(
+      page.locator("h1").locator("..").getByText("Attiva"),
+    ).toBeVisible();
   });
 
   test("la scheda mostra i dati camerali", async ({ page }) => {
@@ -166,6 +169,61 @@ test.describe("consultare l'elenco delle aziende", () => {
     await expect(
       page.getByRole("heading", { name: /nessuna azienda trovata/i }),
     ).toBeVisible();
+  });
+});
+
+test.describe("sfogliare per territorio", () => {
+  test("le briciole riportano indietro nella gerarchia", async ({ page }) => {
+    await page.goto("/aziende/campania/benevento/benevento");
+
+    const percorso = page.getByRole("navigation", { name: "Percorso" });
+    await expect(percorso.getByRole("link", { name: "Campania" })).toBeVisible();
+    await percorso.getByRole("link", { name: "Benevento" }).first().click();
+
+    await expect(page).toHaveURL(/\/aziende\/campania\/benevento$/);
+  });
+
+  test("dalla regione si scende fino alla scheda", async ({ page }) => {
+    await page.goto("/aziende");
+    await expect(
+      page.getByRole("heading", { name: /aziende italiane per regione/i }),
+    ).toBeVisible();
+
+    await page.getByRole("link", { name: /^Lombardia/ }).click();
+    await expect(page).toHaveURL(/\/aziende\/lombardia$/);
+
+    await page
+      .getByRole("link", { name: /^Bergamo/ })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/aziende\/lombardia\/bergamo$/);
+    await expect(
+      page.getByRole("heading", { name: /provincia di Bergamo/i }),
+    ).toBeVisible();
+
+    await page
+      .getByRole("link", { name: /^Bergamo/ })
+      .first()
+      .click();
+    await expect(page).toHaveURL(/\/aziende\/lombardia\/bergamo\/bergamo/);
+
+    const azienda = page.locator('a[href^="/azienda/"]').first();
+    await azienda.click();
+    await expect(page).toHaveURL(/\/azienda\//);
+  });
+
+  test("un territorio inesistente è un 404, non una pagina vuota", async ({
+    page,
+  }) => {
+    expect((await page.goto("/aziende/atlantide"))?.status()).toBe(404);
+    expect((await page.goto("/aziende/lombardia/zzz"))?.status()).toBe(404);
+  });
+
+  test("le aziende di esempio sono marcate anche negli elenchi", async ({
+    page,
+  }) => {
+    await page.goto("/aziende/lombardia/bergamo");
+    await expect(page.getByText("esempio").first()).toBeVisible();
   });
 });
 

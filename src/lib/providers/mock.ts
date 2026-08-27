@@ -1,17 +1,26 @@
 import impreseJson from "../../../data/imprese-sviluppo.json";
-import { normalizzaComune, riconosciComuneInCoda, titoloProprio } from "@/lib/geo";
+import {
+  normalizzaComune,
+  regioneDiSigla,
+  riconosciComuneInCoda,
+  riconosciComuneInTesta,
+  titoloProprio,
+} from "@/lib/geo";
 
 import { punteggio } from "@/lib/ricerca";
 
 import type {
   CompanyData,
   CompanyProvider,
+  EsitoElenco,
   EsitoRicerca,
+  FiltriElenco,
   Indirizzo,
   OpzioniRicerca,
   ProviderResult,
   RisultatoAzienda,
   UnitaLocale,
+  VoceAggregata,
 } from "./types";
 
 /**
@@ -157,7 +166,11 @@ function indirizzoDa(
   sedeTesto: string | null | undefined,
 ): Indirizzo | null {
   if (sede?.comune) {
-    const riconosciuto = normalizzaComune(sede.comune, sede.provincia);
+    // alcuni elenchi accodano la frazione al comune: si prova prima il nome
+    // intero, poi solo la sua parte iniziale
+    const riconosciuto =
+      normalizzaComune(sede.comune, sede.provincia) ??
+      riconosciComuneInTesta(sede.comune, sede.provincia);
     return {
       via: sede.via ? titoloProprio(sede.via) : null,
       cap: sede.cap ?? riconosciuto?.cap ?? null,
@@ -243,6 +256,39 @@ const TUTTE: Record<string, CompanyData> = {
   ...AZIENDE,
 };
 
+function inSintesi(azienda: CompanyData): RisultatoAzienda {
+  return {
+    partitaIva: azienda.partitaIva,
+    denominazione: azienda.denominazione,
+    comune: azienda.sede?.comune ?? null,
+    provincia: azienda.sede?.provincia ?? null,
+    statoAttivita: azienda.statoAttivita,
+    fittizia: azienda.fittizia,
+  };
+}
+
+/** Applica i filtri territoriali e settoriali a un elenco di aziende. */
+function filtra(aziende: CompanyData[], filtri: FiltriElenco): CompanyData[] {
+  return aziende.filter((azienda) => {
+    const sigla = azienda.sede?.provincia ?? null;
+
+    if (filtri.provincia && sigla !== filtri.provincia) return false;
+    if (filtri.comune && azienda.sede?.comune !== filtri.comune) return false;
+    if (filtri.regione && (!sigla || regioneDiSigla(sigla) !== filtri.regione)) {
+      return false;
+    }
+    // il codice ATECO si confronta per prefisso: "62" prende tutta la divisione
+    if (filtri.ateco && !azienda.atecoPrimario?.startsWith(filtri.ateco)) {
+      return false;
+    }
+
+    return true;
+  });
+}
+
+const perDenominazione = (a: CompanyData, b: CompanyData) =>
+  a.denominazione.localeCompare(b.denominazione, "it");
+
 export class MockCompanyProvider implements CompanyProvider {
   readonly name = "mock";
   readonly costPerLookupEur = 0;
@@ -324,6 +370,49 @@ export class MockCompanyProvider implements CompanyProvider {
         .map(([sigla, quante]) => ({ sigla, quante }))
         .sort((a, b) => b.quante - a.quante || a.sigla.localeCompare(b.sigla)),
     };
+  }
+
+  async elenco(
+    filtri: FiltriElenco,
+    opzioni: OpzioniRicerca = {},
+  ): Promise<EsitoElenco> {
+    const { offset = 0, limite = 24 } = opzioni;
+    const trovate = filtra(Object.values(TUTTE), filtri).sort(perDenominazione);
+
+    return {
+      totale: trovate.length,
+      risultati: trovate.slice(offset, offset + limite).map(inSintesi),
+    };
+  }
+
+  async aggrega(
+    filtri: FiltriElenco,
+    per: "regione" | "provincia" | "comune" | "ateco",
+  ): Promise<VoceAggregata[]> {
+    const conteggio = new Map<string, number>();
+
+    for (const azienda of filtra(Object.values(TUTTE), filtri)) {
+      const sigla = azienda.sede?.provincia ?? null;
+
+      const chiave =
+        per === "provincia"
+          ? sigla
+          : per === "comune"
+            ? (azienda.sede?.comune ?? null)
+            : per === "regione"
+              ? (sigla && regioneDiSigla(sigla)) || null
+              : // per settore si raggruppa sulla divisione, non sul codice
+                // completo: altrimenti si otterrebbero centinaia di voci da una
+                (azienda.atecoPrimario?.slice(0, 2) ?? null);
+
+      if (chiave) conteggio.set(chiave, (conteggio.get(chiave) ?? 0) + 1);
+    }
+
+    return [...conteggio.entries()]
+      .map(([chiave, quante]) => ({ chiave, quante }))
+      .sort(
+        (a, b) => b.quante - a.quante || a.chiave.localeCompare(b.chiave, "it"),
+      );
   }
 }
 

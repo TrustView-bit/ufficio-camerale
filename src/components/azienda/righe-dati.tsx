@@ -38,9 +38,10 @@ export function BoxDati({
       )}
 
       <div className="border-border bg-card shadow-card divide-border divide-y overflow-hidden rounded-xl border">
-        {visibili.map((riga) => (
+        {visibili.map((riga, indice) => (
           <div
-            key={riga.etichetta}
+            // l'etichetta si ripete: un'impresa può avere più ATECO secondari
+            key={`${indice}-${riga.etichetta}`}
             className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-5"
           >
             <p className="text-sm">
