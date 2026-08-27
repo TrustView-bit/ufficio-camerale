@@ -76,6 +76,11 @@ export const companies = pgTable(
     atecoSecondari: jsonb("ateco_secondari").$type<Ateco[]>().default([]),
 
     sede: jsonb("sede").$type<Indirizzo | null>(),
+    /** Coordinate della sede, quando il fornitore le dà: non del comune. */
+    latitudine: numeric("latitudine", { precision: 9, scale: 6 }),
+    longitudine: numeric("longitudine", { precision: 9, scale: 6 }),
+    /** Codice destinatario per la fatturazione elettronica. */
+    codiceSdi: text("codice_sdi"),
     unitaLocali: jsonb("unita_locali").$type<UnitaLocale[]>().default([]),
     bilanci: jsonb("bilanci").$type<Bilancio[]>().default([]),
 

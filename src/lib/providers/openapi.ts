@@ -7,6 +7,7 @@ import type {
   CompanyData,
   CompanyProvider,
   ProviderResult,
+  ProviderUnavailableReason,
   StatoAttivita,
 } from "./types";
 
@@ -309,11 +310,22 @@ export class OpenapiCompanyProvider implements CompanyProvider {
       };
     }
 
+    const parsed = rispostaSchema.safeParse(body);
+
+    // L'API segnala anche i guasti con un HTTP 200 e `success: false` — un
+    // problema di fatturazione arriva così. Trattarlo come "impresa non
+    // trovata" sarebbe l'errore peggiore possibile: si direbbe all'utente che
+    // un'impresa non esiste perché non siamo riusciti a pagare.
+    if (parsed.success && parsed.data.success === false) {
+      return {
+        status: "unavailable",
+        reason: motivoDalMessaggio(parsed.data.message),
+        httpStatus: response.status,
+      };
+    }
+
     const raw = extractCompany(body);
     if (!raw) {
-      // O l'impresa non esiste, o la risposta non ha la forma attesa: in
-      // nessuno dei due casi si inventa qualcosa
-      const parsed = rispostaSchema.safeParse(body);
       const vuota =
         parsed.success &&
         (parsed.data.data === null ||
@@ -336,6 +348,34 @@ export class OpenapiCompanyProvider implements CompanyProvider {
       httpStatus: response.status,
     };
   }
+}
+
+/**
+ * Il motivo dell'indisponibilità ricavato dal messaggio, quando l'API
+ * risponde 200 con `success: false`.
+ */
+export function motivoDalMessaggio(
+  messaggio: string | null | undefined,
+): ProviderUnavailableReason {
+  const testo = (messaggio ?? "").toLowerCase();
+
+  if (
+    testo.includes("billing") ||
+    testo.includes("credit") ||
+    testo.includes("codice cliente")
+  ) {
+    return "QUOTA_EXCEEDED";
+  }
+  if (
+    testo.includes("token") ||
+    testo.includes("auth") ||
+    testo.includes("scope")
+  ) {
+    return "UNAUTHORIZED";
+  }
+  if (testo.includes("limit") || testo.includes("too many")) return "RATE_LIMITED";
+
+  return "UNEXPECTED";
 }
 
 function mapHttpStatus(status: number) {

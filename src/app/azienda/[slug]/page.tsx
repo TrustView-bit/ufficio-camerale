@@ -171,12 +171,25 @@ export default async function AziendaPage({ params }: Props) {
         <FonteDati source={source} fetchedAt={fetchedAt} />
       </div>
 
-      <div className="mt-8 grid gap-8">
-        <DatiSocieta company={company} />
-        <AltreInformazioni company={company} />
-        <Andamento company={company} />
-        <UnitaLocali company={company} />
-        <Mappa company={company} />
+      {/* Due colonne da grande schermo in su: i dati a sinistra, la mappa e
+          i recapiti in una colonna che resta visibile mentre si scorre.
+          Sotto i 1024px tutto torna in colonna singola, nell'ordine in cui è
+          scritto. */}
+      <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
+        <div className="grid gap-8">
+          <DatiSocieta company={company} />
+          <AltreInformazioni company={company} />
+          <Andamento company={company} />
+          <UnitaLocali company={company} />
+        </div>
+
+        <aside className="grid gap-6 lg:sticky lg:top-20">
+          <Mappa company={company} />
+          <Contatti company={company} />
+        </aside>
+      </div>
+
+      <div className="mt-10 grid gap-10">
         <DocumentiAcquistabili eSocieta={eSocieta} />
         <AziendeSimili
           titolo={comune ? `Altre aziende a ${comune}` : "Altre aziende"}
@@ -236,8 +249,9 @@ function Intestazione({ company }: { company: CompanyData }) {
 
 function DatiSocieta({ company }: { company: CompanyData }) {
   const indirizzo = formatIndirizzo(company.sede);
-  const sito = toSitoHref(company.sitoWeb);
 
+  // PEC, sito, telefono e codice SDI stanno nella colonna di destra, accanto
+  // alla mappa: sono le informazioni che si cercano insieme
   const righe: RigaOpzionale[] = [
     { etichetta: "Partita IVA", valore: company.partitaIva, numerico: true },
     company.codiceFiscale && {
@@ -268,32 +282,6 @@ function DatiSocieta({ company }: { company: CompanyData }) {
       valore: company.reaCciaa
         ? `${company.reaCciaa}-${company.reaNumero}`
         : company.reaNumero,
-      numerico: true,
-    },
-    company.pec && {
-      etichetta: "PEC",
-      valore: (
-        <a className="text-primary hover:underline" href={`mailto:${company.pec}`}>
-          {company.pec}
-        </a>
-      ),
-    },
-    sito && {
-      etichetta: "Sito web",
-      valore: (
-        <a
-          className="text-primary hover:underline"
-          href={sito}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {hostnameDi(company.sitoWeb)}
-        </a>
-      ),
-    },
-    company.telefono && {
-      etichetta: "Telefono",
-      valore: company.telefono,
       numerico: true,
     },
     company.dipendenti !== null && {
@@ -392,11 +380,6 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
         ),
       };
     }),
-    company.codiceSdi && {
-      etichetta: "Codice destinatario (SDI)",
-      valore: company.codiceSdi,
-      numerico: true,
-    },
     // solo gli esercizi con un fatturato: gli anni ancora vuoti non dicono nulla
     ...company.bilanci
       .filter((bilancio) => bilancio.fatturato !== null)
@@ -474,6 +457,47 @@ function Mappa({ company }: { company: CompanyData }) {
       />
     </section>
   );
+}
+
+/** I recapiti, accanto alla mappa: sono le informazioni che si cercano insieme. */
+function Contatti({ company }: { company: CompanyData }) {
+  const sito = toSitoHref(company.sitoWeb);
+
+  const righe: RigaOpzionale[] = [
+    company.pec && {
+      etichetta: "PEC",
+      valore: (
+        <a className="text-primary hover:underline" href={`mailto:${company.pec}`}>
+          {company.pec}
+        </a>
+      ),
+    },
+    sito && {
+      etichetta: "Sito web",
+      valore: (
+        <a
+          className="text-primary hover:underline"
+          href={sito}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {hostnameDi(company.sitoWeb)}
+        </a>
+      ),
+    },
+    company.telefono && {
+      etichetta: "Telefono",
+      valore: company.telefono,
+      numerico: true,
+    },
+    company.codiceSdi && {
+      etichetta: "Codice SDI",
+      valore: company.codiceSdi,
+      numerico: true,
+    },
+  ];
+
+  return <BoxDati titolo="Contatti" righe={righe} />;
 }
 
 function ServizioNonDisponibile() {

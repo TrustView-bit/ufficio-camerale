@@ -98,9 +98,11 @@ export function rowToCompany(row: CompanyRow): CompanyData {
     atecoPrimarioDescrizione: row.atecoPrimarioDescrizione,
     atecoSecondari: row.atecoSecondari ?? [],
     sede: row.sede ?? null,
-    // non ancora conservate in archivio: arrivano solo dal fornitore
-    coordinate: null,
-    codiceSdi: null,
+    coordinate:
+      row.latitudine !== null && row.longitudine !== null
+        ? { lat: Number(row.latitudine), lon: Number(row.longitudine) }
+        : null,
+    codiceSdi: row.codiceSdi,
     unitaLocali: row.unitaLocali ?? [],
     bilanci: row.bilanci ?? [],
     pec: row.pec,
@@ -253,6 +255,9 @@ async function upsertRow(
     atecoPrimarioDescrizione: company.atecoPrimarioDescrizione,
     atecoSecondari: company.atecoSecondari,
     sede: company.sede,
+    latitudine: company.coordinate?.lat.toFixed(6) ?? null,
+    longitudine: company.coordinate?.lon.toFixed(6) ?? null,
+    codiceSdi: company.codiceSdi,
     unitaLocali: company.unitaLocali,
     bilanci: company.bilanci,
     pec: company.pec,

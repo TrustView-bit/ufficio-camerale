@@ -33,6 +33,7 @@ const CAMPI = [
   "atecoVersione",
   "atecoPrimarioDescrizione",
   "sede",
+  "codiceSdi",
   "dipendenti",
 ] as const;
 
@@ -125,6 +126,7 @@ export function inColonne(impresa: ImpresaImport): Record<Campo, unknown> {
     atecoPrimarioDescrizione:
       risolto?.descrizione ?? impresa.ateco?.descrizione ?? null,
     sede,
+    codiceSdi: null,
     dipendenti: impresa.dipendenti ?? null,
   };
 }

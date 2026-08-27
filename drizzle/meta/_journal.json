@@ -22,6 +22,13 @@
       "when": 1787832982689,
       "tag": "0002_provenienza_campi",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1787838773958,
+      "tag": "0003_coordinate_e_sdi",
+      "breakpoints": true
     }
   ]
 }

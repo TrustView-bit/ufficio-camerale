@@ -1,11 +1,13 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import avanzata from "./__fixtures__/openapi-it-advanced.json";
+import erroreFatturazione from "./__fixtures__/openapi-errore-fatturazione.json";
 import iniziale from "./__fixtures__/openapi-it-start.json";
 import {
   extractCompany,
   mapOpenapiCompany,
   mapStatoAttivita,
+  motivoDalMessaggio,
   OpenapiCompanyProvider,
 } from "./openapi";
 
@@ -231,6 +233,48 @@ describe("OpenapiCompanyProvider", () => {
       "fetch",
       vi.fn(async () => Response.json({ data: [] })),
     );
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
+      status: "not-found",
+    });
+  });
+});
+
+describe("errori restituiti con HTTP 200", () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  const provider = new OpenapiCompanyProvider("token", "IT-advanced");
+
+  it("un errore di fatturazione non è un'impresa inesistente", async () => {
+    // risposta reale dell'API: HTTP 200, success false, data vuota
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => Response.json(erroreFatturazione)),
+    );
+
+    const esito = await provider.getByPartitaIva(PIVA);
+
+    expect(esito.status).toBe("unavailable");
+    expect(esito).toMatchObject({ reason: "QUOTA_EXCEEDED" });
+    // il punto è proprio questo: dire "non esiste" sarebbe una bugia
+    expect(esito.status).not.toBe("not-found");
+  });
+
+  it("riconosce il motivo dal messaggio", () => {
+    expect(motivoDalMessaggio("Billing error message: …")).toBe("QUOTA_EXCEEDED");
+    expect(motivoDalMessaggio("'Codice Cliente' errato")).toBe("QUOTA_EXCEEDED");
+    expect(motivoDalMessaggio("Wrong Token")).toBe("UNAUTHORIZED");
+    expect(motivoDalMessaggio("invalid scopes specified")).toBe("UNAUTHORIZED");
+    expect(motivoDalMessaggio("rate limit exceeded")).toBe("RATE_LIMITED");
+    expect(motivoDalMessaggio("qualcosa di nuovo")).toBe("UNEXPECTED");
+    expect(motivoDalMessaggio(null)).toBe("UNEXPECTED");
+  });
+
+  it("una risposta vuota ma riuscita resta 'non trovata'", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => Response.json({ success: true, data: [], message: "" })),
+    );
+
     await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
       status: "not-found",
     });
