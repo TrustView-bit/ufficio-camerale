@@ -171,11 +171,11 @@ export default async function AziendaPage({ params }: Props) {
         <FonteDati source={source} fetchedAt={fetchedAt} />
       </div>
 
-      {/* Due colonne da grande schermo in su: i dati a sinistra, la mappa e
-          i recapiti in una colonna che resta visibile mentre si scorre.
-          Sotto i 1024px tutto torna in colonna singola, nell'ordine in cui è
+      {/* Due colonne dai 768px in su: i dati a sinistra, la mappa e i
+          recapiti in una colonna che resta visibile mentre si scorre. Sotto
+          quella soglia tutto torna in colonna singola, nell'ordine in cui è
           scritto. */}
-      <div className="mt-8 grid items-start gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
+      <div className="mt-8 grid items-start gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
         <div className="grid gap-8">
           <DatiSocieta company={company} />
           <AltreInformazioni company={company} />
@@ -183,7 +183,7 @@ export default async function AziendaPage({ params }: Props) {
           <UnitaLocali company={company} />
         </div>
 
-        <aside className="grid gap-6 lg:sticky lg:top-20">
+        <aside className="grid gap-6 md:sticky md:top-20">
           <Mappa company={company} />
           <Contatti company={company} />
         </aside>
