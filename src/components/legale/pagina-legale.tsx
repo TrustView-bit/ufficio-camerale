@@ -26,7 +26,7 @@ export function PaginaLegale({
         </p>
 
         {LEGALE_INCOMPLETO && (
-          <p className="border-warning/25 bg-warning-subtle/40 text-warning mt-8 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-sm">
+          <p className="border-warning/50 bg-warning-subtle/40 text-warning mt-8 flex items-start gap-2.5 border-l-4 px-4 py-3 text-sm">
             <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
             <span>
               <strong className="font-medium">Testo non ancora definitivo.</strong>{" "}

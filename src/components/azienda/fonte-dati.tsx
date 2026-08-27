@@ -19,7 +19,7 @@ export function FonteDati({
 
   if (source === "database-stale") {
     return (
-      <p className="border-warning/25 bg-warning-subtle/40 text-warning flex items-start gap-2 rounded-lg border px-3 py-2 text-sm">
+      <p className="border-warning/50 bg-warning-subtle/40 text-warning flex items-start gap-2 border-l-4 px-3 py-2 text-sm">
         <Clock className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           Il Registro Imprese non risponde in questo momento: stai vedendo i dati

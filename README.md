@@ -75,6 +75,9 @@ cromatici hardcodati: usa le utility Tailwind generate dai token
 
 Convenzioni:
 
+- **spigoli vivi ovunque**: tabelle, riquadri, pulsanti e campi non hanno
+  raccordi. L'unica eccezione è il monogramma della testata, che è un sigillo.
+  Gli avvisi sono bande con un filo spesso a sinistra, non riquadri
 - `--primary` — blu profondo istituzionale, azioni principali
 - `--accent` — teal/salvia, semantica di "verificato"
 - `--success` / `--warning` / `--danger` — **solo** stati reali (attiva, in

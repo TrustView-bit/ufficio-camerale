@@ -208,7 +208,7 @@ function FiltroProvince({
       <Link
         href={indirizzo()}
         aria-current={attiva ? undefined : "true"}
-        className={`ease-ui rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 ${
+        className={`ease-ui rounded-none border px-2.5 py-1 text-xs transition-colors duration-150 ${
           attiva
             ? "border-border bg-card text-muted-foreground hover:border-primary/40"
             : "border-primary bg-primary text-primary-foreground"
@@ -224,7 +224,7 @@ function FiltroProvince({
             key={provincia.sigla}
             href={indirizzo(provincia.sigla)}
             aria-current={selezionata ? "true" : undefined}
-            className={`ease-ui rounded-md border px-2.5 py-1 text-xs transition-colors duration-150 ${
+            className={`ease-ui rounded-none border px-2.5 py-1 text-xs transition-colors duration-150 ${
               selezionata
                 ? "border-primary bg-primary text-primary-foreground"
                 : "border-border bg-card text-muted-foreground hover:border-primary/40"
@@ -262,7 +262,7 @@ function Paginazione({
   };
 
   const stile =
-    "border-border bg-card ease-ui hover:border-primary/40 rounded-md border px-3 py-1.5 text-sm transition-colors duration-150";
+    "border-border bg-card ease-ui hover:border-primary/40 rounded-none border px-3 py-1.5 text-sm transition-colors duration-150";
 
   return (
     <nav aria-label="Pagine dei risultati" className="flex items-center gap-2">

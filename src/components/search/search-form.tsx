@@ -127,7 +127,7 @@ export function SearchForm({
             type="button"
             onClick={() => submit(esempio.q)}
             aria-label={`Cerca ${esempio.label} — ${esempio.hint}`}
-            className="num border-border bg-card text-foreground ease-ui hover:border-primary/40 hover:bg-muted rounded-md border px-2.5 py-1 text-xs transition-colors duration-150"
+            className="num border-border bg-card text-foreground ease-ui hover:border-primary/40 hover:bg-muted rounded-none border px-2.5 py-1 text-xs transition-colors duration-150"
           >
             {esempio.label}
           </button>
@@ -142,7 +142,7 @@ export function SearchForm({
               key={item}
               type="button"
               onClick={() => submit(item)}
-              className="num border-border bg-card text-foreground ease-ui hover:border-primary/40 hover:bg-muted rounded-md border px-2.5 py-1 text-xs transition-colors duration-150"
+              className="num border-border bg-card text-foreground ease-ui hover:border-primary/40 hover:bg-muted rounded-none border px-2.5 py-1 text-xs transition-colors duration-150"
             >
               {item}
             </button>
@@ -150,7 +150,7 @@ export function SearchForm({
           <button
             type="button"
             onClick={clear}
-            className="ease-ui hover:text-foreground flex items-center gap-1 rounded-md px-1.5 py-1 text-xs transition-colors duration-150"
+            className="ease-ui hover:text-foreground flex items-center gap-1 rounded-none px-1.5 py-1 text-xs transition-colors duration-150"
           >
             <X className="size-3" aria-hidden />
             Cancella

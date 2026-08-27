@@ -119,7 +119,7 @@ export default async function SettorePage({ params, searchParams }: Props) {
                     : `/attivita/${risolto.slug}?pagina=${pagina - 1}`
                 }
                 rel="prev"
-                className="border-border bg-card ease-ui hover:border-primary/40 rounded-md border px-3 py-1.5 text-sm transition-colors duration-150"
+                className="border-border bg-card ease-ui hover:border-primary/40 rounded-none border px-3 py-1.5 text-sm transition-colors duration-150"
               >
                 Precedente
               </a>
@@ -128,7 +128,7 @@ export default async function SettorePage({ params, searchParams }: Props) {
               <a
                 href={`/attivita/${risolto.slug}?pagina=${pagina + 1}`}
                 rel="next"
-                className="border-border bg-card ease-ui hover:border-primary/40 rounded-md border px-3 py-1.5 text-sm transition-colors duration-150"
+                className="border-border bg-card ease-ui hover:border-primary/40 rounded-none border px-3 py-1.5 text-sm transition-colors duration-150"
               >
                 Successiva
               </a>

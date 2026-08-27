@@ -30,7 +30,7 @@ export function IndiceAlfabetico({
               key={lettera}
               aria-disabled
               title={`Nessuna azienda con la ${lettera}`}
-              className="border-border text-muted-foreground/40 num flex size-8 items-center justify-center rounded-md border text-sm"
+              className="border-border text-muted-foreground/40 num flex size-8 items-center justify-center rounded-none border text-sm"
             >
               {lettera}
             </span>
@@ -43,7 +43,7 @@ export function IndiceAlfabetico({
             href={`/aziende/lettera/${lettera === "#" ? "0-9" : lettera.toLowerCase()}`}
             aria-current={selezionata ? "true" : undefined}
             title={`${quante} ${quante === 1 ? "azienda" : "aziende"}`}
-            className={`num ease-ui flex size-8 items-center justify-center rounded-md border text-sm transition-colors duration-150 ${
+            className={`num ease-ui flex size-8 items-center justify-center rounded-none border text-sm transition-colors duration-150 ${
               selezionata
                 ? "border-primary bg-primary text-primary-foreground"
                 : "border-border bg-card hover:border-primary/40"

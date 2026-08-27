@@ -212,7 +212,7 @@ export default async function AziendaPage({ params }: Props) {
  */
 function AvvisoDatiFittizi() {
   return (
-    <p className="border-warning/25 bg-warning-subtle/40 text-warning mb-6 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-sm">
+    <p className="border-warning/50 bg-warning-subtle/40 text-warning mb-6 flex items-start gap-2.5 border-l-4 px-4 py-3 text-sm">
       <FlaskConical className="mt-0.5 size-4 shrink-0" aria-hidden />
       <span>
         <strong className="font-medium">Azienda di esempio.</strong> Questa scheda
