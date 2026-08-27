@@ -18,11 +18,11 @@ export function DocumentiAcquistabili({ eSocieta }: { eSocieta: boolean }) {
 
   return (
     <section className="print:hidden">
-      <h2 className="mb-3 text-lg font-semibold tracking-tight">
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
         Documenti ufficiali
       </h2>
 
-      <p className="border-warning/25 bg-warning-subtle/40 text-warning mb-4 flex items-start gap-2.5 rounded-lg border px-4 py-3 text-sm">
+      <p className="border-warning/40 bg-warning-subtle/40 text-warning mb-4 flex items-start gap-2.5 border-l-4 px-4 py-3 text-sm">
         <Info className="mt-0.5 size-4 shrink-0" aria-hidden />
         <span>
           <strong className="font-medium">Ordine non ancora attivo.</strong> Il
@@ -31,7 +31,7 @@ export function DocumentiAcquistabili({ eSocieta }: { eSocieta: boolean }) {
         </span>
       </p>
 
-      <ul className="border-border divide-border bg-card shadow-card divide-y overflow-hidden rounded-xl border">
+      <ul className="border-border divide-border bg-card divide-y border">
         {documenti.map((documento) => (
           <li
             key={documento.id}

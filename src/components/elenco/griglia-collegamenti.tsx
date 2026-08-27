@@ -18,13 +18,15 @@ export function GrigliaCollegamenti({
 
   return (
     <section>
-      <h2 className="mb-3 text-lg font-semibold tracking-tight">{titolo}</h2>
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
+        {titolo}
+      </h2>
       <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
         {voci.map((voce) => (
           <li key={voce.href}>
             <Link
               href={voce.href}
-              className="border-border bg-card ease-ui hover:border-primary/40 flex items-baseline justify-between gap-3 rounded-lg border px-3 py-2 text-sm transition-colors duration-150"
+              className="border-border bg-card ease-ui hover:border-primary flex items-baseline justify-between gap-3 border px-3 py-2 text-sm transition-colors duration-150"
             >
               <span>{voce.nome}</span>
               <span className="num text-muted-foreground text-xs">

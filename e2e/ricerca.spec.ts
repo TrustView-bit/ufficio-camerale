@@ -58,7 +58,9 @@ test.describe("dalla ricerca alla scheda azienda", () => {
     // il provider di sviluppo espone imprese vere: qui il CF coincide con la
     // P.IVA, quindi si verifica la funzione sulla scheda inventata
     await page.goto(`/azienda/${PIVA}`);
-    await expect(page.getByText("Codice fiscale:")).toBeVisible();
+    await expect(
+      page.getByRole("rowheader", { name: "Codice fiscale" }),
+    ).toBeVisible();
   });
 
   test("uno slug non canonico viene corretto", async ({ page }) => {
@@ -340,7 +342,9 @@ test.describe("pagine legali", () => {
   test("sono raggiungibili dal piè di pagina", async ({ page }) => {
     await page.goto("/");
 
-    await page.getByRole("link", { name: "Privacy" }).click();
+    // "Privacy" compare anche nella barra di servizio in testata: qui si
+    // verifica il piè di pagina
+    await page.locator("footer").getByRole("link", { name: "Privacy" }).click();
     await expect(
       page.getByRole("heading", { name: "Informativa privacy" }),
     ).toBeVisible();

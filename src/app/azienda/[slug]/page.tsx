@@ -402,10 +402,10 @@ function Andamento({ company }: { company: CompanyData }) {
 
   return (
     <section className="print:break-inside-avoid">
-      <h2 className="mb-3 text-lg font-semibold tracking-tight">
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
         Andamento del fatturato
       </h2>
-      <div className="border-border bg-card shadow-card rounded-xl border p-4">
+      <div className="border-border bg-card border p-4">
         <AndamentoFatturato bilanci={company.bilanci} />
       </div>
     </section>
@@ -443,7 +443,9 @@ function Mappa({ company }: { company: CompanyData }) {
 
   return (
     <section className="print:hidden">
-      <h2 className="mb-3 text-lg font-semibold tracking-tight">Dove si trova</h2>
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
+        Dove si trova
+      </h2>
       <MappaStatica
         lat={lat}
         lon={lon}

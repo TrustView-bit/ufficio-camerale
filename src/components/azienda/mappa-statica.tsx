@@ -75,7 +75,7 @@ export function MappaStatica({
   return (
     <figure className="m-0">
       <div
-        className="border-border bg-muted relative overflow-hidden rounded-xl border"
+        className="border-border bg-muted relative overflow-hidden border"
         style={{ height: ALTEZZA }}
       >
         <div

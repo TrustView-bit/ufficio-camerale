@@ -14,7 +14,7 @@ export function SchedaAzienda({ azienda }: { azienda: RisultatoAzienda }) {
   return (
     <Link
       href={`/azienda/${buildAziendaSlug(azienda.denominazione, azienda.partitaIva)}`}
-      className="border-border bg-card shadow-card ease-ui hover:border-primary/40 flex h-full flex-col gap-2 rounded-xl border p-4 transition-colors duration-150"
+      className="border-border bg-card ease-ui hover:border-primary flex h-full flex-col gap-2 border p-4 transition-colors duration-150"
     >
       <div className="flex items-start gap-2">
         <Building2 className="text-primary mt-0.5 size-4 shrink-0" aria-hidden />

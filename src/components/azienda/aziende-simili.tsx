@@ -22,8 +22,10 @@ export function AziendeSimili({
 
   return (
     <section className="print:hidden">
-      <div className="mb-3 flex flex-wrap items-baseline justify-between gap-3">
-        <h2 className="text-lg font-semibold tracking-tight">{titolo}</h2>
+      <div className="border-foreground mb-4 flex flex-wrap items-baseline justify-between gap-3 border-b-2 pb-1.5">
+        <h2 className="text-sm font-semibold tracking-[0.08em] uppercase">
+          {titolo}
+        </h2>
         {vediTutte && (
           <Link
             href={vediTutte.href}

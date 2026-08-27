@@ -35,6 +35,14 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
+  /* Testata: barra di servizio scura, fascia del marchio ardesia.
+     Non cambia fra tema chiaro e scuro — è un elemento istituzionale, come
+     la testata di un modulo. */
+  --color-testata: var(--testata);
+  --color-testata-scura: var(--testata-scura);
+  --color-testata-foreground: var(--testata-foreground);
+  --color-testata-bordo: var(--testata-bordo);
+
   /* Stati camerali — usati dai badge azienda */
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
@@ -122,6 +130,11 @@
 
   --neutral-subtle: oklch(0.945 0.005 258);
 
+  --testata: oklch(0.505 0.033 248);
+  --testata-scura: oklch(0.255 0.015 250);
+  --testata-foreground: oklch(0.995 0.002 85);
+  --testata-bordo: oklch(0.995 0.005 250 / 18%);
+
   /* shadcn usa --destructive internamente: allineato a --danger */
   --destructive: var(--danger);
 
@@ -187,6 +200,12 @@
   --danger-subtle: oklch(0.318 0.062 25);
 
   --neutral-subtle: oklch(0.292 0.014 258);
+
+  /* la testata resta la stessa: è l'elemento che identifica il portale */
+  --testata: oklch(0.44 0.032 248);
+  --testata-scura: oklch(0.215 0.014 250);
+  --testata-foreground: oklch(0.985 0.002 85);
+  --testata-bordo: oklch(0.995 0.005 250 / 16%);
 
   --destructive: var(--danger);
 

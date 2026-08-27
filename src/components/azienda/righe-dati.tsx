@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
 
 /**
- * Elenco di dati a righe, come nelle visure: etichetta a sinistra, valore in
- * evidenza. Le righe senza valore non vengono generate affatto, così non
- * restano trattini a riempire lo spazio.
+ * Tabella di dati anagrafici: etichetta a sinistra su fondo tenue, valore a
+ * destra, righe separate da un filo. Spigoli vivi, nessuna ombra — è una
+ * tabella di un registro, non una scheda di un'applicazione.
+ *
+ * Le righe senza valore non vengono generate affatto, così non restano
+ * trattini a riempire lo spazio.
  */
 
 export type Riga = {
@@ -34,33 +37,45 @@ export function BoxDati({
   return (
     <section className="break-inside-avoid">
       {titolo && (
-        <h2 className="mb-3 text-lg font-semibold tracking-tight">{titolo}</h2>
+        <h2 className="border-foreground mb-0 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
+          {titolo}
+        </h2>
       )}
 
-      <div className="border-border bg-card shadow-card divide-border divide-y overflow-hidden rounded-xl border">
-        {visibili.map((riga, indice) => (
-          <div
-            // l'etichetta si ripete: un'impresa può avere più ATECO secondari
-            key={`${indice}-${riga.etichetta}`}
-            className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 px-4 py-3 sm:px-5"
-          >
-            <p className="text-sm">
-              <span className="text-muted-foreground">{riga.etichetta}: </span>
-              <span
-                className={
-                  riga.numerico
-                    ? "num text-foreground font-semibold"
-                    : "text-foreground font-semibold"
-                }
+      <table className="border-border w-full border-x border-b text-sm">
+        <tbody>
+          {visibili.map((riga, indice) => (
+            <tr
+              // l'etichetta si ripete: un'impresa può avere più ATECO secondari
+              key={`${indice}-${riga.etichetta}`}
+              className="border-border border-b last:border-b-0"
+            >
+              <th
+                scope="row"
+                className="bg-muted/60 border-border text-muted-foreground w-[38%] border-r px-3 py-2.5 text-left align-top font-normal sm:w-[34%] sm:px-4"
               >
-                {riga.valore}
-              </span>
-            </p>
-            {riga.azione}
-          </div>
-        ))}
-        {children}
-      </div>
+                {riga.etichetta}
+              </th>
+              <td className="px-3 py-2.5 align-top sm:px-4">
+                <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+                  <span
+                    className={
+                      riga.numerico
+                        ? "num text-foreground font-semibold"
+                        : "text-foreground font-semibold"
+                    }
+                  >
+                    {riga.valore}
+                  </span>
+                  {riga.azione}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {children}
     </section>
   );
 }
