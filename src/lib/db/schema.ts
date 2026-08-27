@@ -9,6 +9,7 @@ import {
   serial,
   text,
   timestamp,
+  unique,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -145,6 +146,39 @@ export const apiCalls = pgTable(
   ],
 );
 
+/**
+ * Da quale elenco viene ciascun campo di ciascuna impresa.
+ *
+ * Serve a due cose concrete: decidere chi vince quando due fonti danno lo
+ * stesso campo, e poter rispondere «questo dato viene da qui, acquisito il
+ * tal giorno» quando un'impresa contesta ciò che pubblichiamo.
+ */
+export const impresaFonti = pgTable(
+  "impresa_fonti",
+  {
+    id: serial("id").primaryKey(),
+
+    partitaIva: varchar("partita_iva", { length: 11 }).notNull(),
+    /** Nome del campo di `companies`, in forma canonica. */
+    campo: text("campo").notNull(),
+
+    fonte: text("fonte").notNull(),
+    /** Priorità della fonte al momento della scrittura. */
+    priorita: integer("priorita").notNull(),
+    /** Quando la fonte ha rilevato il dato. */
+    acquisitoIl: timestamp("acquisito_il", { withTimezone: true }).notNull(),
+
+    aggiornatoIl: timestamp("aggiornato_il", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    unique("impresa_fonti_campo_unico").on(table.partitaIva, table.campo),
+    index("impresa_fonti_partita_iva_idx").on(table.partitaIva),
+  ],
+);
+
 export type CompanyRow = typeof companies.$inferSelect;
 export type NewCompanyRow = typeof companies.$inferInsert;
 export type NewApiCall = typeof apiCalls.$inferInsert;
+export type ImpresaFonteRow = typeof impresaFonti.$inferSelect;

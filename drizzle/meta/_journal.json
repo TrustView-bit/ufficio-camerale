@@ -15,6 +15,13 @@
       "when": 1787774327481,
       "tag": "0001_ateco_versione",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1787832982689,
+      "tag": "0002_provenienza_campi",
+      "breakpoints": true
     }
   ]
 }
