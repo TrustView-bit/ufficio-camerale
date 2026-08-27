@@ -120,7 +120,7 @@ successivo, tutto si ricalcola da capo.
 
 ### Imprese di sviluppo
 
-`data/imprese-sviluppo.json` contiene 1.332 imprese con partita IVA
+`data/imprese-sviluppo.json` contiene 1.838 imprese con partita IVA
 formalmente valida e 127 unità locali, estratte da elenchi pubblici con
 `scripts/estrai-imprese.py`. Servono a provare la resa su dati veri invece
 che sui tre esempi inventati.
@@ -140,7 +140,7 @@ l'accostamento per vicinanza mescola i campi.
 
 Sono di due nature diverse, e la distinzione è importante.
 
-Delle **332 imprese reali** si conoscono solo denominazione, sede e partita
+Delle **838 imprese reali** si conoscono solo denominazione, sede e partita
 IVA, e solo quelli vengono esposti: attribuire a un'impresa esistente un
 codice ATECO, un capitale o un numero REA inventati significherebbe pubblicare
 informazioni false su un soggetto reale. I campi mancanti restano `null` e la
