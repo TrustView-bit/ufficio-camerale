@@ -9,6 +9,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00233470236",
+      "denominazione": "A.I.A. - AGRICOLA ITALIANA ALIMENTARE S.P.A.",
+      "codiceFiscale": "00233470236",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "110039",
+      "reaCciaa": "VR",
+      "capitaleSociale": 5000000.0,
+      "atecoPrimario": "463211",
+      "atecoVersione": "2022",
+      "dipendenti": 706,
+      "annoCostituzione": null,
+      "dataCostituzione": "1967-05-22",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4377589010.0,
+          "utile": null,
+          "dipendenti": 706
+        }
+      ],
+      "sede": {
+        "via": "Piazzale Apollinare Veronesi 1",
+        "cap": "37036",
+        "comune": "San Martino Buon Albergo",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01551160623",
       "denominazione": "A.M.G. COSTRUZIONI S.R.L.",
       "sedeTesto": "CONTRADA VOCITO, 8 - TOCCO CAUDIO",
@@ -23,6 +55,198 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "12883420155",
+      "denominazione": "A2A ENERGIA S.P.A.",
+      "codiceFiscale": "12883420155",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1592687",
+      "reaCciaa": "MI",
+      "capitaleSociale": 3000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 766,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-11-08",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5879432684.0,
+          "utile": null,
+          "dipendenti": 766
+        }
+      ],
+      "sede": {
+        "via": "PIAZZA TRENTO 7",
+        "cap": "20135",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "11957540153",
+      "denominazione": "A2A S.P.A.",
+      "codiceFiscale": "11957540153",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "493995",
+      "reaCciaa": "BS",
+      "capitaleSociale": 1629110744.04,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 1975,
+      "annoCostituzione": null,
+      "dataCostituzione": "1996-10-22",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 8700014382.0,
+          "utile": null,
+          "dipendenti": 1975
+        }
+      ],
+      "sede": {
+        "via": "VIA ALESSANDRO LAMARMORA 230",
+        "cap": "25124",
+        "comune": "BRESCIA",
+        "provincia": "BS"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "11988960156",
+      "denominazione": "ABB S.P.A.",
+      "codiceFiscale": "00736410150",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1513225",
+      "reaCciaa": "MI",
+      "capitaleSociale": 110000000.0,
+      "atecoPrimario": "2712",
+      "atecoVersione": "2022",
+      "dipendenti": 5221,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2903142168.0,
+          "utile": null,
+          "dipendenti": 5221
+        }
+      ],
+      "sede": {
+        "via": "VIA VITTOR PISANI 16",
+        "cap": "20124",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "13454210157",
+      "denominazione": "ACCENTURE S.P.A.",
+      "codiceFiscale": "13454210157",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1652886",
+      "reaCciaa": "MI",
+      "capitaleSociale": 1843248.6,
+      "atecoPrimario": "621",
+      "atecoVersione": "2022",
+      "dipendenti": 13124,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-05-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2997078990.0,
+          "utile": null,
+          "dipendenti": 13124
+        }
+      ],
+      "sede": {
+        "via": "VIA NINO BONNET 10",
+        "cap": "20154",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "11852670154",
+      "denominazione": "ACCIAIERIA ARVEDI S.P.A.",
+      "codiceFiscale": "00910070192",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1497770",
+      "reaCciaa": "MI",
+      "capitaleSociale": 112900000.0,
+      "atecoPrimario": "241",
+      "atecoVersione": "2022",
+      "dipendenti": 2028,
+      "annoCostituzione": null,
+      "dataCostituzione": "2004-12-30",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2706877542.0,
+          "utile": null,
+          "dipendenti": 2028
+        }
+      ],
+      "sede": {
+        "via": "VIALE ENRICO FORLANINI 23",
+        "cap": "20134",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "10354890963",
+      "denominazione": "ACCIAIERIE D'ITALIA S.P.A.",
+      "codiceFiscale": "10354890963",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "2525101",
+      "reaCciaa": "MI",
+      "capitaleSociale": 401400000.0,
+      "atecoPrimario": "241",
+      "atecoVersione": "2022",
+      "dipendenti": 10133,
+      "annoCostituzione": null,
+      "dataCostituzione": "2018-11-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5426929109.0,
+          "utile": null,
+          "dipendenti": 10133
+        }
+      ],
+      "sede": {
+        "via": "VIALE CERTOSA 239",
+        "cap": "20151",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "11930070963",
       "denominazione": "ADDA STORE S.R.L. PDV TREZZO",
       "sede": {
@@ -33,6 +257,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02447620234",
+      "denominazione": "AGRICOLA TRE VALLI - SOCIETA' COOPERATIVA",
+      "codiceFiscale": "01631760236",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": "attiva",
+      "reaNumero": "237732",
+      "reaCciaa": "VR",
+      "capitaleSociale": 160650.0,
+      "atecoPrimario": "1012",
+      "atecoVersione": "2022",
+      "dipendenti": 8346,
+      "annoCostituzione": null,
+      "dataCostituzione": "1993-01-08",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2844345675.0,
+          "utile": null,
+          "dipendenti": 8346
+        }
+      ],
+      "sede": {
+        "via": "VIA VALPANTENA 18/G",
+        "cap": "37142",
+        "comune": "VERONA",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01724370620",
@@ -119,6 +375,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "13397910962",
+      "denominazione": "AMAZON BUSINESS EU SARL",
+      "codiceFiscale": "13397910962",
+      "formaGiuridica": "SOCIETA' COSTITUITA IN BASE A LEGGI DI ALTRO STATO",
+      "statoAttivita": "attiva",
+      "reaNumero": "2691078",
+      "reaCciaa": "MI",
+      "capitaleSociale": null,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": null,
+      "annoCostituzione": null,
+      "dataCostituzione": null,
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3053732339.0,
+          "utile": null,
+          "dipendenti": null
+        }
+      ],
+      "sede": {
+        "via": "AVENUE JOHN F. KENNEDY 38",
+        "cap": null,
+        "comune": null,
+        "provincia": "EE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01640890628",
       "denominazione": "AMETISTA SOCIETA' COOPERATIVA SOCIALE ONLUS",
       "sedeTesto": "VIA GIOACCHINO TOMA, 8 BENEVENTO",
@@ -131,6 +419,38 @@
       "sedeTesto": "VIA GIOACCHINO TOMA, 13 BENEVENTO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02133681003",
+      "denominazione": "ANAS - SOCIETA' PER AZIONI",
+      "codiceFiscale": "80208450587",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1024951",
+      "reaCciaa": "RM",
+      "capitaleSociale": 2269892000.0,
+      "atecoPrimario": "52212",
+      "atecoVersione": "2022",
+      "dipendenti": 7568,
+      "annoCostituzione": null,
+      "dataCostituzione": "2003-01-13",
+      "pec": "anas@pec.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4182372483.0,
+          "utile": null,
+          "dipendenti": 7568
+        }
+      ],
+      "sede": {
+        "via": "VIA MONZAMBANO 10",
+        "cap": "00185",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01851670628",
@@ -206,6 +526,102 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00591801204",
+      "denominazione": "AUTOMOBILI LAMBORGHINI S.P.A.",
+      "codiceFiscale": "03049840378",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "259882",
+      "reaCciaa": "BO",
+      "capitaleSociale": 130000000.0,
+      "atecoPrimario": "291 (Fabbricazione di autoveicoli)",
+      "atecoVersione": "2022",
+      "dipendenti": 2538,
+      "annoCostituzione": null,
+      "dataCostituzione": "1980-08-25",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3097478927.0,
+          "utile": null,
+          "dipendenti": 2538
+        }
+      ],
+      "sede": {
+        "via": "VIA MODENA 12",
+        "cap": "40019",
+        "comune": "SANT'AGATA BOLOGNESE",
+        "provincia": "BO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "07516911000",
+      "denominazione": "AUTOSTRADE PER L'ITALIA S.P.A.",
+      "codiceFiscale": "07516911000",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1037417",
+      "reaCciaa": "RM",
+      "capitaleSociale": 622027000.0,
+      "atecoPrimario": "52212",
+      "atecoVersione": "2022",
+      "dipendenti": 5336,
+      "annoCostituzione": null,
+      "dataCostituzione": "2003-07-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5453641160.0,
+          "utile": null,
+          "dipendenti": 5336
+        }
+      ],
+      "sede": {
+        "via": "VIA ALBERTO BERGAMINI 50",
+        "cap": "00159",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "10024610155",
+      "denominazione": "AUTOTORINO S.P.A.",
+      "codiceFiscale": "10024610155",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1336962",
+      "reaCciaa": "MI",
+      "capitaleSociale": 11427000.0,
+      "atecoPrimario": "47811",
+      "atecoVersione": "2022",
+      "dipendenti": 2244,
+      "annoCostituzione": null,
+      "dataCostituzione": "1991-05-13",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2676498011.0,
+          "utile": null,
+          "dipendenti": 2244
+        }
+      ],
+      "sede": {
+        "via": "VIA ANSPERTO 7",
+        "cap": "20123",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01837460623",
       "denominazione": "AUTOTRASPORTI SANTA MARIA SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA PALERMO CL",
       "sedeTesto": "VIA GIOVANNI PAOLO II 23 PAOLISI VIALE PRINCIPE DI NAPOLI 38",
@@ -230,6 +646,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01141160992",
+      "denominazione": "AXPO ITALIA S.P.A.",
+      "codiceFiscale": "01141160992",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "987225",
+      "reaCciaa": "RM",
+      "capitaleSociale": 3000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 253,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-10-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4500695776.0,
+          "utile": null,
+          "dipendenti": 253
+        }
+      ],
+      "sede": {
+        "via": "VIA QUATTRO NOVEMBRE 149",
+        "cap": "00187",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "18422610651",
@@ -2141,11 +2589,75 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "01654010345",
+      "denominazione": "BARILLA G. E R. FRATELLI S.P.A.",
+      "codiceFiscale": "01654010345",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "169146",
+      "reaCciaa": "PR",
+      "capitaleSociale": 180639990.0,
+      "atecoPrimario": "1073",
+      "atecoVersione": "2022",
+      "dipendenti": 4079,
+      "annoCostituzione": null,
+      "dataCostituzione": "1989-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2630757873.0,
+          "utile": null,
+          "dipendenti": 4079
+        }
+      ],
+      "sede": {
+        "via": "VIA MANTOVA 166",
+        "cap": "43122",
+        "comune": "PARMA",
+        "provincia": "PR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01449740628",
       "denominazione": "BARTOLOLONGO - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON RESPONSABILITA' LIMITATA",
       "sedeTesto": "VIA MARIO V BENEVENTO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "10886640969",
+      "denominazione": "BASELL SALES & MARKETING COMPANY B.V.",
+      "codiceFiscale": "97847500150",
+      "formaGiuridica": "SOCIETA' COSTITUITA IN BASE A LEGGI DI ALTRO STATO",
+      "statoAttivita": "attiva",
+      "reaNumero": "2561988",
+      "reaCciaa": "MI",
+      "capitaleSociale": 50000.0,
+      "atecoPrimario": "4612",
+      "atecoVersione": "2022",
+      "dipendenti": 44,
+      "annoCostituzione": null,
+      "dataCostituzione": null,
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6621828000.0,
+          "utile": null,
+          "dipendenti": 44
+        }
+      ],
+      "sede": {
+        "via": "DELFTSEPLEIN 27",
+        "cap": null,
+        "comune": null,
+        "provincia": "EE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01242010625",
@@ -2179,6 +2691,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "12532500159",
+      "denominazione": "BMW ITALIA S.P.A.",
+      "codiceFiscale": "01934110154",
+      "formaGiuridica": "AU",
+      "statoAttivita": null,
+      "reaNumero": "1403223",
+      "reaCciaa": "MI",
+      "capitaleSociale": 5300000.0,
+      "atecoPrimario": "47811",
+      "atecoVersione": "2022",
+      "dipendenti": 260,
+      "annoCostituzione": null,
+      "dataCostituzione": "1973-07-03",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3649413964.0,
+          "utile": null,
+          "dipendenti": 260
+        }
+      ],
+      "sede": {
+        "via": "VIA DELL'UNIONE EUROPEA 1",
+        "cap": "20097",
+        "comune": "SAN DONATO MILANESE",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "02693010353",
@@ -4333,6 +4877,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "00155440514",
+      "denominazione": "CHIMET S.P.A.",
+      "codiceFiscale": "00155440514",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "61012",
+      "reaCciaa": "AR",
+      "capitaleSociale": 50000000.0,
+      "atecoPrimario": "244",
+      "atecoVersione": "2022",
+      "dipendenti": 147,
+      "annoCostituzione": null,
+      "dataCostituzione": "1976-05-10",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6056830238.0,
+          "utile": null,
+          "dipendenti": 147
+        }
+      ],
+      "sede": {
+        "via": "VIA DEI LAGHI 31/33",
+        "cap": "52041",
+        "comune": "CIVITELLA IN VAL DI CHIANA",
+        "provincia": "AR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01289750620",
       "denominazione": "CI.MAR.S.R.L.",
       "sedeTesto": "VIA PROVINCIALE CAUDINA SNC AIROLA",
@@ -4361,6 +4937,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00370290363",
+      "denominazione": "CNH INDUSTRIAL ITALIA S.P.A.",
+      "codiceFiscale": "00370290363",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "489362",
+      "reaCciaa": "TO",
+      "capitaleSociale": 56225000.0,
+      "atecoPrimario": "28301",
+      "atecoVersione": "2022",
+      "dipendenti": 4956,
+      "annoCostituzione": null,
+      "dataCostituzione": "1974-09-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2752445507.0,
+          "utile": null,
+          "dipendenti": 4956
+        }
+      ],
+      "sede": {
+        "via": "LUNGOSTURA LAZIO 19",
+        "cap": "10156",
+        "comune": "TORINO",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01518620628",
       "denominazione": "CO. GE. FRA. COSTRUZIONI SRL - UNIPERSONALE",
       "sedeTesto": "VIA PIANA 115 MORCONE",
@@ -4382,6 +4990,70 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "03320960374",
+      "denominazione": "CONAD - CONSORZIO NAZIONALE DETTAGLIANTI S.P.A.",
+      "codiceFiscale": "00865960157",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": "attiva",
+      "reaNumero": "195010",
+      "reaCciaa": "BO",
+      "capitaleSociale": null,
+      "atecoPrimario": "4619",
+      "atecoVersione": "2022",
+      "dipendenti": 257,
+      "annoCostituzione": null,
+      "dataCostituzione": "1962-05-13",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2693227072.0,
+          "utile": null,
+          "dipendenti": 257
+        }
+      ],
+      "sede": {
+        "via": "VIA MICHELINO 59",
+        "cap": "40127",
+        "comune": "BOLOGNA",
+        "provincia": "BO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "01977130473",
+      "denominazione": "CONAD NORD OVEST SOCIETA' COOPERATIVA",
+      "codiceFiscale": "01977130473",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": null,
+      "reaNumero": "195966",
+      "reaCciaa": "PT",
+      "capitaleSociale": 91808446.0,
+      "atecoPrimario": "4639",
+      "atecoVersione": "2022",
+      "dipendenti": 510,
+      "annoCostituzione": null,
+      "dataCostituzione": "2019-10-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3147949713.0,
+          "utile": null,
+          "dipendenti": 510
+        }
+      ],
+      "sede": {
+        "via": "VIA BURE VECCHIA NORD 10",
+        "cap": "51100",
+        "comune": "PISTOIA",
+        "provincia": "PT"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01766870628",
       "denominazione": "CONSORZIO ALBATROS",
       "sedeTesto": "VIA FILIPPO RAGUZZINI, 5 BENEVENTO",
@@ -4394,6 +5066,38 @@
       "sedeTesto": "VIA VALFORTORE 18 SAN BARTOLOMEO IN GALDO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03503411203",
+      "denominazione": "COOP ALLEANZA 3.0 SOCIETA' COOPERATIVA",
+      "codiceFiscale": "03503411203",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": "attiva",
+      "reaNumero": "524364",
+      "reaCciaa": "BO",
+      "capitaleSociale": null,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 16225,
+      "annoCostituzione": null,
+      "dataCostituzione": "2016-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3928119119.0,
+          "utile": null,
+          "dipendenti": 16225
+        }
+      ],
+      "sede": {
+        "via": "VIA VILLANOVA 29/7",
+        "cap": "40055",
+        "comune": "CASTENASO",
+        "provincia": "BO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "00205000136",
@@ -4532,6 +5236,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "02545900108",
+      "denominazione": "COSTA CROCIERE S.P.A.",
+      "codiceFiscale": "02545900108",
+      "formaGiuridica": "SOCIETÀ PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "279842",
+      "reaCciaa": "GE",
+      "capitaleSociale": 344310720.0,
+      "atecoPrimario": "501",
+      "atecoVersione": "2022",
+      "dipendenti": 2965,
+      "annoCostituzione": null,
+      "dataCostituzione": "2004-10-21",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4699298493.0,
+          "utile": null,
+          "dipendenti": 2965
+        }
+      ],
+      "sede": {
+        "via": "PIAZZA PICCAPIETRA 48",
+        "cap": "16121",
+        "comune": "GENOVA",
+        "provincia": "GE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01648130621",
@@ -8051,6 +8787,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "13533200963",
+      "denominazione": "DATWAVE S.R.L.",
+      "codiceFiscale": "13533200963",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "2728869",
+      "reaCciaa": "MI",
+      "capitaleSociale": 100000.0,
+      "atecoPrimario": "62201",
+      "atecoVersione": "2022",
+      "dipendenti": null,
+      "annoCostituzione": null,
+      "dataCostituzione": "2024-04-29",
+      "pec": "datwave@pec.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3071333000.0,
+          "utile": null,
+          "dipendenti": null
+        }
+      ],
+      "sede": {
+        "via": "PIAZZA SAN BABILA 5",
+        "cap": "20122",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "02588580965",
       "denominazione": "DELIZIA S.R.L. PDV BELLUSCO",
       "sede": {
@@ -8186,6 +8954,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01016870329",
+      "denominazione": "DUFERCO ENERGIA S.P.A.",
+      "codiceFiscale": "03544070174",
+      "formaGiuridica": "SOCIETÀ PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "448318",
+      "reaCciaa": "GE",
+      "capitaleSociale": 30000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 373,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-03-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3471060117.0,
+          "utile": null,
+          "dipendenti": 373
+        }
+      ],
+      "sede": {
+        "via": "VIA PAOLO IMPERIALE 4",
+        "cap": "16126",
+        "comune": "GENOVA",
+        "provincia": "GE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "19957600463",
@@ -9072,6 +9872,38 @@
       "origine": "dataset dimostrativo"
     },
     {
+      "partitaIva": "05779711000",
+      "denominazione": "E-DISTRIBUZIONE S.P.A.",
+      "codiceFiscale": "05779711000",
+      "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+      "statoAttivita": "attiva",
+      "reaNumero": "922436",
+      "reaCciaa": "RM",
+      "capitaleSociale": 2600000000.0,
+      "atecoPrimario": "3514",
+      "atecoVersione": "2022",
+      "dipendenti": 16059,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-10-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7990967769.0,
+          "utile": null,
+          "dipendenti": 16059
+        }
+      ],
+      "sede": {
+        "via": "VIA DOMENICO CIMAROSA 4",
+        "cap": "00198",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01792520627",
       "denominazione": "E.F. DI ELMESE FRANCESCO",
       "sedeTesto": "VIA BENEVENTO, 185 MONTESARCHIO",
@@ -9177,6 +10009,70 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "08526440154",
+      "denominazione": "EDISON ENERGIA S.P.A.",
+      "codiceFiscale": "08526440154",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "1229342",
+      "reaCciaa": "MI",
+      "capitaleSociale": 40000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 488,
+      "annoCostituzione": null,
+      "dataCostituzione": "1990-11-28",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6389410221.0,
+          "utile": null,
+          "dipendenti": 488
+        }
+      ],
+      "sede": {
+        "via": "FORO BUONAPARTE 31",
+        "cap": "20121",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "08263330014",
+      "denominazione": "EDISON S.P.A.",
+      "codiceFiscale": "06722600019",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1698754",
+      "reaCciaa": "MI",
+      "capitaleSociale": 4736117250.0,
+      "atecoPrimario": "821",
+      "atecoVersione": "2022",
+      "dipendenti": 1654,
+      "annoCostituzione": null,
+      "dataCostituzione": "2002-11-04",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 12720885140.0,
+          "utile": null,
+          "dipendenti": 1654
+        }
+      ],
+      "sede": {
+        "via": "FORO BUONAPARTE 31",
+        "cap": "20121",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "02138460130",
       "denominazione": "EFFEGI S.N.C. DI GOSSI PI",
       "sede": {
@@ -9213,6 +10109,102 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "06655971007",
+      "denominazione": "ENEL ENERGIA S.P.A.",
+      "codiceFiscale": "06655971007",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1150724",
+      "reaCciaa": "RM",
+      "capitaleSociale": 10000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 1900,
+      "annoCostituzione": null,
+      "dataCostituzione": "2006-12-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 23177386237.0,
+          "utile": null,
+          "dipendenti": 1900
+        }
+      ],
+      "sede": {
+        "via": "VIA LUIGI BOCCHERINI 15",
+        "cap": "00198",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "05918271007",
+      "denominazione": "ENEL GLOBAL TRADING S.P.A.",
+      "codiceFiscale": "05918271007",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "936646",
+      "reaCciaa": "RM",
+      "capitaleSociale": 90885000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 456,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-12-30",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 14481513962.0,
+          "utile": null,
+          "dipendenti": 456
+        }
+      ],
+      "sede": {
+        "via": "VIALE REGINA MARGHERITA 125",
+        "cap": "00198",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "05617841001",
+      "denominazione": "ENEL PRODUZIONE S.P.A.",
+      "codiceFiscale": "05617841001",
+      "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+      "statoAttivita": "attiva",
+      "reaNumero": "904803",
+      "reaCciaa": "RM",
+      "capitaleSociale": 1800000000.0,
+      "atecoPrimario": "3512",
+      "atecoVersione": "2022",
+      "dipendenti": 1491,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-10-10",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6279569647.0,
+          "utile": null,
+          "dipendenti": 1491
+        }
+      ],
+      "sede": {
+        "via": "VIA LUIGI BOCCHERINI 15",
+        "cap": "00198",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01772210629",
       "denominazione": "ENGENEERING EVOLUTION S.R.L.",
       "sedeTesto": "VIA ENRICO DE NICOLA, 10 APICE",
@@ -9220,11 +10212,235 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "06289781004",
+      "denominazione": "ENGIE ITALIA S.P.A.",
+      "codiceFiscale": "06289781004",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1817090",
+      "reaCciaa": "MI",
+      "capitaleSociale": 47460583.0,
+      "atecoPrimario": "71121",
+      "atecoVersione": "2022",
+      "dipendenti": 676,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-09-26",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7500614436.0,
+          "utile": null,
+          "dipendenti": 676
+        }
+      ],
+      "sede": {
+        "via": "VIA CHIESE 72",
+        "cap": "20126",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "12300020158",
+      "denominazione": "ENI PLENITUDE S.P.A. SOCIETA' BENEFIT",
+      "codiceFiscale": "12300020158",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1544762",
+      "reaCciaa": "MI",
+      "capitaleSociale": 855555556.0,
+      "atecoPrimario": "3523",
+      "atecoVersione": "2022",
+      "dipendenti": 1885,
+      "annoCostituzione": null,
+      "dataCostituzione": "2017-03-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7064842193.0,
+          "utile": null,
+          "dipendenti": 1885
+        }
+      ],
+      "sede": {
+        "via": "VIA GIOVANNI LORENZINI 4",
+        "cap": "20139",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "00905811006",
+      "denominazione": "ENI S.P.A.",
+      "codiceFiscale": "00484960588",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "756453",
+      "reaCciaa": "RM",
+      "capitaleSociale": 4005358876.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 11623,
+      "annoCostituzione": null,
+      "dataCostituzione": "1992-08-07",
+      "pec": "eni@pec.eni.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 35026371529.0,
+          "utile": null,
+          "dipendenti": 11623
+        }
+      ],
+      "sede": {
+        "via": "Piazzale Enrico Mattei 1",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "10133500966",
+      "denominazione": "ENI TRADE & BIOFUELS S.P.A.",
+      "codiceFiscale": "10133500966",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1609163",
+      "reaCciaa": "RM",
+      "capitaleSociale": 3050000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 99,
+      "annoCostituzione": null,
+      "dataCostituzione": "2021-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 36110164591.0,
+          "utile": null,
+          "dipendenti": 99
+        }
+      ],
+      "sede": {
+        "via": "PIAZZALE ENRICO MATTEI 1",
+        "cap": "00144",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "11403240960",
+      "denominazione": "ENILIVE S.P.A.",
+      "codiceFiscale": "11403240960",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "1676444",
+      "reaCciaa": "RM",
+      "capitaleSociale": 437094420.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 1372,
+      "annoCostituzione": null,
+      "dataCostituzione": "2022-12-12",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 13162232455.0,
+          "utile": null,
+          "dipendenti": 1372
+        }
+      ],
+      "sede": {
+        "via": "Viale Giorgio Ribotta 51",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "02701740108",
+      "denominazione": "ENIMOOV S.P.A.",
+      "codiceFiscale": "02701740108",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "904784",
+      "reaCciaa": "RM",
+      "capitaleSociale": 59944310.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 159,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-07-09",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3860571505.0,
+          "utile": null,
+          "dipendenti": 159
+        }
+      ],
+      "sede": {
+        "via": "Viale Giorgio Ribotta 51",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "03983200613",
       "denominazione": "ERPA FER S.R.L.",
       "sedeTesto": "C.DA SAN VITALE, 244 - BENEVENTO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "17112421007",
+      "denominazione": "ESE S.R.L.",
+      "codiceFiscale": "17112421007",
+      "formaGiuridica": "SOCIETÀ A RESPONSABILITÀ LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "1696571",
+      "reaCciaa": "RM",
+      "capitaleSociale": 1010000.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 90,
+      "annoCostituzione": null,
+      "dataCostituzione": "2023-10-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 11327055429.0,
+          "utile": null,
+          "dipendenti": 90
+        }
+      ],
+      "sede": {
+        "via": "VIA SALARIA 1322",
+        "cap": "00138",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "09300480960",
@@ -9237,6 +10453,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "04916380159",
+      "denominazione": "ESSELUNGA S.P.A.",
+      "codiceFiscale": "01255720169",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1063068",
+      "reaCciaa": "MI",
+      "capitaleSociale": 100000000.0,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 26736,
+      "annoCostituzione": null,
+      "dataCostituzione": "1980-12-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 9112444447.0,
+          "utile": null,
+          "dipendenti": 26736
+        }
+      ],
+      "sede": {
+        "via": "VIA VITTOR PISANI 20",
+        "cap": "20124",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "03790280659",
@@ -10580,11 +11828,139 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "12878470157",
+      "denominazione": "FASTWEB S.P.A.",
+      "codiceFiscale": "12878470157",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1591912",
+      "reaCciaa": "MI",
+      "capitaleSociale": 41344209.4,
+      "atecoPrimario": "61",
+      "atecoVersione": "2022",
+      "dipendenti": 3203,
+      "annoCostituzione": null,
+      "dataCostituzione": "2004-12-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2796960059.0,
+          "utile": null,
+          "dipendenti": 3203
+        }
+      ],
+      "sede": {
+        "via": "Piazza Adriano Olivetti 1",
+        "cap": "20139",
+        "comune": "Milano",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "00159560366",
+      "denominazione": "FERRARI S.P.A.",
+      "codiceFiscale": "00159560366",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "88683",
+      "reaCciaa": "MO",
+      "capitaleSociale": 20260000.0,
+      "atecoPrimario": "291",
+      "atecoVersione": "2022",
+      "dipendenti": 4934,
+      "annoCostituzione": null,
+      "dataCostituzione": "1960-05-23",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6284626802.0,
+          "utile": null,
+          "dipendenti": 4934
+        }
+      ],
+      "sede": {
+        "via": "VIA EMILIA EST 1163",
+        "cap": "41122",
+        "comune": "MODENA",
+        "provincia": "MO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01343270623",
       "denominazione": "FIERRO SERVICE S.R.L.",
       "sedeTesto": "VIALE DELLA STORIA, 12 APICE",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00629440322",
+      "denominazione": "FINCANTIERI S.P.A.",
+      "codiceFiscale": "00397130584",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "89063",
+      "reaCciaa": "TS",
+      "capitaleSociale": 883722972.7,
+      "atecoPrimario": "301",
+      "atecoVersione": "2022",
+      "dipendenti": 9119,
+      "annoCostituzione": null,
+      "dataCostituzione": "1984-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3792580246.0,
+          "utile": null,
+          "dipendenti": 9119
+        }
+      ],
+      "sede": {
+        "via": "VIA GENOVA 1",
+        "cap": "34121",
+        "comune": "TRIESTE",
+        "provincia": "TS"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "00894451004",
+      "denominazione": "FORD ITALIA S.P.A.",
+      "codiceFiscale": "00443120589",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "221081",
+      "reaCciaa": "RM",
+      "capitaleSociale": 250000.0,
+      "atecoPrimario": "46711",
+      "atecoVersione": "2022",
+      "dipendenti": 152,
+      "annoCostituzione": null,
+      "dataCostituzione": "2008-02-20",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2618629000.0,
+          "utile": null,
+          "dipendenti": 152
+        }
+      ],
+      "sede": {
+        "via": "VIA DEL SERAFICO 89",
+        "cap": "00142",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01588360626",
@@ -10659,6 +12035,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "09397710014",
+      "denominazione": "FPT INDUSTRIAL S.P.A.",
+      "codiceFiscale": "09397710014",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "1048700",
+      "reaCciaa": "TO",
+      "capitaleSociale": 100000000.0,
+      "atecoPrimario": "291 (Fabbricazione di autoveicoli)",
+      "atecoVersione": "2022",
+      "dipendenti": 5235,
+      "annoCostituzione": null,
+      "dataCostituzione": "2010-12-01",
+      "pec": "fptindustrial@legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3172669673.0,
+          "utile": null,
+          "dipendenti": 5235
+        }
+      ],
+      "sede": {
+        "via": "VIA PUGLIA 15",
+        "cap": "10156",
+        "comune": "TORINO",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "07680980963",
@@ -12475,6 +13883,70 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "06208031002",
+      "denominazione": "GESTORE DEI MERCATI ENERGETICI S.P.A.",
+      "codiceFiscale": "06208031002",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "953866",
+      "reaCciaa": "RM",
+      "capitaleSociale": 7500000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 122,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-12-21",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 40503424402.0,
+          "utile": null,
+          "dipendenti": 122
+        }
+      ],
+      "sede": {
+        "via": "Viale Maresciallo Pilsudski 122/124",
+        "cap": "00197",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "05754381001",
+      "denominazione": "GESTORE DEI SERVIZI ENERGETICI - GSE S.P.A.",
+      "codiceFiscale": "05754381001",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "918934",
+      "reaCciaa": "RM",
+      "capitaleSociale": 26000000.0,
+      "atecoPrimario": "3513",
+      "atecoVersione": "2022",
+      "dipendenti": 702,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-08-02",
+      "pec": "gse@pec.gse.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 14403059144.0,
+          "utile": null,
+          "dipendenti": 702
+        }
+      ],
+      "sede": {
+        "via": "Viale Maresciallo Pilsudski 92",
+        "cap": "00197",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01088990625",
       "denominazione": "GIADA ONLUS SOCIETA' COOPERATIVA SOCIALE PER AZIONI",
       "sedeTesto": "VIA DELLE LAME COLLE SANNITA",
@@ -12539,6 +14011,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00882090152",
+      "denominazione": "GROUPE PSA ITALIA S.P.A.",
+      "codiceFiscale": "00882090152",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1297722",
+      "reaCciaa": "TO",
+      "capitaleSociale": 4480000.0,
+      "atecoPrimario": "46711",
+      "atecoVersione": "2022",
+      "dipendenti": 197,
+      "annoCostituzione": null,
+      "dataCostituzione": "1969-03-12",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4344716308.0,
+          "utile": null,
+          "dipendenti": 197
+        }
+      ],
+      "sede": {
+        "via": "VIA PLAVA 80",
+        "cap": "10135",
+        "comune": "TORINO",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01770270625",
       "denominazione": "GRUPPO FRACH S.R.L.",
       "sedeTesto": "VIA SAN GIOVANNI 29C - TELESE TERME",
@@ -12553,6 +14057,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "12683790153",
+      "denominazione": "GS S.P.A.",
+      "codiceFiscale": "00295960637",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1396833",
+      "reaCciaa": "MI",
+      "capitaleSociale": 50000000.0,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 10992,
+      "annoCostituzione": null,
+      "dataCostituzione": "1998-11-02",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3633719298.0,
+          "utile": null,
+          "dipendenti": 10992
+        }
+      ],
+      "sede": {
+        "via": "VIA BISCEGLIE 66",
+        "cap": "20152",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01651120626",
       "denominazione": "GSA S.R.L.",
       "sedeTesto": "VIA NAZIONALE 67/B FOIANO DI VAL FORTORE",
@@ -12565,6 +14101,38 @@
       "sedeTesto": "VIA CUPE 4 SAN LUPO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "04294710480",
+      "denominazione": "GUCCIO GUCCI S.P.A.",
+      "codiceFiscale": "03031300159",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "438090",
+      "reaCciaa": "FI",
+      "capitaleSociale": 50000000.0,
+      "atecoPrimario": "1512",
+      "atecoVersione": "2022",
+      "dipendenti": 1727,
+      "annoCostituzione": null,
+      "dataCostituzione": "1991-03-29",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3378341432.0,
+          "utile": null,
+          "dipendenti": 1727
+        }
+      ],
+      "sede": {
+        "via": "VIA DEI TORNABUONI 73/R",
+        "cap": "50123",
+        "comune": "FIRENZE",
+        "provincia": "FI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "03519710499",
@@ -13373,6 +14941,102 @@
       "origine": "dataset dimostrativo"
     },
     {
+      "partitaIva": "02221101203",
+      "denominazione": "HERA COMM S.P.A.",
+      "codiceFiscale": "02221101203",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "421914",
+      "reaCciaa": "BO",
+      "capitaleSociale": 53595898.95,
+      "atecoPrimario": "3523",
+      "atecoVersione": "2022",
+      "dipendenti": 651,
+      "annoCostituzione": null,
+      "dataCostituzione": "2002-01-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5845733766.0,
+          "utile": null,
+          "dipendenti": 651
+        }
+      ],
+      "sede": {
+        "via": "VIA MOLINO ROSSO 8",
+        "cap": "40026",
+        "comune": "IMOLA",
+        "provincia": "BO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "02060500390",
+      "denominazione": "HERA TRADING S.R.L.",
+      "codiceFiscale": "02060500390",
+      "formaGiuridica": "SR (Società a responsabilità limitata)",
+      "statoAttivita": "attiva",
+      "reaNumero": "133985",
+      "reaCciaa": "TS",
+      "capitaleSociale": 22600000.0,
+      "atecoPrimario": "3523",
+      "atecoVersione": "2022",
+      "dipendenti": 47,
+      "annoCostituzione": null,
+      "dataCostituzione": "2004-07-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6720344223.0,
+          "utile": null,
+          "dipendenti": 47
+        }
+      ],
+      "sede": {
+        "via": "VIA DEL TEATRO 5",
+        "cap": "34121",
+        "comune": "TRIESTE",
+        "provincia": "TS"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "01371160662",
+      "denominazione": "HITACHI RAIL STS S.P.A.",
+      "codiceFiscale": "01371160662",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "761628",
+      "reaCciaa": "NA",
+      "capitaleSociale": 100000000.0,
+      "atecoPrimario": "302",
+      "atecoVersione": "2022",
+      "dipendenti": 4574,
+      "annoCostituzione": null,
+      "dataCostituzione": "2005-11-21",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2956092187.0,
+          "utile": null,
+          "dipendenti": 4574
+        }
+      ],
+      "sede": {
+        "via": "VIA ARGINE 425",
+        "cap": "80147",
+        "comune": "NAPOLI",
+        "provincia": "NA"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01106050626",
       "denominazione": "HOTEL IL CASTELLO S.R.L.",
       "sedeTesto": "VIA VITULANESE MONTESARCHIO",
@@ -13902,6 +15566,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "01178580997",
+      "denominazione": "IREN MERCATO S.P.A.",
+      "codiceFiscale": "01178580997",
+      "formaGiuridica": "SP (Società Per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "390320",
+      "reaCciaa": "GE",
+      "capitaleSociale": 61356220.0,
+      "atecoPrimario": "3515 - Commercio di energia elettrica",
+      "atecoVersione": "2022",
+      "dipendenti": 615,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-03-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3263757697.0,
+          "utile": null,
+          "dipendenti": 615
+        }
+      ],
+      "sede": {
+        "via": "PIAZZETTA GIAMBATTISTA RAGGI 6",
+        "cap": "16137",
+        "comune": "GENOVA",
+        "provincia": "GE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "04232440984",
       "denominazione": "IRIDEA MARK",
       "sede": {
@@ -13925,6 +15621,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01629050897",
+      "denominazione": "ISAB S.R.L.",
+      "codiceFiscale": "01629050897",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "136409",
+      "reaCciaa": "SR",
+      "capitaleSociale": 50000000.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 1022,
+      "annoCostituzione": null,
+      "dataCostituzione": "2008-12-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6856500951.0,
+          "utile": null,
+          "dipendenti": 1022
+        }
+      ],
+      "sede": {
+        "via": "EX S.S. 114 KM 146",
+        "cap": "96010",
+        "comune": "PRIOLO GARGALLO",
+        "provincia": "SR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "04302950987",
@@ -13977,6 +15705,134 @@
       "sedeTesto": "VIA CAUDINA 20 SANT'AGATA DE' GOTI",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "15907661001",
+      "denominazione": "ITALIA TRASPORTO AEREO S.P.A.",
+      "codiceFiscale": "15907661001",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1622937",
+      "reaCciaa": "RM",
+      "capitaleSociale": 792682926.83,
+      "atecoPrimario": "51101",
+      "atecoVersione": "2022",
+      "dipendenti": 4678,
+      "annoCostituzione": null,
+      "dataCostituzione": "2020-12-21",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2919767113.0,
+          "utile": null,
+          "dipendenti": 4678
+        }
+      ],
+      "sede": {
+        "via": "VIA VENTI SETTEMBRE 97",
+        "cap": "00187",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "00051570893",
+      "denominazione": "ITALIANA PETROLI S.P.A.",
+      "codiceFiscale": "00051570893",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "740950",
+      "reaCciaa": "RM",
+      "capitaleSociale": 47665314.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 627,
+      "annoCostituzione": null,
+      "dataCostituzione": "2015-01-22",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7367922100.0,
+          "utile": null,
+          "dipendenti": 627
+        }
+      ],
+      "sede": {
+        "via": "VIA SALARIA 1322",
+        "cap": "00138",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "01111420517",
+      "denominazione": "ITALPREZIOSI S.P.A.",
+      "codiceFiscale": "01111420517",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "83621",
+      "reaCciaa": "AR",
+      "capitaleSociale": 25000000.0,
+      "atecoPrimario": "2441",
+      "atecoVersione": "2022",
+      "dipendenti": 91,
+      "annoCostituzione": null,
+      "dataCostituzione": "1984-06-09",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3942513492.0,
+          "utile": null,
+          "dipendenti": 91
+        }
+      ],
+      "sede": {
+        "via": "LOCALITA' SAN ZENO ZONA INDUSTRIALE STRADA A 32",
+        "cap": "52100",
+        "comune": "AREZZO",
+        "provincia": "AR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "09709770011",
+      "denominazione": "IVECO S.P.A.",
+      "codiceFiscale": "09709770011",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "1074767",
+      "reaCciaa": "TO",
+      "capitaleSociale": 200000000.0,
+      "atecoPrimario": "291",
+      "atecoVersione": "2022",
+      "dipendenti": 6733,
+      "annoCostituzione": null,
+      "dataCostituzione": "2010-12-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7065384954.0,
+          "utile": null,
+          "dipendenti": 6733
+        }
+      ],
+      "sede": {
+        "via": "VIA PUGLIA 35",
+        "cap": "10156",
+        "comune": "TORINO",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "08013180321",
@@ -15753,6 +17609,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00891951006",
+      "denominazione": "KUWAIT PETROLEUM ITALIA S.P.A.",
+      "codiceFiscale": "00435970587",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": null,
+      "reaNumero": "73832",
+      "reaCciaa": "RM",
+      "capitaleSociale": 130000000.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 708,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-06-25",
+      "pec": "kuwaitpetroleum@pec.kuwaitpetroleum.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 14941759584.0,
+          "utile": null,
+          "dipendenti": 708
+        }
+      ],
+      "sede": {
+        "via": "Viale dell'Oceano Indiano 13",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "50311180272",
       "denominazione": "Kairos Academy",
       "codiceFiscale": "50311180272",
@@ -16260,6 +18148,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "00881841001",
+      "denominazione": "LEONARDO - SOCIETA' PER AZIONI",
+      "codiceFiscale": "00401990585",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "7031",
+      "reaCciaa": "RM",
+      "capitaleSociale": 2543861738.0,
+      "atecoPrimario": "303",
+      "atecoVersione": "2022",
+      "dipendenti": 32230,
+      "annoCostituzione": null,
+      "dataCostituzione": "1993-02-20",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 10964526991.0,
+          "utile": null,
+          "dipendenti": 32230
+        }
+      ],
+      "sede": {
+        "via": "Piazza Monte Grappa 4",
+        "cap": "00195",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "03040140265",
       "denominazione": "LF COSTRUZIONI S.R.L.",
       "sede": {
@@ -16272,11 +18192,107 @@
       "origine": "elenco imprese di costruzioni"
     },
     {
+      "partitaIva": "02275030233",
+      "denominazione": "LIDL ITALIA S.R.L.",
+      "codiceFiscale": "02275030233",
+      "formaGiuridica": "SOCIETÀ A RESPONSABILITÀ LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "228845",
+      "reaCciaa": "VR",
+      "capitaleSociale": 40000000.0,
+      "atecoPrimario": "469",
+      "atecoVersione": "2022",
+      "dipendenti": 22565,
+      "annoCostituzione": null,
+      "dataCostituzione": "1991-07-20",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7438283125.0,
+          "utile": null,
+          "dipendenti": 22565
+        }
+      ],
+      "sede": {
+        "via": "VIA AUGUSTO RUFFO 36",
+        "cap": "37040",
+        "comune": "ARCOLE",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "06741351008",
+      "denominazione": "LOGISTA ITALIA S.P.A.",
+      "codiceFiscale": "06741351008",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "986948",
+      "reaCciaa": "RM",
+      "capitaleSociale": 15164000.0,
+      "atecoPrimario": "463509",
+      "atecoVersione": "2022",
+      "dipendenti": 482,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-10-01",
+      "pec": "logista.italia@pec.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4273665836.0,
+          "utile": null,
+          "dipendenti": 482
+        }
+      ],
+      "sede": {
+        "via": "VIA VALADIER 37",
+        "cap": "00193",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01617710627",
       "denominazione": "LONGO S.R.L.",
       "sedeTesto": "CONTRADA CERZA CUPA SNC - MOLINARA",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "07047491217",
+      "denominazione": "LUDOIL ENERGIA S.R.L.",
+      "codiceFiscale": "07047491217",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": null,
+      "reaNumero": "1743714",
+      "reaCciaa": "RM",
+      "capitaleSociale": 20000000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 47,
+      "annoCostituzione": null,
+      "dataCostituzione": "2011-12-20",
+      "pec": "ludoilenergia@pec.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3362769050.0,
+          "utile": null,
+          "dipendenti": 47
+        }
+      ],
+      "sede": {
+        "via": "VIA AURELIA NORD 8",
+        "cap": "00053",
+        "comune": "CIVITAVECCHIA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01289520627",
@@ -16321,6 +18337,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "10182640150",
+      "denominazione": "LUXOTTICA GROUP S.P.A.",
+      "codiceFiscale": "00891030272",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "1348098",
+      "reaCciaa": "MI",
+      "capitaleSociale": 29111701.98,
+      "atecoPrimario": "46431",
+      "atecoVersione": "2022",
+      "dipendenti": 3638,
+      "annoCostituzione": null,
+      "dataCostituzione": "1981-11-23",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4357524998.0,
+          "utile": null,
+          "dipendenti": 3638
+        }
+      ],
+      "sede": {
+        "via": "Piazzale Luigi Cadorna 3",
+        "cap": "20123",
+        "comune": "Milano",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "75520090210",
@@ -17169,6 +19217,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "02466220205",
+      "denominazione": "MARCEGAGLIA CARBON STEEL S.P.A.",
+      "codiceFiscale": "02466220205",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "255216",
+      "reaCciaa": "MN",
+      "capitaleSociale": 396218598.0,
+      "atecoPrimario": "24202",
+      "atecoVersione": "2022",
+      "dipendenti": 1762,
+      "annoCostituzione": null,
+      "dataCostituzione": "2015-11-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3302069127.0,
+          "utile": null,
+          "dipendenti": 1762
+        }
+      ],
+      "sede": {
+        "via": "VIA DE' BRESCIANI 16",
+        "cap": "46040",
+        "comune": "GAZOLDO DEGLI IPPOLITI",
+        "provincia": "MN"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01053720338",
       "denominazione": "MARK",
       "sede": {
@@ -17225,6 +19305,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00542090238",
+      "denominazione": "MAXI DI S.R.L.",
+      "codiceFiscale": "00542090238",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": null,
+      "reaNumero": "142404",
+      "reaCciaa": "VR",
+      "capitaleSociale": 10000000.0,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 7210,
+      "annoCostituzione": null,
+      "dataCostituzione": "1975-03-25",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2764577752.0,
+          "utile": null,
+          "dipendenti": 7210
+        }
+      ],
+      "sede": {
+        "via": "VIALE DEL LAVORO 20",
+        "cap": "37050",
+        "comune": "BELFIORE",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01844450625",
       "denominazione": "MC GREEN SRLS SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
       "sedeTesto": "VIA APPIA EST, 31 ARPAIA",
@@ -17232,11 +19344,75 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "03185210618",
+      "denominazione": "MD S.P.A.",
+      "codiceFiscale": "03185210618",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": "attiva",
+      "reaNumero": "224859",
+      "reaCciaa": "CE",
+      "capitaleSociale": 150000000.0,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 8012,
+      "annoCostituzione": null,
+      "dataCostituzione": "2006-08-11",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3605825597.0,
+          "utile": null,
+          "dipendenti": 8012
+        }
+      ],
+      "sede": {
+        "via": "ZONA INDUSTRIALE A.S.I. CAPANNONE N.18",
+        "cap": "81030",
+        "comune": "GRICIGNANO DI AVERSA",
+        "provincia": "CE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01342740626",
       "denominazione": "MECCANICA S.A.S. DI IORIO SALVATORE & C.",
       "sedeTesto": "C.DA SANTO STEFANO SNC VITULANO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "06325761002",
+      "denominazione": "MERCEDES-BENZ ITALIA S.P.A.",
+      "codiceFiscale": "06325761002",
+      "formaGiuridica": "SP (Società per Azioni)",
+      "statoAttivita": null,
+      "reaNumero": "960386",
+      "reaCciaa": "RM",
+      "capitaleSociale": 38002000.0,
+      "atecoPrimario": "46711",
+      "atecoVersione": "2022",
+      "dipendenti": 402,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-01-19",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3230389167.0,
+          "utile": null,
+          "dipendenti": 402
+        }
+      ],
+      "sede": {
+        "via": "VIA GIULIO VINCENZO BONA 110",
+        "cap": "00156",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "03622040164",
@@ -19139,6 +21315,70 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "04880930484",
+      "denominazione": "NUOVO PIGNONE INTERNATIONAL S.R.L.",
+      "codiceFiscale": "04880930484",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "496890",
+      "reaCciaa": "FI",
+      "capitaleSociale": 112004940.84,
+      "atecoPrimario": "28292",
+      "atecoVersione": "2022",
+      "dipendenti": 2034,
+      "annoCostituzione": null,
+      "dataCostituzione": "1998-07-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5383064125.0,
+          "utile": null,
+          "dipendenti": 2034
+        }
+      ],
+      "sede": {
+        "via": "VIA FELICE MATTEUCCI 2",
+        "cap": "50127",
+        "comune": "FIRENZE",
+        "provincia": "FI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "06176750484",
+      "denominazione": "NUOVO PIGNONE S.R.L.",
+      "codiceFiscale": "06176750484",
+      "formaGiuridica": "SOCIETÀ A RESPONSABILITÀ LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "606899",
+      "reaCciaa": "FI",
+      "capitaleSociale": 100000000.0,
+      "atecoPrimario": "28292",
+      "atecoVersione": "2022",
+      "dipendenti": 2228,
+      "annoCostituzione": null,
+      "dataCostituzione": "2011-12-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4128226792.0,
+          "utile": null,
+          "dipendenti": 2228
+        }
+      ],
+      "sede": {
+        "via": "VIA FELICE MATTEUCCI 2",
+        "cap": "50127",
+        "comune": "FIRENZE",
+        "provincia": "FI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01960400354",
       "denominazione": "NUOVO SUPERMERCATO POVIGLIO S.N.C. DI LEONI LORENZO & C. PDV POVIGLIO",
       "sede": {
@@ -19669,6 +21909,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01319940324",
+      "denominazione": "OMV SUPPLY & TRADING ITALIA S.R.L.",
+      "codiceFiscale": "01319940324",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "204004",
+      "reaCciaa": "TS",
+      "capitaleSociale": 22010000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 5,
+      "annoCostituzione": null,
+      "dataCostituzione": "2018-12-27",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 6667869572.0,
+          "utile": null,
+          "dipendenti": 5
+        }
+      ],
+      "sede": {
+        "via": "VIA CESARE BECCARIA 13",
+        "cap": "34133",
+        "comune": "TRIESTE",
+        "provincia": "TS"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01508420625",
@@ -20517,6 +22789,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00163040546",
+      "denominazione": "PAC 2000 A SOCIETA' COOPERATIVA",
+      "codiceFiscale": "00163040546",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": "attiva",
+      "reaNumero": "98419",
+      "reaCciaa": "PG",
+      "capitaleSociale": 55540921.0,
+      "atecoPrimario": "4638",
+      "atecoVersione": "2022",
+      "dipendenti": 778,
+      "annoCostituzione": null,
+      "dataCostituzione": "1972-08-16",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4209971700.0,
+          "utile": null,
+          "dipendenti": 778
+        }
+      ],
+      "sede": {
+        "via": "VIA DEL RAME",
+        "cap": "06134",
+        "comune": "PERUGIA",
+        "provincia": "PG"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01416840625",
       "denominazione": "PADULI MULTISERVIZI S.N.C. DI ZOTTI FABRIZIO E TRUGLIA MOIRA CLAUDIA",
       "sedeTesto": "VIA ENZO MARMORALE 4 PADULI",
@@ -20569,6 +22873,70 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "06657521008",
+      "denominazione": "PHILIP MORRIS ITALIA S.R.L.",
+      "codiceFiscale": "06657521008",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "981615",
+      "reaCciaa": "RM",
+      "capitaleSociale": 5000000.0,
+      "atecoPrimario": "12",
+      "atecoVersione": "2022",
+      "dipendenti": 822,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-09-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2626115296.0,
+          "utile": null,
+          "dipendenti": 822
+        }
+      ],
+      "sede": {
+        "via": "VIA PO 11-15",
+        "cap": "00198",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "07211330159",
+      "denominazione": "PIRELLI TYRE S.P.A.",
+      "codiceFiscale": "07211330159",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "1147607",
+      "reaCciaa": "MI",
+      "capitaleSociale": 558154000.0,
+      "atecoPrimario": "22111",
+      "atecoVersione": "2022",
+      "dipendenti": 1307,
+      "annoCostituzione": null,
+      "dataCostituzione": "1984-03-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4378938646.0,
+          "utile": null,
+          "dipendenti": 1307
+        }
+      ],
+      "sede": {
+        "via": "VIALE PIERO E ALBERTO PIRELLI 25",
+        "cap": "20126",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01832050627",
       "denominazione": "PLP SOCIETA' A RESPONSABILITA' LIMITATA SEMPLIFICATA",
       "sedeTesto": "VIA SPINAZZOLA SNC - CUSANO MUTRI",
@@ -20600,6 +22968,70 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01114601006",
+      "denominazione": "POSTE ITALIANE - SOCIETA' PER AZIONI",
+      "codiceFiscale": "97103880585",
+      "formaGiuridica": "Società per Azioni",
+      "statoAttivita": "attiva",
+      "reaNumero": "842633",
+      "reaCciaa": "RM",
+      "capitaleSociale": 1306110000.0,
+      "atecoPrimario": "531",
+      "atecoVersione": "2022",
+      "dipendenti": 115817,
+      "annoCostituzione": null,
+      "dataCostituzione": "1997-01-01",
+      "pec": "protocollo@postecert.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 10503829486.0,
+          "utile": null,
+          "dipendenti": 115817
+        }
+      ],
+      "sede": {
+        "via": "Viale Europa 190",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "10115350158",
+      "denominazione": "PRADA S.P.A.",
+      "codiceFiscale": "10115350158",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1343952",
+      "reaCciaa": "MI",
+      "capitaleSociale": 255882400.0,
+      "atecoPrimario": "4771",
+      "atecoVersione": "2022",
+      "dipendenti": 5450,
+      "annoCostituzione": null,
+      "dataCostituzione": "1990-07-11",
+      "pec": "prada@legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2976971031.0,
+          "utile": null,
+          "dipendenti": 5450
+        }
+      ],
+      "sede": {
+        "via": "VIA ANTONIO FOGAZZARO 28",
+        "cap": "20135",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01785940626",
@@ -22670,6 +25102,38 @@
       "origine": "dataset dimostrativo"
     },
     {
+      "partitaIva": "06543251000",
+      "denominazione": "Q8 QUASER S.R.L.",
+      "codiceFiscale": "00295420632",
+      "formaGiuridica": "Società a Responsabilità Limitata",
+      "statoAttivita": "attiva",
+      "reaNumero": "973923",
+      "reaCciaa": "RM",
+      "capitaleSociale": 18500000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 84,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-03-31",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3870861011.0,
+          "utile": null,
+          "dipendenti": 84
+        }
+      ],
+      "sede": {
+        "via": "Viale dell'Oceano Indiano 13",
+        "cap": "00144",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "90955030367",
       "denominazione": "Quanta Consulting S.R.L.",
       "codiceFiscale": "90955030367",
@@ -22774,6 +25238,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "05811161008",
+      "denominazione": "RENAULT ITALIA S.P.A.",
+      "codiceFiscale": "00291240638",
+      "formaGiuridica": "SOCIETÀ PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "273440",
+      "reaCciaa": "RM",
+      "capitaleSociale": 2582500.0,
+      "atecoPrimario": "47811",
+      "atecoVersione": "2022",
+      "dipendenti": 213,
+      "annoCostituzione": null,
+      "dataCostituzione": "1962-03-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4054135740.0,
+          "utile": null,
+          "dipendenti": 213
+        }
+      ],
+      "sede": {
+        "via": "VIA TIBURTINA 1159",
+        "cap": "00156",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01796980629",
       "denominazione": "RESTAURI NARDONE S.R.L.",
       "sedeTesto": "VIALE MICHELANGELO, 29 SANT'ANGELO A CUPOLO",
@@ -22786,6 +25282,38 @@
       "sedeTesto": "VIA GALANO, 26- GUARDIA SANFRAMONDI",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "01008081000",
+      "denominazione": "RETE FERROVIARIA ITALIANA - RFI S.P.A.",
+      "codiceFiscale": "01585570581",
+      "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+      "statoAttivita": "attiva",
+      "reaNumero": "758300",
+      "reaCciaa": "RM",
+      "capitaleSociale": 31536472466.0,
+      "atecoPrimario": "49",
+      "atecoVersione": "2022",
+      "dipendenti": 32586,
+      "annoCostituzione": null,
+      "dataCostituzione": "1992-09-10",
+      "pec": "rfi@legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2877373192.0,
+          "utile": null,
+          "dipendenti": 32586
+        }
+      ],
+      "sede": {
+        "via": "PIAZZA DELLA CROCE ROSSA 1",
+        "cap": "00161",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01295960197",
@@ -23660,6 +26188,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "00825790157",
+      "denominazione": "SAIPEM S.P.A.",
+      "codiceFiscale": "00825790157",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "788744",
+      "reaCciaa": "MI",
+      "capitaleSociale": 1001669790.83,
+      "atecoPrimario": "091",
+      "atecoVersione": "2022",
+      "dipendenti": 5970,
+      "annoCostituzione": null,
+      "dataCostituzione": "1996-06-05",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5871918220.0,
+          "utile": null,
+          "dipendenti": 5970
+        }
+      ],
+      "sede": {
+        "via": "VIA LUIGI RUSSOLO 5",
+        "cap": "20138",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01626980344",
       "denominazione": "SAL.CO S.R.L.",
       "sede": {
@@ -23715,6 +26275,38 @@
         }
       ],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "00136440922",
+      "denominazione": "SARAS S.P.A.",
+      "codiceFiscale": "00136440922",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "49540",
+      "reaCciaa": "CA",
+      "capitaleSociale": 67784444.0,
+      "atecoPrimario": "19201",
+      "atecoVersione": "2022",
+      "dipendenti": 279,
+      "annoCostituzione": null,
+      "dataCostituzione": "1962-05-24",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 9614379000.0,
+          "utile": null,
+          "dipendenti": 279
+        }
+      ],
+      "sede": {
+        "via": null,
+        "cap": "09018",
+        "comune": "SARROCH",
+        "provincia": "CA"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "16304881002",
@@ -23794,6 +26386,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "10238291008",
+      "denominazione": "SNAM RETE GAS S.P.A.",
+      "codiceFiscale": "10238291008",
+      "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+      "statoAttivita": "attiva",
+      "reaNumero": "1964271",
+      "reaCciaa": "MI",
+      "capitaleSociale": 1200000000.0,
+      "atecoPrimario": "49501",
+      "atecoVersione": "2022",
+      "dipendenti": 1976,
+      "annoCostituzione": null,
+      "dataCostituzione": "2012-01-01",
+      "pec": "snam.retegasweb@legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2934458041.0,
+          "utile": null,
+          "dipendenti": 1976
+        }
+      ],
+      "sede": {
+        "via": "VIA VEZZA D'OGLIO 6",
+        "cap": "20139",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01627000621",
       "denominazione": "SOCIAL CARE - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON LUCRATIVA DI UTILITA' SOCIALE\"",
       "sedeTesto": "VIA PADULI - BUONALBERGO 6 PADULI",
@@ -23815,11 +26439,139 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "10410680960",
+      "denominazione": "SONATRACH RAFFINERIA ITALIANA S.R.L.",
+      "codiceFiscale": "10410680960",
+      "formaGiuridica": "SOCIETÀ A RESPONSABILITÀ LIMITATA",
+      "statoAttivita": null,
+      "reaNumero": "2529184",
+      "reaCciaa": "MI",
+      "capitaleSociale": 500000000.0,
+      "atecoPrimario": "192",
+      "atecoVersione": "2022",
+      "dipendenti": 766,
+      "annoCostituzione": null,
+      "dataCostituzione": "2018-07-04",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5852126463.0,
+          "utile": null,
+          "dipendenti": 766
+        }
+      ],
+      "sede": {
+        "via": "VIA ALESSANDRO MANZONI 38",
+        "cap": "20121",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "10496660969",
+      "denominazione": "SONY EUROPE B.V.",
+      "codiceFiscale": "10496660969",
+      "formaGiuridica": "SOCIETA' COSTITUITA IN BASE A LEGGI DI ALTRO STATO",
+      "statoAttivita": "attiva",
+      "reaNumero": "2535704",
+      "reaCciaa": "MI",
+      "capitaleSociale": null,
+      "atecoPrimario": "4619",
+      "atecoVersione": "2022",
+      "dipendenti": 76,
+      "annoCostituzione": null,
+      "dataCostituzione": null,
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2696000000.0,
+          "utile": null,
+          "dipendenti": 76
+        }
+      ],
+      "sede": {
+        "via": "TAURUSAVENUE 16",
+        "cap": null,
+        "comune": null,
+        "provincia": "EE"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "12874490159",
+      "denominazione": "SORGENIA S.P.A.",
+      "codiceFiscale": "07756640012",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1594238",
+      "reaCciaa": "MI",
+      "capitaleSociale": 150000000.0,
+      "atecoPrimario": "3515",
+      "atecoVersione": "2022",
+      "dipendenti": 406,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-07-09",
+      "pec": "sorgenia@legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3114146708.0,
+          "utile": null,
+          "dipendenti": 406
+        }
+      ],
+      "sede": {
+        "via": "VIA ALESSANDRO ALGARDI 4",
+        "cap": "20148",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01485610628",
       "denominazione": "SPEEDY TRANS S.R.L. - SOCIETA' A RESPONSABILITA' LIMITATA",
       "sedeTesto": "VIA GIROLAMO D'AMELIO 21 MONTESARCHIO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02416840235",
+      "denominazione": "SPESA INTELLIGENTE S.P.A.",
+      "codiceFiscale": "02416840235",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "238008",
+      "reaCciaa": "VR",
+      "capitaleSociale": 5000000.0,
+      "atecoPrimario": "4711",
+      "atecoVersione": "2022",
+      "dipendenti": 7449,
+      "annoCostituzione": null,
+      "dataCostituzione": "1993-06-21",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3328795303.0,
+          "utile": null,
+          "dipendenti": 7449
+        }
+      ],
+      "sede": {
+        "via": "VIA CAMPALTO 3/D",
+        "cap": "37036",
+        "comune": "SAN MARTINO BUON ALBERGO",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "02387380161",
@@ -23832,6 +26584,70 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "07973780013",
+      "denominazione": "STELLANTIS EUROPE S.P.A.",
+      "codiceFiscale": "07973780013",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "934697",
+      "reaCciaa": "TO",
+      "capitaleSociale": 850000000.0,
+      "atecoPrimario": "291",
+      "atecoVersione": "2022",
+      "dipendenti": 34706,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-06-01",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 21323834620.0,
+          "utile": null,
+          "dipendenti": 34706
+        }
+      ],
+      "sede": {
+        "via": "CORSO GIOVANNI AGNELLI 200",
+        "cap": "10135",
+        "comune": "TORINO",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "00951900968",
+      "denominazione": "STMICROELECTRONICS S.R.L.",
+      "codiceFiscale": "09291380153",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "1281765",
+      "reaCciaa": "MB",
+      "capitaleSociale": 580000000.0,
+      "atecoPrimario": "261",
+      "atecoVersione": "2022",
+      "dipendenti": 12704,
+      "annoCostituzione": null,
+      "dataCostituzione": "1988-06-18",
+      "pec": "stmicroelectronics@pec.legalmail.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2842515755.0,
+          "utile": null,
+          "dipendenti": 12704
+        }
+      ],
+      "sede": {
+        "via": "VIA CAMILLO OLIVETTI 2",
+        "cap": "20864",
+        "comune": "AGRATE BRIANZA",
+        "provincia": "MB"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "03572570988",
@@ -27128,6 +29944,38 @@
       "origine": "dataset dimostrativo"
     },
     {
+      "partitaIva": "00698550159",
+      "denominazione": "TAMOIL ITALIA S.P.A.",
+      "codiceFiscale": "00698550159",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": null,
+      "reaNumero": "425890",
+      "reaCciaa": "MI",
+      "capitaleSociale": 165000000.0,
+      "atecoPrimario": "4681",
+      "atecoVersione": "2022",
+      "dipendenti": 245,
+      "annoCostituzione": null,
+      "dataCostituzione": null,
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3302143119.0,
+          "utile": null,
+          "dipendenti": 245
+        }
+      ],
+      "sede": {
+        "via": "VIA ANDREA COSTA 17",
+        "cap": "20131",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "02290420351",
       "denominazione": "TARABELLONI DAVIDE",
       "sede": {
@@ -27154,6 +30002,38 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "01628410159",
+      "denominazione": "TECNIMONT S.P.A.",
+      "codiceFiscale": "01628410159",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "574643",
+      "reaCciaa": "MI",
+      "capitaleSociale": 1000000.0,
+      "atecoPrimario": "71121",
+      "atecoVersione": "2022",
+      "dipendenti": 1874,
+      "annoCostituzione": null,
+      "dataCostituzione": "1960-11-23",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4474265130.0,
+          "utile": null,
+          "dipendenti": 1874
+        }
+      ],
+      "sede": {
+        "via": "VIA GAETANO DE CASTILLIA 6/A",
+        "cap": "20124",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01214420620",
       "denominazione": "TECNO SERVICE DI FRANCO ANIELLO",
       "sedeTesto": "VIA SELV",
@@ -27166,6 +30046,38 @@
       "sedeTesto": "VIA SAN BENE",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "00488410010",
+      "denominazione": "TELECOM ITALIA S.P.A. (TIM)",
+      "codiceFiscale": "00488410010",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1580695",
+      "reaCciaa": "MI",
+      "capitaleSociale": 6109291512.0,
+      "atecoPrimario": "61",
+      "atecoVersione": "2022",
+      "dipendenti": 40229,
+      "annoCostituzione": null,
+      "dataCostituzione": "2003-08-04",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 9218214372.0,
+          "utile": null,
+          "dipendenti": 40229
+        }
+      ],
+      "sede": {
+        "via": "VIA GAETANO NEGRI 1",
+        "cap": "20123",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01853180626",
@@ -27182,11 +30094,75 @@
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
     },
     {
+      "partitaIva": "05779661007",
+      "denominazione": "TERNA - RETE ELETTRICA NAZIONALE S.P.A.",
+      "codiceFiscale": "05779661007",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "922416",
+      "reaCciaa": "RM",
+      "capitaleSociale": 442198240.0,
+      "atecoPrimario": "3513",
+      "atecoVersione": "2022",
+      "dipendenti": 1222,
+      "annoCostituzione": null,
+      "dataCostituzione": "1999-10-01",
+      "pec": "terna@pec.terna.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2960604537.0,
+          "utile": null,
+          "dipendenti": 1222
+        }
+      ],
+      "sede": {
+        "via": "Viale Egidio Galbani n. 70",
+        "cap": "00156",
+        "comune": "Roma",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "01856730625",
       "denominazione": "TICHE S.R.L.",
       "sedeTesto": "VIA DEL COMMERCIO, 32 MOIANO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "03926291000",
+      "denominazione": "TOYOTA MOTOR ITALIA S.P.A.",
+      "codiceFiscale": "03926291000",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "713082",
+      "reaCciaa": "RM",
+      "capitaleSociale": 38958000.0,
+      "atecoPrimario": "46711",
+      "atecoVersione": "2022",
+      "dipendenti": 217,
+      "annoCostituzione": null,
+      "dataCostituzione": "1991-03-25",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3064707973.0,
+          "utile": null,
+          "dipendenti": 217
+        }
+      ],
+      "sede": {
+        "via": "VIA KIICIRO TOYODA 2",
+        "cap": "00148",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "02074870128",
@@ -27199,6 +30175,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "05403151003",
+      "denominazione": "TRENITALIA S.P.A.",
+      "codiceFiscale": "05403151003",
+      "formaGiuridica": "SOCIETA' PER AZIONI CON SOCIO UNICO",
+      "statoAttivita": "attiva",
+      "reaNumero": "883047",
+      "reaCciaa": "RM",
+      "capitaleSociale": 1685925000.0,
+      "atecoPrimario": "491",
+      "atecoVersione": "2022",
+      "dipendenti": 24588,
+      "annoCostituzione": null,
+      "dataCostituzione": "2000-05-02",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5883736789.0,
+          "utile": null,
+          "dipendenti": 24588
+        }
+      ],
+      "sede": {
+        "via": "PIAZZA DELLA CROCE ROSSA 1",
+        "cap": "00161",
+        "comune": "ROMA",
+        "provincia": "RM"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "04482470988",
@@ -28567,6 +31575,38 @@
       "origine": "rete di vendita Conad Centro Nord"
     },
     {
+      "partitaIva": "00407780485",
+      "denominazione": "UNICOOP FIRENZE SOCIETA' COOPERATIVA",
+      "codiceFiscale": "00407780485",
+      "formaGiuridica": "SOCIETA' COOPERATIVA",
+      "statoAttivita": "attiva",
+      "reaNumero": "34781",
+      "reaCciaa": "FI",
+      "capitaleSociale": 16336006.0,
+      "atecoPrimario": "471102",
+      "atecoVersione": "2022",
+      "dipendenti": 8422,
+      "annoCostituzione": null,
+      "dataCostituzione": "1988-10-14",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3133316848.0,
+          "utile": null,
+          "dipendenti": 8422
+        }
+      ],
+      "sede": {
+        "via": "VIA SANTA REPARATA 43",
+        "cap": "50129",
+        "comune": "FIRENZE",
+        "provincia": "FI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
       "partitaIva": "02993730353",
       "denominazione": "V",
       "sede": {
@@ -28608,6 +31648,38 @@
       },
       "unitaLocali": [],
       "origine": "rete di vendita Conad Centro Nord"
+    },
+    {
+      "partitaIva": "01768800748",
+      "denominazione": "VERSALIS S.P.A.",
+      "codiceFiscale": "03823300821",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1351279",
+      "reaCciaa": "MI",
+      "capitaleSociale": 200000000.0,
+      "atecoPrimario": "2014",
+      "atecoVersione": "2022",
+      "dipendenti": 4201,
+      "annoCostituzione": null,
+      "dataCostituzione": "1991-03-18",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 2874562033.0,
+          "utile": null,
+          "dipendenti": 4201
+        }
+      ],
+      "sede": {
+        "via": "VIA ALCIDE DE GASPERI 2",
+        "cap": "20097",
+        "comune": "SAN DONATO MILANESE",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01400070627",
@@ -28696,6 +31768,70 @@
       "sedeTesto": "C.DA OLIVOLA VIA SPEZZAMADONNA, 61 BENEVENTO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "08539010010",
+      "denominazione": "VODAFONE ITALIA S.P.A.",
+      "codiceFiscale": "93026890017",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "cessata",
+      "reaNumero": "974956",
+      "reaCciaa": "TO",
+      "capitaleSociale": 2305099887.3,
+      "atecoPrimario": "61",
+      "atecoVersione": "2022",
+      "dipendenti": 4942,
+      "annoCostituzione": null,
+      "dataCostituzione": "2002-11-26",
+      "pec": "vodafone@pec.vodafone.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 4753972347.0,
+          "utile": null,
+          "dipendenti": 4942
+        }
+      ],
+      "sede": {
+        "via": "VIA GUGLIELMO JERVIS 13",
+        "cap": "10015",
+        "comune": "IVREA",
+        "provincia": "TO"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "01779120235",
+      "denominazione": "VOLKSWAGEN GROUP ITALIA S.P.A.",
+      "codiceFiscale": "07649360158",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "195899",
+      "reaCciaa": "VR",
+      "capitaleSociale": 46480500.0,
+      "atecoPrimario": "46711",
+      "atecoVersione": "2022",
+      "dipendenti": 862,
+      "annoCostituzione": null,
+      "dataCostituzione": "1985-11-20",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 7699713081.0,
+          "utile": null,
+          "dipendenti": 862
+        }
+      ],
+      "sede": {
+        "via": "Viale Gerard Richard Gumpert 1",
+        "cap": "37137",
+        "comune": "Verona",
+        "provincia": "VR"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "02332070248",
@@ -29535,6 +32671,70 @@
       "sedeTesto": "VIA NAPOLI SNC MONTESARCHIO",
       "unitaLocali": [],
       "origine": "elenco pubblico di imprese richiedenti, dicembre 2025"
+    },
+    {
+      "partitaIva": "02895590962",
+      "denominazione": "WEBUILD S.P.A.",
+      "codiceFiscale": "00830660155",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "525502",
+      "reaCciaa": "MI",
+      "capitaleSociale": 600000000.0,
+      "atecoPrimario": "4212",
+      "atecoVersione": "2022",
+      "dipendenti": 1315,
+      "annoCostituzione": null,
+      "dataCostituzione": "1959-01-24",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 5123434422.0,
+          "utile": null,
+          "dipendenti": 1315
+        }
+      ],
+      "sede": {
+        "via": "VIA CENTRO DIREZIONALE MILANOFIORI",
+        "cap": "20089",
+        "comune": "ROZZANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
+    },
+    {
+      "partitaIva": "13378520152",
+      "denominazione": "WIND TRE S.P.A.",
+      "codiceFiscale": "02517580920",
+      "formaGiuridica": "SOCIETA' PER AZIONI",
+      "statoAttivita": "attiva",
+      "reaNumero": "1638878",
+      "reaCciaa": "MI",
+      "capitaleSociale": 474303795.0,
+      "atecoPrimario": "611",
+      "atecoVersione": "2022",
+      "dipendenti": 6247,
+      "annoCostituzione": null,
+      "dataCostituzione": "2001-01-10",
+      "pec": "windtre@pec.windtre.it",
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 3988000000.0,
+          "utile": null,
+          "dipendenti": 6247
+        }
+      ],
+      "sede": {
+        "via": "VIA MONTE ROSA 91",
+        "cap": "20149",
+        "comune": "MILANO",
+        "provincia": "MI"
+      },
+      "unitaLocali": [],
+      "origine": "Top 100 aziende italiane"
     },
     {
       "partitaIva": "01873660623",

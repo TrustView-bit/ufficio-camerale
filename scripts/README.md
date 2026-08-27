@@ -15,7 +15,7 @@ nessun build deve dipendere dalla raggiungibilità di una fonte esterna.
 |---|---|---|
 | `elenco-imprese` | PDF | ragione sociale, sede legale, partita IVA |
 | `rete-vendita` | PDF | codice, ragione sociale, indirizzo, comune, frazione, provincia, CAP, partita IVA, canale, zona |
-| `tabella` | TSV con intestazione | `denominazione`, `partitaIva`, e facoltativi `via`, `cap`, `comune`, `provincia` |
+| `tabella` | TSV con intestazione | `denominazione` e `partitaIva` obbligatori; facoltativi indirizzo, CAP, comune, provincia, codice fiscale, forma giuridica, stato attività, REA, CCIAA, capitale, ATECO, dipendenti, fatturato, anno bilancio, PEC, data iscrizione |
 | `demo-json` | JSON | dataset dimostrativo completo, marcato `dati_fittizi` |
 
 I record vengono **uniti** a quelli già presenti, con la partita IVA come
@@ -72,3 +72,19 @@ campo è cercato fra più nomi possibili e, se nel file non si trovano né la
 partita IVA né la denominazione, l'adapter si ferma elencando le colonne che
 ha trovato — meglio un errore esplicito che un'importazione silenziosamente
 vuota.
+
+
+## Da un file Excel
+
+```bash
+npx tsx scripts/xlsx-in-tsv.ts elenco.xlsx "Nome foglio" > data/sorgenti/elenco.tsv
+python3 scripts/estrai-imprese.py tabella data/sorgenti/elenco.tsv "descrizione della fonte"
+```
+
+Due strumenti separati che si compongono: il primo legge le celle e basta, il
+secondo interpreta le colonne. Il lettore tabellare cerca ogni campo fra più
+nomi possibili — «Prov.», «provincia» e «PR» sono la stessa colonna — perché
+ogni elenco le chiama a modo suo, e pretenderne uno solo lo renderebbe
+inutilizzabile.
+
+Ripristina anche gli zeri iniziali che Excel mangia, su partita IVA e CAP.

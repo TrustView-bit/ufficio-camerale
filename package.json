@@ -18,7 +18,8 @@
     "test:e2e": "playwright test",
     "build:ateco": "tsx scripts/build-ateco.ts",
     "build:comuni": "tsx scripts/build-comuni.ts",
-    "import": "tsx --tsconfig tsconfig.json scripts/import.ts"
+    "import": "tsx --tsconfig tsconfig.json scripts/import.ts",
+    "xlsx:tsv": "tsx scripts/xlsx-in-tsv.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",

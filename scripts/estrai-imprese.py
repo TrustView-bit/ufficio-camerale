@@ -42,6 +42,7 @@ import json
 import pathlib
 import re
 import sys
+import unicodedata
 import zlib
 
 RADICE = pathlib.Path(__file__).resolve().parent.parent
@@ -255,44 +256,166 @@ def estrai_rete_vendita(pdf: bytes):
     return imprese
 
 
+def chiave_colonna(nome: str) -> str:
+    """Confronta i nomi di colonna ignorando accenti, spazi e maiuscole."""
+    senza_accenti = (
+        unicodedata.normalize("NFD", nome)
+        .encode("ascii", "ignore")
+        .decode("ascii")
+    )
+    return re.sub(r"[^a-z0-9]", "", senza_accenti.lower())
+
+
+def campo(valori: dict, *nomi_possibili: str):
+    """Cerca una colonna fra più nomi: le intestazioni cambiano da un file
+    all'altro, e pretenderne uno solo renderebbe il lettore inutilizzabile."""
+    for nome in nomi_possibili:
+        valore = valori.get(chiave_colonna(nome))
+        if valore:
+            return valore
+    return None
+
+
+def numero(valore):
+    if not valore:
+        return None
+    pulito = re.sub(r"[^\d,.-]", "", str(valore))
+    if not pulito:
+        return None
+    # se ci sono entrambi i segni, l'ultimo è il decimale
+    if "," in pulito and "." in pulito:
+        pulito = (
+            pulito.replace(".", "").replace(",", ".")
+            if pulito.rfind(",") > pulito.rfind(".")
+            else pulito.replace(",", "")
+        )
+    elif "," in pulito or "." in pulito:
+        segno = "," if "," in pulito else "."
+        # regola dei tre decimali: tre cifre dopo il segno sono migliaia
+        pulito = (
+            pulito.replace(segno, "")
+            if len(pulito) - pulito.rfind(segno) - 1 == 3
+            else pulito.replace(segno, ".")
+        )
+    try:
+        return float(pulito)
+    except ValueError:
+        return None
+
+
+STATI_TABELLA = {
+    "attivo": "attiva",
+    "attiva": "attiva",
+    "inattivo": "inattiva",
+    "inattiva": "inattiva",
+    "in liquidazione": "in-liquidazione",
+    "cessato": "cessata",
+    "cessata": "cessata",
+}
+
+
+def data_iso(valore):
+    """Da "21/12/2000" alla forma ISO; l'anno da solo resta l'anno."""
+    if not valore:
+        return None
+    italiana = re.fullmatch(r"(\d{2})[/\-.](\d{2})[/\-.](\d{4})", valore.strip())
+    if italiana:
+        return f"{italiana[3]}-{italiana[2]}-{italiana[1]}"
+    if re.fullmatch(r"\d{4}-\d{2}-\d{2}", valore.strip()):
+        return valore.strip()
+    if re.fullmatch(r"(19|20)\d{2}", valore.strip()):
+        return valore.strip()
+    return None
+
+
 def estrai_tabella(contenuto: bytes):
-    """Legge un TSV con intestazione. Nessuna magia: le colonne sono nomi."""
+    """
+    Legge un TSV con intestazione.
+
+    Le colonne obbligatorie sono due, denominazione e partita IVA; tutte le
+    altre sono facoltative e vengono cercate fra più nomi possibili, perché
+    ogni elenco le chiama a modo suo.
+    """
     righe = contenuto.decode("utf8").splitlines()
     if not righe:
         return {}
 
-    intestazioni = [c.strip() for c in righe[0].split("\t")]
-    necessarie = {"denominazione", "partitaIva"}
-    if not necessarie.issubset(intestazioni):
-        print(
-            f"✗ il TSV deve avere almeno le colonne {sorted(necessarie)}.\n"
-            f"  Trovate: {intestazioni}"
-        )
-        return {}
+    intestazioni = [chiave_colonna(c) for c in righe[0].split("\t")]
 
     imprese = {}
+    senza_piva = 0
+
     for riga in righe[1:]:
         if not riga.strip():
             continue
+
         valori = dict(zip(intestazioni, [c.strip() for c in riga.split("\t")]))
 
-        piva = valori.get("partitaIva", "").replace("IT", "").strip()
-        denominazione = ripulisci(valori.get("denominazione", ""))
+        piva = (campo(valori, "partitaIva", "partita iva", "piva") or "").replace(
+            "IT", ""
+        ).strip()
+        # Excel mangia lo zero iniziale: una partita IVA ha undici cifre
+        if piva.isdigit():
+            piva = piva.zfill(11)
+
+        denominazione = ripulisci(
+            campo(valori, "denominazione", "ragione sociale", "impresa") or ""
+        )
 
         if not denominazione or not cifra_di_controllo_valida(piva):
+            senza_piva += 1
             continue
+
+        cap = campo(valori, "cap") or ""
+        ateco = campo(valori, "ateco", "codice ateco")
+        capitale = numero(campo(valori, "capitale sociale", "capitale sociale (€)"))
+        dipendenti = numero(campo(valori, "dipendenti", "numero dipendenti"))
+        fatturato = numero(campo(valori, "fatturato", "fatturato (€)", "ricavi"))
+        anno = campo(valori, "anno bilancio", "anno")
 
         imprese[piva] = {
             "partitaIva": piva,
             "denominazione": denominazione,
+            "codiceFiscale": campo(valori, "codice fiscale", "cf"),
+            "formaGiuridica": campo(valori, "forma giuridica", "natura giuridica"),
+            "statoAttivita": STATI_TABELLA.get(
+                (campo(valori, "stato attivita", "stato") or "").lower()
+            ),
+            "reaNumero": campo(valori, "n. rea", "rea", "numero rea"),
+            "reaCciaa": campo(valori, "cciaa", "camera"),
+            "capitaleSociale": capitale,
+            "atecoPrimario": ateco,
+            # gli elenchi correnti riportano ancora la classificazione 2022
+            "atecoVersione": "2022" if ateco else None,
+            "dipendenti": int(dipendenti) if dipendenti is not None else None,
+            "annoCostituzione": None,
+            "dataCostituzione": data_iso(
+                campo(valori, "data iscrizione", "data costituzione")
+            ),
+            "pec": campo(valori, "pec"),
+            "bilanci": (
+                [
+                    {
+                        "anno": int(anno),
+                        "fatturato": fatturato,
+                        "utile": None,
+                        "dipendenti": int(dipendenti) if dipendenti is not None else None,
+                    }
+                ]
+                if fatturato is not None and anno and anno.isdigit()
+                else []
+            ),
             "sede": {
-                "via": valori.get("via") or None,
-                "cap": valori.get("cap") or None,
-                "comune": valori.get("comune") or None,
-                "provincia": valori.get("provincia") or None,
+                "via": campo(valori, "via", "indirizzo", "indirizzo sede legale"),
+                "cap": cap.zfill(5) if cap.isdigit() else (cap or None),
+                "comune": campo(valori, "comune"),
+                "provincia": campo(valori, "provincia", "prov.", "pr"),
             },
             "unitaLocali": [],
         }
+
+    if senza_piva:
+        print(f"  {senza_piva} righe scartate: partita IVA assente o non valida")
 
     return imprese
 

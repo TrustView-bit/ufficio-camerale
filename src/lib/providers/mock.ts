@@ -10,6 +10,7 @@ import {
 import { punteggio } from "@/lib/ricerca";
 
 import type {
+  Bilancio,
   CompanyData,
   CompanyProvider,
   EsitoElenco,
@@ -230,10 +231,12 @@ function daElenchiPubblici(): Record<string, CompanyData> {
       formaGiuridica: campo<string>("formaGiuridica"),
       statoAttivita:
         campo<CompanyData["statoAttivita"]>("statoAttivita") ?? "sconosciuto",
-      // di queste imprese si conosce l'anno, non il giorno
-      dataCostituzione: campo<number>("annoCostituzione")
-        ? String(campo<number>("annoCostituzione"))
-        : null,
+      // alcuni elenchi danno la data intera, altri solo l'anno
+      dataCostituzione:
+        campo<string>("dataCostituzione") ??
+        (campo<number>("annoCostituzione")
+          ? String(campo<number>("annoCostituzione"))
+          : null),
       reaNumero: campo<string>("reaNumero"),
       reaCciaa: campo<string>("reaCciaa"),
       capitaleSociale: campo<number>("capitaleSociale"),
@@ -245,7 +248,7 @@ function daElenchiPubblici(): Record<string, CompanyData> {
       coordinate: null,
       codiceSdi: null,
       unitaLocali,
-      bilanci: [],
+      bilanci: campo<Bilancio[]>("bilanci") ?? [],
       pec: campo<string>("pec"),
       sitoWeb: campo<string>("sitoWeb"),
       telefono: campo<string>("telefono"),
