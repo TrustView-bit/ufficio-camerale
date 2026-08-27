@@ -1,6 +1,9 @@
 import { z } from "zod";
 
+import { normalizzaComune, titoloProprio } from "@/lib/geo";
+
 import type {
+  Bilancio,
   CompanyData,
   CompanyProvider,
   ProviderResult,
@@ -10,23 +13,23 @@ import type {
 /**
  * Provider openapi.it (Company API).
  *
- * ⚠️ NON ANCORA VERIFICATO CONTRO L'API REALE. Trasporto, autenticazione e
- * mappatura degli errori sono scritti con cura, ma la corrispondenza dei
- * singoli campi va confermata su una risposta vera prima di mettere
- * `COMPANY_PROVIDER=openapi` in produzione.
+ * ✅ Verificato su risposte reali dei livelli IT-start e IT-advanced: le
+ * fixture in `__fixtures__/` sono risposte vere, non inventate.
  *
- * Per questo lo schema è volutamente severo su ciò che serve davvero
- * (denominazione e partita IVA) e permissivo sul resto: se la forma della
- * risposta non è quella attesa il provider risponde `unavailable/UNEXPECTED`
- * e si ripiega sull'archivio, invece di mostrare dati sbagliati come se
- * fossero buoni. Un errore rumoroso è preferibile a una scheda plausibile ma
- * falsa.
+ * Due cose che la documentazione non lasciava intuire e che si vedono solo
+ * guardando una risposta:
+ *
+ * - `streetName` **contiene già l'indirizzo completo** ("VIALE FILIPPO
+ *   TOMMASO MARINETTI 221"), non il solo nome della via: comporlo di nuovo
+ *   con toponimo e civico lo duplicherebbe;
+ * - capitale sociale e dipendenti non sono campi dell'impresa ma
+ *   dell'**ultimo bilancio**, dentro `balanceSheets.last`.
  */
 
 const OPENAPI_BASE = "https://company.openapi.com";
 const TIMEOUT_MS = 8000;
 
-/** Livelli di dettaglio offerti dall'API, dal più economico al più completo. */
+/** Livelli di dettaglio, dal più economico al più completo. */
 export type OpenapiLevel = "IT-start" | "IT-advanced" | "IT-full";
 
 /** Costo indicativo per interrogazione, in euro. Da allineare al listino. */
@@ -36,166 +39,224 @@ const COSTO_PER_LIVELLO: Record<OpenapiLevel, number> = {
   "IT-full": 1.2,
 };
 
-const indirizzoSchema = z
+const gpsSchema = z
+  .object({ coordinates: z.array(z.number()).length(2) })
+  .partial()
+  .passthrough();
+
+const sedeSchema = z
   .object({
-    streetName: z.string().nullish(),
+    toponym: z.string().nullish(),
     street: z.string().nullish(),
     streetNumber: z.string().nullish(),
-    toponym: z.string().nullish(),
+    /** Già completo: toponimo, via e civico insieme. */
+    streetName: z.string().nullish(),
     town: z.string().nullish(),
+    hamlet: z.string().nullish(),
     province: z.string().nullish(),
     zipCode: z.string().nullish(),
-    region: z.string().nullish(),
+    gps: gpsSchema.nullish(),
   })
   .partial()
   .passthrough();
 
-const atecoSchema = z
+const vocaboloSchema = z
+  .object({ code: z.string().nullish(), description: z.string().nullish() })
+  .partial()
+  .passthrough();
+
+const bilancioSchema = z
   .object({
-    code: z.string().nullish(),
-    description: z.string().nullish(),
+    year: z.number().nullish(),
+    turnover: z.number().nullish(),
+    netWorth: z.number().nullish(),
+    employees: z.number().nullish(),
+    shareCapital: z.number().nullish(),
   })
   .partial()
   .passthrough();
 
-const companySchema = z
+const aziendaSchema = z
   .object({
-    // gli unici campi senza i quali non si può costruire una scheda
+    // senza questi non si costruisce una scheda
     companyName: z.string().min(1),
     vatCode: z.string().nullish(),
     taxCode: z.string().nullish(),
 
-    legalForm: z.string().nullish(),
     activityStatus: z.string().nullish(),
+    detailedLegalForm: vocaboloSchema.nullish(),
+
     registrationDate: z.string().nullish(),
-    creationDate: z.string().nullish(),
+    startDate: z.string().nullish(),
+    endDate: z.string().nullish(),
 
     reaCode: z.union([z.string(), z.number()]).nullish(),
     cciaa: z.string().nullish(),
-    shareCapital: z.union([z.string(), z.number()]).nullish(),
 
     atecoClassification: z
-      .object({ ateco: atecoSchema.nullish() })
+      .object({
+        ateco: vocaboloSchema.nullish(),
+        ateco2007: vocaboloSchema.nullish(),
+      })
       .partial()
       .passthrough()
       .nullish(),
 
     address: z
-      .object({ registeredOffice: indirizzoSchema.nullish() })
+      .object({ registeredOffice: sedeSchema.nullish() })
+      .partial()
+      .passthrough()
+      .nullish(),
+
+    balanceSheets: z
+      .object({
+        last: bilancioSchema.nullish(),
+        all: z.array(bilancioSchema).nullish(),
+      })
       .partial()
       .passthrough()
       .nullish(),
 
     pec: z.string().nullish(),
-    website: z.string().nullish(),
-    phone: z.string().nullish(),
-    employees: z.union([z.string(), z.number()]).nullish(),
+    sdiCode: z.string().nullish(),
   })
   .passthrough();
 
-const responseSchema = z
+const rispostaSchema = z
   .object({
     success: z.boolean().nullish(),
     error: z.unknown().nullish(),
     message: z.string().nullish(),
-    data: z.union([z.array(companySchema), companySchema]).nullish(),
+    data: z.union([z.array(aziendaSchema), aziendaSchema]).nullish(),
   })
   .passthrough();
 
-type RawCompany = z.infer<typeof companySchema>;
+type Azienda = z.infer<typeof aziendaSchema>;
 
-function toNumber(value: string | number | null | undefined): number | null {
-  if (value === null || value === undefined) return null;
-  const parsed =
-    typeof value === "number" ? value : Number(value.replace(",", "."));
-  return Number.isFinite(parsed) ? parsed : null;
-}
-
-function toText(value: string | number | null | undefined): string | null {
-  if (value === null || value === undefined) return null;
-  const text = String(value).trim();
-  return text === "" ? null : text;
+function testo(valore: string | number | null | undefined): string | null {
+  if (valore === null || valore === undefined) return null;
+  const pulito = String(valore).trim();
+  return pulito === "" ? null : pulito;
 }
 
 /** Normalizza le molte diciture con cui viene indicato lo stato attività. */
-export function mapStatoAttivita(raw: string | null | undefined): StatoAttivita {
-  const value = (raw ?? "").toLowerCase();
-  if (value.includes("liquidazione")) return "in-liquidazione";
-  if (value.includes("cessat")) return "cessata";
+export function mapStatoAttivita(grezzo: string | null | undefined): StatoAttivita {
+  const valore = (grezzo ?? "").toLowerCase();
+  if (valore.includes("liquidazione")) return "in-liquidazione";
+  if (valore.includes("cessat")) return "cessata";
   // "inattiva" è uno stato a sé: iscritta ma non operativa
-  if (value.includes("inattiv")) return "inattiva";
-  if (value.includes("attiv")) return "attiva";
+  if (valore.includes("inattiv")) return "inattiva";
+  if (valore.includes("attiv")) return "attiva";
   return "sconosciuto";
 }
 
-/** Ricompone un indirizzo leggibile dai pezzi restituiti dall'API. */
-function mapIndirizzo(raw: z.infer<typeof indirizzoSchema> | null | undefined) {
+/**
+ * L'indirizzo. `streetName` è già completo: si usa quello, e si ricompone dai
+ * pezzi solo quando manca.
+ */
+function mapIndirizzo(raw: z.infer<typeof sedeSchema> | null | undefined) {
   if (!raw) return null;
 
   const via =
-    toText(
-      [raw.toponym, raw.streetName ?? raw.street, raw.streetNumber]
-        .filter(Boolean)
-        .join(" "),
-    ) ?? null;
+    testo(raw.streetName) ??
+    testo([raw.toponym, raw.street, raw.streetNumber].filter(Boolean).join(" "));
 
-  const indirizzo = {
-    via,
-    cap: toText(raw.zipCode),
-    comune: toText(raw.town),
-    provincia: toText(raw.province),
+  const comuneGrezzo = testo(raw.town);
+  if (!via && !comuneGrezzo) return null;
+
+  // il fornitore scrive tutto in maiuscolo: si riporta alla forma con cui il
+  // resto del sito scrive comuni e indirizzi
+  const riconosciuto = comuneGrezzo
+    ? normalizzaComune(comuneGrezzo, testo(raw.province))
+    : null;
+
+  return {
+    via: via ? titoloProprio(via) : null,
+    cap: testo(raw.zipCode) ?? riconosciuto?.cap ?? null,
+    comune:
+      riconosciuto?.comune ?? (comuneGrezzo ? titoloProprio(comuneGrezzo) : null),
+    provincia: riconosciuto?.sigla ?? testo(raw.province),
     nazione: "IT",
   };
+}
 
-  // un indirizzo con soli campi vuoti non vale la pena di essere conservato
-  return via || indirizzo.comune ? indirizzo : null;
+/** GPS arriva come [longitudine, latitudine], nell'ordine di GeoJSON. */
+function mapCoordinate(raw: z.infer<typeof sedeSchema> | null | undefined) {
+  const punti = raw?.gps?.coordinates;
+  if (!punti || punti.length !== 2) return null;
+
+  const [lon, lat] = punti as [number, number];
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+
+  return { lat, lon };
+}
+
+function mapBilanci(raw: Azienda): Bilancio[] {
+  const tutti = raw.balanceSheets?.all ?? [];
+
+  return tutti
+    .filter((bilancio) => typeof bilancio.year === "number")
+    .map((bilancio) => ({
+      anno: bilancio.year!,
+      fatturato: bilancio.turnover ?? null,
+      utile: bilancio.netWorth ?? null,
+      dipendenti: bilancio.employees ?? null,
+    }))
+    .sort((a, b) => b.anno - a.anno);
 }
 
 /** Traduce una risposta openapi.it nel nostro tipo di dominio. */
-export function mapOpenapiCompany(
-  raw: RawCompany,
-  partitaIva: string,
-): CompanyData {
-  const ateco = raw.atecoClassification?.ateco;
+export function mapOpenapiCompany(raw: Azienda, partitaIva: string): CompanyData {
+  const sedeGrezza = raw.address?.registeredOffice;
+
+  // il campo `ateco` è già nella classificazione 2025; `ateco2007` è quella
+  // precedente, che il raccordo sa convertire
+  const ateco2025 = raw.atecoClassification?.ateco;
+  const atecoVecchio = raw.atecoClassification?.ateco2007;
+  const codiceAteco = testo(ateco2025?.code) ?? testo(atecoVecchio?.code);
+
+  const ultimo = raw.balanceSheets?.last;
 
   return {
-    partitaIva: toText(raw.vatCode) ?? partitaIva,
-    codiceFiscale: toText(raw.taxCode),
+    partitaIva: testo(raw.vatCode) ?? partitaIva,
+    codiceFiscale: testo(raw.taxCode),
     denominazione: raw.companyName.trim(),
-    formaGiuridica: toText(raw.legalForm),
+    formaGiuridica: testo(raw.detailedLegalForm?.description),
     statoAttivita: mapStatoAttivita(raw.activityStatus),
     dataCostituzione:
-      toText(raw.registrationDate)?.slice(0, 10) ??
-      toText(raw.creationDate)?.slice(0, 10) ??
+      testo(raw.startDate)?.slice(0, 10) ??
+      testo(raw.registrationDate)?.slice(0, 10) ??
       null,
-    reaNumero: toText(raw.reaCode),
-    reaCciaa: toText(raw.cciaa),
-    capitaleSociale: toNumber(raw.shareCapital),
-    atecoPrimario: toText(ateco?.code),
-    // openapi.it non dichiara la classificazione: lo stabilisce descriviAteco
-    atecoVersione: null,
-    atecoPrimarioDescrizione: toText(ateco?.description),
+    reaNumero: testo(raw.reaCode),
+    reaCciaa: testo(raw.cciaa),
+    // capitale e dipendenti stanno nell'ultimo bilancio, non nell'impresa
+    capitaleSociale: ultimo?.shareCapital ?? null,
+    atecoPrimario: codiceAteco,
+    atecoVersione: testo(ateco2025?.code) ? "2025" : atecoVecchio ? "2022" : null,
+    atecoPrimarioDescrizione:
+      testo(ateco2025?.description) ?? testo(atecoVecchio?.description),
     atecoSecondari: [],
-    sede: mapIndirizzo(raw.address?.registeredOffice),
+    sede: mapIndirizzo(sedeGrezza),
+    coordinate: mapCoordinate(sedeGrezza),
+    codiceSdi: testo(raw.sdiCode),
     unitaLocali: [],
-    bilanci: [],
-    pec: toText(raw.pec),
-    sitoWeb: toText(raw.website),
-    telefono: toText(raw.phone),
-    dipendenti: toNumber(raw.employees),
+    bilanci: mapBilanci(raw),
+    pec: testo(raw.pec),
+    sitoWeb: null,
+    telefono: null,
+    dipendenti: ultimo?.employees ?? null,
     classeDipendenti: null,
   };
 }
 
 /** Estrae l'unica azienda attesa, che l'API la incarti in un array o no. */
-export function extractCompany(data: unknown): RawCompany | null {
-  const parsed = responseSchema.safeParse(data);
+export function extractCompany(data: unknown): Azienda | null {
+  const parsed = rispostaSchema.safeParse(data);
   if (!parsed.success) return null;
 
   const payload = parsed.data.data;
   if (!payload) return null;
-  if (Array.isArray(payload)) return payload[0] ?? null;
-  return payload;
+  return Array.isArray(payload) ? (payload[0] ?? null) : payload;
 }
 
 export class OpenapiCompanyProvider implements CompanyProvider {
@@ -204,7 +265,7 @@ export class OpenapiCompanyProvider implements CompanyProvider {
 
   constructor(
     private readonly token: string,
-    private readonly level: OpenapiLevel = "IT-start",
+    private readonly level: OpenapiLevel = "IT-advanced",
   ) {
     this.costPerLookupEur = COSTO_PER_LIVELLO[level];
   }
@@ -229,9 +290,7 @@ export class OpenapiCompanyProvider implements CompanyProvider {
       return { status: "unavailable", reason: isTimeout ? "TIMEOUT" : "NETWORK" };
     }
 
-    if (response.status === 404) {
-      return { status: "not-found", httpStatus: 404 };
-    }
+    if (response.status === 404) return { status: "not-found", httpStatus: 404 };
 
     if (!response.ok) {
       return {
@@ -254,13 +313,16 @@ export class OpenapiCompanyProvider implements CompanyProvider {
 
     const raw = extractCompany(body);
     if (!raw) {
-      // Nessun dato utilizzabile: o l'impresa non esiste, o la risposta non
-      // ha la forma attesa. In entrambi i casi non si inventa nulla.
-      const parsed = responseSchema.safeParse(body);
-      const empty =
+      // O l'impresa non esiste, o la risposta non ha la forma attesa: in
+      // nessuno dei due casi si inventa qualcosa
+      const parsed = rispostaSchema.safeParse(body);
+      const vuota =
         parsed.success &&
-        (parsed.data.data === null || parsed.data.data === undefined);
-      return empty
+        (parsed.data.data === null ||
+          parsed.data.data === undefined ||
+          (Array.isArray(parsed.data.data) && parsed.data.data.length === 0));
+
+      return vuota
         ? { status: "not-found", httpStatus: response.status }
         : {
             status: "unavailable",

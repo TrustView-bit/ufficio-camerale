@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "taxCode": "12485671007",
+      "vatCode": "12485671007",
+      "companyName": "OPENAPI S.P.A.",
+      "address": {
+        "registeredOffice": {
+          "toponym": "VIALE",
+          "street": "FILIPPO TOMMASO MARINETTI",
+          "streetNumber": "221",
+          "streetName": "VIALE FILIPPO TOMMASO MARINETTI 221",
+          "town": "ROMA",
+          "hamlet": null,
+          "province": "RM",
+          "zipCode": "00143",
+          "gps": {
+            "coordinates": [12.47843, 41.8071]
+          },
+          "region": {
+            "code": "12",
+            "description": "LAZIO"
+          },
+          "townCode": "H501"
+        }
+      },
+      "activityStatus": "ATTIVA",
+      "registrationDate": "2013-07-19",
+      "sdiCode": "USAL8PV",
+      "sdiCodeTimestamp": 1786093011,
+      "creationTimestamp": 1624358855,
+      "lastUpdateTimestamp": 1787205635,
+      "id": "60d1bfc731177b0a092cdfc1"
+    }
+  ],
+  "success": true,
+  "message": "",
+  "error": null
+}

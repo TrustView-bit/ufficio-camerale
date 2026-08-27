@@ -35,6 +35,10 @@ export type CompanyData = {
   atecoPrimarioDescrizione: string | null;
   atecoSecondari: Ateco[];
   sede: Indirizzo | null;
+  /** Coordinate della sede, quando il fornitore le dà: non del comune. */
+  coordinate: { lat: number; lon: number } | null;
+  /** Codice destinatario per la fatturazione elettronica. */
+  codiceSdi: string | null;
   unitaLocali: UnitaLocale[];
   bilanci: Bilancio[];
   pec: string | null;

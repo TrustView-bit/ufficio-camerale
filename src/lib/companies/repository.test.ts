@@ -46,6 +46,8 @@ const AZIENDA: CompanyData = {
     provincia: "MI",
     nazione: "IT",
   },
+  coordinate: null,
+  codiceSdi: null,
   unitaLocali: [],
   bilanci: [
     { anno: 2024, fatturato: 18_400_000, utile: 1_150_000, dipendenti: 92 },

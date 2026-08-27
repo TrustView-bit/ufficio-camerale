@@ -379,11 +379,20 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
         ),
       };
     }),
-    ...company.bilanci.map((bilancio) => ({
-      etichetta: `Fatturato ${bilancio.anno}`,
-      valore: formatEuro(bilancio.fatturato) ?? "non disponibile",
+    company.codiceSdi && {
+      etichetta: "Codice destinatario (SDI)",
+      valore: company.codiceSdi,
       numerico: true,
-    })),
+    },
+    // solo gli esercizi con un fatturato: gli anni ancora vuoti non dicono nulla
+    ...company.bilanci
+      .filter((bilancio) => bilancio.fatturato !== null)
+      .slice(0, 5)
+      .map((bilancio) => ({
+        etichetta: `Fatturato ${bilancio.anno}`,
+        valore: formatEuro(bilancio.fatturato) ?? "non disponibile",
+        numerico: true,
+      })),
   ];
 
   return <BoxDati titolo="Altre informazioni" righe={righe} />;
@@ -410,15 +419,27 @@ function Mappa({ company }: { company: CompanyData }) {
     ? normalizzaComune(company.sede.comune, company.sede.provincia)
     : null;
 
-  if (!comune) return null;
+  // il fornitore dà le coordinate della sede: molto meglio del centro del
+  // comune, e si può ingrandire di più
+  const precise = company.coordinate;
+  const lat = precise?.lat ?? comune?.lat;
+  const lon = precise?.lon ?? comune?.lon;
+
+  if (lat === undefined || lon === undefined) return null;
 
   return (
     <section className="print:hidden">
       <h2 className="mb-3 text-lg font-semibold tracking-tight">Dove si trova</h2>
       <MappaStatica
-        lat={comune.lat}
-        lon={comune.lon}
-        etichetta={`${comune.comune} (${comune.sigla})`}
+        lat={lat}
+        lon={lon}
+        zoom={precise ? 16 : 14}
+        etichetta={
+          precise
+            ? (formatIndirizzo(company.sede) ?? "la sede")
+            : `${comune!.comune} (${comune!.sigla})`
+        }
+        esatta={Boolean(precise)}
       />
     </section>
   );

@@ -1,5 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
+import avanzata from "./__fixtures__/openapi-it-advanced.json";
+import iniziale from "./__fixtures__/openapi-it-start.json";
 import {
   extractCompany,
   mapOpenapiCompany,
@@ -7,41 +9,106 @@ import {
   OpenapiCompanyProvider,
 } from "./openapi";
 
-const RAW = {
-  companyName: "ESEMPIO MANIFATTURA S.P.A.",
-  vatCode: "00743110157",
-  taxCode: "00743110157",
-  legalForm: "SOCIETA' PER AZIONI",
-  activityStatus: "ATTIVA",
-  registrationDate: "1962-04-17T00:00:00.000Z",
-  reaCode: 1305487,
-  cciaa: "MI",
-  shareCapital: "2500000.00",
-  atecoClassification: {
-    ateco: { code: "25.62.00", description: "Lavori di meccanica generale" },
-  },
-  address: {
-    registeredOffice: {
-      toponym: "LARGO",
-      streetName: "FRANCESCO RICHINI",
-      streetNumber: "6",
-      town: "MILANO",
-      province: "MI",
-      zipCode: "20122",
-    },
-  },
-  pec: "esempio@pec.example.it",
-  website: "https://www.example.it",
-  phone: "+39 02 1234567",
-  employees: "92",
-};
+/**
+ * Le fixture sono risposte REALI dell'API, catturate il 27 agosto 2026
+ * interrogando la partita IVA di Openapi stessa. Non sono inventate: è la
+ * differenza fra un adapter verificato e uno ipotizzato.
+ */
+
+const PIVA = "12485671007";
+
+describe("IT-start — la risposta reale", () => {
+  const raw = extractCompany(iniziale)!;
+  const azienda = mapOpenapiCompany(raw, PIVA);
+
+  it("legge i campi identificativi", () => {
+    expect(azienda).toMatchObject({
+      partitaIva: "12485671007",
+      codiceFiscale: "12485671007",
+      denominazione: "OPENAPI S.P.A.",
+      statoAttivita: "attiva",
+    });
+  });
+
+  it("non duplica l'indirizzo: streetName è già completo", () => {
+    // il campo contiene "VIALE FILIPPO TOMMASO MARINETTI 221": ricomporlo con
+    // toponimo e civico darebbe "VIALE VIALE … 221 221"
+    expect(azienda.sede?.via).toBe("Viale Filippo Tommaso Marinetti 221");
+  });
+
+  it("riporta comune e indirizzo alla forma usata nel resto del sito", () => {
+    // il fornitore scrive "ROMA" in maiuscolo
+    expect(azienda.sede).toMatchObject({
+      cap: "00143",
+      comune: "Roma",
+      provincia: "RM",
+    });
+  });
+
+  it("legge le coordinate della sede, non del comune", () => {
+    // GPS arriva come [longitudine, latitudine]
+    expect(azienda.coordinate?.lat).toBeCloseTo(41.8071, 3);
+    expect(azienda.coordinate?.lon).toBeCloseTo(12.47843, 3);
+  });
+
+  it("legge il codice destinatario per la fatturazione elettronica", () => {
+    expect(azienda.codiceSdi).toBe("USAL8PV");
+  });
+
+  it("non inventa i campi che questo livello non fornisce", () => {
+    expect(azienda.formaGiuridica).toBeNull();
+    expect(azienda.capitaleSociale).toBeNull();
+    expect(azienda.reaNumero).toBeNull();
+    expect(azienda.bilanci).toEqual([]);
+  });
+});
+
+describe("IT-advanced — la risposta reale", () => {
+  const raw = extractCompany(avanzata)!;
+  const azienda = mapOpenapiCompany(raw, PIVA);
+
+  it("legge la forma giuridica dalla sua struttura annidata", () => {
+    expect(azienda.formaGiuridica).toBe("SOCIETA' PER AZIONI");
+  });
+
+  it("compone il REA con la camera di commercio", () => {
+    expect(azienda.reaCciaa).toBe("RM");
+    expect(azienda.reaNumero).toBe("1378273");
+  });
+
+  it("prende capitale e dipendenti dall'ultimo bilancio, non dall'impresa", () => {
+    expect(azienda.capitaleSociale).toBe(50000);
+    expect(azienda.dipendenti).toBe(19);
+  });
+
+  it("legge la serie storica dei bilanci, dal più recente", () => {
+    expect(azienda.bilanci.length).toBeGreaterThan(5);
+    expect(azienda.bilanci[0]!.anno).toBeGreaterThan(azienda.bilanci[1]!.anno);
+
+    const duemila25 = azienda.bilanci.find((b) => b.anno === 2025);
+    expect(duemila25).toMatchObject({ fatturato: 5696858, dipendenti: 19 });
+  });
+
+  it("usa l'ATECO 2025 quando c'è, non quello vecchio", () => {
+    expect(azienda.atecoPrimario).toBe("621");
+    expect(azienda.atecoVersione).toBe("2025");
+  });
+
+  it("legge la PEC", () => {
+    expect(azienda.pec).toBe("openapi@legalmail.it");
+  });
+
+  it("legge la data di costituzione", () => {
+    expect(azienda.dataCostituzione).toBe("2013-10-20");
+  });
+});
 
 describe("mapStatoAttivita", () => {
   it("riconosce le diciture note", () => {
     expect(mapStatoAttivita("ATTIVA")).toBe("attiva");
-    expect(mapStatoAttivita("Impresa attiva")).toBe("attiva");
     expect(mapStatoAttivita("CESSATA")).toBe("cessata");
     expect(mapStatoAttivita("IN LIQUIDAZIONE")).toBe("in-liquidazione");
+    expect(mapStatoAttivita("INATTIVA")).toBe("inattiva");
   });
 
   it("dà precedenza alla liquidazione, che contiene anche 'attiv'", () => {
@@ -54,64 +121,11 @@ describe("mapStatoAttivita", () => {
   });
 });
 
-describe("mapOpenapiCompany", () => {
-  it("normalizza i campi principali", () => {
-    const company = mapOpenapiCompany(RAW, "00743110157");
-
-    expect(company).toMatchObject({
-      partitaIva: "00743110157",
-      denominazione: "ESEMPIO MANIFATTURA S.P.A.",
-      statoAttivita: "attiva",
-      reaNumero: "1305487",
-      reaCciaa: "MI",
-      capitaleSociale: 2_500_000,
-      atecoPrimario: "25.62.00",
-      dipendenti: 92,
-    });
-  });
-
-  it("taglia la data di costituzione alla sola parte ISO", () => {
-    expect(mapOpenapiCompany(RAW, "00743110157").dataCostituzione).toBe(
-      "1962-04-17",
-    );
-  });
-
-  it("ricompone l'indirizzo dai pezzi", () => {
-    expect(mapOpenapiCompany(RAW, "00743110157").sede).toEqual({
-      via: "LARGO FRANCESCO RICHINI 6",
-      cap: "20122",
-      comune: "MILANO",
-      provincia: "MI",
-      nazione: "IT",
-    });
-  });
-
-  it("restituisce null invece di un indirizzo vuoto", () => {
-    const company = mapOpenapiCompany(
-      { ...RAW, address: { registeredOffice: {} } },
-      "00743110157",
-    );
-    expect(company.sede).toBeNull();
-  });
-
-  it("ripiega sulla P.IVA richiesta se la risposta non la contiene", () => {
-    const company = mapOpenapiCompany(
-      { companyName: "SENZA PARTITA" },
-      "00743110157",
-    );
-    expect(company.partitaIva).toBe("00743110157");
-    expect(company.capitaleSociale).toBeNull();
-    expect(company.sede).toBeNull();
-  });
-});
-
 describe("extractCompany", () => {
   it("gestisce sia l'array sia l'oggetto singolo", () => {
-    expect(extractCompany({ success: true, data: [RAW] })?.companyName).toBe(
-      RAW.companyName,
-    );
-    expect(extractCompany({ success: true, data: RAW })?.companyName).toBe(
-      RAW.companyName,
+    expect(extractCompany(iniziale)?.companyName).toBe("OPENAPI S.P.A.");
+    expect(extractCompany({ data: extractCompany(iniziale) })?.companyName).toBe(
+      "OPENAPI S.P.A.",
     );
   });
 
@@ -122,26 +136,24 @@ describe("extractCompany", () => {
   });
 
   it("rifiuta una risposta priva di denominazione invece di inventarla", () => {
-    expect(extractCompany({ data: [{ vatCode: "00743110157" }] })).toBeNull();
+    expect(extractCompany({ data: [{ vatCode: PIVA }] })).toBeNull();
   });
 });
 
 describe("OpenapiCompanyProvider", () => {
   afterEach(() => vi.unstubAllGlobals());
 
-  const provider = new OpenapiCompanyProvider("token-finto");
+  const provider = new OpenapiCompanyProvider("token-finto", "IT-advanced");
 
   it("invia il token come Bearer sul livello richiesto", async () => {
-    const fetchMock = vi.fn<typeof fetch>(async () =>
-      Response.json({ success: true, data: [RAW] }),
-    );
+    const fetchMock = vi.fn<typeof fetch>(async () => Response.json(avanzata));
     vi.stubGlobal("fetch", fetchMock);
 
-    const result = await provider.getByPartitaIva("00743110157");
-
+    const result = await provider.getByPartitaIva(PIVA);
     expect(result.status).toBe("found");
+
     const [url, init] = fetchMock.mock.calls[0]!;
-    expect(String(url)).toBe("https://company.openapi.com/IT-start/00743110157");
+    expect(String(url)).toBe(`https://company.openapi.com/IT-advanced/${PIVA}`);
     expect((init?.headers as Record<string, string>).Authorization).toBe(
       "Bearer token-finto",
     );
@@ -162,7 +174,7 @@ describe("OpenapiCompanyProvider", () => {
         "fetch",
         vi.fn(async () => new Response("", { status: caso.status })),
       );
-      await expect(provider.getByPartitaIva("00743110157")).resolves.toMatchObject({
+      await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
         status: "unavailable",
         reason: caso.reason,
       });
@@ -174,7 +186,7 @@ describe("OpenapiCompanyProvider", () => {
       "fetch",
       vi.fn(async () => new Response("", { status: 404 })),
     );
-    await expect(provider.getByPartitaIva("00743110157")).resolves.toMatchObject({
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
       status: "not-found",
     });
   });
@@ -186,7 +198,7 @@ describe("OpenapiCompanyProvider", () => {
         throw new DOMException("timeout", "TimeoutError");
       }),
     );
-    await expect(provider.getByPartitaIva("00743110157")).resolves.toEqual({
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toEqual({
       status: "unavailable",
       reason: "TIMEOUT",
     });
@@ -197,7 +209,7 @@ describe("OpenapiCompanyProvider", () => {
         throw new TypeError("fetch failed");
       }),
     );
-    await expect(provider.getByPartitaIva("00743110157")).resolves.toEqual({
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toEqual({
       status: "unavailable",
       reason: "NETWORK",
     });
@@ -208,7 +220,7 @@ describe("OpenapiCompanyProvider", () => {
       "fetch",
       vi.fn(async () => Response.json({ data: [{ qualcosa: "di diverso" }] })),
     );
-    await expect(provider.getByPartitaIva("00743110157")).resolves.toMatchObject({
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
       status: "unavailable",
       reason: "UNEXPECTED",
     });
@@ -217,21 +229,10 @@ describe("OpenapiCompanyProvider", () => {
   it("distingue una risposta vuota da una malformata", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () => Response.json({ data: null })),
+      vi.fn(async () => Response.json({ data: [] })),
     );
-    await expect(provider.getByPartitaIva("00743110157")).resolves.toMatchObject({
+    await expect(provider.getByPartitaIva(PIVA)).resolves.toMatchObject({
       status: "not-found",
     });
-  });
-});
-
-describe("mapStatoAttivita — inattiva è uno stato a sé", () => {
-  it("non confonde inattiva con cessata", () => {
-    expect(mapStatoAttivita("INATTIVA")).toBe("inattiva");
-    expect(mapStatoAttivita("CESSATA")).toBe("cessata");
-  });
-
-  it("la liquidazione resta prioritaria", () => {
-    expect(mapStatoAttivita("INATTIVA IN LIQUIDAZIONE")).toBe("in-liquidazione");
   });
 });

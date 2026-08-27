@@ -35,11 +35,14 @@ export function MappaStatica({
   lon,
   etichetta,
   zoom = 14,
+  esatta = false,
 }: {
   lat: number;
   lon: number;
   etichetta: string;
   zoom?: number;
+  /** true quando il punto è la sede, non il centro del comune. */
+  esatta?: boolean;
 }) {
   const { x, y } = coordinateInPixel(lat, lon, zoom);
 
@@ -121,8 +124,9 @@ export function MappaStatica({
       </div>
 
       <figcaption className="text-muted-foreground mt-2 text-xs">
-        Mappa centrata su {etichetta}. La posizione indicata è quella del comune,
-        non del numero civico.
+        {esatta
+          ? `Sede legale: ${etichetta}.`
+          : `Mappa centrata su ${etichetta}. La posizione indicata è quella del comune, non del numero civico.`}
       </figcaption>
     </figure>
   );

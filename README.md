@@ -390,14 +390,50 @@ Regole a cui ogni provider deve attenersi:
   `UNEXPECTED` rumoroso che una scheda plausibile ma sbagliata;
 - **dichiarare `costPerLookupEur`**: è ciò che finisce in `api_calls`.
 
-### Stato di `openapi.ts`
+### openapi.it
 
-L'adapter openapi.it è scritto ma **non ancora verificato contro l'API reale**,
-perché richiede un account. Trasporto, autenticazione, timeout e mappatura
-degli errori HTTP sono coperti da test; la corrispondenza dei singoli campi va
-confermata su una risposta vera prima di impostare `COMPANY_PROVIDER=openapi`.
-Anche i costi in `COSTO_PER_LIVELLO` sono indicativi e vanno allineati al
-listino.
+**Verificato su risposte reali** dei livelli `IT-start` e `IT-advanced`: le
+fixture in `src/lib/providers/__fixtures__/` sono risposte vere, catturate
+dall'API, e i test girano su quelle.
+
+L'autenticazione è a due passaggi, cosa che la documentazione non rende
+evidente: la API key **non** si usa direttamente sull'endpoint dei dati, va
+scambiata con un token con gli *scope* richiesti.
+
+```bash
+curl -u 'EMAIL:APIKEY' -H 'Content-Type: application/json' \
+  -X POST https://oauth.openapi.it/token \
+  -d '{"scopes":["GET:company.openapi.com/IT-advanced"],"ttl":31536000}'
+```
+
+Il `token` che torna va in `OPENAPI_IT_TOKEN`. Serve anche che la Company API
+sia **attiva sul conto**: finché non lo è, la richiesta di token risponde
+`invalid scopes specified or API not enabled` qualunque scope si chieda.
+
+Due cose che si vedono solo guardando una risposta vera, e che avevo sbagliato
+ipotizzandole dalla documentazione:
+
+- `streetName` contiene **già l'indirizzo completo**, non il solo nome della
+  via: ricomporlo con toponimo e civico lo duplica;
+- capitale sociale e dipendenti non sono campi dell'impresa ma dell'**ultimo
+  bilancio**, dentro `balanceSheets.last`.
+
+In più l'API fornisce cose che il modello non prevedeva: **coordinate GPS
+della sede** (che rendono la mappa precisa al civico invece che al comune), il
+**codice destinatario SDI**, e la **serie storica dei bilanci**.
+
+I costi in `COSTO_PER_LIVELLO` restano indicativi: vanno allineati al listino.
+
+### Sfogliare con il fornitore reale
+
+Con `COMPANY_PROVIDER=openapi` le schede mostrano dati veri, ma `/ricerca` e
+`/aziende` restano vuote: **un'API a pagamento non lascia enumerare il proprio
+archivio**, e senza `DATABASE_URL` non c'è un archivio locale su cui costruire
+gli elenchi. Le pagine lo dichiarano invece di mostrare zero risultati come se
+non esistesse nulla.
+
+È l'architettura prevista: gli elenchi si costruiscono sui dati man mano
+salvati in Postgres, non interrogando il fornitore.
 
 ## Deploy su Vercel
 

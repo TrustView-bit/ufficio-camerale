@@ -98,6 +98,9 @@ export function rowToCompany(row: CompanyRow): CompanyData {
     atecoPrimarioDescrizione: row.atecoPrimarioDescrizione,
     atecoSecondari: row.atecoSecondari ?? [],
     sede: row.sede ?? null,
+    // non ancora conservate in archivio: arrivano solo dal fornitore
+    coordinate: null,
+    codiceSdi: null,
     unitaLocali: row.unitaLocali ?? [],
     bilanci: row.bilanci ?? [],
     pec: row.pec,
