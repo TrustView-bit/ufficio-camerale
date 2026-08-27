@@ -1,4 +1,3 @@
-import { Building2 } from "lucide-react";
 import Link from "next/link";
 
 import { StatusBadge, type CompanyStatus } from "@/components/status-badge";
@@ -16,12 +15,9 @@ export function SchedaAzienda({ azienda }: { azienda: RisultatoAzienda }) {
       href={`/azienda/${buildAziendaSlug(azienda.denominazione, azienda.partitaIva)}`}
       className="border-border bg-card ease-ui hover:border-primary flex h-full flex-col gap-2 border p-4 transition-colors duration-150"
     >
-      <div className="flex items-start gap-2">
-        <Building2 className="text-primary mt-0.5 size-4 shrink-0" aria-hidden />
-        <h3 className="text-sm leading-snug font-semibold text-balance">
-          {azienda.denominazione}
-        </h3>
-      </div>
+      <h3 className="text-sm leading-snug font-semibold text-balance">
+        {azienda.denominazione}
+      </h3>
 
       <p className="num text-muted-foreground text-xs">{azienda.partitaIva}</p>
 
