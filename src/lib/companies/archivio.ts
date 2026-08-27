@@ -17,6 +17,7 @@ import type {
   EsitoRicerca,
   FiltriElenco,
   OpzioniRicerca,
+  Raggruppamento,
   RisultatoAzienda,
   StatoAttivita,
   VoceAggregata,
@@ -62,6 +63,14 @@ function condizioni(filtri: FiltriElenco): SQL[] {
   if (filtri.comune) parti.push(eq(comuneSql, filtri.comune));
   if (filtri.ateco) {
     parti.push(ilike(companies.atecoPrimario, `${filtri.ateco}%`));
+  }
+  if (filtri.iniziale) {
+    // "#" raccoglie tutto ciò che non comincia per lettera
+    parti.push(
+      filtri.iniziale === "#"
+        ? sql`${companies.denominazione} !~* '^[a-z]'`
+        : ilike(companies.denominazione, `${filtri.iniziale}%`),
+    );
   }
 
   // la regione non è una colonna: si traduce nell'elenco delle sue province
@@ -142,7 +151,7 @@ export async function elencoInArchivio(
 export async function aggregaInArchivio(
   db: Database,
   filtri: FiltriElenco,
-  per: "regione" | "provincia" | "comune" | "ateco",
+  per: Raggruppamento,
 ): Promise<VoceAggregata[]> {
   const dove = condizioni(filtri);
 
@@ -152,12 +161,18 @@ export async function aggregaInArchivio(
       ? comuneSql
       : per === "ateco"
         ? sql<string>`left(${companies.atecoPrimario}, 2)`
-        : provinciaSql;
+        : per === "iniziale"
+          ? sql<string>`case when ${companies.denominazione} ~* '^[a-z]'
+              then upper(left(${companies.denominazione}, 1)) else '#' end`
+          : provinciaSql;
 
   const righe = await db
     .select({ chiave, quante: count() })
     .from(companies)
-    .where(and(...dove, isNotNull(companies.sede)))
+    // l'iniziale esiste sempre; le altre chiavi vivono nella sede
+    .where(
+      per === "iniziale" ? and(...dove) : and(...dove, isNotNull(companies.sede)),
+    )
     .groupBy(chiave);
 
   const conteggio = new Map<string, number>();

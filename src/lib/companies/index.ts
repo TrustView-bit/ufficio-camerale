@@ -10,6 +10,7 @@ import type {
   EsitoRicerca,
   FiltriElenco,
   OpzioniRicerca,
+  Raggruppamento,
   VoceAggregata,
 } from "@/lib/providers/types";
 
@@ -79,7 +80,7 @@ export async function elencoAziende(
 /** Conteggi per costruire i collegamenti al livello successivo. */
 export async function aggregaAziende(
   filtri: FiltriElenco,
-  per: "regione" | "provincia" | "comune" | "ateco",
+  per: Raggruppamento,
 ): Promise<VoceAggregata[]> {
   const db = getDb();
   if (db) return aggregaInArchivio(db, filtri, per);

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Briciole } from "@/components/elenco/briciole";
 import { GrigliaCollegamenti } from "@/components/elenco/griglia-collegamenti";
+import { IndiceAlfabetico } from "@/components/elenco/indice-alfabetico";
 import { aggregaAziende } from "@/lib/companies";
 import { regioni } from "@/lib/geo";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
@@ -16,7 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AziendePage() {
-  const conteggi = await aggregaAziende({}, "regione");
+  const [conteggi, perLettera] = await Promise.all([
+    aggregaAziende({}, "regione"),
+    aggregaAziende({}, "iniziale"),
+  ]);
   const perRegione = new Map(conteggi.map((voce) => [voce.chiave, voce.quante]));
 
   const voci = regioni()
@@ -42,7 +46,16 @@ export default async function AziendePage() {
         provincia, al comune e infine alla singola scheda.
       </p>
 
-      <div className="mt-8">
+      <div className="mt-8 flex flex-col gap-10">
+        <section>
+          <h2 className="mb-3 text-lg font-semibold tracking-tight">
+            Indice alfabetico
+          </h2>
+          <IndiceAlfabetico
+            conteggi={new Map(perLettera.map((v) => [v.chiave, v.quante]))}
+          />
+        </section>
+
         <GrigliaCollegamenti titolo="Regioni" voci={voci} />
       </div>
     </div>

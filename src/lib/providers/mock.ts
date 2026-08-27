@@ -18,6 +18,7 @@ import type {
   Indirizzo,
   OpzioniRicerca,
   ProviderResult,
+  Raggruppamento,
   RisultatoAzienda,
   UnitaLocale,
   VoceAggregata,
@@ -290,6 +291,15 @@ function filtra(aziende: CompanyData[], filtri: FiltriElenco): CompanyData[] {
       return false;
     }
 
+    if (filtri.iniziale) {
+      const prima = azienda.denominazione.trim().charAt(0).toUpperCase();
+      const eLettera = /[A-Z]/.test(prima);
+      // "#" raccoglie tutto ciò che non comincia per lettera
+      if (filtri.iniziale === "#" ? eLettera : prima !== filtri.iniziale) {
+        return false;
+      }
+    }
+
     return true;
   });
 }
@@ -395,12 +405,14 @@ export class MockCompanyProvider implements CompanyProvider {
 
   async aggrega(
     filtri: FiltriElenco,
-    per: "regione" | "provincia" | "comune" | "ateco",
+    per: Raggruppamento,
   ): Promise<VoceAggregata[]> {
     const conteggio = new Map<string, number>();
 
     for (const azienda of filtra(Object.values(TUTTE), filtri)) {
       const sigla = azienda.sede?.provincia ?? null;
+
+      const primaLettera = azienda.denominazione.trim().charAt(0).toUpperCase();
 
       const chiave =
         per === "provincia"
@@ -409,9 +421,13 @@ export class MockCompanyProvider implements CompanyProvider {
             ? (azienda.sede?.comune ?? null)
             : per === "regione"
               ? (sigla && regioneDiSigla(sigla)) || null
-              : // per settore si raggruppa sulla divisione, non sul codice
-                // completo: altrimenti si otterrebbero centinaia di voci da una
-                (azienda.atecoPrimario?.slice(0, 2) ?? null);
+              : per === "iniziale"
+                ? /[A-Z]/.test(primaLettera)
+                  ? primaLettera
+                  : "#"
+                : // per settore si raggruppa sulla divisione, non sul codice
+                  // completo: altrimenti si otterrebbero centinaia di voci da una
+                  (azienda.atecoPrimario?.slice(0, 2) ?? null);
 
       if (chiave) conteggio.set(chiave, (conteggio.get(chiave) ?? 0) + 1);
     }

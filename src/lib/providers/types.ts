@@ -97,7 +97,13 @@ export type FiltriElenco = {
   comune?: string;
   /** Codice ATECO, confrontato per prefisso: "62" prende tutta la divisione. */
   ateco?: string;
+  /** Iniziale della ragione sociale, per l'indice alfabetico. */
+  iniziale?: string;
 };
+
+/** Su cosa si raggruppa quando si contano le aziende. */
+export type Raggruppamento =
+  "regione" | "provincia" | "comune" | "ateco" | "iniziale";
 
 /** Una voce di raggruppamento, con quante aziende contiene. */
 export type VoceAggregata = {
@@ -156,10 +162,7 @@ export interface CompanyProvider {
   elenco?(filtri: FiltriElenco, opzioni?: OpzioniRicerca): Promise<EsitoElenco>;
 
   /** Conteggi per costruire i collegamenti al livello successivo. */
-  aggrega?(
-    filtri: FiltriElenco,
-    per: "regione" | "provincia" | "comune" | "ateco",
-  ): Promise<VoceAggregata[]>;
+  aggrega?(filtri: FiltriElenco, per: Raggruppamento): Promise<VoceAggregata[]>;
 }
 
 export const PROVIDER_UNAVAILABLE_MESSAGE: Record<

@@ -203,10 +203,16 @@ test.describe("sfogliare per territorio", () => {
       page.getByRole("heading", { name: /aziende italiane per regione/i }),
     ).toBeVisible();
 
-    await page.locator('a[href^="/aziende/"]').first().click();
+    await page
+      .locator('a[href^="/aziende/"]:not([href*="/lettera/"])')
+      .first()
+      .click();
     await expect(page).toHaveURL(/\/aziende\/[a-z-]+$/);
 
-    await page.locator('a[href^="/aziende/"]').first().click();
+    await page
+      .locator('a[href^="/aziende/"]:not([href*="/lettera/"])')
+      .first()
+      .click();
     await expect(page).toHaveURL(/\/aziende\/[a-z-]+\/[a-z-]+$/);
     await expect(
       page.getByRole("heading", { name: /provincia di/i }),
@@ -225,13 +231,13 @@ test.describe("sfogliare per territorio", () => {
     // si legge l'indirizzo invece di leggere page.url() dopo un click: la
     // navigazione può non essere ancora conclusa
     const regione = (await page
-      .locator('a[href^="/aziende/"]')
+      .locator('a[href^="/aziende/"]:not([href*="/lettera/"])')
       .first()
       .getAttribute("href"))!;
 
     await page.goto(regione);
     const provincia = (await page
-      .locator('a[href^="/aziende/"]')
+      .locator('a[href^="/aziende/"]:not([href*="/lettera/"])')
       .first()
       .getAttribute("href"))!;
 
@@ -247,6 +253,36 @@ test.describe("sfogliare per territorio", () => {
   }) => {
     expect((await page.goto("/aziende/atlantide"))?.status()).toBe(404);
     expect((await page.goto("/aziende/lombardia/zzz"))?.status()).toBe(404);
+  });
+});
+
+test.describe("indice alfabetico", () => {
+  test("le lettere con aziende portano al loro elenco", async ({ page }) => {
+    await page.goto("/aziende");
+
+    const indice = page.getByRole("navigation", { name: /indice alfabetico/i });
+    await expect(indice).toBeVisible();
+
+    const attiva = indice.getByRole("link").first();
+    const lettera = (await attiva.textContent())!.trim();
+    await attiva.click();
+
+    await expect(page).toHaveURL(/\/aziende\/lettera\//);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(lettera);
+    expect(await page.locator('a[href^="/azienda/"]').count()).toBeGreaterThan(0);
+  });
+
+  test("le lettere senza aziende non sono cliccabili", async ({ page }) => {
+    await page.goto("/aziende");
+
+    const indice = page.getByRole("navigation", { name: /indice alfabetico/i });
+    // ventisette caselle in tutto: A-Z più il gruppo delle cifre
+    expect(await indice.locator("a, span").count()).toBe(27);
+    expect(await indice.locator("span[aria-disabled]").count()).toBeGreaterThan(0);
+  });
+
+  test("una lettera senza risultati è un 404", async ({ page }) => {
+    expect((await page.goto("/aziende/lettera/zz"))?.status()).toBe(404);
   });
 });
 

@@ -195,6 +195,10 @@ raggiungibili senza conoscerne la partita IVA:
 /aziende/lombardia/bergamo/treviglio      aziende del comune
 ```
 
+C'è anche l'indice alfabetico, `/aziende/lettera/a`: le lettere senza aziende
+restano visibili ma spente, perché nasconderle farebbe saltare l'alfabeto e
+costringerebbe a cercare la lettera invece di puntarla.
+
 Lo stesso vale per i settori:
 
 ```
