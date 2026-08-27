@@ -125,7 +125,12 @@
   /* shadcn usa --destructive internamente: allineato a --danger */
   --destructive: var(--danger);
 
-  --chart-1: oklch(0.415 0.128 259);
+  /* Serie dei grafici: la luminosità sta dentro la banda richiesta ai
+     marcatori (L 0.43–0.77 in chiaro, 0.48–0.67 in scuro) e il contrasto sul
+     fondo card supera 3:1. Verificato con lo strumento, non a occhio.
+     Le altre voci restano da validare prima di usarle in un grafico a più
+     serie: tinte equidistanti a pari luminosità falliscono il test daltonismo. */
+  --chart-1: oklch(0.55 0.14 259);
   --chart-2: oklch(0.478 0.084 187);
   --chart-3: oklch(0.508 0.108 62);
   --chart-4: oklch(0.492 0.1 166);
@@ -185,7 +190,7 @@
 
   --destructive: var(--danger);
 
-  --chart-1: oklch(0.735 0.108 259);
+  --chart-1: oklch(0.62 0.13 259);
   --chart-2: oklch(0.732 0.077 178);
   --chart-3: oklch(0.782 0.122 74);
   --chart-4: oklch(0.722 0.107 168);

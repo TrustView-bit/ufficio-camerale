@@ -3,6 +3,7 @@ import { FlaskConical, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
+import { AndamentoFatturato } from "@/components/azienda/andamento-fatturato";
 import { AziendeSimili } from "@/components/azienda/aziende-simili";
 import { DocumentiAcquistabili } from "@/components/azienda/documenti-acquistabili";
 import { FonteDati } from "@/components/azienda/fonte-dati";
@@ -173,6 +174,7 @@ export default async function AziendaPage({ params }: Props) {
       <div className="mt-8 grid gap-8">
         <DatiSocieta company={company} />
         <AltreInformazioni company={company} />
+        <Andamento company={company} />
         <UnitaLocali company={company} />
         <Mappa company={company} />
         <DocumentiAcquistabili eSocieta={eSocieta} />
@@ -396,6 +398,24 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
   ];
 
   return <BoxDati titolo="Altre informazioni" righe={righe} />;
+}
+
+function Andamento({ company }: { company: CompanyData }) {
+  const conFatturato = company.bilanci.filter(
+    (bilancio) => bilancio.fatturato !== null,
+  );
+  if (conFatturato.length < 2) return null;
+
+  return (
+    <section className="print:break-inside-avoid">
+      <h2 className="mb-3 text-lg font-semibold tracking-tight">
+        Andamento del fatturato
+      </h2>
+      <div className="border-border bg-card shadow-card rounded-xl border p-4">
+        <AndamentoFatturato bilanci={company.bilanci} />
+      </div>
+    </section>
+  );
 }
 
 function UnitaLocali({ company }: { company: CompanyData }) {
