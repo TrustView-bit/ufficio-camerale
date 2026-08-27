@@ -13,6 +13,7 @@ import type {
   VoceAggregata,
 } from "@/lib/providers/types";
 
+import { aggregaInArchivio, cercaInArchivio, elencoInArchivio } from "./archivio";
 import { getCompany, type CompanyLookup } from "./repository";
 
 export * from "./repository";
@@ -49,27 +50,30 @@ export async function cercaAziende(
   query: string,
   opzioni: OpzioniRicerca = {},
 ): Promise<EsitoRicerca | null> {
-  const provider = getCompanyProvider();
-  if (!provider.cercaPerNome) return null;
+  // prima l'archivio: è lì che vivono le aziende già interrogate
+  const db = getDb();
+  if (db) return cercaInArchivio(db, query, opzioni);
 
-  return provider.cercaPerNome(query, opzioni);
+  const provider = getCompanyProvider();
+  return provider.cercaPerNome?.(query, opzioni) ?? null;
 }
 
 /**
  * Elenco filtrato per territorio o settore.
  *
- * Restituisce null se il fornitore non sa enumerare il proprio archivio: le
- * API a pagamento non lo permettono, e in produzione queste pagine andranno
- * costruite sui dati già salvati in Postgres.
+ * Si costruisce sull'archivio: un'API a pagamento non lascia enumerare il
+ * proprio contenuto, quindi queste pagine crescono con le aziende che
+ * qualcuno ha già cercato.
  */
 export async function elencoAziende(
   filtri: FiltriElenco,
   opzioni: OpzioniRicerca = {},
 ): Promise<EsitoElenco | null> {
-  const provider = getCompanyProvider();
-  if (!provider.elenco) return null;
+  const db = getDb();
+  if (db) return elencoInArchivio(db, filtri, opzioni);
 
-  return provider.elenco(filtri, opzioni);
+  const provider = getCompanyProvider();
+  return provider.elenco?.(filtri, opzioni) ?? null;
 }
 
 /** Conteggi per costruire i collegamenti al livello successivo. */
@@ -77,8 +81,9 @@ export async function aggregaAziende(
   filtri: FiltriElenco,
   per: "regione" | "provincia" | "comune" | "ateco",
 ): Promise<VoceAggregata[]> {
-  const provider = getCompanyProvider();
-  if (!provider.aggrega) return [];
+  const db = getDb();
+  if (db) return aggregaInArchivio(db, filtri, per);
 
-  return provider.aggrega(filtri, per);
+  const provider = getCompanyProvider();
+  return provider.aggrega?.(filtri, per) ?? [];
 }

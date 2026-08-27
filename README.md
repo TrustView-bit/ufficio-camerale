@@ -424,16 +424,17 @@ della sede** (che rendono la mappa precisa al civico invece che al comune), il
 
 I costi in `COSTO_PER_LIVELLO` restano indicativi: vanno allineati al listino.
 
-### Sfogliare con il fornitore reale
+### Da dove vengono gli elenchi
 
-Con `COMPANY_PROVIDER=openapi` le schede mostrano dati veri, ma `/ricerca` e
-`/aziende` restano vuote: **un'API a pagamento non lascia enumerare il proprio
-archivio**, e senza `DATABASE_URL` non c'è un archivio locale su cui costruire
-gli elenchi. Le pagine lo dichiarano invece di mostrare zero risultati come se
-non esistesse nulla.
+Un'API a pagamento **non lascia enumerare il proprio contenuto**: si può
+chiedere una partita IVA alla volta, non «tutte le imprese di Bergamo».
 
-È l'architettura prevista: gli elenchi si costruiscono sui dati man mano
-salvati in Postgres, non interrogando il fornitore.
+Per questo ricerca ed elenchi si costruiscono sull'**archivio**
+(`src/lib/companies/archivio.ts`), non sul fornitore: crescono con le aziende
+che qualcuno ha già cercato, e ogni scheda aperta le allarga. Senza
+`DATABASE_URL` si ripiega sul provider, che sa farlo solo in quello
+dimostrativo — e le pagine lo dichiarano invece di mostrare zero risultati
+come se non esistesse nulla.
 
 ## Deploy su Vercel
 
