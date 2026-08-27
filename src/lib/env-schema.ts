@@ -19,6 +19,15 @@ const schema = z
 
     COMPANY_PROVIDER: z.enum(["mock", "openapi"]).default("mock"),
     OPENAPI_IT_TOKEN: z.string().min(1).optional(),
+    /**
+     * Costo reale di una chiamata, dal listino del fornitore.
+     *
+     * Il valore predefinito è 0 di proposito: finché non è noto il listino,
+     * scrivere una cifra inventata nella colonna dei costi produce un totale
+     * che sembra una spesa e non lo è. Meglio contare le chiamate — dato
+     * certo — e lasciare l'importo a zero finché non lo si sa.
+     */
+    OPENAPI_COSTO_PER_CHIAMATA: z.coerce.number().nonnegative().default(0),
 
     /** Dopo quanti giorni un record in archivio è considerato stantio. */
     REFRESH_AFTER_DAYS: z.coerce.number().int().positive().max(365).default(30),

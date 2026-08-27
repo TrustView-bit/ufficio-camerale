@@ -32,13 +32,6 @@ const TIMEOUT_MS = 8000;
 /** Livelli di dettaglio, dal più economico al più completo. */
 export type OpenapiLevel = "IT-start" | "IT-advanced" | "IT-full";
 
-/** Costo indicativo per interrogazione, in euro. Da allineare al listino. */
-const COSTO_PER_LIVELLO: Record<OpenapiLevel, number> = {
-  "IT-start": 0.05,
-  "IT-advanced": 0.35,
-  "IT-full": 1.2,
-};
-
 const gpsSchema = z
   .object({ coordinates: z.array(z.number()).length(2) })
   .partial()
@@ -263,11 +256,16 @@ export class OpenapiCompanyProvider implements CompanyProvider {
   readonly name = "openapi";
   readonly costPerLookupEur: number;
 
+  /**
+   * Il costo va passato da fuori, dal listino vero: inventarlo qui
+   * riempirebbe la colonna dei costi di cifre plausibili ma false.
+   */
   constructor(
     private readonly token: string,
     private readonly level: OpenapiLevel = "IT-advanced",
+    costoPerChiamata = 0,
   ) {
-    this.costPerLookupEur = COSTO_PER_LIVELLO[level];
+    this.costPerLookupEur = costoPerChiamata;
   }
 
   async getByPartitaIva(partitaIva: string): Promise<ProviderResult> {

@@ -369,9 +369,11 @@ datato e dichiarato tale è più utile di una pagina d'errore. Al contrario, se
 il provider risponde "non esiste", quella risposta è autorevole e non si
 ripiega sull'archivio.
 
-Ogni chiamata effettivamente pagata finisce nella tabella `api_calls` con il
-costo stimato, la durata e l'esito, così la spesa è verificabile con una query
-invece che a fine mese sulla fattura.
+Ogni chiamata al fornitore finisce nella tabella `api_calls` con durata, esito
+e costo. **Il costo vale 0 finché non si dichiara il listino reale** in
+`OPENAPI_COSTO_PER_CHIAMATA`: il numero di chiamate è un dato certo, l'importo
+no, e una cifra inventata nella colonna dei costi produce un totale che sembra
+una spesa senza esserlo.
 
 Il portale funziona anche **senza** database e senza Redis: degrada a cache in
 memoria e paga ogni interrogazione. Utile in sviluppo, da non fare in
@@ -439,7 +441,8 @@ In più l'API fornisce cose che il modello non prevedeva: **coordinate GPS
 della sede** (che rendono la mappa precisa al civico invece che al comune), il
 **codice destinatario SDI**, e la **serie storica dei bilanci**.
 
-I costi in `COSTO_PER_LIVELLO` restano indicativi: vanno allineati al listino.
+Il costo per chiamata non è scritto nel codice: si dichiara in
+`OPENAPI_COSTO_PER_CHIAMATA` e vale 0 finché non si conosce il listino.
 
 ### Da dove vengono gli elenchi
 

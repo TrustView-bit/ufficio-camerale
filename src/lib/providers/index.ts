@@ -25,7 +25,11 @@ export function getCompanyProvider(): CompanyProvider {
 
   switch (env.COMPANY_PROVIDER) {
     case "openapi":
-      cached = new OpenapiCompanyProvider(env.OPENAPI_IT_TOKEN!);
+      cached = new OpenapiCompanyProvider(
+        env.OPENAPI_IT_TOKEN!,
+        "IT-advanced",
+        env.OPENAPI_COSTO_PER_CHIAMATA,
+      );
       break;
     case "mock":
       cached = new MockCompanyProvider();

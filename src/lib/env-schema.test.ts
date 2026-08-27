@@ -106,3 +106,22 @@ describe("parseEnv", () => {
     }
   });
 });
+
+describe("costo per chiamata", () => {
+  it("vale zero finché non si conosce il listino", () => {
+    const esito = parseEnv(ENV_APPENA_COPIATO);
+    expect(esito.ok && esito.env.OPENAPI_COSTO_PER_CHIAMATA).toBe(0);
+  });
+
+  it("accetta il costo reale quando lo si dichiara", () => {
+    const esito = parseEnv({
+      ...ENV_APPENA_COPIATO,
+      OPENAPI_COSTO_PER_CHIAMATA: "0.12",
+    });
+    expect(esito.ok && esito.env.OPENAPI_COSTO_PER_CHIAMATA).toBe(0.12);
+  });
+
+  it("rifiuta un costo negativo", () => {
+    expect(parseEnv({ OPENAPI_COSTO_PER_CHIAMATA: "-1" }).ok).toBe(false);
+  });
+});
