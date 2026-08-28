@@ -4,6 +4,7 @@ import {
   anniDi,
   formatDataIso,
   formatEuro,
+  formatEuroCompatto,
   formatIndirizzo,
   hostnameDi,
   mascheraCodiceFiscale,
@@ -19,6 +20,25 @@ describe("formatEuro", () => {
   it("distingue lo zero dall'assenza di dato", () => {
     expect(formatEuro(0)).toContain("0");
     expect(formatEuro(null)).toBeNull();
+  });
+});
+
+describe("formatEuroCompatto", () => {
+  it("abbrevia i miliardi con una cifra decimale", () => {
+    expect(formatEuroCompatto(35_026_371_500)).toBe("35,0 mld €");
+  });
+
+  it("abbrevia i milioni, senza decimali oltre il centinaio", () => {
+    expect(formatEuroCompatto(820_400_000)).toBe("820 mln €");
+    expect(formatEuroCompatto(18_400_000)).toBe("18,4 mln €");
+  });
+
+  it("sotto il milione lascia l'importo per esteso", () => {
+    expect(formatEuroCompatto(250_000)).toContain("250.000");
+  });
+
+  it("non si inventa nulla su un dato assente", () => {
+    expect(formatEuroCompatto(null)).toBeNull();
   });
 });
 

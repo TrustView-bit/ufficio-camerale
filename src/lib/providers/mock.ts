@@ -10,6 +10,7 @@ import {
 import { punteggio } from "@/lib/ricerca";
 
 import type {
+  AziendaInEvidenza,
   Bilancio,
   CompanyData,
   CompanyProvider,
@@ -307,6 +308,15 @@ function filtra(aziende: CompanyData[], filtri: FiltriElenco): CompanyData[] {
   });
 }
 
+/** L'esercizio più recente di cui si conosce il fatturato. */
+function ultimoConFatturato(azienda: CompanyData): Bilancio | null {
+  return (
+    azienda.bilanci
+      .filter((bilancio) => bilancio.fatturato !== null)
+      .sort((a, b) => b.anno - a.anno)[0] ?? null
+  );
+}
+
 const perDenominazione = (a: CompanyData, b: CompanyData) =>
   a.denominazione.localeCompare(b.denominazione, "it");
 
@@ -404,6 +414,27 @@ export class MockCompanyProvider implements CompanyProvider {
       totale: trovate.length,
       risultati: trovate.slice(offset, offset + limite).map(inSintesi),
     };
+  }
+
+  async inEvidenza(limite = 6): Promise<AziendaInEvidenza[]> {
+    return (
+      Object.values(TUTTE)
+        // le dimostrative hanno numeri inventati: in una classifica per
+        // fatturato scavalcherebbero aziende vere con cifre finte
+        .filter((azienda) => !azienda.fittizia)
+        .map((azienda) => ({ azienda, bilancio: ultimoConFatturato(azienda) }))
+        .filter(
+          (voce): voce is { azienda: CompanyData; bilancio: Bilancio } =>
+            voce.bilancio !== null,
+        )
+        .sort((a, b) => b.bilancio.fatturato! - a.bilancio.fatturato!)
+        .slice(0, limite)
+        .map(({ azienda, bilancio }) => ({
+          ...inSintesi(azienda),
+          fatturato: bilancio.fatturato,
+          anno: bilancio.anno,
+        }))
+    );
   }
 
   async aggrega(

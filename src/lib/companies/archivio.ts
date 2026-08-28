@@ -13,6 +13,7 @@ import {
 import { companies } from "@/lib/db/schema";
 import { regioneDiSigla } from "@/lib/geo";
 import type {
+  AziendaInEvidenza,
   EsitoElenco,
   EsitoRicerca,
   FiltriElenco,
@@ -146,6 +147,49 @@ export async function elencoInArchivio(
     .offset(offset);
 
   return { totale: totale?.quante ?? 0, risultati: righe.map(inSintesi) };
+}
+
+/**
+ * L'esercizio più recente con un fatturato, estratto dal jsonb dei bilanci.
+ *
+ * `jsonb_agg ... -> 0` restituisce il primo elemento dopo l'ordinamento per
+ * anno decrescente: i bilanci sono pochi per riga, e questo evita di
+ * riportarli tutti in JavaScript per poi tenerne uno.
+ */
+const ultimoBilancio = sql`(
+  select jsonb_agg(b order by (b->>'anno')::int desc)
+  from jsonb_array_elements(coalesce(${companies.bilanci}, '[]'::jsonb)) b
+  where b->>'fatturato' is not null
+) -> 0`;
+
+const fatturatoSql = sql<number | null>`(${ultimoBilancio}->>'fatturato')::float8`;
+const annoBilancioSql = sql<number | null>`(${ultimoBilancio}->>'anno')::int`;
+
+/** Le aziende con il fatturato più alto fra quelle presenti in archivio. */
+export async function inEvidenzaInArchivio(
+  db: Database,
+  limite = 6,
+): Promise<AziendaInEvidenza[]> {
+  const righe = await db
+    .select({
+      partitaIva: companies.partitaIva,
+      denominazione: companies.denominazione,
+      sede: companies.sede,
+      statoAttivita: companies.statoAttivita,
+      fatturato: fatturatoSql,
+      anno: annoBilancioSql,
+    })
+    .from(companies)
+    .where(sql`${fatturatoSql} is not null`)
+    .orderBy(sql`${fatturatoSql} desc`)
+    .limit(limite);
+
+  return righe.map((riga) => ({
+    ...inSintesi(riga),
+    // il driver può restituire i numerici come stringa
+    fatturato: riga.fatturato === null ? null : Number(riga.fatturato),
+    anno: riga.anno === null ? null : Number(riga.anno),
+  }));
 }
 
 export async function aggregaInArchivio(

@@ -4,6 +4,27 @@ import { expect, test } from "@playwright/test";
 const PIVA = "00743110157";
 const DENOMINAZIONE = "Esempio Manifattura S.p.A.";
 
+test.describe("schede in evidenza in home", () => {
+  test("le maggiori aziende dell'archivio portano alla loro scheda", async ({
+    page,
+  }) => {
+    await page.goto("/");
+
+    const sezione = page.getByRole("region", {
+      name: /tra le maggiori in archivio/i,
+    });
+    // il primo collegamento della sezione è "Sfoglia tutte le aziende":
+    // le schede sono le voci dell'elenco
+    const prima = sezione.getByRole("listitem").first().getByRole("link");
+
+    const nome = (await prima.getByRole("heading").textContent())?.trim();
+    await prima.click();
+
+    await expect(page).toHaveURL(/\/azienda\/.+-\d{11}$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(nome!);
+  });
+});
+
 test.describe("dalla ricerca alla scheda azienda", () => {
   test("una Partita IVA valida porta alla scheda", async ({ page }) => {
     await page.goto("/");

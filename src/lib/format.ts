@@ -18,6 +18,34 @@ export function formatEuro(value: number | null): string | null {
   return value === null ? null : EURO.format(value);
 }
 
+/**
+ * Cifre grandi in forma breve: 35.026.371.500 diventa "35,0 mld €".
+ *
+ * Serve dove lo spazio conta e l'ordine di grandezza basta — le schede in
+ * evidenza della home. Nella scheda dell'azienda resta `formatEuro`, che
+ * mostra l'importo per intero.
+ */
+export function formatEuroCompatto(value: number | null): string | null {
+  if (value === null) return null;
+
+  const assoluto = Math.abs(value);
+  if (assoluto < 1_000_000) return formatEuro(value);
+
+  const [divisore, unita] =
+    assoluto >= 1_000_000_000
+      ? ([1_000_000_000, "mld"] as const)
+      : ([1_000_000, "mln"] as const);
+
+  const ridotto = value / divisore;
+  // una cifra decimale sotto cento, nessuna sopra: "35,0 mld" ma "820 mln"
+  const decimali = Math.abs(ridotto) < 100 ? 1 : 0;
+
+  return `${ridotto.toLocaleString("it-IT", {
+    minimumFractionDigits: decimali,
+    maximumFractionDigits: decimali,
+  })} ${unita} €`;
+}
+
 /** Da "1962-04-17" a "17 aprile 1962". */
 export function formatDataIso(iso: string | null): string | null {
   if (!iso) return null;

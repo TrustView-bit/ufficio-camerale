@@ -6,6 +6,7 @@ import { env } from "@/lib/env";
 import { getCompanyProvider } from "@/lib/providers";
 
 import type {
+  AziendaInEvidenza,
   EsitoElenco,
   EsitoRicerca,
   FiltriElenco,
@@ -14,7 +15,12 @@ import type {
   VoceAggregata,
 } from "@/lib/providers/types";
 
-import { aggregaInArchivio, cercaInArchivio, elencoInArchivio } from "./archivio";
+import {
+  aggregaInArchivio,
+  cercaInArchivio,
+  elencoInArchivio,
+  inEvidenzaInArchivio,
+} from "./archivio";
 import { getCompany, type CompanyLookup } from "./repository";
 
 export * from "./repository";
@@ -87,4 +93,18 @@ export async function aggregaAziende(
 
   const provider = getCompanyProvider();
   return provider.aggrega?.(filtri, per) ?? [];
+}
+
+/**
+ * Le aziende più grandi per fatturato fra quelle conosciute.
+ *
+ * Elenco vuoto quando non se ne conosce nessuna: la home in quel caso non
+ * mostra la sezione, invece di mostrarla vuota.
+ */
+export async function aziendeInEvidenza(limite = 6): Promise<AziendaInEvidenza[]> {
+  const db = getDb();
+  if (db) return inEvidenzaInArchivio(db, limite);
+
+  const provider = getCompanyProvider();
+  return provider.inEvidenza?.(limite) ?? [];
 }

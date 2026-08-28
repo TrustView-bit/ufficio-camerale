@@ -1,8 +1,10 @@
 import { Building2, ScanSearch, ShieldCheck } from "lucide-react";
 
+import { AziendeInEvidenza } from "@/components/home/aziende-in-evidenza";
 import { SearchForm } from "@/components/search/search-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
+import { aziendeInEvidenza } from "@/lib/companies";
 
 const PASSI = [
   {
@@ -25,7 +27,9 @@ const PASSI = [
   },
 ] as const;
 
-export default function Home() {
+export default async function Home() {
+  const evidenza = await aziendeInEvidenza(6);
+
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <section className="py-16 sm:py-24">
@@ -53,6 +57,8 @@ export default function Home() {
           <SearchForm />
         </div>
       </section>
+
+      <AziendeInEvidenza aziende={evidenza} />
 
       <section className="pb-8" aria-labelledby="come-funziona">
         <h2

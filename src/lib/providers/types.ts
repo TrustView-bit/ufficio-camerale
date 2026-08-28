@@ -89,6 +89,17 @@ export type RisultatoAzienda = {
   fittizia?: boolean;
 };
 
+/**
+ * Una riga d'elenco con l'ultimo fatturato noto, per le schede in evidenza.
+ *
+ * `fatturato` può essere null anche qui: l'azienda esiste, il bilancio no.
+ */
+export type AziendaInEvidenza = RisultatoAzienda & {
+  fatturato: number | null;
+  /** Anno del bilancio da cui viene il fatturato. */
+  anno: number | null;
+};
+
 /** Filtri delle pagine di elenco: territorio e settore. */
 export type FiltriElenco = {
   regione?: string;
@@ -160,6 +171,15 @@ export interface CompanyProvider {
    * dati già salvati in Postgres, non interrogando il fornitore.
    */
   elenco?(filtri: FiltriElenco, opzioni?: OpzioniRicerca): Promise<EsitoElenco>;
+
+  /**
+   * Le aziende con il fatturato più alto fra quelle conosciute.
+   *
+   * Facoltativa come le altre: è un'interrogazione sull'archivio, e ordina
+   * solo ciò che l'archivio contiene già — non è una classifica delle
+   * maggiori imprese italiane, ma delle maggiori fra quelle che abbiamo.
+   */
+  inEvidenza?(limite?: number): Promise<AziendaInEvidenza[]>;
 
   /** Conteggi per costruire i collegamenti al livello successivo. */
   aggrega?(filtri: FiltriElenco, per: Raggruppamento): Promise<VoceAggregata[]>;
