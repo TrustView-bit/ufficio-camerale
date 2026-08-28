@@ -15,7 +15,10 @@ const DATA_LUNGA = new Intl.DateTimeFormat("it-IT", {
 });
 
 export function formatEuro(value: number | null): string | null {
-  return value === null ? null : EURO.format(value);
+  // NaN e Infinity passerebbero il controllo di nullità e verrebbero
+  // formattati come "NaN €": un dato mancante non deve diventare visibile
+  if (value === null || !Number.isFinite(value)) return null;
+  return EURO.format(value);
 }
 
 /**

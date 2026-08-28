@@ -222,8 +222,11 @@ function daElenchiPubblici(): Record<string, CompanyData> {
     // Il campo c'è solo dove l'elenco di origine lo forniva. Per le imprese
     // reali resta null: attribuire loro un capitale o un REA inventati
     // sarebbe pubblicare informazioni false su un soggetto esistente.
+    // `?? null` non è pleonastico: una chiave assente dà `undefined`, che
+    // supera i controlli `!== null` a valle e finisce stampato nella scheda
+    // come "undefined" o "NaN €".
     const campo = <T>(chiave: string): T | null =>
-      (impresa as Record<string, unknown>)[chiave] as T | null;
+      ((impresa as Record<string, unknown>)[chiave] as T | null) ?? null;
 
     mappa[impresa.partitaIva] = {
       partitaIva: impresa.partitaIva,

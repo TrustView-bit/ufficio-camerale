@@ -30,3 +30,21 @@ describe("inEvidenza", () => {
     }
   });
 });
+
+describe("campi assenti", () => {
+  it("restituisce null, mai undefined", async () => {
+    // Le imprese degli elenchi pubblici hanno spesso solo nome e sede. Se un
+    // campo mancante arrivasse come `undefined`, i controlli `!== null` della
+    // scheda lo lascerebbero passare e finirebbe stampato come "undefined".
+    const magre = await provider.elenco({}, { limite: 400 });
+
+    for (const riga of magre.risultati) {
+      const esito = await provider.getByPartitaIva(riga.partitaIva);
+      if (esito.status !== "found") continue;
+
+      for (const [campo, valore] of Object.entries(esito.company)) {
+        expect(valore, `${riga.partitaIva} → ${campo}`).not.toBeUndefined();
+      }
+    }
+  });
+});

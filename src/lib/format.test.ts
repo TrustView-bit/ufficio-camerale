@@ -21,6 +21,11 @@ describe("formatEuro", () => {
     expect(formatEuro(0)).toContain("0");
     expect(formatEuro(null)).toBeNull();
   });
+
+  it("non stampa NaN quando il dato arriva rotto", () => {
+    expect(formatEuro(Number.NaN)).toBeNull();
+    expect(formatEuro(undefined as unknown as number)).toBeNull();
+  });
 });
 
 describe("formatEuroCompatto", () => {
