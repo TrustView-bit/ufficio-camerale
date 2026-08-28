@@ -318,6 +318,34 @@ Le tile pubbliche di `openstreetmap.org` hanno una politica d'uso che
 scoraggia il traffico elevato: prima di mettere il sito sotto carico vero
 conviene passare a un fornitore di tile proprio.
 
+### Descrizioni generate
+
+`src/lib/descrizioni/` scrive la sintesi in prosa che compare come «In
+sintesi» sopra i dati. Tre scelte la governano:
+
+**Solo su richiesta.** Con quasi duemila imprese in archivio, generarle tutte
+sarebbe una spesa certa per un beneficio ipotetico: la maggior parte delle
+schede non viene mai aperta. La prima visita programma la generazione dentro
+`after()` — la pagina non attende il modello — e dalla seconda in poi il testo
+è già in cache (30 giorni) e nella colonna `descrizione`.
+
+**Il modello riceve solo la scheda.** `fattiDi()` costruisce l'elenco dei
+fatti, e quell'elenco è l'unico ingresso. Il modello «sa» già chi è Eni, e
+quella conoscenza è il rischio: una descrizione che integra a memoria produce
+affermazioni su un'impresa reale che nessuno ha verificato. Il prompt lo vieta
+come prima regola.
+
+**Ogni cifra viene ricontrollata.** `verificaDescrizione()` estrae le sequenze
+di cifre del testo generato e le confronta con quelle dei fatti: un importo,
+un anno o un conteggio che nei dati non c'è fa scartare l'intero testo, che
+non viene né mostrato né salvato. Non si può accertare automaticamente che una
+frase sia vera, ma si può accertare che i numeri vengano dai dati — ed è la
+classe di invenzione più dannosa.
+
+Senza `ANTHROPIC_API_KEY` non parte nulla e le schede restano come sono. Le
+aziende del dataset dimostrativo sono escluse: hanno dati inventati, e una
+descrizione in prosa li renderebbe ancora più simili a informazioni vere.
+
 ### Documenti ordinabili
 
 `src/lib/documenti.ts` elenca i documenti camerali con i relativi prezzi. **I

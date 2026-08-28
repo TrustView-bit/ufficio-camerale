@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { FlaskConical, TriangleAlert } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
+import { after } from "next/server";
 
 import { AndamentoFatturato } from "@/components/azienda/andamento-fatturato";
 import { AziendeSimili } from "@/components/azienda/aziende-simili";
+import { Descrizione } from "@/components/azienda/descrizione";
 import { DocumentiAcquistabili } from "@/components/azienda/documenti-acquistabili";
 import { FonteDati } from "@/components/azienda/fonte-dati";
 import { MappaStatica } from "@/components/azienda/mappa-statica";
@@ -20,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { descriviAteco, slugAteco } from "@/lib/ateco";
 import { elencoAziende, lookupCompany } from "@/lib/companies";
+import { descrizioneSalvata, generaESalva } from "@/lib/descrizioni";
 import { env } from "@/lib/env";
 import {
   anniDi,
@@ -125,6 +128,11 @@ export default async function AziendaPage({ params }: Props) {
     .filter((azienda) => azienda.partitaIva !== company.partitaIva)
     .slice(0, 6);
 
+  // La descrizione si mostra solo se è già stata scritta. Se manca, la si
+  // programma dopo la risposta: la pagina non deve aspettare un modello.
+  const descrizione = await descrizioneSalvata(company.partitaIva);
+  if (!descrizione) after(() => generaESalva(company));
+
   const percorsoComune =
     regione && sigla && comune
       ? `/aziende/${slugTerritorio(regione)}/${slugTerritorio(
@@ -177,6 +185,7 @@ export default async function AziendaPage({ params }: Props) {
           scritto. */}
       <div className="mt-8 grid items-start gap-8 md:grid-cols-[minmax(0,7fr)_minmax(0,4fr)]">
         <div className="grid gap-8">
+          <Descrizione testo={descrizione} />
           <DatiSocieta company={company} />
           <AltreInformazioni company={company} />
           <Andamento company={company} />
