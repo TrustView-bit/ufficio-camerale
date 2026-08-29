@@ -56,6 +56,12 @@ export const companies = pgTable(
     codiceFiscale: varchar("codice_fiscale", { length: 16 }),
 
     denominazione: text("denominazione").notNull(),
+    /** La denominazione ridotta alla forma confrontabile da `chiaveRicerca`:
+        senza accenti né punteggiatura, con le sigle ricomposte ("s.p.a." →
+        "spa"). Si scrive qui perché quella normalizzazione è codice
+        JavaScript, e rifarla in SQL a ogni ricerca darebbe risultati diversi
+        dalla ricerca in memoria. */
+    denominazioneRicerca: text("denominazione_ricerca"),
     formaGiuridica: text("forma_giuridica"),
     /** attiva | cessata | in-liquidazione | sconosciuto */
     statoAttivita: text("stato_attivita").notNull().default("sconosciuto"),
@@ -112,6 +118,7 @@ export const companies = pgTable(
   },
   (table) => [
     index("companies_denominazione_idx").on(table.denominazione),
+    index("companies_denominazione_ricerca_idx").on(table.denominazioneRicerca),
     index("companies_fetched_at_idx").on(table.fetchedAt),
   ],
 );

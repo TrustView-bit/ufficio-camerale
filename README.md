@@ -250,6 +250,34 @@ Nota: `robots.txt` esclude `/ricerca` dall'indicizzazione. Le pagine di
 risultato non hanno contenuto proprio, e tenerle fuori riduce la superficie di
 ripubblicazione. Le schede azienda restano indicizzabili.
 
+### Come si confrontano i nomi
+
+`src/lib/ricerca.ts` contiene la normalizzazione e il punteggio, e li usano
+**entrambe** le strade — l'archivio Postgres e il provider in memoria: due
+implementazioni con regole diverse darebbero all'utente due risposte diverse
+alla stessa domanda.
+
+Due regole meritano di essere spiegate.
+
+**Le sigle puntate si ricompongono.** "S.P.A." diventa `spa`, "A.D.R." diventa
+`adr`. Senza questo passaggio la denominazione si riduce a `eni s p a`, dove
+la sequenza `spa` non compare: chi scrive "eni spa" — cioè la maggioranza, i
+punti non li mette quasi nessuno — non troverebbe ENI.
+
+**Una parola che apre un nome vale più di una che sta in mezzo a un'altra.**
+Chi cerca "eni" vuole ENI, non THALES ALENIA SPACE. La corrispondenza interna
+resta valida, perché serve a chi cerca "paolo" dentro "Sanpaolo", ma finisce
+in fondo. A parità di merito vince il nome più corto: fra "ENI S.P.A." e "ENI
+GLOBAL ENERGY MARKETS S.P.A." chi ha scritto "eni" cercava la prima.
+
+Sull'archivio il confronto avviene sulla colonna `denominazione_ricerca`, che
+conserva la forma normalizzata. È una colonna e non un calcolo al volo perché
+la normalizzazione è codice JavaScript: rifarla in SQL darebbe risultati
+diversi. Le righe scritte prima della migrazione `0004` hanno la colonna
+vuota e la ricerca ripiega su `lower(denominazione)` — trova comunque, ma non
+riconosce le sigle. `npm run db:backfill-ricerca` chiude la differenza ed è
+idempotente.
+
 ## Validazione
 
 `src/lib/validation/` contiene i controlli formali, condivisi da client e

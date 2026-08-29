@@ -5,9 +5,16 @@ import { chiaveRicerca, punteggio } from "./ricerca";
 describe("chiaveRicerca", () => {
   it("appiattisce accenti, punteggiatura e maiuscole", () => {
     expect(chiaveRicerca("SOCIETA' METALLURGICA S.R.L.")).toBe(
-      "societa metallurgica s r l",
+      "societa metallurgica srl",
     );
     expect(chiaveRicerca("Città di Forlì")).toBe("citta di forli");
+  });
+});
+
+describe("chiaveRicerca, sigle", () => {
+  it("ricompone le sigle puntate in una parola sola", () => {
+    expect(chiaveRicerca("ENI S.P.A.")).toBe("eni spa");
+    expect(chiaveRicerca("A.D.R. Costruzioni")).toBe("adr costruzioni");
   });
 });
 
@@ -47,5 +54,27 @@ describe("punteggio", () => {
     expect(
       punteggio("Cooperativa di Consumo La Popolare", "popolare"),
     ).toBeGreaterThan(0);
+  });
+
+  it("chi scrive «eni spa» cerca ENI, non Thales Alenia Space", () => {
+    const eni = punteggio("ENI S.P.A.", "eni spa");
+    const alenia = punteggio("THALES ALENIA SPACE ITALIA S.P.A.", "eni spa");
+
+    expect(eni).toBe(100);
+    expect(eni).toBeGreaterThan(alenia);
+  });
+
+  it("una parola che apre un nome vale più di una che sta in mezzo", () => {
+    const apre = punteggio("ENI Plenitude S.p.A.", "eni");
+    const dentro = punteggio("Thales Alenia Space Italia S.p.A.", "eni");
+
+    expect(apre).toBeGreaterThan(dentro);
+    expect(dentro).toBeGreaterThan(0);
+  });
+
+  it("continua a trovare una parola dentro un nome composto", () => {
+    expect(punteggio("INTESA SANPAOLO S.P.A.", "intesa san paolo")).toBeGreaterThan(
+      0,
+    );
   });
 });

@@ -366,6 +366,9 @@ export class MockCompanyProvider implements CompanyProvider {
         .sort(
           (a, b) =>
             b.punti - a.punti ||
+            // a parità di merito vince il nome più corto: fra "ENI S.P.A." e
+            // "ENI GLOBAL ENERGY MARKETS S.P.A." chi scrive "eni" cerca la prima
+            a.azienda.denominazione.length - b.azienda.denominazione.length ||
             a.azienda.denominazione.localeCompare(b.azienda.denominazione, "it"),
         )
         .map((riga) => riga.azienda);

@@ -12,6 +12,7 @@ import {
 
 import { companies } from "@/lib/db/schema";
 import { regioneDiSigla } from "@/lib/geo";
+import { chiaveRicerca } from "@/lib/ricerca";
 import type {
   AziendaInEvidenza,
   EsitoElenco,
@@ -236,6 +237,37 @@ export async function aggregaInArchivio(
     .sort((a, b) => b.quante - a.quante || a.chiave.localeCompare(b.chiave, "it"));
 }
 
+/**
+ * L'ordine di merito, negli stessi scaglioni di `punteggio()`.
+ *
+ * Si ordina crescendo, quindi 0 è il risultato migliore. La distinzione che
+ * conta è l'ultima: una parola che **apre** una parola del nome vale più di
+ * una che capita in mezzo a un'altra — chi cerca "eni" vuole ENI, non THALES
+ * ALENIA SPACE.
+ */
+function rilevanza(nomeRicerca: SQL, parole: string[]): SQL {
+  if (parole.length === 0) return sql`0`;
+
+  const unite = parole.join(" ");
+
+  // `\m` è il confine iniziale di parola in Postgres
+  const aperture = parole.map(
+    (parola) => sql`${nomeRicerca} ~ ${`\\m${escapeRegex(parola)}`}`,
+  );
+
+  return sql`case
+    when ${nomeRicerca} = ${unite} then 0
+    when ${nomeRicerca} like ${`${unite} %`} then 1
+    when ${sql.join(aperture, sql` and `)} then 2
+    else 3
+  end`;
+}
+
+/** I nomi contengono punti e parentesi: vanno neutralizzati nel pattern. */
+function escapeRegex(testo: string): string {
+  return testo.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 export async function cercaInArchivio(
   db: Database,
   query: string,
@@ -243,11 +275,18 @@ export async function cercaInArchivio(
 ): Promise<EsitoRicerca> {
   const { provincia, offset = 0, limite = 20 } = opzioni;
 
+  // Il confronto avviene sulla forma normalizzata — senza accenti, senza
+  // punteggiatura, con le sigle ricomposte — perché è la stessa che usa la
+  // ricerca in memoria: due strade con regole diverse darebbero all'utente
+  // due risposte diverse alla stessa domanda.
+  const nomeRicerca = sql`coalesce(${companies.denominazioneRicerca}, lower(${companies.denominazione}))`;
+
+  const parole = chiaveRicerca(query).split(" ").filter(Boolean);
+
   // ogni parola digitata deve comparire: chi cerca due parole non vuole i
   // risultati che ne contengono una sola
-  const parole = query.trim().split(/\s+/).filter(Boolean);
-  const dove: SQL[] = parole.map((parola) =>
-    ilike(companies.denominazione, `%${parola}%`),
+  const dove: SQL[] = parole.map(
+    (parola) => sql`${nomeRicerca} like ${`%${parola}%`}`,
   );
 
   const filtroBase = dove.length > 0 ? and(...dove) : undefined;
@@ -278,7 +317,13 @@ export async function cercaInArchivio(
     })
     .from(companies)
     .where(filtro)
-    .orderBy(asc(companies.denominazione))
+    // a parità di merito vince il nome più corto: fra "ENI S.P.A." e "ENI
+    // GLOBAL ENERGY MARKETS S.P.A." chi ha scritto "eni" cercava la prima
+    .orderBy(
+      rilevanza(nomeRicerca, parole),
+      sql`length(${nomeRicerca})`,
+      asc(companies.denominazione),
+    )
     .limit(limite)
     .offset(offset);
 

@@ -4,6 +4,7 @@ import { descriviAteco } from "@/lib/ateco";
 import { companies, impresaFonti } from "@/lib/db/schema";
 import type { Database } from "@/lib/companies/repository";
 import { normalizzaComune, riconosciComuneInTesta } from "@/lib/geo";
+import { chiaveRicerca } from "@/lib/ricerca";
 
 import { prioritaDi, type ImpresaImport } from "./schema";
 
@@ -209,6 +210,7 @@ export async function applicaBlocco(
       await db.insert(companies).values({
         partitaIva: impresa.partitaIva,
         denominazione: impresa.denominazione,
+        denominazioneRicerca: chiaveRicerca(impresa.denominazione),
         ...daScrivere,
         providerName: impresa.fonte,
         fetchedAt: nuova.acquisitoIl,
@@ -219,7 +221,18 @@ export async function applicaBlocco(
     } else if (campiVinti.length > 0) {
       await db
         .update(companies)
-        .set({ ...daScrivere, updatedAt: adesso })
+        // la chiave di ricerca è derivata: segue la denominazione che vince
+        .set({
+          ...daScrivere,
+          ...("denominazione" in daScrivere
+            ? {
+                denominazioneRicerca: chiaveRicerca(
+                  daScrivere.denominazione as string,
+                ),
+              }
+            : {}),
+          updatedAt: adesso,
+        })
         .where(eq(companies.partitaIva, impresa.partitaIva));
       conteggio.aggiornata += 1;
     } else {

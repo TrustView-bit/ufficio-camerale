@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 
 import { descriviAteco } from "@/lib/ateco";
+import { chiaveRicerca } from "@/lib/ricerca";
 import type { CacheStore } from "@/lib/cache/store";
 // Lo schema si importa direttamente: `@/lib/db` include "server-only",
 // che non è caricabile dai test. Il tipo Database, essendo solo un tipo,
@@ -244,6 +245,7 @@ async function upsertRow(
     partitaIva: company.partitaIva,
     codiceFiscale: company.codiceFiscale,
     denominazione: company.denominazione,
+    denominazioneRicerca: chiaveRicerca(company.denominazione),
     formaGiuridica: company.formaGiuridica,
     statoAttivita: company.statoAttivita,
     dataCostituzione: company.dataCostituzione,
