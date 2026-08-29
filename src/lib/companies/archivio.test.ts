@@ -2,13 +2,15 @@ import { readdirSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 
 import { PGlite } from "@electric-sql/pglite";
+import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/pglite";
 import { beforeEach, describe, expect, it } from "vitest";
 
 import { companies } from "@/lib/db/schema";
 import { chiaveRicerca } from "@/lib/ricerca";
+import { SOGLIA_INDICIZZAZIONE } from "@/lib/scheda";
 
-import { cercaInArchivio } from "./archivio";
+import { cercaInArchivio, datiSostanzialiSql } from "./archivio";
 import type { Database } from "./repository";
 
 const MIGRAZIONI = fileURLToPath(new URL("../../../drizzle", import.meta.url));
@@ -88,5 +90,39 @@ describe("cercaInArchivio", () => {
   it("conta le province prima di filtrare", async () => {
     const esito = await cercaInArchivio(db, "eni");
     expect(esito.totale).toBe(3);
+  });
+});
+
+describe("la soglia della sitemap", () => {
+  it("è la stessa regola di schedaIndicizzabile, scritta in SQL", async () => {
+    // una scheda con solo nome e sede resta fuori; con tre dati entra
+    await db.insert(companies).values([
+      {
+        partitaIva: "01790820623",
+        denominazione: "MAGRA S.R.L.",
+        denominazioneRicerca: chiaveRicerca("MAGRA S.R.L."),
+        providerName: "test",
+        fetchedAt: new Date(),
+      },
+      {
+        partitaIva: "01654010345",
+        denominazione: "PIENA S.P.A.",
+        denominazioneRicerca: chiaveRicerca("PIENA S.P.A."),
+        formaGiuridica: "Società per azioni",
+        reaNumero: "123456",
+        atecoPrimario: "41.20.00",
+        providerName: "test",
+        fetchedAt: new Date(),
+      },
+    ]);
+
+    const trovate = await db
+      .select({ denominazione: companies.denominazione })
+      .from(companies)
+      .where(sql`${datiSostanzialiSql} >= ${SOGLIA_INDICIZZAZIONE}`);
+
+    const nomi = trovate.map((riga) => riga.denominazione);
+    expect(nomi).toContain("PIENA S.P.A.");
+    expect(nomi).not.toContain("MAGRA S.R.L.");
   });
 });

@@ -11,6 +11,7 @@ import { DocumentiAcquistabili } from "@/components/azienda/documenti-acquistabi
 import { FonteDati } from "@/components/azienda/fonte-dati";
 import { MappaStatica } from "@/components/azienda/mappa-statica";
 import { QuickLinks } from "@/components/azienda/quick-links";
+import { SchedaParziale } from "@/components/azienda/scheda-parziale";
 import { Briciole } from "@/components/elenco/briciole";
 import {
   BoxDati,
@@ -40,6 +41,7 @@ import {
   slugTerritorio,
 } from "@/lib/geo";
 import type { CompanyData } from "@/lib/providers/types";
+import { schedaIndicizzabile } from "@/lib/scheda";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
 import { buildAziendaSlug, parsePartitaIvaFromSlug } from "@/lib/slug";
 
@@ -82,11 +84,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: company.denominazione,
     description: descrizione,
     alternates: { canonical: url },
-    // né una scheda inventata né l'intero archivio dimostrativo devono
-    // finire nei motori di ricerca
+    // Non finiscono nei motori di ricerca: le schede inventate, quelle con
+    // troppo poco da dire, e l'intero archivio finché è dimostrativo.
+    // `follow` resta vero: i collegamenti a comune e settore restano utili.
     robots: company.fittizia
       ? { index: false, follow: false }
-      : ROBOTS_SE_DIMOSTRATIVO,
+      : schedaIndicizzabile(company)
+        ? ROBOTS_SE_DIMOSTRATIVO
+        : { index: false, follow: true },
     openGraph: {
       type: "profile",
       title: company.denominazione,
@@ -113,6 +118,8 @@ export default async function AziendaPage({ params }: Props) {
   // Un solo indirizzo canonico per azienda, che è anche ciò che vuole Google
   const canonico = buildAziendaSlug(company.denominazione, company.partitaIva);
   if (slug !== canonico) permanentRedirect(`/azienda/${canonico}`);
+
+  const indicizzabile = schedaIndicizzabile(company);
 
   const eSocieta = !/\(D\.I\.\)|ditta individuale/i.test(company.denominazione);
 
@@ -175,7 +182,8 @@ export default async function AziendaPage({ params }: Props) {
         <QuickLinks company={company} />
       </div>
 
-      <div className="mt-5">
+      <div className="mt-5 grid gap-3">
+        {!company.fittizia && !indicizzabile && <SchedaParziale />}
         <FonteDati source={source} fetchedAt={fetchedAt} />
       </div>
 

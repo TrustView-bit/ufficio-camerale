@@ -229,6 +229,28 @@ nessuna pagina costruita sui dati aziendali viene indicizzata.** Sono dati
 dimostrativi, e non devono finire nei motori di ricerca. Collegando un
 fornitore reale l'indicizzazione si attiva da sé.
 
+### Schede troppo scarne per l'indice
+
+Circa quattro imprese reali su dieci arrivano dagli elenchi pubblici con la
+sola denominazione e l'indirizzo. La loro pagina è corretta, ma non ha nulla
+da offrire a chi ci arriva da un motore di ricerca — e molte pagine sottili su
+un dominio nuovo ne abbassano la reputazione complessiva.
+
+`src/lib/scheda.ts` conta i campi che distinguono una scheda da un elenco
+telefonico (la sede non conta: ce l'hanno tutte). Sotto i tre dati la pagina
+si marca `noindex, follow`: fuori dai risultati, ma i suoi collegamenti verso
+comune e settore restano percorribili. La scheda lo dichiara anche al lettore,
+perché altrimenti sembrerebbe affermare che quei dati non esistono, mentre
+semplicemente non li abbiamo.
+
+La stessa soglia esiste due volte, e devono restare allineate: in JavaScript
+per decidere il `robots` della pagina, e in SQL (`datiSostanzialiSql`) per
+decidere cosa entra nella sitemap. Un test su PGlite verifica che le due
+diano lo stesso verdetto — se divergessero, si chiederebbe ai motori di
+visitare indirizzi a cui si è appena detto di non indicizzare.
+
+Sull'archivio attuale: 503 schede indicizzabili su 840 reali.
+
 ## Ricerca e consultazione
 
 `/ricerca` è insieme pagina dei risultati ed elenco navigabile: senza query

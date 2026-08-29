@@ -7,6 +7,7 @@ import {
   inArray,
   isNotNull,
   sql,
+  type AnyColumn,
   type SQL,
 } from "drizzle-orm";
 
@@ -39,6 +40,37 @@ import { type Database } from "./repository";
 /** La provincia vive dentro il jsonb della sede. */
 const provinciaSql = sql<string>`${companies.sede}->>'provincia'`;
 const comuneSql = sql<string>`${companies.sede}->>'comune'`;
+
+/**
+ * Quanti dati sostanziali ha una riga, in SQL.
+ *
+ * È `datiSostanziali()` di `@/lib/scheda` riscritta per Postgres: la scheda
+ * decide con quella se mettersi in `noindex`, la sitemap decide con questa se
+ * proporre l'indirizzo. Se le due divergessero, si chiederebbe ai motori di
+ * visitare pagine a cui si è appena detto di non indicizzare.
+ */
+export const datiSostanzialiSql = sql<number>`(
+  ${presente(companies.formaGiuridica)}
+  + ${presente(companies.dataCostituzione)}
+  + ${presente(companies.reaNumero)}
+  + ${presente(companies.capitaleSociale)}
+  + ${presente(companies.atecoPrimario)}
+  + ${presente(companies.pec)}
+  + ${presente(companies.sitoWeb)}
+  + ${presente(companies.telefono)}
+  + ${presente(companies.dipendenti)}
+  + ${nonVuoto(companies.bilanci)}
+  + ${nonVuoto(companies.unitaLocali)}
+)`;
+
+function presente(colonna: AnyColumn): SQL {
+  return sql`case when ${colonna} is not null then 1 else 0 end`;
+}
+
+function nonVuoto(colonna: AnyColumn): SQL {
+  return sql`case when jsonb_array_length(coalesce(${colonna}, '[]'::jsonb)) > 0
+    then 1 else 0 end`;
+}
 
 function inSintesi(riga: {
   partitaIva: string;
