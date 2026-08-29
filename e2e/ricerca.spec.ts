@@ -4,6 +4,25 @@ import { expect, test } from "@playwright/test";
 const PIVA = "00743110157";
 const DENOMINAZIONE = "Esempio Manifattura S.p.A.";
 
+test.describe("intestazioni di sicurezza", () => {
+  test("ogni risposta le porta con sé", async ({ page }) => {
+    const risposta = await page.goto("/");
+    const intestazioni = risposta!.headers();
+
+    expect(intestazioni["x-content-type-options"]).toBe("nosniff");
+    expect(intestazioni["x-frame-options"]).toBe("DENY");
+    expect(intestazioni["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+
+    const csp = intestazioni["content-security-policy"]!;
+    expect(csp).toContain("frame-ancestors 'none'");
+    expect(csp).toContain("object-src 'none'");
+    // le tile della mappa sono l'unica origine esterna ammessa
+    expect(csp).toContain("img-src 'self' data: https://tile.openstreetmap.org");
+    // in produzione niente eval: il compilatore di sviluppo non c'è più
+    expect(csp).not.toContain("unsafe-eval");
+  });
+});
+
 test.describe("schede in evidenza in home", () => {
   test("le maggiori aziende dell'archivio portano alla loro scheda", async ({
     page,

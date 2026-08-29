@@ -410,6 +410,24 @@ sarebbe peggio di nessun pulsante.
 al server dei test. Senza, ogni esecuzione della suite farebbe decine di
 chiamate a pagamento e dipenderebbe da dati che cambiano.
 
+## Intestazioni di sicurezza
+
+`next.config.ts` le applica a ogni risposta: CSP, `X-Content-Type-Options`,
+`X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy` e HSTS. Un test E2E
+le verifica sulla build di produzione, perché una regressione qui non si vede
+guardando il sito.
+
+La CSP ammette `'unsafe-inline'` negli script, e la scelta va dichiarata: Next
+inserisce script inline per l'idratazione e la scheda azienda ne aggiunge uno
+con i dati strutturati JSON-LD. L'alternativa pulita è una CSP con nonce, che
+richiede un middleware che lo generi a ogni richiesta — rendendo dinamica ogni
+pagina e buttando via l'ISR su cui il sito si regge. Meglio un compromesso
+dichiarato che una CSP severa disattivata al primo errore.
+
+Il resto è stretto: nessun frame, nessun plugin, niente form verso l'esterno,
+e come sola origine esterna per le immagini le tile di OpenStreetMap.
+`'unsafe-eval'` esiste solo in sviluppo, dove il compilatore ne ha bisogno.
+
 ## Limite di richieste
 
 Dieci ricerche al minuto e cento al giorno per indirizzo IP, applicate alle
