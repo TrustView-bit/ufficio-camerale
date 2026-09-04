@@ -55,7 +55,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             Vai al contenuto
           </a>
           <SiteHeader />
-          <main id="contenuto" className="flex-1">
+          {/* `tabIndex={-1}` rende <main> un bersaglio di messa a fuoco:
+              Chrome e Firefox portano comunque lì il punto di partenza della
+              tabulazione, ma i lettori di schermo spostano il cursore di
+              lettura solo se l'elemento può ricevere il fuoco. Senza,
+              «Vai al contenuto» funziona col Tab e non con la voce. */}
+          <main id="contenuto" tabIndex={-1} className="flex-1 outline-none">
             {children}
           </main>
           <SiteFooter />

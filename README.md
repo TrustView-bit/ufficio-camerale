@@ -410,6 +410,25 @@ sarebbe peggio di nessun pulsante.
 al server dei test. Senza, ogni esecuzione della suite farebbe decine di
 chiamate a pagamento e dipenderebbe da dati che cambiano.
 
+## Accessibilità
+
+`e2e/accessibilita.spec.ts` passa axe su sette pagine, in tema chiaro e
+scuro, su desktop e su mobile: 22 controlli, nessuna violazione WCAG 2.1
+A/AA. Il tema scuro si verifica a parte perché ridefinisce tutti i token di
+colore — altrimenti si scopre tardi che una metà è a norma e l'altra no.
+
+axe non certifica la conformità: molti criteri richiedono un giudizio umano,
+e uno strumento automatico ne copre circa un terzo. Coglie però in modo
+affidabile la classe di errori che si introduce senza accorgersene — contrasti
+insufficienti, campi senza etichetta, gerarchie di titoli saltate.
+
+Due prove sono di tastiera, dove axe non arriva: il primo Tab deve offrire
+«Vai al contenuto» visibile, e dopo il salto la tabulazione deve ripartire dal
+contenuto e non dalla testata. `<main>` ha `tabIndex={-1}` perché il salto
+funzioni anche con un lettore di schermo: Chrome e Firefox spostano comunque
+il punto di partenza della tabulazione, ma il cursore di lettura si muove solo
+se l'elemento può ricevere il fuoco.
+
 ## Intestazioni di sicurezza
 
 `next.config.ts` le applica a ogni risposta: CSP, `X-Content-Type-Options`,
