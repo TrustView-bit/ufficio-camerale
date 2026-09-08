@@ -6,7 +6,7 @@ import { campo, SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Informativa privacy",
   description:
-    "Come Ufficio Camerale tratta i dati personali, quali sono le fonti e come esercitare i diritti previsti dal GDPR.",
+    "Come Catalogo Imprese tratta i dati personali, quali sono le fonti e come esercitare i diritti previsti dal GDPR.",
 };
 
 export default function PrivacyPage() {

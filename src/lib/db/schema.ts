@@ -194,3 +194,47 @@ export type CompanyRow = typeof companies.$inferSelect;
 export type NewCompanyRow = typeof companies.$inferInsert;
 export type NewApiCall = typeof apiCalls.$inferInsert;
 export type ImpresaFonteRow = typeof impresaFonti.$inferSelect;
+
+/**
+ * Richieste di documenti camerali.
+ *
+ * Non è un ordine: è la domanda di un utente che vuole un documento. Chi
+ * gestisce il portale la legge, verifica la disponibilità e risponde per
+ * email con il collegamento per procedere all'acquisto. Il prezzo salvato è
+ * quello mostrato al momento della richiesta: se il listino cambia dopo, la
+ * richiesta ricorda cosa aveva visto l'utente.
+ */
+export const richiesteDocumenti = pgTable(
+  "richieste_documenti",
+  {
+    id: serial("id").primaryKey(),
+
+    partitaIva: varchar("partita_iva", { length: 11 }).notNull(),
+    denominazione: text("denominazione").notNull(),
+
+    /** Id del documento in `src/lib/documenti.ts`. */
+    documentoId: text("documento_id").notNull(),
+    documentoNome: text("documento_nome").notNull(),
+    /** Prezzo indicativo mostrato all'utente, IVA esclusa. */
+    prezzoIndicativo: numeric("prezzo_indicativo", { precision: 10, scale: 2 }),
+
+    nome: text("nome").notNull(),
+    email: text("email").notNull(),
+    telefono: text("telefono"),
+    note: text("note"),
+
+    /** ricevuta | risposta | chiusa — la si aggiorna a mano. */
+    stato: text("stato").notNull().default("ricevuta"),
+
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [
+    index("richieste_documenti_created_at_idx").on(table.createdAt),
+    index("richieste_documenti_partita_iva_idx").on(table.partitaIva),
+  ],
+);
+
+export type RichiestaDocumentoRow = typeof richiesteDocumenti.$inferSelect;
+export type NewRichiestaDocumento = typeof richiesteDocumenti.$inferInsert;

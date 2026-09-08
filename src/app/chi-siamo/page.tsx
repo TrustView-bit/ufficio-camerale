@@ -7,7 +7,7 @@ import { campo, SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Chi siamo",
   description:
-    "Che cos'è Ufficio Camerale, da dove prende i dati e che cosa non è.",
+    "Che cos'è Catalogo Imprese, da dove prende i dati e che cosa non è.",
 };
 
 export default function ChiSiamoPage() {

@@ -2,12 +2,12 @@
 
 import { useCallback, useSyncExternalStore } from "react";
 
-const STORAGE_KEY = "ufficio-camerale:ricerche-recenti";
+const STORAGE_KEY = "catalogo-imprese:ricerche-recenti";
 const MAX_RECENT = 5;
 const EMPTY: readonly string[] = [];
 
 /** Evento interno: `storage` non scatta nella scheda che ha scritto. */
-const CHANGE_EVENT = "ufficio-camerale:recenti";
+const CHANGE_EVENT = "catalogo-imprese:recenti";
 
 // useSyncExternalStore richiede uno snapshot referenzialmente stabile:
 // teniamo in cache l'ultimo array insieme alla stringa da cui deriva.

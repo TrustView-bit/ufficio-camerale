@@ -68,30 +68,36 @@ test.describe("dalla ricerca alla scheda azienda", () => {
     await page.goto(`/azienda/${PIVA}`);
 
     await expect(
-      page.getByRole("heading", { name: "Dati della società" }),
+      page.getByRole("heading", { name: /partita iva, codice fiscale e rea/i }),
     ).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Altre informazioni" }),
+      page.getByRole("heading", { name: /costituzione, capitale, ateco/i }),
     ).toBeVisible();
     await expect(page.getByText("25.62.00")).toBeVisible();
     await expect(page.getByText("MI-1305487")).toBeVisible();
   });
 
-  test("il catalogo documenti è visibile ma non ordinabile", async ({ page }) => {
+  test("«Ordina» apre la richiesta e senza archivio lo dice", async ({ page }) => {
     await page.goto(`/azienda/${PIVA}`);
 
     await expect(
       page.getByRole("heading", { name: "Documenti ufficiali" }),
     ).toBeVisible();
-    await expect(page.getByText(/ordine non ancora attivo/i)).toBeVisible();
 
-    // nessun pulsante d'acquisto deve risultare cliccabile
-    const ordina = page.getByRole("button", { name: "Ordina" });
-    await expect(ordina.first()).toBeDisabled();
-    const quanti = await ordina.count();
-    for (let i = 0; i < quanti; i++) {
-      await expect(ordina.nth(i)).toBeDisabled();
-    }
+    await page.getByRole("button", { name: /ordina visura camerale ordinaria/i }).click();
+
+    const finestra = page.getByRole("dialog");
+    await expect(finestra).toBeVisible();
+    await expect(finestra.getByText(/nessun pagamento parte da qui/i)).toBeVisible();
+
+    await finestra.getByLabel("Nome e cognome").fill("Mario Rossi");
+    await finestra.getByLabel("Email").fill("mario@example.it");
+    await finestra.getByLabel(/acconsento/i).check();
+    await finestra.getByRole("button", { name: "Invia richiesta" }).click();
+
+    // i test girano senza DATABASE_URL: la richiesta non ha dove andare e la
+    // finestra deve dirlo, non fingere di averla salvata
+    await expect(finestra.getByRole("alert")).toContainText(/non riusciamo a registrare/i);
   });
 
   test("il codice fiscale di una persona fisica è oscurato", async ({ page }) => {
@@ -183,7 +189,7 @@ test.describe("consultare l'elenco delle aziende", () => {
 
     await expect(page.getByRole("heading", { level: 1 })).toHaveText(nome!);
     await expect(
-      page.getByRole("heading", { name: "Dati della società" }),
+      page.getByRole("heading", { name: /partita iva, codice fiscale e rea/i }),
     ).toBeVisible();
   });
 
@@ -264,7 +270,7 @@ test.describe("sfogliare per territorio", () => {
     await azienda.click();
     await expect(page).toHaveURL(/\/azienda\//);
     await expect(
-      page.getByRole("heading", { name: "Dati della società" }),
+      page.getByRole("heading", { name: /partita iva, codice fiscale e rea/i }),
     ).toBeVisible();
   });
 

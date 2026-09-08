@@ -6,7 +6,7 @@ import { campo, SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Cookie e memorizzazione locale",
   description:
-    "Quali tecnologie di memorizzazione usa Ufficio Camerale e perché non compare alcun banner sui cookie.",
+    "Quali tecnologie di memorizzazione usa Catalogo Imprese e perché non compare alcun banner sui cookie.",
 };
 
 export default function CookiePage() {

@@ -1,9 +1,10 @@
 /**
  * Catalogo dei documenti camerali ordinabili.
  *
- * ⚠️ I prezzi sono SEGNAPOSTO: non esiste ancora un fornitore collegato, né un
- * incasso. Vanno sostituiti con il listino reale prima di attivare qualunque
- * acquisto, e l'interfaccia dichiara apertamente che l'ordine non è attivo.
+ * «Ordina» raccoglie una richiesta (vedi `src/lib/richieste/`): il pagamento
+ * non parte dal sito, arriva per email con un collegamento. I prezzi sono
+ * indicativi e l'interfaccia lo dichiara: vanno allineati al listino reale
+ * del fornitore prima di rispondere alle richieste.
  */
 
 export type Documento = {

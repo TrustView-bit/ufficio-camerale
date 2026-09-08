@@ -51,7 +51,7 @@ export function SiteFooter() {
             <strong className="text-foreground font-medium">
               Servizio indipendente.
             </strong>{" "}
-            Ufficio Camerale non è affiliato né collegato alle Camere di Commercio,
+            Catalogo Imprese non è affiliato né collegato alle Camere di Commercio,
             a InfoCamere o ad Unioncamere. I dati provengono da fonti pubbliche e
             sono forniti senza garanzia di completezza o di aggiornamento.
           </p>
@@ -61,7 +61,7 @@ export function SiteFooter() {
         </div>
 
         <p className="text-muted-foreground mt-10 text-xs">
-          © {new Date().getFullYear()} Ufficio Camerale
+          © {new Date().getFullYear()} Catalogo Imprese
         </p>
       </div>
     </footer>

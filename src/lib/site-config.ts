@@ -9,7 +9,7 @@
 const DA_COMPLETARE = "DA_COMPLETARE";
 
 export const SITE = {
-  nome: "Ufficio Camerale",
+  nome: "Catalogo Imprese",
 
   /** Persona fisica o giuridica che tratta i dati. */
   titolare: DA_COMPLETARE,

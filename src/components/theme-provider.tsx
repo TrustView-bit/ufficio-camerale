@@ -10,8 +10,11 @@ export function ThemeProvider({
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme="system"
-      enableSystem
+      // Il portale è sempre in chiaro: la preferenza di sistema non viene
+      // seguita, altrimenti chi ha il sistema in scuro vedeva un sito scuro.
+      defaultTheme="light"
+      forcedTheme="light"
+      enableSystem={false}
       disableTransitionOnChange
       {...props}
     >

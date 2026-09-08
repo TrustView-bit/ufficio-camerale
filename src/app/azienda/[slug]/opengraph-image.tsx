@@ -6,7 +6,7 @@ import { parsePartitaIvaFromSlug } from "@/lib/slug";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
-export const alt = "Scheda azienda su Ufficio Camerale";
+export const alt = "Scheda azienda su Catalogo Imprese";
 
 /**
  * L'anteprima mostrata quando la scheda viene condivisa.
@@ -69,7 +69,7 @@ export default async function Image({
             background: COLORI.blu,
           }}
         />
-        <div style={{ fontSize: 26, fontWeight: 600 }}>Ufficio Camerale</div>
+        <div style={{ fontSize: 26, fontWeight: 600 }}>Catalogo Imprese</div>
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>

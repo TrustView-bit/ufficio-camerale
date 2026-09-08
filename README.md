@@ -1,4 +1,4 @@
-# Ufficio Camerale
+# Catalogo Imprese
 
 Portale italiano di verifica Partita IVA e consultazione dati camerali.
 Ricerca una P.IVA, un codice fiscale o una ragione sociale e ottieni una scheda
@@ -398,11 +398,19 @@ descrizione in prosa li renderebbe ancora più simili a informazioni vere.
 
 ### Documenti ordinabili
 
-`src/lib/documenti.ts` elenca i documenti camerali con i relativi prezzi. **I
-prezzi sono segnaposto e l'ordine non è attivo**: non c'è un fornitore
-collegato né un incasso. I pulsanti sono disabilitati e la sezione lo dichiara
-apertamente — un pulsante d'acquisto che sembra funzionante ma non lo è
-sarebbe peggio di nessun pulsante.
+`src/lib/documenti.ts` elenca i documenti camerali con i relativi prezzi
+indicativi. Il pulsante «Ordina» **non avvia un pagamento**: apre una finestra
+in cui l'utente lascia nome, email e (facoltativi) telefono e note, con il
+consenso al trattamento. La richiesta finisce nella tabella
+`richieste_documenti` (`POST /api/richieste`, validata con zod e soggetta al
+limite di richieste) con il nome e il prezzo del documento copiati al momento:
+se il listino cambia dopo, la richiesta ricorda cosa aveva visto l'utente.
+
+Chi gestisce il portale legge le richieste, verifica la disponibilità e
+risponde per email con il collegamento per procedere all'acquisto; la colonna
+`stato` (`ricevuta` → `risposta` → `chiusa`) si aggiorna a mano. Senza
+`DATABASE_URL` la richiesta non ha dove andare e la finestra lo dice, invece di
+fingere di averla salvata.
 
 ### I test non toccano l'API a pagamento
 

@@ -25,18 +25,15 @@ export const metadata: Metadata = {
   // network non riescono a scaricarle
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    default: "Ufficio Camerale — verifica Partita IVA e dati aziendali",
-    template: "%s · Ufficio Camerale",
+    default: "Catalogo Imprese — verifica Partita IVA e dati aziendali",
+    template: "%s · Catalogo Imprese",
   },
   description:
     "Verifica una Partita IVA e consulta i dati camerali di un'azienda italiana: anagrafica, sede, ATECO, REA e contatti.",
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fbfbf9" },
-    { media: "(prefers-color-scheme: dark)", color: "#1c1f26" },
-  ],
+  themeColor: "#fbfbf9",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

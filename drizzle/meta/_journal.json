@@ -29,6 +29,20 @@
       "when": 1787838773958,
       "tag": "0003_coordinate_e_sdi",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1788561310667,
+      "tag": "0004_denominazione_ricerca",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1788561310668,
+      "tag": "0005_richieste_documenti",
+      "breakpoints": true
     }
   ]
 }

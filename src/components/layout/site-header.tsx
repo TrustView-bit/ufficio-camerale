@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -25,7 +26,7 @@ const PRINCIPALE = [
 
 export function SiteHeader() {
   return (
-    <header data-site-chrome className="text-testata-foreground">
+    <header data-site-chrome className="text-testata-foreground border-border border-b">
       {/* barra di servizio */}
       <div className="bg-testata-scura">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -35,13 +36,13 @@ export function SiteHeader() {
                 <li key={voce.href}>
                   <Link
                     href={voce.href}
-                    className="ease-ui rounded-sm opacity-80 transition-opacity duration-150 hover:opacity-100"
+                    className="ease-ui text-muted-foreground hover:text-foreground rounded-sm transition-colors duration-150"
                   >
                     {voce.label}
                   </Link>
                 </li>
               ))}
-              <li className="ml-auto hidden opacity-70 sm:block">
+              <li className="text-muted-foreground ml-auto hidden sm:block">
                 Dati pubblici del Registro Imprese
               </li>
             </ul>
@@ -53,17 +54,19 @@ export function SiteHeader() {
       <div className="bg-testata">
         <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
           <Link href="/" className="inline-flex items-center gap-4 rounded-sm">
-            <span
-              aria-hidden
-              className="border-testata-foreground/70 text-testata-foreground flex size-14 shrink-0 items-center justify-center rounded-full border-2 text-lg font-bold tracking-tight"
-            >
-              UC
-            </span>
+            <Image
+              src="/sigillo.png"
+              alt=""
+              width={64}
+              height={64}
+              priority
+              className="size-16 shrink-0"
+            />
             <span className="flex flex-col leading-tight">
-              <span className="text-2xl font-bold tracking-wide uppercase sm:text-3xl">
-                Ufficio Camerale
+              <span className="text-primary text-2xl font-bold tracking-wide uppercase sm:text-3xl">
+                Catalogo Imprese
               </span>
-              <span className="text-[11px] tracking-[0.14em] uppercase opacity-90 sm:text-xs">
+              <span className="text-muted-foreground text-[11px] tracking-[0.14em] uppercase sm:text-xs">
                 Consultazione di dati pubblici d&apos;impresa
               </span>
             </span>
@@ -79,7 +82,7 @@ export function SiteHeader() {
                   <li key={voce.href}>
                     <Link
                       href={voce.href}
-                      className="ease-ui decoration-testata-foreground/50 rounded-sm underline-offset-[6px] transition-colors duration-150 hover:underline"
+                      className="ease-ui decoration-primary/50 hover:text-primary rounded-sm font-medium underline-offset-[6px] transition-colors duration-150 hover:underline"
                     >
                       {voce.label}
                     </Link>

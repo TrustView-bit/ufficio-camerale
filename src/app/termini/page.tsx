@@ -6,14 +6,14 @@ import { campo, SITE } from "@/lib/site-config";
 export const metadata: Metadata = {
   title: "Termini di servizio",
   description:
-    "Condizioni d'uso di Ufficio Camerale, limiti di responsabilità sui dati e regole di utilizzo.",
+    "Condizioni d'uso di Catalogo Imprese, limiti di responsabilità sui dati e regole di utilizzo.",
 };
 
 export default function TerminiPage() {
   return (
     <PaginaLegale
       titolo="Termini di servizio"
-      sommario="Le regole d'uso di Ufficio Camerale e i limiti di ciò che il servizio garantisce."
+      sommario="Le regole d'uso di Catalogo Imprese e i limiti di ciò che il servizio garantisce."
     >
       <h2>Che cos&apos;è questo servizio</h2>
       <p>

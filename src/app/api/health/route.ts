@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 export function GET() {
   return NextResponse.json({
     status: "ok",
-    service: "ufficio-camerale",
+    service: "catalogo-imprese",
     timestamp: new Date().toISOString(),
   });
 }

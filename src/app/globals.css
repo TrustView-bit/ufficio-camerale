@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* -------------------------------------------------------------------------
-   Design token — Ufficio Camerale
+   Design token — Catalogo Imprese
    Palette istituzionale ma calda: blu profondo (fiducia) + teal salvia
    (conferma/verificato). Ambra e rosso SOLO per stati reali.
    Ogni colore e' definito qui: mai hardcodare valori nei componenti.
@@ -35,9 +35,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Testata: barra di servizio scura, fascia del marchio ardesia.
-     Non cambia fra tema chiaro e scuro — è un elemento istituzionale, come
-     la testata di un modulo. */
+  /* Testata: barra di servizio e fascia del marchio, in chiaro. */
   --color-testata: var(--testata);
   --color-testata-scura: var(--testata-scura);
   --color-testata-foreground: var(--testata-foreground);
@@ -130,10 +128,12 @@
 
   --neutral-subtle: oklch(0.945 0.005 258);
 
-  --testata: oklch(0.505 0.033 248);
-  --testata-scura: oklch(0.255 0.015 250);
-  --testata-foreground: oklch(0.995 0.002 85);
-  --testata-bordo: oklch(0.995 0.005 250 / 18%);
+  /* Testata in chiaro: fascia bianca del marchio, barra di servizio grigio
+     chiaro, testo scuro. Il sigillo porta da solo il colore. */
+  --testata: oklch(1 0 0);
+  --testata-scura: oklch(0.965 0.005 90);
+  --testata-foreground: var(--foreground);
+  --testata-bordo: oklch(0.908 0.006 258);
 
   /* shadcn usa --destructive internamente: allineato a --danger */
   --destructive: var(--danger);
@@ -201,11 +201,10 @@
 
   --neutral-subtle: oklch(0.292 0.014 258);
 
-  /* la testata resta la stessa: è l'elemento che identifica il portale */
-  --testata: oklch(0.44 0.032 248);
-  --testata-scura: oklch(0.215 0.014 250);
-  --testata-foreground: oklch(0.985 0.002 85);
-  --testata-bordo: oklch(0.995 0.005 250 / 16%);
+  --testata: var(--card);
+  --testata-scura: var(--muted);
+  --testata-foreground: var(--foreground);
+  --testata-bordo: var(--border);
 
   --destructive: var(--danger);
 

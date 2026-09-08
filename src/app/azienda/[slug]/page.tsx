@@ -42,6 +42,13 @@ import {
 } from "@/lib/geo";
 import type { CompanyData } from "@/lib/providers/types";
 import { schedaIndicizzabile } from "@/lib/scheda";
+import {
+  descrizioneScheda,
+  domandeFrequenti,
+  frasiFatto,
+  indiziAffidabilita,
+  titoloScheda,
+} from "@/lib/seo-scheda";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
 import { buildAziendaSlug, parsePartitaIvaFromSlug } from "@/lib/slug";
 
@@ -66,14 +73,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const { company } = caricata.result;
-  const sede = company.sede?.comune;
-  const descrizione = [
-    `Dati camerali di ${company.denominazione}`,
-    sede ? `con sede a ${sede}` : null,
-    `— Partita IVA ${company.partitaIva}, numero REA, ATECO, PEC e contatti.`,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  // Titolo e description nell'impianto che Google e la sua AI Overview
+  // premiano sulle schede dei portali dati: nome, Partita IVA e i dati più
+  // cercati nel titolo; una frase-fatto in apertura della description.
+  const descrizione = descrizioneScheda(company);
 
   const url = `${env.NEXT_PUBLIC_SITE_URL}/azienda/${buildAziendaSlug(
     company.denominazione,
@@ -81,7 +84,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   )}`;
 
   return {
-    title: company.denominazione,
+    // `absolute`: il titolo è già completo, il suffisso del sito lo
+    // allungherebbe oltre quello che Google mostra
+    title: { absolute: titoloScheda(company) },
     description: descrizione,
     alternates: { canonical: url },
     // Non finiscono nei motori di ricerca: le schede inventate, quelle con
@@ -97,7 +102,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: company.denominazione,
       description: descrizione,
       url,
-      siteName: "Ufficio Camerale",
+      siteName: "Catalogo Imprese",
       locale: "it_IT",
     },
   };
@@ -178,6 +183,8 @@ export default async function AziendaPage({ params }: Props) {
 
       <Intestazione company={company} />
 
+      <InSintesiFatti company={company} />
+
       <div className="mt-5">
         <QuickLinks company={company} />
       </div>
@@ -207,7 +214,13 @@ export default async function AziendaPage({ params }: Props) {
       </div>
 
       <div className="mt-10 grid gap-10">
-        <DocumentiAcquistabili eSocieta={eSocieta} />
+        <Affidabilita company={company} />
+        <DomandeFrequenti company={company} />
+        <DocumentiAcquistabili
+          partitaIva={company.partitaIva}
+          denominazione={company.denominazione}
+          eSocieta={eSocieta}
+        />
         <AziendeSimili
           titolo={comune ? `Altre aziende a ${comune}` : "Altre aziende"}
           aziende={simili}
@@ -308,7 +321,7 @@ function DatiSocieta({ company }: { company: CompanyData }) {
     },
   ];
 
-  return <BoxDati titolo="Dati della società" righe={righe} />;
+  return <BoxDati titolo={`Partita IVA, codice fiscale e REA di ${company.denominazione}`} righe={righe} />;
 }
 
 function AltreInformazioni({ company }: { company: CompanyData }) {
@@ -408,7 +421,7 @@ function AltreInformazioni({ company }: { company: CompanyData }) {
       })),
   ];
 
-  return <BoxDati titolo="Altre informazioni" righe={righe} />;
+  return <BoxDati titolo={`Costituzione, capitale, ATECO e fatturato di ${company.denominazione}`} righe={righe} />;
 }
 
 function Andamento({ company }: { company: CompanyData }) {
@@ -420,7 +433,7 @@ function Andamento({ company }: { company: CompanyData }) {
   return (
     <section className="print:break-inside-avoid">
       <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
-        Andamento del fatturato
+        Andamento del fatturato di {company.denominazione}
       </h2>
       <div className="border-border bg-card border p-4">
         <AndamentoFatturato bilanci={company.bilanci} />
@@ -461,7 +474,7 @@ function Mappa({ company }: { company: CompanyData }) {
   return (
     <section className="print:hidden">
       <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
-        Dove si trova
+        Sede legale di {company.denominazione}
       </h2>
       <MappaStatica
         lat={lat}
@@ -516,7 +529,78 @@ function Contatti({ company }: { company: CompanyData }) {
     },
   ];
 
-  return <BoxDati titolo="Contatti" righe={righe} />;
+  return <BoxDati titolo={`PEC e contatti di ${company.denominazione}`} righe={righe} />;
+}
+
+/**
+ * L'apertura in frasi-fatto: «<numero> è la Partita IVA di <nome>. <nome> ha
+ * sede legale in …». È il testo che l'AI Overview di Google cita alla lettera
+ * dalle schede meglio posizionate, e ogni frase copre una ricerca diversa
+ * (nome + partita iva, nome + sede, nome + rea, il numero nudo). Sta in HTML
+ * puro prima di qualsiasi tabella.
+ */
+function InSintesiFatti({ company }: { company: CompanyData }) {
+  const frasi = frasiFatto(company);
+  return (
+    <p className="mt-5 max-w-3xl text-[15px] leading-relaxed">
+      {frasi.map((frase, indice) => (
+        <span key={indice}>
+          {indice === 0 ? <strong className="font-semibold">{frase}</strong> : frase}{" "}
+        </span>
+      ))}
+    </p>
+  );
+}
+
+/**
+ * La domanda che la gente si fa e che i motori vedono fare. La risposta è un
+ * elenco di fatti pubblici: niente giudizi, niente punteggi inventati.
+ */
+function Affidabilita({ company }: { company: CompanyData }) {
+  const indizi = indiziAffidabilita(company);
+  if (indizi.length === 0) return null;
+
+  return (
+    <section className="print:break-inside-avoid">
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
+        {company.denominazione} è un&apos;azienda affidabile? Cosa dicono i dati pubblici
+      </h2>
+      <ul className="border-border bg-card divide-border divide-y border text-sm">
+        {indizi.map((indizio) => (
+          <li key={indizio} className="px-4 py-2.5">
+            {indizio}
+          </li>
+        ))}
+      </ul>
+      <p className="text-muted-foreground mt-3 text-xs">
+        Sono i dati depositati presso il Registro Imprese. Non costituiscono un
+        giudizio di affidabilità: per una valutazione del rischio servono la visura
+        storica, i bilanci completi e la situazione protesti, ordinabili qui sotto.
+      </p>
+    </section>
+  );
+}
+
+/** Le domande che Google mostra come «Le persone hanno chiesto anche». */
+function DomandeFrequenti({ company }: { company: CompanyData }) {
+  const domande = domandeFrequenti(company);
+  if (domande.length < 2) return null;
+
+  return (
+    <section className="print:break-inside-avoid">
+      <h2 className="border-foreground mb-4 border-b-2 pb-1.5 text-sm font-semibold tracking-[0.08em] uppercase">
+        Domande frequenti su {company.denominazione}
+      </h2>
+      <dl className="border-border bg-card divide-border divide-y border">
+        {domande.map((voce) => (
+          <div key={voce.domanda} className="px-4 py-3">
+            <dt className="text-sm font-semibold">{voce.domanda}</dt>
+            <dd className="text-muted-foreground mt-1 text-sm">{voce.risposta}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  );
 }
 
 function ServizioNonDisponibile() {
@@ -542,17 +626,60 @@ function ServizioNonDisponibile() {
   );
 }
 
-/** Dati strutturati per i motori di ricerca. */
+/**
+ * Dati strutturati per i motori di ricerca: l'Organization con tutti gli
+ * identificativi (P.IVA, codice fiscale, REA, ATECO) e le FAQ, così che ogni
+ * dato abbia una forma leggibile dalla macchina oltre a quella in pagina.
+ * Gli stessi numeri, nello stesso formato del testo: un valore diverso fra
+ * testo e dati strutturati è il modo più sicuro per non essere citati.
+ */
 function jsonLd(company: CompanyData) {
   const sito = toSitoHref(company.sitoWeb);
+  const url = `${env.NEXT_PUBLIC_SITE_URL}/azienda/${buildAziendaSlug(
+    company.denominazione,
+    company.partitaIva,
+  )}`;
+  const bilancio = company.bilanci
+    .filter((b) => b.fatturato !== null)
+    .sort((a, b) => b.anno - a.anno)[0];
 
-  return {
-    "@context": "https://schema.org",
+  const identificativi = [
+    { "@type": "PropertyValue", propertyID: "Partita IVA", value: company.partitaIva },
+    company.codiceFiscale && {
+      "@type": "PropertyValue",
+      propertyID: "Codice fiscale",
+      value: company.codiceFiscale,
+    },
+    company.reaNumero && {
+      "@type": "PropertyValue",
+      propertyID: "REA",
+      value: company.reaCciaa
+        ? `${company.reaCciaa}-${company.reaNumero}`
+        : company.reaNumero,
+    },
+    company.atecoPrimario && {
+      "@type": "PropertyValue",
+      propertyID: "ATECO",
+      value: company.atecoPrimario,
+      description: company.atecoPrimarioDescrizione ?? undefined,
+    },
+    company.codiceSdi && {
+      "@type": "PropertyValue",
+      propertyID: "Codice SDI",
+      value: company.codiceSdi,
+    },
+  ].filter(Boolean);
+
+  const organization = {
     "@type": "Organization",
+    "@id": `${url}#organization`,
     name: company.denominazione,
+    legalName: company.denominazione,
+    url: sito ?? undefined,
+    mainEntityOfPage: url,
     vatID: `IT${company.partitaIva}`,
     taxID: company.codiceFiscale ?? undefined,
-    url: sito ?? undefined,
+    identifier: identificativi,
     email: company.pec ?? undefined,
     telephone: company.telefono ?? undefined,
     foundingDate: company.dataCostituzione ?? undefined,
@@ -570,6 +697,52 @@ function jsonLd(company: CompanyData) {
           addressCountry: company.sede.nazione ?? "IT",
         }
       : undefined,
+    location:
+      company.coordinate && {
+        "@type": "Place",
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: company.coordinate.lat,
+          longitude: company.coordinate.lon,
+        },
+      },
+    // il fatturato più recente, dichiarato con l'anno a cui si riferisce
+    ...(bilancio
+      ? {
+          subjectOf: {
+            "@type": "Dataset",
+            name: `Bilancio ${bilancio.anno} di ${company.denominazione}`,
+            temporalCoverage: String(bilancio.anno),
+            variableMeasured: [
+              {
+                "@type": "PropertyValue",
+                name: "Fatturato",
+                value: bilancio.fatturato,
+                unitCode: "EUR",
+              },
+            ],
+          },
+        }
+      : {}),
+  };
+
+  const domande = domandeFrequenti(company);
+  const faq =
+    domande.length >= 2
+      ? {
+          "@type": "FAQPage",
+          "@id": `${url}#faq`,
+          mainEntity: domande.map((voce) => ({
+            "@type": "Question",
+            name: voce.domanda,
+            acceptedAnswer: { "@type": "Answer", text: voce.risposta },
+          })),
+        }
+      : null;
+
+  return {
+    "@context": "https://schema.org",
+    "@graph": [organization, ...(faq ? [faq] : [])],
   };
 }
 
