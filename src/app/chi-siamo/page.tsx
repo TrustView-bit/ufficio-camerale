@@ -48,11 +48,10 @@ export default function ChiSiamoPage() {
         vecchio come se fosse fresco.
       </p>
 
-      <h2>Che cosa non siamo</h2>
+      <h2>Che cosa non facciamo</h2>
       <p>
-        Non siamo la Camera di Commercio, né InfoCamere, né Unioncamere, e non
-        abbiamo alcun rapporto con questi enti. Non rilasciamo visure né certificati
-        con valore legale: per quelli occorre rivolgersi ai canali ufficiali.
+        Non rilasciamo visure né certificati con valore legale: per quelli occorre
+        rivolgersi ai canali ufficiali del Registro Imprese.
       </p>
       <p>
         Non vendiamo elenchi, non facciamo profilazione e non cediamo dati a terzi

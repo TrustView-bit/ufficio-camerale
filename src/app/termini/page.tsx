@@ -22,13 +22,10 @@ export default function TerminiPage() {
         europea. È gestito da {campo(SITE.titolare)}.
       </p>
       <p>
-        <strong>
-          Non è affiliato, collegato né autorizzato dalle Camere di Commercio, da
-          InfoCamere, da Unioncamere o da qualunque altro ente pubblico.
-        </strong>{" "}
-        Non rilascia visure, certificati o documenti aventi valore legale. Per
-        quelli occorre rivolgersi alla Camera di Commercio competente o ai canali
-        ufficiali del Registro Imprese.
+        Raccoglie e organizza informazioni pubbliche provenienti dal Registro
+        Imprese e dal sistema VIES. Non rilascia visure, certificati o documenti
+        aventi valore legale: per quelli occorre rivolgersi alla Camera di
+        Commercio competente o ai canali ufficiali del Registro Imprese.
       </p>
 
       <h2>Che cosa non garantiamo</h2>
