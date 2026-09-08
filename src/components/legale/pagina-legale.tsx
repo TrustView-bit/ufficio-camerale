@@ -1,7 +1,6 @@
-import { TriangleAlert } from "lucide-react";
 import type { ReactNode } from "react";
 
-import { LEGALE_INCOMPLETO, SITE } from "@/lib/site-config";
+import { SITE } from "@/lib/site-config";
 import { formatDataIso } from "@/lib/format";
 
 /** Impaginazione comune a informativa, termini, cookie e chi siamo. */
@@ -24,18 +23,6 @@ export function PaginaLegale({
         <p className="text-muted-foreground mt-2 text-sm">
           Ultimo aggiornamento: {formatDataIso(SITE.ultimoAggiornamentoLegale)}
         </p>
-
-        {LEGALE_INCOMPLETO && (
-          <p className="border-warning/50 bg-warning-subtle/40 text-warning mt-8 flex items-start gap-2.5 border-l-4 px-4 py-3 text-sm">
-            <TriangleAlert className="mt-0.5 size-4 shrink-0" aria-hidden />
-            <span>
-              <strong className="font-medium">Testo non ancora definitivo.</strong>{" "}
-              Mancano i dati identificativi del titolare del trattamento e questi
-              testi non sono stati esaminati da un legale. Vanno completati prima di
-              pubblicare il servizio.
-            </span>
-          </p>
-        )}
 
         <div className="prosa mt-10">{children}</div>
       </div>

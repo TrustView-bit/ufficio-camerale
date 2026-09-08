@@ -25,11 +25,6 @@ export const SITE = {
   ultimoAggiornamentoLegale: "2026-08-26",
 } as const;
 
-/** true finché restano campi non compilati. */
-export const LEGALE_INCOMPLETO = Object.values(SITE).some(
-  (valore) => valore === DA_COMPLETARE,
-);
-
 /** Mostra il valore, o un segnaposto evidente se non è ancora stato scelto. */
 export function campo(valore: string | null): string {
   if (!valore) return "—";
