@@ -46,16 +46,7 @@ export function SiteFooter() {
   return (
     <footer data-site-chrome className="border-border bg-muted/40 mt-16 border-t">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:gap-16">
-          <p className="text-muted-foreground max-w-xl text-sm leading-relaxed">
-            <strong className="text-foreground font-medium">
-              Servizio indipendente.
-            </strong>{" "}
-            Catalogo Imprese non è affiliato né collegato alle Camere di Commercio,
-            a InfoCamere o ad Unioncamere. I dati provengono da fonti pubbliche e
-            sono forniti senza garanzia di completezza o di aggiornamento.
-          </p>
-
+        <div className="grid gap-8 sm:grid-cols-2">
           <FooterNav title="Servizio" items={SERVIZIO} />
           <FooterNav title="Legale" items={LEGALE} />
         </div>
