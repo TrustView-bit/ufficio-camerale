@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         : { index: false, follow: true },
     openGraph: {
       type: "profile",
-      title: company.denominazione,
+      title: titoloScheda(company),
       description: descrizione,
       url,
       siteName: "Catalogo Imprese",
