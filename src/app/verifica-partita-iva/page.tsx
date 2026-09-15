@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "Verifica Partita IVA su VIES",
   description:
     "Verifica gratuitamente se una Partita IVA italiana è registrata negli scambi intracomunitari, tramite il servizio VIES della Commissione europea.",
+  alternates: { canonical: "/verifica-partita-iva" },
 };
 
 const ESITI = [

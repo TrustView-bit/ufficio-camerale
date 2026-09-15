@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   description:
     "Sfoglia le aziende italiane partendo dalla regione, poi dalla provincia e dal comune.",
   robots: ROBOTS_SE_DIMOSTRATIVO,
+  alternates: { canonical: "/aziende" },
 };
 
 export default async function AziendePage() {

@@ -7,8 +7,7 @@ import {
   descriviAteco,
   divisioni,
   normalizzaCodiceAteco,
-  slugAteco,
-} from "./ateco";
+  slugAteco, titoloBreveAteco } from "./ateco";
 
 describe("normalizzaCodiceAteco", () => {
   it("riporta alla forma puntata di Istat", () => {
@@ -218,5 +217,19 @@ describe("divisioni", () => {
     expect(elenco.map((d) => d.codice)).toContain("62");
     // la divisione 04 non esiste in ATECO 2025
     expect(elenco.map((d) => d.codice)).not.toContain("04");
+  });
+});
+
+describe("titoloBreveAteco", () => {
+  it("accorcia un titolo Istat all'ultima virgola o « e » entro il limite", () => {
+    expect(
+      titoloBreveAteco(
+        "Attività di agenzie di viaggio, tour operator e altri servizi di prenotazione e attività connesse",
+      ),
+    ).toBe("Attività di agenzie di viaggio, tour operator");
+  });
+
+  it("lascia intatto un titolo già corto", () => {
+    expect(titoloBreveAteco("Raffinerie di petrolio")).toBe("Raffinerie di petrolio");
   });
 });

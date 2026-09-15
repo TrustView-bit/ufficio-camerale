@@ -4,10 +4,11 @@ import { notFound } from "next/navigation";
 import { Briciole } from "@/components/elenco/briciole";
 import { GrigliaCollegamenti } from "@/components/elenco/griglia-collegamenti";
 import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
-import { codiceDaSlugAteco, descriviAteco } from "@/lib/ateco";
+import { codiceDaSlugAteco, descriviAteco, titoloBreveAteco } from "@/lib/ateco";
 import { aggregaAziende, elencoAziende } from "@/lib/companies";
 import { siglaToProvincia, slugTerritorio, regioneDiSigla } from "@/lib/geo";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
+import { metaElenco } from "@/lib/seo-elenco";
 
 export const revalidate = 3600;
 
@@ -30,12 +31,19 @@ async function risolvi(params: Props["params"]) {
   return { codice, descrizione: descritto.descrizione, slug: settore };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const risolto = await risolvi(params);
   if (!risolto) return { title: "Settore non trovato", robots: { index: false } };
 
+  const { pagina } = await searchParams;
   return {
-    title: `${risolto.descrizione} — aziende`,
+    // «codice ateco NN» è la query: il codice apre il titolo, il nome Istat
+    // (fino a 120 caratteri) è accorciato a quello che Google mostra
+    ...metaElenco(
+      `Codice ATECO ${risolto.codice} – ${titoloBreveAteco(risolto.descrizione)}`,
+      `/attivita/${risolto.slug}`,
+      Number(pagina) || 1,
+    ),
     description: `Elenco delle aziende italiane con codice ATECO ${risolto.codice}: ${risolto.descrizione}.`,
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };

@@ -40,32 +40,56 @@ function ultimoBilancio(company: CompanyData) {
     .sort((a, b) => b.anno - a.anno)[0];
 }
 
-/** Titolo della pagina: nome, P.IVA, poi i dati più cercati che la scheda ha. */
-export function titoloScheda(company: CompanyData): string {
-  const parti = [`Partita IVA ${company.partitaIva}`];
-  const numeroRea = rea(company);
-  if (numeroRea) parti.push(`REA ${numeroRea}`);
-  if (company.pec) parti.push("PEC");
-  if (ultimoBilancio(company)) parti.push("fatturato");
-  if (company.sede?.comune) parti.push(`sede a ${company.sede.comune}`);
+/** Oltre questa misura Google taglia il titolo nei risultati. */
+const TITOLO_MAX = 70;
+/** Oltre questa misura Google taglia la description nei risultati. */
+const DESCRIZIONE_MAX = 160;
 
-  return `${nome(company)} – ${parti.join(", ")}`;
+/**
+ * Titolo della pagina: nome e P.IVA sempre, poi i dati che la scheda ha
+ * nell'ordine in cui la gente li cerca (misurato su «eni»: fatturato, PEC,
+ * sede, REA), ognuno solo se il titolo resta nei caratteri che Google mostra.
+ */
+export function titoloScheda(company: CompanyData): string {
+  const candidati: string[] = [];
+  if (ultimoBilancio(company)) candidati.push("fatturato");
+  if (company.pec) candidati.push("PEC");
+  if (company.sede?.comune) candidati.push(`sede a ${company.sede.comune}`);
+  const numeroRea = rea(company);
+  if (numeroRea) candidati.push(`REA ${numeroRea}`);
+
+  let titolo = `${nome(company)} – Partita IVA ${company.partitaIva}`;
+  for (const parte of candidati) {
+    const esteso = `${titolo}, ${parte}`;
+    if (esteso.length <= TITOLO_MAX) titolo = esteso;
+  }
+  return titolo;
 }
 
-/** Meta description: la prima frase-fatto più l'elenco di ciò che c'è. */
+/**
+ * Meta description: la prima frase-fatto, poi l'elenco di ciò che la scheda
+ * ha, una voce alla volta finché si resta nei caratteri che Google mostra.
+ */
 export function descrizioneScheda(company: CompanyData): string {
-  const frasi = frasiFatto(company);
-  const cosa: string[] = [];
-  if (company.codiceFiscale) cosa.push("codice fiscale");
-  if (rea(company)) cosa.push("numero REA");
-  if (company.pec) cosa.push("PEC");
-  if (company.atecoPrimario) cosa.push("codice ATECO");
+  const prima = frasiFatto(company)[0]!;
+  const disponibili: string[] = [];
   const bilancio = ultimoBilancio(company);
-  if (bilancio) cosa.push(`fatturato ${bilancio.anno}`);
-  if (company.capitaleSociale) cosa.push("capitale sociale");
+  if (bilancio) disponibili.push(`fatturato ${bilancio.anno}`);
+  if (company.pec) disponibili.push("PEC");
+  if (rea(company)) disponibili.push("numero REA");
+  if (company.codiceFiscale) disponibili.push("codice fiscale");
+  if (company.atecoPrimario) disponibili.push("codice ATECO");
+  if (company.capitaleSociale) disponibili.push("capitale sociale");
 
-  const coda = cosa.length > 0 ? ` ${maiuscola(cosa.join(", "))} e dati camerali.` : "";
-  return `${frasi[0]}${coda}`.slice(0, 300);
+  const componi = (voci: string[]) =>
+    `${prima} ${maiuscola(voci.join(", "))} e dati camerali.`;
+  const scelte: string[] = [];
+  for (const voce of disponibili) {
+    if (componi([...scelte, voce]).length <= DESCRIZIONE_MAX) scelte.push(voce);
+  }
+  if (scelte.length > 0) return componi(scelte);
+  if (prima.length <= DESCRIZIONE_MAX) return prima;
+  return `${prima.slice(0, DESCRIZIONE_MAX - 1).replace(/\s+\S*$/, "")}…`;
 }
 
 function maiuscola(testo: string): string {

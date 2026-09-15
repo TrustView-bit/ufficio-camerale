@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Informativa privacy",
   description:
     "Come Catalogo Imprese tratta i dati personali, quali sono le fonti e come esercitare i diritti previsti dal GDPR.",
+  alternates: { canonical: "/privacy" },
 };
 
 export default function PrivacyPage() {

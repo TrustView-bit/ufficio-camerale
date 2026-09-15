@@ -70,11 +70,21 @@ const MAGRA: CompanyData = {
 describe("titolo e description", () => {
   it("mettono nome, Partita IVA e i dati più cercati che la scheda ha", () => {
     expect(titoloScheda(ENI)).toBe(
-      "ENI S.P.A. – Partita IVA 00905811006, REA RM-756453, PEC, fatturato, sede a Roma",
+      "ENI S.P.A. – Partita IVA 00905811006, fatturato, PEC, sede a Roma",
     );
+    expect(titoloScheda(ENI).length).toBeLessThanOrEqual(70);
     expect(descrizioneScheda(ENI)).toMatch(/^00905811006 è la Partita IVA di ENI S\.P\.A\./);
-    expect(descrizioneScheda(ENI)).toContain("fatturato 2024");
-    expect(descrizioneScheda(ENI).length).toBeLessThanOrEqual(300);
+    expect(descrizioneScheda(ENI)).toMatch(/fatturato 2024/i);
+    expect(descrizioneScheda(ENI).length).toBeLessThanOrEqual(160);
+  });
+
+  it("con un nome lungo tengono nome e Partita IVA e lasciano cadere il resto", () => {
+    const lunga = { ...ENI, denominazione: "GESTORE DEI MERCATI ENERGETICI S.P.A." };
+    expect(titoloScheda(lunga)).toMatch(
+      /^GESTORE DEI MERCATI ENERGETICI S\.P\.A\. – Partita IVA 00905811006/,
+    );
+    expect(titoloScheda(lunga).length).toBeLessThanOrEqual(70);
+    expect(descrizioneScheda(lunga).length).toBeLessThanOrEqual(160);
   });
 
   it("su una scheda magra non promettono dati che non ci sono", () => {

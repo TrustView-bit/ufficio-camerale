@@ -697,15 +697,16 @@ function jsonLd(company: CompanyData) {
           addressCountry: company.sede.nazione ?? "IT",
         }
       : undefined,
-    location:
-      company.coordinate && {
-        "@type": "Place",
-        geo: {
-          "@type": "GeoCoordinates",
-          latitude: company.coordinate.lat,
-          longitude: company.coordinate.lon,
-        },
-      },
+    location: company.coordinate
+      ? {
+          "@type": "Place",
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: company.coordinate.lat,
+            longitude: company.coordinate.lon,
+          },
+        }
+      : undefined,
     // il fatturato più recente, dichiarato con l'anno a cui si riferisce
     ...(bilancio
       ? {

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Termini di servizio",
   description:
     "Condizioni d'uso di Catalogo Imprese, limiti di responsabilità sui dati e regole di utilizzo.",
+  alternates: { canonical: "/termini" },
 };
 
 export default function TerminiPage() {

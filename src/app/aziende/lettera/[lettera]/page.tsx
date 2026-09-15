@@ -6,6 +6,7 @@ import { IndiceAlfabetico } from "@/components/elenco/indice-alfabetico";
 import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
 import { aggregaAziende, elencoAziende } from "@/lib/companies";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
+import { metaElenco } from "@/lib/seo-elenco";
 
 export const revalidate = 3600;
 
@@ -23,8 +24,8 @@ function normalizza(grezza: string): string | null {
   return /^[A-Z]$/.test(lettera) ? lettera : null;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { lettera: grezza } = await params;
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
+  const [{ lettera: grezza }, { pagina }] = await Promise.all([params, searchParams]);
   const lettera = normalizza(grezza);
 
   if (!lettera) return { title: "Lettera non valida", robots: { index: false } };
@@ -35,7 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : `Aziende con la lettera ${lettera}`;
 
   return {
-    title: titolo,
+    ...metaElenco(titolo, `/aziende/lettera/${grezza}`, Number(pagina) || 1),
     description: `${titolo}: elenco alfabetico delle imprese italiane.`,
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Building2, ScanSearch, ShieldCheck } from "lucide-react";
 
 import { AziendeInEvidenza } from "@/components/home/aziende-in-evidenza";
@@ -5,6 +6,32 @@ import { SearchForm } from "@/components/search/search-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardDescription, CardHeader } from "@/components/ui/card";
 import { aziendeInEvidenza } from "@/lib/companies";
+import { env } from "@/lib/env";
+
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+// Chi pubblica il sito e come si chiama: è da qui che Google prende il nome
+// del sito da mostrare nei risultati e l'editore da associare alle schede.
+const SITO_JSON_LD = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${env.NEXT_PUBLIC_SITE_URL}/#organization`,
+      name: "Catalogo Imprese",
+      url: env.NEXT_PUBLIC_SITE_URL,
+      logo: `${env.NEXT_PUBLIC_SITE_URL}/sigillo.png`,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${env.NEXT_PUBLIC_SITE_URL}/#website`,
+      name: "Catalogo Imprese",
+      url: env.NEXT_PUBLIC_SITE_URL,
+      inLanguage: "it",
+      publisher: { "@id": `${env.NEXT_PUBLIC_SITE_URL}/#organization` },
+    },
+  ],
+};
 
 const PASSI = [
   {
@@ -32,6 +59,10 @@ export default async function Home() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(SITO_JSON_LD) }}
+      />
       <section className="py-16 sm:py-24">
         <Badge
           variant="outline"

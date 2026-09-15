@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: `Aziende in ${regione}`,
     description: `Elenco delle aziende con sede in ${regione}, per provincia e per comune.`,
+    alternates: { canonical: `/aziende/${slug}` },
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };
 }

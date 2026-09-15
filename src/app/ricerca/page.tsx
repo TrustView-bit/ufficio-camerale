@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Ricerca aziende",
   description:
     "Cerca un'azienda italiana per Partita IVA, codice fiscale o ragione sociale.",
+  alternates: { canonical: "/ricerca" },
 };
 
 type Props = {

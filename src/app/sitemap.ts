@@ -9,6 +9,7 @@ import { companies } from "@/lib/db/schema";
 import { env } from "@/lib/env";
 import { provinceDiRegione, slugTerritorio } from "@/lib/geo";
 import { SOGLIA_INDICIZZAZIONE } from "@/lib/scheda";
+import { DATI_REALI } from "@/lib/seo";
 import { buildAziendaSlug } from "@/lib/slug";
 
 /** Quante schede azienda includere al massimo. */
@@ -42,6 +43,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/termini`, changeFrequency: "yearly", priority: 0.3 },
     { url: `${base}/cookie`, changeFrequency: "yearly", priority: 0.3 },
   ];
+
+  // In modalità dimostrativa elenchi e schede sono `noindex`: metterli in
+  // sitemap significa proporre a Google pagine che gli si chiede di ignorare,
+  // e Search Console le segnala una per una. Restano le sole indicizzabili.
+  if (!DATI_REALI) {
+    return statiche.filter((voce) => !/\/(aziende|attivita)$/.test(voce.url));
+  }
 
   const [territorio, settori, aziende] = await Promise.all([
     pagineTerritorio(base),

@@ -222,3 +222,16 @@ export function divisioni(): { codice: string; titolo: string }[] {
     .map(([codice, voce]) => ({ codice, titolo: voce.titolo }))
     .sort((a, b) => a.codice.localeCompare(b.codice));
 }
+
+/**
+ * La prima parte di un titolo Istat, per il <title> della pagina settore:
+ * i titoli ufficiali arrivano a 120 caratteri, Google ne mostra 60-70. Si
+ * taglia all'ultima virgola o « e » utile, mai a metà parola.
+ */
+export function titoloBreveAteco(titolo: string, max = 60): string {
+  if (titolo.length <= max) return titolo;
+  const finestra = titolo.slice(0, max + 1);
+  const taglio = Math.max(finestra.lastIndexOf(", "), finestra.lastIndexOf(" e "));
+  if (taglio > max / 2) return titolo.slice(0, taglio).trim();
+  return finestra.slice(0, finestra.lastIndexOf(" ")).trim();
+}

@@ -1,0 +1,23 @@
+# Catalogo Imprese
+
+> Consultazione di dati pubblici d'impresa italiani: Partita IVA, codice fiscale, numero REA, sede legale, codice ATECO, PEC, fatturato e bilanci, dal Registro Imprese e dal sistema VIES. Ogni scheda riporta la data di aggiornamento del dato.
+
+## Pagine principali
+
+- [Home](https://www.catalogoimprese.com/)
+- [Verifica Partita IVA su VIES](https://www.catalogoimprese.com/verifica-partita-iva)
+- [Aziende per regione, provincia e comune](https://www.catalogoimprese.com/aziende)
+- [Aziende per settore ATECO](https://www.catalogoimprese.com/attivita)
+- [Sitemap](https://www.catalogoimprese.com/sitemap.xml)
+
+## Schede azienda
+
+URL: https://www.catalogoimprese.com/azienda/<denominazione>-<partita-iva>
+
+Ogni scheda apre con una frase-fatto («<numero> è la Partita IVA di <nome>, ha sede legale in …»), riporta i dati camerali in tabella, le domande frequenti con risposta di una riga e i dati strutturati schema.org (Organization, FAQPage, BreadcrumbList).
+
+## Informazioni
+
+- [Chi siamo](https://www.catalogoimprese.com/chi-siamo)
+- [Termini di servizio](https://www.catalogoimprese.com/termini)
+- [Informativa privacy](https://www.catalogoimprese.com/privacy)

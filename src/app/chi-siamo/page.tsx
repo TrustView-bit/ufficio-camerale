@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Chi siamo",
   description:
     "Che cos'è Catalogo Imprese, da dove prende i dati e che cosa non è.",
+  alternates: { canonical: "/chi-siamo" },
 };
 
 export default function ChiSiamoPage() {

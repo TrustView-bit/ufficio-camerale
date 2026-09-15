@@ -11,6 +11,7 @@ import {
   siglaToProvincia,
 } from "@/lib/geo";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
+import { metaElenco } from "@/lib/seo-elenco";
 
 export const revalidate = 3600;
 
@@ -43,12 +44,17 @@ async function risolvi(params: Props["params"]) {
   };
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const risolto = await risolvi(params);
   if (!risolto) return { title: "Comune non trovato", robots: { index: false } };
 
+  const [{ regione, provincia, comune }, { pagina }] = await Promise.all([params, searchParams]);
   return {
-    title: `Aziende a ${risolto.comune}`,
+    ...metaElenco(
+      `Aziende a ${risolto.comune}`,
+      `/aziende/${regione}/${provincia}/${comune}`,
+      Number(pagina) || 1,
+    ),
     description: `Elenco delle aziende con sede a ${risolto.comune}, in provincia di ${risolto.provincia}.`,
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };

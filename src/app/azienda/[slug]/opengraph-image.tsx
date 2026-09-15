@@ -118,7 +118,7 @@ export default async function Image({
           paddingTop: 24,
         }}
       >
-        Dati camerali da fonti pubbliche · servizio indipendente
+        Dati camerali da fonti pubbliche · www.catalogoimprese.com
       </div>
     </div>,
     size,

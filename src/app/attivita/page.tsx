@@ -13,6 +13,7 @@ export const metadata: Metadata = {
   description:
     "Sfoglia le aziende italiane per settore di attività, secondo la classificazione ATECO 2025.",
   robots: ROBOTS_SE_DIMOSTRATIVO,
+  alternates: { canonical: "/attivita" },
 };
 
 export default async function AttivitaPage() {

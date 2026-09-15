@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Cookie e memorizzazione locale",
   description:
     "Quali tecnologie di memorizzazione usa Catalogo Imprese e perché non compare alcun banner sui cookie.",
+  alternates: { canonical: "/cookie" },
 };
 
 export default function CookiePage() {

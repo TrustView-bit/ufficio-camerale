@@ -40,9 +40,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const risolto = await risolvi(params);
   if (!risolto) return { title: "Provincia non trovata", robots: { index: false } };
 
+  const { regione: slugRegione, provincia: slugProvincia } = await params;
+
   return {
     title: `Aziende in provincia di ${risolto.provincia}`,
     description: `Elenco delle aziende con sede in provincia di ${risolto.provincia}, comune per comune.`,
+    alternates: { canonical: `/aziende/${slugRegione}/${slugProvincia}` },
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };
 }
