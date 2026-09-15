@@ -161,6 +161,25 @@ Misura del successo, per fase: fase 1 = schede indicizzate in Search Console; fa
 partita iva» e «numero rea»; fase 3 = clic da query con nome azienda; fase 4 = citazioni in AI Overview su
 almeno 5 delle 20 query campione.
 
+## 9. Audit del 15 settembre 2026 — stato dopo la messa online
+
+Sito online su `www.catalogoimprese.com` (Vercel, deploy automatico da `main`). Misurato sull'HTML servito e con
+Lighthouse 12 mobile: home 96/100/100/100, scheda 98/69/100/100 (il 69 è il solo `noindex`).
+
+Corretto in giornata (commit `0d9f593`, `e1f9975`):
+- canonical, sitemap e robots.txt puntavano a `http://localhost:3000` (Search Console: 172 URL rifiutati) → in
+  produzione l'indirizzo è il dominio pubblico anche senza variabile;
+- la sitemap proponeva 163 pagine `noindex` → in modalità mock restano le 6 pagine indicizzabili;
+- canonical su tutte le pagine, `?pagina=N` e «– pagina N» sulle paginate;
+- title scheda ≤ 70 caratteri (nome, P.IVA, poi fatturato/PEC/sede/REA), description ≤ 160;
+- title settore «Codice ATECO NN – titolo Istat accorciato»;
+- home: JSON-LD `WebSite` + `Organization`; OG image di default; `/llms.txt`.
+
+Bloccato da decisioni, non dal codice (P0): schede `noindex` finché il provider è mock; `DATABASE_URL` assente
+(sitemap senza schede, richieste documenti in 503); titolare mancante nelle pagine legali; una scheda con P.IVA
+non verificata. Prossime pagine (P1): `/cerca-pec`, `/numero-rea`, riscrittura di `/verifica-partita-iva`,
+analytics con eventi. Diagnosi completa e priorità P0–P3 nel documento «Strategia SEO Catalogo Imprese».
+
 ## Limiti di questa ricerca
 
 - Lo strumento dei volumi restituisce 10 keyword per chiamata: alcune query («risalire da partita iva a nome»,
