@@ -65,7 +65,7 @@ export function MappaStatica({
 
       tiles.push({
         key: `${tx}-${ty}`,
-        src: `https://tile.openstreetmap.org/${zoom}/${txAvvolto}/${ty}.png`,
+        src: `https://a.basemaps.cartocdn.com/rastertiles/voyager/${zoom}/${txAvvolto}/${ty}.png`,
         left: tx * TILE - sinistra,
         top: ty * TILE - alto,
       });
@@ -119,6 +119,15 @@ export function MappaStatica({
             className="hover:underline"
           >
             OpenStreetMap
+          </a>
+          {" · "}
+          <a
+            href="https://carto.com/attributions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:underline"
+          >
+            CARTO
           </a>
         </span>
       </div>
