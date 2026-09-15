@@ -4,11 +4,20 @@ import { z } from "zod";
  * Schema delle variabili d'ambiente, separato da `env.ts` perché quello
  * importa "server-only" e non sarebbe caricabile dai test.
  */
+/**
+ * Il dominio pubblico, con `www` perché è quello che Vercel serve (l'apice
+ * fa 308 verso www). È scritto qui e non solo nell'ambiente perché finisce
+ * in canonical, sitemap e robots.txt: un deploy senza la variabile impostata
+ * pubblicava `http://localhost:3000` in tutti e tre, cioè diceva a Google
+ * che la versione ufficiale di ogni pagina era un indirizzo inesistente.
+ */
+export const SITO_PRODUZIONE = "https://www.catalogoimprese.com";
+
 const schema = z
   .object({
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
 
-    NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
+    NEXT_PUBLIC_SITE_URL: z.url().optional(),
 
     /** Neon o Vercel Postgres. Assente: archivio disattivato. */
     DATABASE_URL: z.string().min(1).optional(),
@@ -56,7 +65,13 @@ const schema = z
           "UPSTASH_REDIS_REST_URL e UPSTASH_REDIS_REST_TOKEN vanno configurate entrambe o nessuna delle due.",
       });
     }
-  });
+  })
+  .transform((env) => ({
+    ...env,
+    NEXT_PUBLIC_SITE_URL:
+      env.NEXT_PUBLIC_SITE_URL ??
+      (env.NODE_ENV === "production" ? SITO_PRODUZIONE : "http://localhost:3000"),
+  }));
 
 export type Env = z.infer<typeof schema>;
 

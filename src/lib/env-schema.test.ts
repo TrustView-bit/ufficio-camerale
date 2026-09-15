@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { parseEnv } from "./env-schema";
+import { parseEnv, SITO_PRODUZIONE } from "./env-schema";
 
 /** Esattamente ciò che si ottiene copiando .env.example senza compilarlo. */
 const ENV_APPENA_COPIATO = {
@@ -104,6 +104,28 @@ describe("parseEnv", () => {
     if (!esito.ok) {
       expect(esito.problemi[0]).toContain("NEXT_PUBLIC_SITE_URL");
     }
+  });
+});
+
+describe("indirizzo del sito", () => {
+  it("in sviluppo vale localhost", () => {
+    const esito = parseEnv({});
+    expect(esito.ok && esito.env.NEXT_PUBLIC_SITE_URL).toBe("http://localhost:3000");
+  });
+
+  it("in produzione senza variabile vale il dominio pubblico, mai localhost", () => {
+    // è il caso del deploy su Vercel senza variabili impostate
+    const esito = parseEnv({ NODE_ENV: "production" });
+    expect(esito.ok && esito.env.NEXT_PUBLIC_SITE_URL).toBe(SITO_PRODUZIONE);
+    expect(SITO_PRODUZIONE).toMatch(/^https:\/\/www\./);
+  });
+
+  it("una variabile impostata vince sempre sul default", () => {
+    const esito = parseEnv({
+      NODE_ENV: "production",
+      NEXT_PUBLIC_SITE_URL: "https://anteprima.esempio.it",
+    });
+    expect(esito.ok && esito.env.NEXT_PUBLIC_SITE_URL).toBe("https://anteprima.esempio.it");
   });
 });
 
