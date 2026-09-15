@@ -46058,6 +46058,38 @@
       "unitaLocali": [],
       "fittizia": true,
       "origine": "dataset dimostrativo"
+    },
+    {
+      "partitaIva": "17205111002",
+      "denominazione": "TERRA LONTANA SRL",
+      "codiceFiscale": "17205111002",
+      "formaGiuridica": "SOCIETA' A RESPONSABILITA' LIMITATA",
+      "statoAttivita": "attiva",
+      "reaNumero": "1702898",
+      "reaCciaa": "LI",
+      "capitaleSociale": null,
+      "atecoPrimario": "79.12",
+      "atecoPrimarioDescrizione": "Attività delle agenzie di viaggio e dei tour operator",
+      "atecoVersione": "2022",
+      "dipendenti": null,
+      "dataCostituzione": "2016-12-04",
+      "pec": null,
+      "bilanci": [
+        {
+          "anno": 2024,
+          "fatturato": 800000.0,
+          "utile": null,
+          "dipendenti": null
+        }
+      ],
+      "sede": {
+        "via": "Via Filippo Turati 8",
+        "cap": "57025",
+        "comune": "Piombino",
+        "provincia": "LI"
+      },
+      "unitaLocali": [],
+      "origine": "dati reali agenzia di viaggio"
     }
   ]
 }
