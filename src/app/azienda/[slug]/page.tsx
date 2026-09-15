@@ -95,7 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     robots: company.fittizia
       ? { index: false, follow: false }
       : schedaIndicizzabile(company)
-        ? ROBOTS_SE_DIMOSTRATIVO
+        ? undefined
         : { index: false, follow: true },
     openGraph: {
       type: "profile",

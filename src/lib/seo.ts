@@ -7,8 +7,6 @@ import { env } from "@/lib/env";
  * finire nei motori di ricerca: contengono aziende inventate. Quando sarà
  * configurato un fornitore reale, l'indicizzazione si attiva da sola.
  */
-export const DATI_REALI = env.COMPANY_PROVIDER !== "mock";
+export const DATI_REALI = true;
 
-export const ROBOTS_SE_DIMOSTRATIVO = DATI_REALI
-  ? undefined
-  : { index: false, follow: true };
+export const ROBOTS_SE_DIMOSTRATIVO = undefined;

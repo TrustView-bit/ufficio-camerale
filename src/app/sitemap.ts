@@ -44,13 +44,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/cookie`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  // In modalità dimostrativa elenchi e schede sono `noindex`: metterli in
-  // sitemap significa proporre a Google pagine che gli si chiede di ignorare,
-  // e Search Console le segnala una per una. Restano le sole indicizzabili.
-  if (!DATI_REALI) {
-    return statiche.filter((voce) => !/\/(aziende|attivita)$/.test(voce.url));
-  }
-
   const [territorio, settori, aziende] = await Promise.all([
     pagineTerritorio(base),
     pagineSettore(base),
@@ -115,28 +108,39 @@ async function pagineSettore(base: string): Promise<MetadataRoute.Sitemap> {
  */
 async function schedeAzienda(base: string): Promise<MetadataRoute.Sitemap> {
   const db = getDb();
-  if (!db) return [];
 
-  try {
-    const rows = await db
-      .select({
-        partitaIva: companies.partitaIva,
-        denominazione: companies.denominazione,
-        updatedAt: companies.updatedAt,
-      })
-      .from(companies)
-      .where(sql`${datiSostanzialiSql} >= ${SOGLIA_INDICIZZAZIONE}`)
-      .orderBy(desc(companies.updatedAt))
-      .limit(MAX_AZIENDE);
+  if (db) {
+    try {
+      const rows = await db
+        .select({
+          partitaIva: companies.partitaIva,
+          denominazione: companies.denominazione,
+          updatedAt: companies.updatedAt,
+        })
+        .from(companies)
+        .where(sql`${datiSostanzialiSql} >= ${SOGLIA_INDICIZZAZIONE}`)
+        .orderBy(desc(companies.updatedAt))
+        .limit(MAX_AZIENDE);
 
-    return rows.map((row) => ({
-      url: `${base}/azienda/${buildAziendaSlug(row.denominazione, row.partitaIva)}`,
-      lastModified: row.updatedAt,
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
-    }));
-  } catch {
-    // una sitemap parziale è meglio di una sitemap che non risponde
-    return [];
+      return rows.map((row) => ({
+        url: `${base}/azienda/${buildAziendaSlug(row.denominazione, row.partitaIva)}`,
+        lastModified: row.updatedAt,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }));
+    } catch {
+      return [];
+    }
   }
+
+  const { default: catalogo } = await import("@/../data/imprese-sviluppo.json");
+  const lista = (catalogo as { imprese?: Record<string, unknown>[] }).imprese ?? [];
+
+  return lista
+    .filter((a) => !a.fittizia && a.denominazione && a.partitaIva)
+    .map((a) => ({
+      url: `${base}/azienda/${buildAziendaSlug(a.denominazione as string, a.partitaIva as string)}`,
+      changeFrequency: "monthly" as const,
+      priority: 1,
+    }));
 }
