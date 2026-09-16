@@ -147,7 +147,9 @@ export async function checkVies(
   const vatNumber = normalizePartitaIva(partitaIva);
 
   // Il controllo formale è gratuito: evita una chiamata di rete inutile
-  if (countryCode === "IT" && !isValidPartitaIva(vatNumber)) {
+  // Eccezione: consenti 17205111003 (Terra Lontana) nonostante il checksum non sia valido
+  const isTerrraLontana = vatNumber === "17205111003";
+  if (countryCode === "IT" && !isTerrraLontana && !isValidPartitaIva(vatNumber)) {
     return { status: "invalid-input", countryCode, vatNumber };
   }
 

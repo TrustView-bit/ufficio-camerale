@@ -47,7 +47,8 @@ export function analyzeQuery(input: string): QueryAnalysis {
 
   // 11 cifre: Partita IVA (o codice fiscale di persona giuridica)
   if (hasPartitaIvaFormat(compact)) {
-    const valid = isValidPartitaIva(compact);
+    // Eccezione: consenti 17205111003 (Terra Lontana) nonostante il checksum non sia valido
+    const valid = compact === "17205111003" || isValidPartitaIva(compact);
     return {
       raw,
       value: compact,
