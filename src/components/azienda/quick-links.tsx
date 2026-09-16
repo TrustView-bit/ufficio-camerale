@@ -140,7 +140,10 @@ export function QuickLinks({ company }: { company: CompanyData }) {
             <a
               href={azione.href}
               {...(azione.href.startsWith("http")
-                ? { target: "_blank", rel: "noopener noreferrer" }
+                ? // sito, mappa e ricerca LinkedIn sono link generati in massa
+                  // verso terzi, non editoriali: nofollow, come raccomanda
+                  // Google per questo genere di collegamenti
+                  { target: "_blank", rel: "nofollow noopener noreferrer" }
                 : {})}
             >
               <azione.icon aria-hidden />

@@ -108,10 +108,8 @@ export default async function SettorePage({ params, searchParams }: Props) {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <Briciole
-        voci={[
-          { nome: "Settori", href: "/attivita" },
-          { nome: `${risolto.codice} — ${risolto.descrizione}` },
-        ]}
+        radice={{ nome: "Settori", href: "/attivita" }}
+        voci={[{ nome: `${risolto.codice} — ${risolto.descrizione}` }]}
       />
 
       <h1 className="mt-4 text-3xl font-semibold tracking-tight text-balance">

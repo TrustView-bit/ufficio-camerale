@@ -5,12 +5,25 @@ import { env } from "@/lib/env";
 
 export type Bricola = { nome: string; href?: string };
 
+const RADICE_AZIENDE: Bricola = { nome: "Aziende", href: "/aziende" };
+
 /**
  * Briciole di navigazione. Oltre a orientare chi legge, sono dati strutturati
  * per i motori di ricerca: dicono dove sta la pagina nella gerarchia del sito.
+ *
+ * `radice` di default è "Aziende" perché quasi tutte le pagine d'elenco
+ * stanno sotto `/aziende`; `/attivita/*` non ci sta e deve passarne una sua
+ * (v. `attivita/page.tsx`), o dichiarerebbe una gerarchia falsa nel
+ * BreadcrumbList.
  */
-export function Briciole({ voci }: { voci: Bricola[] }) {
-  const complete: Bricola[] = [{ nome: "Aziende", href: "/aziende" }, ...voci];
+export function Briciole({
+  voci,
+  radice = RADICE_AZIENDE,
+}: {
+  voci: Bricola[];
+  radice?: Bricola;
+}) {
+  const complete: Bricola[] = [radice, ...voci];
 
   const datiStrutturati = {
     "@context": "https://schema.org",

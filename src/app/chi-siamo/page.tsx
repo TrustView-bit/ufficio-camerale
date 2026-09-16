@@ -38,9 +38,9 @@ export default function ChiSiamoPage() {
         </li>
         <li>
           <strong>VIES</strong> — il sistema della Commissione europea che conferma
-          la validità di una Partita IVA per gli scambi intracomunitari,
-          consultabile dalla{" "}
-          <Link href="/verifica-partita-iva">pagina dedicata</Link>.
+          la validità di una Partita IVA per gli scambi intracomunitari: puoi{" "}
+          <Link href="/verifica-partita-iva">verificare una Partita IVA su VIES</Link>{" "}
+          direttamente da qui.
         </li>
       </ul>
       <p>

@@ -32,7 +32,7 @@ export default async function AttivitaPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <Briciole voci={[{ nome: "Settori" }]} />
+      <Briciole radice={{ nome: "Settori" }} voci={[]} />
 
       <h1 className="mt-4 text-3xl font-semibold tracking-tight">
         Aziende italiane per settore
