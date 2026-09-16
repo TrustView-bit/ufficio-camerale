@@ -714,6 +714,8 @@ function jsonLd(company: CompanyData) {
             "@type": "Dataset",
             name: `Bilancio ${bilancio.anno} di ${company.denominazione}`,
             description: `Dati di bilancio dell'anno ${bilancio.anno} di ${company.denominazione}, Partita IVA IT${company.partitaIva}.`,
+            license: "https://creativecommons.org/licenses/by/4.0/",
+            creator: { "@type": "Organization", name: "Catalogo Imprese" },
             temporalCoverage: String(bilancio.anno),
             variableMeasured: [
               {
