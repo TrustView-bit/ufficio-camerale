@@ -61,7 +61,9 @@ export default async function Home() {
     <div className="mx-auto max-w-6xl px-4 sm:px-6">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(SITO_JSON_LD) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(SITO_JSON_LD).replace(/</g, "\\u003c"),
+        }}
       />
       <section className="py-16 sm:py-24">
         <Badge

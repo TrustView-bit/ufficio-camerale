@@ -156,7 +156,10 @@ export default async function AziendaPage({ params }: Props) {
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd(company)) }}
+        // `<` in un dato del fornitore chiuderebbe lo <script>: si scappa sempre
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd(company)).replace(/</g, "\\u003c"),
+        }}
       />
 
       {company.fittizia && <AvvisoDatiFittizi />}
