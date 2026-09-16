@@ -713,6 +713,7 @@ function jsonLd(company: CompanyData) {
           subjectOf: {
             "@type": "Dataset",
             name: `Bilancio ${bilancio.anno} di ${company.denominazione}`,
+            description: `Dati di bilancio dell'anno ${bilancio.anno} di ${company.denominazione}, Partita IVA IT${company.partitaIva}.`,
             temporalCoverage: String(bilancio.anno),
             variableMeasured: [
               {
