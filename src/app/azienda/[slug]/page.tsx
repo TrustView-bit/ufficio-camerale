@@ -714,8 +714,10 @@ function jsonLd(company: CompanyData) {
             "@type": "Dataset",
             name: `Bilancio ${bilancio.anno} di ${company.denominazione}`,
             description: `Dati di bilancio dell'anno ${bilancio.anno} di ${company.denominazione}, Partita IVA IT${company.partitaIva}.`,
+            url,
             license: "https://creativecommons.org/licenses/by/4.0/",
-            creator: { "@type": "Organization", name: "Catalogo Imprese" },
+            creator: { "@type": "Organization", name: "Catalogo Imprese", url: env.NEXT_PUBLIC_SITE_URL },
+            keywords: ["bilancio", "fatturato", company.denominazione, `Partita IVA ${company.partitaIva}`],
             temporalCoverage: String(bilancio.anno),
             variableMeasured: [
               {
