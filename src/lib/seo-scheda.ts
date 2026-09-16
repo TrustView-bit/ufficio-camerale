@@ -119,6 +119,10 @@ export function descrizioneScheda(company: CompanyData): string {
   const prima = frasiFatto(company)[0]!;
   const n = nome(company);
   const pezzi: string[] = [];
+  // REA, insieme a P.IVA e denominazione (già nella prima frase), è il dato
+  // con cui più spesso si cerca questa pagina: priorità massima.
+  const numeroRea = rea(company);
+  if (numeroRea) pezzi.push(`ha REA ${numeroRea}`);
   if (company.sede?.comune) {
     pezzi.push(
       `ha sede a ${company.sede.comune}${
