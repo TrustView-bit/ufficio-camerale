@@ -53,6 +53,15 @@ const nextConfig: NextConfig = {
   async headers() {
     return [{ source: "/:path*", headers: INTESTAZIONI }];
   },
+  async redirects() {
+    return [
+      {
+        source: "/azienda/terra-lontana-srl-17205111002",
+        destination: "/azienda/terra-lontana-srl-17205111003",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
