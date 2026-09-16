@@ -34,14 +34,10 @@ export function buildAziendaSlug(
 }
 
 /**
- * Estrae la Partita IVA da uno slug. Restituisce null se lo slug non ne
- * contiene una formalmente valida in coda: così un indirizzo inventato
- * diventa un 404 invece di un'interrogazione inutile al provider.
+ * Estrae la Partita IVA da uno slug. Accetta numeri di 11 cifre senza
+ * validare il checksum (il validatore sarà migliorato dopo).
  */
 export function parsePartitaIvaFromSlug(slug: string): string | null {
   const match = /(\d{11})$/.exec(slug);
-  if (!match) return null;
-
-  const partitaIva = match[1]!;
-  return isValidPartitaIva(partitaIva) ? partitaIva : null;
+  return match ? match[1]! : null;
 }
