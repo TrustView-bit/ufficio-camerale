@@ -27,6 +27,54 @@ function nome(company: CompanyData): string {
   return company.denominazione.trim();
 }
 
+/** Oltre questa misura Google taglia il titolo nei risultati. */
+const TITOLO_MAX = 70;
+/** Oltre questa misura Google taglia la description nei risultati. */
+const DESCRIZIONE_MAX = 160;
+
+/**
+ * Oltre questa misura il nome da solo supererebbe TITOLO_MAX una volta
+ * accodato " – Partita IVA " (16 caratteri) e le 11 cifre della P.IVA.
+ */
+const NOME_BREVE_MAX = TITOLO_MAX - " – Partita IVA ".length - 11;
+
+/**
+ * Il Registro Imprese scrive, nella stessa denominazione, la forma legale
+ * lunga e quella con cui l'azienda è nota (spesso fra parentesi, dopo "IN
+ * BREVE" o "IN FORMA ABBREVIATA"). Per il titolo — che Google taglia — si
+ * preferisce sempre la forma corta quando il Registro stesso la indica.
+ */
+export function nomeBreve(company: CompanyData): string {
+  const originale = nome(company);
+
+  const inBreveConParentesi = /\(IN BREVE:?\s*([^)]+)\)/i.exec(originale);
+  if (inBreveConParentesi) return pulisci(inBreveConParentesi[1]!);
+
+  const marcatori = [/IN FORMA ABBREVIATA:?\s*/i, /IN BREVE:?\s*/i, /IN SIGLA:?\s*/i];
+  for (const marcatore of marcatori) {
+    const indice = originale.search(marcatore);
+    if (indice === -1) continue;
+    const dopo = originale.slice(indice).replace(marcatore, "");
+    // Il Registro a volte elenca più alternative: "…IN BREVE X O Y", "…X OVVERO: Y"
+    const primaAlternativa = dopo.split(/\s+(?:O|OVVERO):?\s+/i)[0]!;
+    return pulisci(primaAlternativa);
+  }
+
+  const primaDiPrecisazione = originale.split(/\s+-\s+FATTA PRECISAZIONE/i)[0]!;
+  if (primaDiPrecisazione.length < originale.length) return pulisci(primaDiPrecisazione);
+
+  const senzaGlossa = originale.replace(/\s*"[^"]+"\s*$/, "");
+  const base = pulisci(senzaGlossa);
+  if (base.length <= NOME_BREVE_MAX) return base;
+
+  return `${base.slice(0, NOME_BREVE_MAX).replace(/\s+\S*$/, "")}…`;
+}
+
+/** Rifinisce i frammenti che il Registro scrive con doppi punti e spazi doppi. */
+function pulisci(testo: string): string {
+  return testo.trim().replace(/\.{2,}$/, ".").replace(/\s{2,}/g, " ");
+}
+
 function rea(company: CompanyData): string | null {
   if (!company.reaNumero) return null;
   return company.reaCciaa
@@ -39,11 +87,6 @@ function ultimoBilancio(company: CompanyData) {
     .filter((b) => b.fatturato !== null)
     .sort((a, b) => b.anno - a.anno)[0];
 }
-
-/** Oltre questa misura Google taglia il titolo nei risultati. */
-const TITOLO_MAX = 70;
-/** Oltre questa misura Google taglia la description nei risultati. */
-const DESCRIZIONE_MAX = 160;
 
 /**
  * Titolo della pagina: nome e P.IVA sempre, poi i dati che la scheda ha
@@ -58,7 +101,7 @@ export function titoloScheda(company: CompanyData): string {
   const numeroRea = rea(company);
   if (numeroRea) candidati.push(`REA ${numeroRea}`);
 
-  let titolo = `${nome(company)} – Partita IVA ${company.partitaIva}`;
+  let titolo = `${nomeBreve(company)} – Partita IVA ${company.partitaIva}`;
   for (const parte of candidati) {
     const esteso = `${titolo}, ${parte}`;
     if (esteso.length <= TITOLO_MAX) titolo = esteso;
@@ -67,24 +110,35 @@ export function titoloScheda(company: CompanyData): string {
 }
 
 /**
- * Meta description: la prima frase-fatto, poi l'elenco di ciò che la scheda
- * ha, una voce alla volta finché si resta nei caratteri che Google mostra.
+ * Meta description: la prima frase-fatto, poi una seconda frase coi dati che
+ * si cercano davvero — comune, fatturato, settore, stato — scritti come
+ * dati e non come nomi di campo, una voce alla volta finché si resta nei
+ * caratteri che Google mostra.
  */
 export function descrizioneScheda(company: CompanyData): string {
   const prima = frasiFatto(company)[0]!;
-  const disponibili: string[] = [];
+  const n = nome(company);
+  const pezzi: string[] = [];
+  if (company.sede?.comune) {
+    pezzi.push(
+      `ha sede a ${company.sede.comune}${
+        company.sede.provincia ? ` (${company.sede.provincia})` : ""
+      }`,
+    );
+  }
   const bilancio = ultimoBilancio(company);
-  if (bilancio) disponibili.push(`fatturato ${bilancio.anno}`);
-  if (company.pec) disponibili.push("PEC");
-  if (rea(company)) disponibili.push("numero REA");
-  if (company.codiceFiscale) disponibili.push("codice fiscale");
-  if (company.atecoPrimario) disponibili.push("codice ATECO");
-  if (company.capitaleSociale) disponibili.push("capitale sociale");
+  if (bilancio) {
+    pezzi.push(`fatturato ${bilancio.anno} di ${formatEuro(bilancio.fatturato)}`);
+  }
+  if (company.atecoPrimarioDescrizione) {
+    pezzi.push(`opera nel settore ${company.atecoPrimarioDescrizione.toLowerCase()}`);
+  }
+  const stato = STATO_TESTO[company.statoAttivita];
+  if (stato) pezzi.push(stato);
 
-  const componi = (voci: string[]) =>
-    `${prima} ${maiuscola(voci.join(", "))} e dati camerali.`;
+  const componi = (voci: string[]) => `${prima} ${n} ${voci.join(", ")}.`;
   const scelte: string[] = [];
-  for (const voce of disponibili) {
+  for (const voce of pezzi) {
     if (componi([...scelte, voce]).length <= DESCRIZIONE_MAX) scelte.push(voce);
   }
   if (scelte.length > 0) return componi(scelte);

@@ -8,6 +8,7 @@ import {
   domandeFrequenti,
   frasiFatto,
   indiziAffidabilita,
+  nomeBreve,
   titoloScheda,
 } from "./seo-scheda";
 
@@ -90,6 +91,70 @@ describe("titolo e description", () => {
   it("su una scheda magra non promettono dati che non ci sono", () => {
     expect(titoloScheda(MAGRA)).toBe("Rossi Mario – Partita IVA 01234567890, sede a Roma");
     expect(descrizioneScheda(MAGRA)).not.toMatch(/PEC|REA|fatturato/);
+  });
+
+  it("la description dice i dati, non i nomi dei campi", () => {
+    const descrizione = descrizioneScheda(ENI);
+    expect(descrizione).not.toMatch(/^.*\b(?:PEC|REA|codice fiscale|capitale sociale)\b.*e dati camerali\.$/);
+    expect(descrizione).toMatch(/Roma/);
+    expect(descrizione.length).toBeLessThanOrEqual(160);
+  });
+});
+
+describe("nomeBreve", () => {
+  it("lascia intatto un nome già corto", () => {
+    expect(nomeBreve(ENI)).toBe("ENI S.P.A.");
+  });
+
+  it("preferisce la forma fra parentesi dopo IN BREVE", () => {
+    const azienda = {
+      ...ENI,
+      denominazione:
+        "CE.DI. GROS - SOCIETA' CONSORTILE A RESPONSABILITA' LIMITATA (IN BREVE CE.DI. GROS - S.C.A R.L..)",
+    };
+    expect(nomeBreve(azienda)).toBe("CE.DI. GROS - S.C.A R.L.");
+  });
+
+  it("prende la prima alternativa dopo IN BREVE senza parentesi", () => {
+    const azienda = {
+      ...ENI,
+      denominazione:
+        "EGIDIO GALBANI SOCIETA' A RESPONSABILITA' LIMITATA IN BREVE EGIDIO GALBANI S.R.L.. O E.GA. S.R.L.",
+    };
+    expect(nomeBreve(azienda)).toBe("EGIDIO GALBANI S.R.L.");
+  });
+
+  it("prende il testo dopo IN FORMA ABBREVIATA", () => {
+    const azienda = {
+      ...ENI,
+      denominazione:
+        "PUBLITALIA 80 CONCESSIONARIA PUBBLICITA S.P.A.. E IN FORMA ABBREVIATA PUBLITALIA 80 S.P.A.",
+    };
+    expect(nomeBreve(azienda)).toBe("PUBLITALIA 80 S.P.A.");
+  });
+
+  it("taglia alla precisazione aggiunta dal Registro", () => {
+    const azienda = {
+      ...ENI,
+      denominazione:
+        "UNILEVER ITALIA MKT. OPERATIONS S.R.L. - FATTA PRECISAZIONE CHE DETTA DENOMINAZIONE POTRA ESSERE SCRITTA CON O SENZA IL PUNTO DOPO LA PAROLA MKT",
+    };
+    expect(nomeBreve(azienda)).toBe("UNILEVER ITALIA MKT. OPERATIONS S.R.L.");
+  });
+
+  it("tiene il titolo intero sotto i 70 caratteri anche sui nomi peggiori del dataset", () => {
+    const casi = [
+      "CE.DI. GROS - SOCIETA' CONSORTILE A RESPONSABILITA' LIMITATA (IN BREVE CE.DI. GROS - S.C.A R.L..)",
+      "EGIDIO GALBANI SOCIETA' A RESPONSABILITA' LIMITATA IN BREVE EGIDIO GALBANI S.R.L.. O E.GA. S.R.L.",
+      "PUBLITALIA 80 CONCESSIONARIA PUBBLICITA S.P.A.. E IN FORMA ABBREVIATA PUBLITALIA 80 S.P.A.",
+      "UNILEVER ITALIA MKT. OPERATIONS S.R.L. - FATTA PRECISAZIONE CHE DETTA DENOMINAZIONE POTRA ESSERE SCRITTA CON O SENZA IL PUNTO DOPO LA PAROLA MKT",
+      "CONSORZIO NAZIONALE PER LA RACCOLTA, IL RICICLO E IL RECUPERO DEGLI IMBALLAGGI IN PLASTICA",
+      "SOCIAL CARE - SOCIETA' COOPERATIVA SOCIALE A RESPONSABILITA' LIMITATA O.N.L.U.S. \"ORGANIZZAZIONE NON LUCRATIVA DI UTILITA' SOCIALE\"",
+    ];
+    for (const denominazione of casi) {
+      const azienda = { ...ENI, denominazione };
+      expect(titoloScheda(azienda).length).toBeLessThanOrEqual(70);
+    }
   });
 });
 
