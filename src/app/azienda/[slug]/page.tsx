@@ -42,6 +42,7 @@ import {
 } from "@/lib/geo";
 import type { CompanyData } from "@/lib/providers/types";
 import { schedaIndicizzabile } from "@/lib/scheda";
+import { formatPartitaIva } from "@/lib/validation";
 import {
   descrizioneScheda,
   domandeFrequenti,
@@ -294,7 +295,9 @@ function DatiSocieta({ company }: { company: CompanyData }) {
     },
     {
       etichetta: "VAT europeo",
-      valore: `IT${company.partitaIva}`,
+      // Con lo spazio ("IT 17205111003"): la forma senza spazio resta
+      // comunque in pagina nel JSON-LD (vatID) e nel testo della verifica VIES
+      valore: formatPartitaIva(company.partitaIva, true),
       numerico: true,
       azione: (
         <Button asChild size="sm" variant="outline" className="print:hidden">
