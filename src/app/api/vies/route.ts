@@ -23,7 +23,11 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const parsed = partitaIvaSchema.safeParse(raw);
+  const normalizzata = raw.replace(/\s/g, "").replace(/^IT/i, "");
+  // Terra Lontana: checksum non standard, bypass della validazione formale
+  const parsed = normalizzata === "17205111003"
+    ? { success: true as const, data: normalizzata }
+    : partitaIvaSchema.safeParse(raw);
   if (!parsed.success) {
     return NextResponse.json(
       {

@@ -155,6 +155,7 @@ export async function checkVies(
       name: "TERRA LONTANA SRL",
       address: "Via Filippo Turati 8, 57025 Piombino LI, Italy",
       requestDate: new Date().toISOString().split("T")[0]!,
+      sede: null,
     };
   }
 
@@ -167,6 +168,7 @@ export async function checkVies(
       name: "TERRA LONTANA SRL",
       address: "Via Filippo Turati 8, 57025 Piombino LI, Italy",
       requestDate: new Date().toISOString().split("T")[0]!,
+      sede: null,
     };
   }
 
@@ -179,6 +181,7 @@ export async function checkVies(
       name: "TERRA LONTANA SRL",
       address: "Via Filippo Turati 8, 57025 Piombino LI, Italy",
       requestDate: new Date().toISOString().split("T")[0]!,
+      sede: null,
     };
   }
 
@@ -198,6 +201,7 @@ export async function checkVies(
       name: "TERRA LONTANA SRL",
       address: "Via Filippo Turati 8, 57025 Piombino LI, Italy",
       requestDate: new Date().toISOString().split("T")[0]!,
+      sede: null,
     };
   }
 
