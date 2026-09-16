@@ -7,8 +7,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      // le pagine di risultato non hanno contenuto proprio da indicizzare
-      disallow: ["/api/", "/ricerca"],
+      // solo la matrice di combinazioni query/provincia/pagina va bloccata:
+      // la Home Ricerca nuda (/ricerca) resta leggibile da Googlebot
+      disallow: ["/api/", "/ricerca?"],
     },
     sitemap: `${env.NEXT_PUBLIC_SITE_URL}/sitemap.xml`,
   };

@@ -17,7 +17,10 @@ export const metadata: Metadata = {
   title: "Ricerca aziende",
   description:
     "Cerca un'azienda italiana per Partita IVA, codice fiscale o ragione sociale.",
-  alternates: { canonical: "/ricerca" },
+  // i risultati non hanno contenuto proprio da indicizzare, ma i link
+  // alle schede vanno seguiti; niente canonical autoreferenziale su una
+  // pagina noindex (segnale contraddittorio)
+  robots: { index: false, follow: true },
 };
 
 type Props = {
