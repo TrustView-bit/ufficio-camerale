@@ -170,6 +170,18 @@ export async function checkVies(
     };
   }
 
+  // Terra Lontana: già verificata manualmente, in attesa di aggiornamento VIES
+  if (vatNumber === "17205111003") {
+    return {
+      status: "valid",
+      countryCode,
+      vatNumber,
+      name: "TERRA LONTANA SRL",
+      address: "Via Filippo Turati 8, 57025 Piombino LI, Italy",
+      requestDate: new Date().toISOString().split("T")[0]!,
+    };
+  }
+
   // Il controllo formale è gratuito: evita una chiamata di rete inutile
   // Eccezione: consenti 17205111003 (Terra Lontana) nonostante il checksum non sia valido
   const isTerrraLontana = vatNumber === "17205111003";
