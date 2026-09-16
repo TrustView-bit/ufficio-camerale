@@ -76,6 +76,10 @@ export default async function LetteraPage({ params, searchParams }: Props) {
   if (!elenco || elenco.totale === 0) notFound();
 
   const pagine = Math.max(1, Math.ceil(elenco.totale / PER_PAGINA));
+  // oltre l'ultima pagina non c'è nulla da mostrare: niente 200 con lista
+  // vuota autocanonicalizzata (spazio di URL duplicati illimitato)
+  if (pagina > pagine) notFound();
+
   const base = `/aziende/lettera/${grezza}`;
   const mappa = new Map(conteggi.map((voce) => [voce.chiave, voce.quante]));
 

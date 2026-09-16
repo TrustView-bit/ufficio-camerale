@@ -92,6 +92,10 @@ export default async function ComunePage({ params, searchParams }: Props) {
   if (!elenco || elenco.totale === 0) notFound();
 
   const pagine = Math.max(1, Math.ceil(elenco.totale / PER_PAGINA));
+  // oltre l'ultima pagina non c'è nulla da mostrare: niente 200 con lista
+  // vuota autocanonicalizzata (spazio di URL duplicati illimitato)
+  if (pagina > pagine) notFound();
+
   const base = `/aziende/${risolto.slugRegione}/${risolto.slugProvincia}/${(await params).comune}`;
 
   return (
