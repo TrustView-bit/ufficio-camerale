@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { Briciole } from "@/components/elenco/briciole";
 import { GrigliaCollegamenti } from "@/components/elenco/griglia-collegamenti";
@@ -7,6 +7,7 @@ import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
 import { aggregaAziende, elencoAziende } from "@/lib/companies";
 import {
   regioneDaSlug,
+  regioneDiSigla,
   siglaDaSlugProvincia,
   siglaToProvincia,
   slugTerritorio,
@@ -27,12 +28,18 @@ async function risolvi(params: Props["params"]) {
   const sigla = siglaDaSlugProvincia(slugProvincia);
   if (!regione || !sigla) return null;
 
+  // la provincia esiste davvero: se la regione dell'URL non è quella vera,
+  // è un URL sbagliato (duplicato), non una pagina inesistente
+  const regioneReale = regioneDiSigla(sigla) ?? regione;
+  const slugRegioneReale = slugTerritorio(regioneReale);
+
   return {
-    regione,
-    slugRegione,
+    regione: regioneReale,
+    slugRegione: slugRegioneReale,
     slugProvincia,
     sigla,
     provincia: siglaToProvincia(sigla) ?? sigla,
+    fuoriRegione: slugRegioneReale !== slugRegione,
   };
 }
 
@@ -40,12 +47,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const risolto = await risolvi(params);
   if (!risolto) return { title: "Provincia non trovata", robots: { index: false } };
 
-  const { regione: slugRegione, provincia: slugProvincia } = await params;
-
   return {
     title: `Aziende in provincia di ${risolto.provincia}`,
     description: `Elenco delle aziende con sede in provincia di ${risolto.provincia}, comune per comune.`,
-    alternates: { canonical: `/aziende/${slugRegione}/${slugProvincia}` },
+    alternates: {
+      canonical: `/aziende/${risolto.slugRegione}/${risolto.slugProvincia}`,
+    },
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };
 }
@@ -53,6 +60,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ProvinciaPage({ params }: Props) {
   const risolto = await risolvi(params);
   if (!risolto) notFound();
+
+  // la provincia esiste, ma sotto la regione sbagliata: mai notFound (il
+  // contenuto c'è), sempre redirect all'URL con la regione vera
+  if (risolto.fuoriRegione) {
+    permanentRedirect(`/aziende/${risolto.slugRegione}/${risolto.slugProvincia}`);
+  }
 
   const filtri = { provincia: risolto.sigla };
   const [comuni, elenco] = await Promise.all([

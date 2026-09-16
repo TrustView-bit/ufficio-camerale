@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { Briciole } from "@/components/elenco/briciole";
 import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
@@ -7,8 +7,10 @@ import { elencoAziende } from "@/lib/companies";
 import {
   comuneDaSlug,
   regioneDaSlug,
+  regioneDiSigla,
   siglaDaSlugProvincia,
   siglaToProvincia,
+  slugTerritorio,
 } from "@/lib/geo";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
 import { metaElenco } from "@/lib/seo-elenco";
@@ -34,13 +36,19 @@ async function risolvi(params: Props["params"]) {
   const comune = sigla ? comuneDaSlug(slugComune, sigla) : null;
   if (!regione || !sigla || !comune) return null;
 
+  // provincia e comune esistono davvero: se la regione dell'URL non è
+  // quella vera della provincia, è l'URL a essere sbagliato (duplicato)
+  const regioneReale = regioneDiSigla(sigla) ?? regione;
+  const slugRegioneReale = slugTerritorio(regioneReale);
+
   return {
-    regione,
-    slugRegione,
+    regione: regioneReale,
+    slugRegione: slugRegioneReale,
     slugProvincia,
     sigla,
     provincia: siglaToProvincia(sigla) ?? sigla,
     comune,
+    fuoriRegione: slugRegioneReale !== slugRegione,
   };
 }
 
@@ -48,11 +56,11 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const risolto = await risolvi(params);
   if (!risolto) return { title: "Comune non trovato", robots: { index: false } };
 
-  const [{ regione, provincia, comune }, { pagina }] = await Promise.all([params, searchParams]);
+  const [{ comune }, { pagina }] = await Promise.all([params, searchParams]);
   return {
     ...metaElenco(
       `Aziende a ${risolto.comune}`,
-      `/aziende/${regione}/${provincia}/${comune}`,
+      `/aziende/${risolto.slugRegione}/${risolto.slugProvincia}/${comune}`,
       Number(pagina) || 1,
     ),
     description: `Elenco delle aziende con sede a ${risolto.comune}, in provincia di ${risolto.provincia}.`,
@@ -63,6 +71,15 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function ComunePage({ params, searchParams }: Props) {
   const risolto = await risolvi(params);
   if (!risolto) notFound();
+
+  // provincia e comune esistono, ma sotto la regione sbagliata: mai
+  // notFound (il contenuto c'è), sempre redirect alla regione vera
+  if (risolto.fuoriRegione) {
+    const { comune: slugComune } = await params;
+    permanentRedirect(
+      `/aziende/${risolto.slugRegione}/${risolto.slugProvincia}/${slugComune}`,
+    );
+  }
 
   const { pagina: grezza } = await searchParams;
   const pagina = Math.max(1, Number(grezza) || 1);

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { Briciole } from "@/components/elenco/briciole";
 import { IndiceAlfabetico } from "@/components/elenco/indice-alfabetico";
@@ -24,6 +24,12 @@ function normalizza(grezza: string): string | null {
   return /^[A-Z]$/.test(lettera) ? lettera : null;
 }
 
+/** Forma canonica dello slug: minuscola, o "0-9" per la cifra — la stessa
+ * generata da IndiceAlfabetico per i link interni verso questa pagina. */
+function slugCanonico(lettera: string): string {
+  return lettera === "#" ? "0-9" : lettera.toLowerCase();
+}
+
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const [{ lettera: grezza }, { pagina }] = await Promise.all([params, searchParams]);
   const lettera = normalizza(grezza);
@@ -36,7 +42,11 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
       : `Aziende con la lettera ${lettera}`;
 
   return {
-    ...metaElenco(titolo, `/aziende/lettera/${grezza}`, Number(pagina) || 1),
+    ...metaElenco(
+      titolo,
+      `/aziende/lettera/${slugCanonico(lettera)}`,
+      Number(pagina) || 1,
+    ),
     description: `${titolo}: elenco alfabetico delle imprese italiane.`,
     robots: ROBOTS_SE_DIMOSTRATIVO,
   };
@@ -46,6 +56,11 @@ export default async function LetteraPage({ params, searchParams }: Props) {
   const { lettera: grezza } = await params;
   const lettera = normalizza(grezza);
   if (!lettera) notFound();
+
+  // "A" e "a" sono lo stesso contenuto ma due URL distinti: si riporta
+  // sempre alla forma minuscola usata dai link interni (contenuto duplicato)
+  const canonico = slugCanonico(lettera);
+  if (grezza !== canonico) permanentRedirect(`/aziende/lettera/${canonico}`);
 
   const { pagina: grezzaPagina } = await searchParams;
   const pagina = Math.max(1, Number(grezzaPagina) || 1);

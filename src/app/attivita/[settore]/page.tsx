@@ -1,10 +1,15 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 
 import { Briciole } from "@/components/elenco/briciole";
 import { GrigliaCollegamenti } from "@/components/elenco/griglia-collegamenti";
 import { SchedaAzienda } from "@/components/elenco/scheda-azienda";
-import { codiceDaSlugAteco, descriviAteco, titoloBreveAteco } from "@/lib/ateco";
+import {
+  codiceDaSlugAteco,
+  descriviAteco,
+  slugAteco,
+  titoloBreveAteco,
+} from "@/lib/ateco";
 import { aggregaAziende, elencoAziende } from "@/lib/companies";
 import { siglaToProvincia, slugTerritorio, regioneDiSigla } from "@/lib/geo";
 import { ROBOTS_SE_DIMOSTRATIVO } from "@/lib/seo";
@@ -28,7 +33,14 @@ async function risolvi(params: Props["params"]) {
   const descritto = descriviAteco(codice);
   if (!descritto) return null;
 
-  return { codice, descrizione: descritto.descrizione, slug: settore };
+  return {
+    codice,
+    descrizione: descritto.descrizione,
+    slug: settore,
+    // qualunque suffisso dopo il codice ATECO andava bene: si fissa un solo
+    // indirizzo canonico, come già fa /azienda/[slug] con buildAziendaSlug
+    canonico: slugAteco(codice, descritto.descrizione),
+  };
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
@@ -41,7 +53,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     // (fino a 120 caratteri) è accorciato a quello che Google mostra
     ...metaElenco(
       `Codice ATECO ${risolto.codice} – ${titoloBreveAteco(risolto.descrizione)}`,
-      `/attivita/${risolto.slug}`,
+      `/attivita/${risolto.canonico}`,
       Number(pagina) || 1,
     ),
     description: `Elenco delle aziende italiane con codice ATECO ${risolto.codice}: ${risolto.descrizione}.`,
@@ -52,6 +64,12 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 export default async function SettorePage({ params, searchParams }: Props) {
   const risolto = await risolvi(params);
   if (!risolto) notFound();
+
+  // qualunque suffisso dopo il codice ATECO risponderebbe 200 e si
+  // dichiarerebbe canonico di se stesso: si riporta a un solo indirizzo
+  if (risolto.slug !== risolto.canonico) {
+    permanentRedirect(`/attivita/${risolto.canonico}`);
+  }
 
   const { pagina: grezza } = await searchParams;
   const pagina = Math.max(1, Number(grezza) || 1);
