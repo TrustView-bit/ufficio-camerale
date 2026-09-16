@@ -205,7 +205,12 @@ function indirizzoDa(
   return null;
 }
 
-function daElenchiPubblici(): Record<string, CompanyData> {
+/**
+ * Esportata perché la sitemap la riusa per applicare la stessa soglia di
+ * sostanza del ramo con database quando non c'è un database (v. sitemap.ts):
+ * altrimenti proporrebbe schede che la pagina stessa marca `noindex`.
+ */
+export function daElenchiPubblici(): Record<string, CompanyData> {
   const mappa: Record<string, CompanyData> = {};
 
   for (const impresa of impreseJson.imprese) {

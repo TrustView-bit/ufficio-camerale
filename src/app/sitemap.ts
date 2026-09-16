@@ -8,7 +8,8 @@ import { getDb } from "@/lib/db";
 import { companies } from "@/lib/db/schema";
 import { env } from "@/lib/env";
 import { provinceDiRegione, slugTerritorio } from "@/lib/geo";
-import { SOGLIA_INDICIZZAZIONE } from "@/lib/scheda";
+import { daElenchiPubblici } from "@/lib/providers/mock";
+import { schedaIndicizzabile, SOGLIA_INDICIZZAZIONE } from "@/lib/scheda";
 import { DATI_REALI } from "@/lib/seo";
 import { buildAziendaSlug } from "@/lib/slug";
 
@@ -133,13 +134,12 @@ async function schedeAzienda(base: string): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  const { default: catalogo } = await import("@/../data/imprese-sviluppo.json");
-  const lista = (catalogo as { imprese?: Record<string, unknown>[] }).imprese ?? [];
-
-  return lista
-    .filter((a) => !a.fittizia && a.denominazione && a.partitaIva)
-    .map((a) => ({
-      url: `${base}/azienda/${buildAziendaSlug(a.denominazione as string, a.partitaIva as string)}`,
+  // stessa soglia di sostanza del ramo con database (schedaIndicizzabile):
+  // altrimenti si proporrebbero schede che la pagina stessa marca `noindex`
+  return Object.values(daElenchiPubblici())
+    .filter((azienda) => schedaIndicizzabile(azienda))
+    .map((azienda) => ({
+      url: `${base}/azienda/${buildAziendaSlug(azienda.denominazione, azienda.partitaIva)}`,
       changeFrequency: "monthly" as const,
       priority: 1,
     }));

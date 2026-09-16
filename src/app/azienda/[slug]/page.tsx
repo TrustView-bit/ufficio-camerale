@@ -69,8 +69,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const caricata = await caricaAzienda(slug);
 
-  if (!caricata || caricata.result.status !== "found") {
+  if (!caricata || caricata.result.status === "not-found") {
     return { title: "Azienda non trovata", robots: { index: false } };
+  }
+
+  if (caricata.result.status === "unavailable") {
+    // il fornitore dati non ha risposto: non vuol dire che l'azienda non
+    // esiste, e Google non deve pensare che la pagina vada rimossa per un
+    // guasto temporaneo — niente `robots`, quindi niente noindex
+    return { title: "Dati momentaneamente non disponibili" };
   }
 
   const { company } = caricata.result;

@@ -96,12 +96,16 @@ export async function generaESalvaDescrizione(
 
     if (!db) return;
 
+    const ora = deps.now?.() ?? new Date();
     await db
       .update(companies)
       .set({
         descrizione: esito.testo,
-        descrizioneGeneratedAt: deps.now?.() ?? new Date(),
+        descrizioneGeneratedAt: ora,
         descrizioneModel: esito.modello,
+        // la descrizione è contenuto vero della pagina: il suo cambiamento
+        // deve riflettersi nel <lastmod> della sitemap
+        updatedAt: ora,
       })
       .where(eq(companies.partitaIva, partitaIva));
   } catch {
