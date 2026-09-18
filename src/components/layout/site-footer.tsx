@@ -23,15 +23,15 @@ function FooterNav({
 }) {
   return (
     <nav aria-label={title}>
-      <h2 className="text-foreground text-xs font-medium tracking-wide uppercase">
+      <h2 className="text-foreground text-xs font-semibold tracking-widest uppercase mb-4">
         {title}
       </h2>
-      <ul className="mt-3 space-y-2">
+      <ul className="space-y-2.5">
         {items.map((item) => (
           <li key={item.href}>
             <Link
               href={item.href}
-              className="text-muted-foreground ease-ui hover:text-foreground rounded-md text-sm transition-colors duration-150"
+              className="text-muted-foreground hover:text-foreground text-sm transition-colors duration-150"
             >
               {item.label}
             </Link>
@@ -44,24 +44,42 @@ function FooterNav({
 
 export function SiteFooter() {
   return (
-    <footer data-site-chrome className="border-border bg-muted/40 mt-16 border-t">
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-        <div className="grid gap-8 sm:grid-cols-2">
+    <footer data-site-chrome className="border-border bg-muted/30 mt-16 border-t">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+
+        {/* Riga principale: brand + nav */}
+        <div className="grid gap-10 py-12 sm:grid-cols-3">
+          {/* Brand */}
+          <div>
+            <p className="text-foreground text-sm font-semibold">Catalogo Imprese</p>
+            <p className="text-muted-foreground mt-2 text-sm leading-relaxed">
+              Dati pubblici del Registro Imprese e VIES, raccolti in un&apos;unica scheda.
+            </p>
+          </div>
+
           <FooterNav title="Servizio" items={SERVIZIO} />
           <FooterNav title="Legale" items={LEGALE} />
         </div>
 
-        <p className="text-muted-foreground mt-10 text-xs leading-relaxed">
-          I dati pubblicati e i documenti in vendita sono forniti nella loro forma originale e non
-          subiscono modifiche o rielaborazioni. Non esprimono valutazioni o giudizi sulla solidità,
-          affidabilità o comportamento economico delle aziende o delle persone né costituiscono
-          analisi o raccomandazioni per decisioni aziendali e non rientrano quindi tra le attività
-          soggette a licenza TULPS art. 134 e s.m.i.
+        {/* Separatore */}
+        <div className="border-border border-t" />
+
+        {/* Disclaimer legale */}
+        <div className="border-border/60 bg-muted/50 my-6 rounded-lg border px-5 py-4">
+          <p className="text-muted-foreground text-[11px] leading-relaxed">
+            I dati pubblicati e i documenti in vendita sono forniti nella loro forma originale e non
+            subiscono modifiche o rielaborazioni. Non esprimono valutazioni o giudizi sulla solidità,
+            affidabilità o comportamento economico delle aziende o delle persone né costituiscono
+            analisi o raccomandazioni per decisioni aziendali e non rientrano quindi tra le attività
+            soggette a licenza TULPS art.&nbsp;134 e s.m.i.
+          </p>
+        </div>
+
+        {/* Copyright */}
+        <p className="text-muted-foreground pb-8 text-xs">
+          © Copyright {new Date().getFullYear()} AdCapital Srl&ensp;·&ensp;P.IVA IT11372821006
         </p>
 
-        <p className="text-muted-foreground mt-4 text-xs">
-          © Copyright {new Date().getFullYear()} AdCapital Srl | P.IVA IT11372821006
-        </p>
       </div>
     </footer>
   );
