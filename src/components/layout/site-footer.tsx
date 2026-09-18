@@ -51,8 +51,16 @@ export function SiteFooter() {
           <FooterNav title="Legale" items={LEGALE} />
         </div>
 
-        <p className="text-muted-foreground mt-10 text-xs">
-          © {new Date().getFullYear()} Catalogo Imprese
+        <p className="text-muted-foreground mt-10 text-xs leading-relaxed">
+          I dati pubblicati e i documenti in vendita sono forniti nella loro forma originale e non
+          subiscono modifiche o rielaborazioni. Non esprimono valutazioni o giudizi sulla solidità,
+          affidabilità o comportamento economico delle aziende o delle persone né costituiscono
+          analisi o raccomandazioni per decisioni aziendali e non rientrano quindi tra le attività
+          soggette a licenza TULPS art. 134 e s.m.i.
+        </p>
+
+        <p className="text-muted-foreground mt-4 text-xs">
+          © Copyright {new Date().getFullYear()} AdCapital Srl | P.IVA IT11372821006
         </p>
       </div>
     </footer>
