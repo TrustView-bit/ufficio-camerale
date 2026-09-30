@@ -19,15 +19,14 @@ const CSP = [
   "base-uri 'self'",
   "object-src 'none'",
   "frame-ancestors 'none'",
-  // embed OSM (mappa della sede): solo openstreetmap.org
-  "frame-src https://www.openstreetmap.org",
   "form-action 'self'",
   "script-src 'self' 'unsafe-inline'" +
     // il dev server ricompila valutando codice: senza, la pagina non si carica
     (process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""),
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
-  "img-src 'self' data:",
+  // le tile della mappa statica; `data:` serve alle immagini incorporate
+  "img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org",
   "connect-src 'self'" +
     (process.env.NODE_ENV === "development" ? " ws: http://localhost:*" : ""),
   "upgrade-insecure-requests",
