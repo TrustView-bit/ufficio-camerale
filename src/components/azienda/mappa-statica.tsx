@@ -63,9 +63,10 @@ export function MappaStatica({
       if (ty < 0 || ty >= massimo) continue;
       const txAvvolto = ((tx % massimo) + massimo) % massimo;
 
+      const sottodominio = ["a", "b", "c"][Math.abs(txAvvolto + ty) % 3]!;
       tiles.push({
         key: `${tx}-${ty}`,
-        src: `https://a.basemaps.cartocdn.com/rastertiles/voyager/${zoom}/${txAvvolto}/${ty}.png`,
+        src: `https://${sottodominio}.tile.openstreetmap.org/${zoom}/${txAvvolto}/${ty}.png`,
         left: tx * TILE - sinistra,
         top: ty * TILE - alto,
       });
@@ -118,16 +119,7 @@ export function MappaStatica({
             rel="noopener noreferrer"
             className="hover:underline"
           >
-            OpenStreetMap
-          </a>
-          {" · "}
-          <a
-            href="https://carto.com/attributions"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:underline"
-          >
-            CARTO
+            OpenStreetMap contributors
           </a>
         </span>
       </div>

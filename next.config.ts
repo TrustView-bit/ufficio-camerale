@@ -26,7 +26,7 @@ const CSP = [
   "style-src 'self' 'unsafe-inline'",
   "font-src 'self'",
   // le tile della mappa statica; `data:` serve alle immagini incorporate
-  "img-src 'self' data: https://tile.openstreetmap.org https://*.basemaps.cartocdn.com",
+  "img-src 'self' data: https://tile.openstreetmap.org https://*.tile.openstreetmap.org",
   "connect-src 'self'" +
     (process.env.NODE_ENV === "development" ? " ws: http://localhost:*" : ""),
   "upgrade-insecure-requests",
