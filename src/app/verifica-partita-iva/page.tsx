@@ -7,9 +7,9 @@ import { VIES_TIMEOUT_MS } from "@/lib/providers/vies";
 import { normalizePartitaIva } from "@/lib/validation";
 
 export const metadata: Metadata = {
-  title: "Verifica Partita IVA su VIES",
+  title: "Verifica Partita IVA online gratis (VIES)",
   description:
-    "Verifica gratuitamente se una Partita IVA italiana è registrata negli scambi intracomunitari, tramite il servizio VIES della Commissione europea.",
+    "Controlla gratis una Partita IVA: verifichiamo la cifra di controllo e chiediamo al VIES della Commissione europea se è registrata e attiva. Risposta in pochi secondi.",
   alternates: { canonical: "/verifica-partita-iva" },
 };
 

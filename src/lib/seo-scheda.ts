@@ -95,6 +95,11 @@ function ultimoBilancio(company: CompanyData) {
  */
 export function titoloScheda(company: CompanyData): string {
   const candidati: string[] = [];
+  // quando differisce dalla P.IVA il codice fiscale è un numero cercato a sé
+  // (Search Console, 10/2026: «00799960158» per Intesa Sanpaolo)
+  if (company.codiceFiscale && company.codiceFiscale !== company.partitaIva) {
+    candidati.push(`C.F. ${company.codiceFiscale}`);
+  }
   if (ultimoBilancio(company)) candidati.push("fatturato");
   if (company.pec) candidati.push("PEC");
   if (company.sede?.comune) candidati.push(`sede a ${company.sede.comune}`);
@@ -116,8 +121,15 @@ export function titoloScheda(company: CompanyData): string {
  * caratteri che Google mostra.
  */
 export function descrizioneScheda(company: CompanyData): string {
-  const prima = frasiFatto(company)[0]!;
-  const n = nome(company);
+  // nome breve: la denominazione legale intera (ACEA ATO 2 …) si mangerebbe
+  // da sola i caratteri che Google mostra
+  const n = nomeBreve(company);
+  const prima =
+    company.codiceFiscale && company.codiceFiscale !== company.partitaIva
+      ? `${company.partitaIva} è la Partita IVA di ${n} (codice fiscale ${company.codiceFiscale}).`
+      : `${company.partitaIva} è la Partita IVA di ${n}${
+          company.codiceFiscale ? ", che coincide con il codice fiscale" : ""
+        }.`;
   const pezzi: string[] = [];
   // REA, insieme a P.IVA e denominazione (già nella prima frase), è il dato
   // con cui più spesso si cerca questa pagina: priorità massima.
